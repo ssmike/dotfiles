@@ -1,0 +1,27 @@
+"mocp -G"
+    control + alt + g
+
+"systemctl suspend"
+    control + alt + s 
+
+"slock"
+    control + alt + l
+"~/scripts/steam.sh"
+    control + alt + s
+
+"xbacklight -inc 40"
+    XF86MonBrightnessUp
+"xbacklight -dec 40"
+    XF86MonBrightnessDown
+
+"amixer -q sset Master 10%+"
+    XF86AudioRaiseVolume
+
+"amixer -q sset Master 10%-"
+    XF86AudioLowerVolume
+"sakura -x mocp"
+    control + alt + m
+"amixer -q sset Master toggle"
+    XF86AudioMute
+"amixer -q sset Master toggle"
+    control + m
