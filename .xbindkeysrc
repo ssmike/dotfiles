@@ -24,4 +24,4 @@
 "amixer -q sset Master toggle"
     XF86AudioMute
 "amixer -q sset Master toggle"
-    control + m
+    alt + m

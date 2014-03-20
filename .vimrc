@@ -147,3 +147,5 @@ imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 '
+let g:syntastic_c_compiler = "gcc"
+let g:syntastic_cpp_compiler_options = '-ansi -pedantic -Wall'
