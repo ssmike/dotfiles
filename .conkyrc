@@ -17,8 +17,6 @@ echo -n "^i($HOME/.dzen/mpd.xbm) ^fg(\#99CCFF)${execi 5 ~/.conky-curs}^fg(\#FFFF
 echo -n "^i($HOME/.dzen/net-wifi5.xbm) ^fg(\#E4E941)${wireless_essid wlp3s0}${wireless_essid wlp6s0}^fg(\#FFFFFF)"
 echo -n "^i($HOME/.dzen/dzen_bitmaps/arr_down.xbm) ^fg(\#99CCFF)${downspeedf wlan0}KB^fg(\#FFFFFF)"
 echo -n "^i($HOME/.dzen/dzen_bitmaps/mini.mail2.xpm)"
+echo -n " ^fg(\#39D421)${execi 5 ~/.gpu_script}^fg(\#FFFFFF)"
 [ ! -z "`find ~/mail/new -type f`" ] && echo -n " ^fg(\#99CCFF)unread mails^fg(\#FFFFFF)"
-echo -n "^i($HOME/.dzen/mpd.xbm) ^fg(\#39D421)${execi 5 ~/.gpu_script}^fg(\#FFFFFF)"
-#$(cat /proc/acpi/bbswitch | sed "s/.* \(.*\)$/\1/") 
-#echo -n "^fg(\#39D421)$ss:^fg(\#FFFFFF)"
 echo 
