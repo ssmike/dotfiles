@@ -1,9 +1,6 @@
 "mocp -G"
     control + alt + g
 
-"systemctl suspend"
-    control + alt + s 
-
 "slock"
     control + alt + l
 "~/scripts/steam.sh"

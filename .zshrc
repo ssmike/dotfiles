@@ -218,6 +218,10 @@ function notify-command-complete() {
   unset last_command start_time last_status
 }
 
+function op() {
+    vblank_mode=0 exec primusrun $1
+}
+
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
 
