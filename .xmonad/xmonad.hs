@@ -321,6 +321,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [resource  =? "kdesktop"       --> doIgnore ]
     , [className =? c --> doShift "2:web" | c <- web]
     , [className =? c --> doShift "3:code" | c <- code]
+    , [className =? c --> doShift "6:work" | c <- work]
 	, [className =? "Wxmaxima" --> doShift "7:math"]
 	, [className =? "Xmaxima" --> doShift "7:math"]
     , [className =? "Steam" --> doShift "8:game"]
@@ -329,6 +330,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     ]
     )
     where
+        work = ["Zathura"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
         code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite"]
         libreoffice = ["libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]

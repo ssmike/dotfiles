@@ -6,9 +6,9 @@
 "~/scripts/steam.sh"
     control + alt + s
 
-"xbacklight -inc 40"
+"xbacklight -inc 20"
     XF86MonBrightnessUp
-"xbacklight -dec 40"
+"xbacklight -dec 20"
     XF86MonBrightnessDown
 
 "amixer -q sset Master 10%+"

@@ -1,0 +1,13 @@
+[retriever]
+type = SimplePOP3SSLRetriever
+server = pop.mail.ru
+username = aesc.10b@mail.ru
+port = 995
+password = 
+
+[destination]
+type = Maildir
+path = ~/mail/
+
+[options]
+read_all=False
