@@ -3,3 +3,6 @@ set folder=$HOME/mail
 set spoolfile=+/
 set header_cache=~/.hcache
 auto_view text/html
+
+#set allow_8bit
+#set charset=koi8-r
