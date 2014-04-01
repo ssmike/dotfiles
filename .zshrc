@@ -11,6 +11,8 @@ ZSH_HIGHLIGHT_STYLES=(
         'globbing'        'fg=166'
 )
 
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+
 NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
 NOTIFY_COMMAND_TIMEOUT=30
 

@@ -12,3 +12,4 @@ synclient TapButton1=1
 setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
 /usr/libexec/polkit-gnome-authentication-agent-1  &
 ~/.xmonad/dzen-auto.sh &
+syndaemon -t -i 1 -d 

@@ -332,13 +332,13 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     where
         work = ["Zathura"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
-        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite"]
+        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0"]
         libreoffice = ["libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         fullfloat = ["dota_linux"]
         float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox"]
         ignore = ["Zenity", "Oblogout"]
-        media = ["Vlc", "MPlayer", "Umplayer", "Smplayer"]
-        fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar"]
+        media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese"]
+        fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab"]
         etc = ["Clementine", "Transmission-gtk", "Deluge"]
  
 ------------------------------------------------------------------------

@@ -1,5 +1,11 @@
-"mocp -G"
-    control + alt + g
+"~/scripts/play-pause.sh"
+    XF86AudioPlay
+"mocp -f"
+    XF86AudioNext
+"mocp -r"
+    XF86AudioPrev
+"mocp -s"
+    XF86AudioStop
 
 "slock"
     control + alt + l
@@ -13,7 +19,6 @@
 
 "amixer -q sset Master 10%+"
     XF86AudioRaiseVolume
-
 "amixer -q sset Master 10%-"
     XF86AudioLowerVolume
 "sakura -x mocp"
@@ -22,3 +27,5 @@
     XF86AudioMute
 "amixer -q sset Master toggle"
     alt + m
+"amixer -q sset Speaker toggle"
+    alt + k
