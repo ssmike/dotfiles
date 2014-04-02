@@ -27,5 +27,7 @@
     XF86AudioMute
 "amixer -q sset Master toggle"
     alt + m
-"amixer -q sset Speaker toggle"
+"amixer -q sset Speaker unmute"
     alt + k
+"amixer -q sset Speaker mute"
+    alt + l
