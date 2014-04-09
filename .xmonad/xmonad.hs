@@ -393,7 +393,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 -- -w 1020
 main = do 
-    dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0"
+    dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
     --spawn "conky | sh | /usr/bin/dzen2 -dock -x 630 -y 0"
     xmonad defaultConfig {
           -- simple stuff

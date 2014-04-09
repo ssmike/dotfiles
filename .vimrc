@@ -23,6 +23,11 @@
 " for editing java files jdk needed
 " final step : run vim -c ":BundleUpdate"
 
+"for project configuration"
+if filereadable(".vim.local")
+    so .vim.local
+endif
+
 set nocompatible
 filetype off  
 
@@ -42,6 +47,7 @@ Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
 Bundle "Tagbar"
 Bundle "acx0/Conque-Shell"
+Bundle 'The-NERD-Commenter'
 
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
@@ -93,7 +99,7 @@ nmap [ :resize -5<CR>
 nmap ] :resize +5<CR>
 nmap <F5> :TagbarToggle<CR>
 " for pwd following
-autocmd BufEnter * lcd %:p:h
+"autocmd BufEnter * lcd %:p:h
 
 syn on
 "set mapleader = ",""
@@ -153,7 +159,7 @@ if !exists("g:syntastic_cpp_compiler")
     let g:syntastic_cpp_compiler='clang++'
 endif
 if !exists("g:syntastic_cpp_compiler_options")
-    let g:syntastic_cpp_compiler_options=' -std=c++11 -stdlib=libc++'
+    let g:syntastic_cpp_compiler_options=' -std=c++11'
 endif
 if !exists("g:syntastic_c_compiler")
     let g:syntastic_c_compiler="gcc"

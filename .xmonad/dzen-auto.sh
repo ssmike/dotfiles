@@ -11,6 +11,6 @@ function take {
 
 #mkfifo ~/.info
 #take ~/.info | dzen2 -y 1000 -dock & 
-conky -c ~/.conkyrc | /bin/sh | dzen2 -y 1000 -dock & 
+conky -c ~/.conkyrc | /bin/sh | dzen2 -y 2000 -dock -e - -ta l & 
 #echo "" > ~/.info
 #conky -c ~/.conky > ~/.info
