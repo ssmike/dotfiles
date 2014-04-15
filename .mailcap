@@ -3,3 +3,4 @@ text/html;                      w3m -I %{charset} %s; nametemplate=%s.html
 text/html;                      w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput; 
 application/pdf;                zathura %s;
 application/vnd.oasis.opendocument.spreadsheet;     soffice %s;
+application/vnd.oasis.opendocument.text;            soffice %s;
