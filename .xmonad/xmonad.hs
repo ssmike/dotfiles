@@ -133,17 +133,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_o     ), windowPromptGoto  defaultXPConfig)
     , ((modm .|. shiftMask, xK_i     ), windowPromptBring  defaultXPConfig)
     , ((modm, xK_o), goToSelected defaultGSConfig)
-    -- launch commend prompt
+    -- launch command prompt
     , ((modm .|. shiftMask, xK_p     ), shellPrompt defaultXPConfig)
     --, ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
  
-    -- launch gmrun
+    -- launcher
     , ((modm              , xK_p     ), spawn "gmrun")
+    --, ((modm              , xK_F1), spawn "dmenu_run")
  
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill1)
- 	--remove window 
-	--, ((modm .|. shiftMask, xK_d 	), kill1)
+
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
  
@@ -322,20 +322,18 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doShift "2:web" | c <- web]
     , [className =? c --> doShift "3:code" | c <- code]
     , [className =? c --> doShift "6:work" | c <- work]
-	, [className =? "Wxmaxima" --> doShift "7:math"]
-	, [className =? "Xmaxima" --> doShift "7:math"]
-    , [className =? "Steam" --> doShift "8:game"]
-    , [className =? "dota_linux" --> doShift "8:game"]
-    , [className =? c --> doShift "6:work" | c <- libreoffice]
+    , [className =? c --> doShift "7:math" | c <- math]
+    , [className =? c --> doShift "8:game" | c <- game]
     ]
     )
     where
-        work = ["Zathura"]
+        game = ["Steam", "dota_linux"] 
+        math = ["XMaxima", "XMathematica", "Wxmaxima", "geogebra-GeoGebra"]
+        work = ["Zathura", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
-        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0"]
-        libreoffice = ["libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
+        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3"]
         fullfloat = ["dota_linux"]
-        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox"]
+        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "dota_linux"]
         ignore = ["Zenity", "Oblogout"]
         media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab"]

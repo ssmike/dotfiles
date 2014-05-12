@@ -7,8 +7,8 @@ use_spacer none
 #99CCFF
 
 TEXT
-echo -n "^i($HOME/.dzen/dzen_bitmaps/full.xbm)^fg(\#E4E941)${fs_free /}^fg(\#FFFFFF) "
 echo -n "^fg(\#99CCFF)${execi 1 skb}^fg(\#FFFFFF) "
+echo -n "^i($HOME/.dzen/dzen_bitmaps/full.xbm)^fg(\#E4E941)${fs_free /}^fg(\#FFFFFF) "
 echo -n "^i($HOME/.dzen/vol-hi.xbm)^fg(\#99CCFF)${execi 1 /home/mike/.volumescript}^fg(\#FFFFFF)"
 echo -n "^i($HOME/.dzen/power-bat2.xbm)^fg(\#BD140A)${battery BAT0}^fg(\#FFFFFF)"
 echo -n "^i($HOME/.dzen/cpu.xbm)^fg(\#99CCFF)${cpu}%^fg(\#FFFFFF)"
