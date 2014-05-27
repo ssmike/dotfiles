@@ -36,10 +36,11 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 filetype plugin indent on   
-Bundle "vundle"
+Bundle "gmarik/vundle"
 Bundle 'scrooloose/nerdtree'
 Bundle 'clang-complete'
-Bundle "Syntastic"
+"vundle compatibility broken
+"Bundle "scrooloose/syntastic"
 Bundle 'davidhalter/jedi-vim'
 Bundle "SuperTab"
 Bundle "javacomplete"
@@ -52,6 +53,8 @@ Bundle 'The-NERD-Commenter'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
+
+Bundle "mhinz/vim-startify"
 
 set tabstop=4
 set shiftwidth=4
