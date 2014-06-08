@@ -15,4 +15,5 @@ edit:
 	vim ./main.cpp
 run:
 	./main
+	cp ./outp /tmp/outp
 

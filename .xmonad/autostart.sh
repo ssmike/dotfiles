@@ -14,6 +14,8 @@ synclient TapButton2=3
 synclient Palmdetect=1
 synclient PalmMinZ=80
 synclient HorizTwoFingerScroll=1
+cdemu-daemon &
+gcdemu &
 #setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
 setxkbmap -layout "us,ru" -option "grp:caps_toggle"
 /usr/libexec/polkit-gnome-authentication-agent-1  &

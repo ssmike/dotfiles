@@ -1,4 +1,7 @@
 export WINEARCH=win32
+
+export PATH=$PATH:~/.cabal/bin
+
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES=(
@@ -245,6 +248,7 @@ alias -s vim="vim -S "
 #gentoo aliases
 alias popd="popd -q"
 alias femerge='FEATURES="-collision-detect -protect-owned" emerge'
+alias mc=ranger
 alias getmail="/usr/bin/getmail --rcfile=sms --rcfile=aesc --rcfile=mike"
 alias emacsd="/bin/emacs --daemon"
 alias emacs="emacsclient -c -a=vim"

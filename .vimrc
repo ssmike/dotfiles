@@ -41,6 +41,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'clang-complete'
 "vundle compatibility broken
 "Bundle "scrooloose/syntastic"
+Bundle "pbrisbin/vim-syntax-shakespeare"
 Bundle 'davidhalter/jedi-vim'
 Bundle "SuperTab"
 Bundle "javacomplete"
