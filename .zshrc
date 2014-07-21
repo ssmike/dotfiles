@@ -21,8 +21,9 @@ NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
 NOTIFY_COMMAND_TIMEOUT=30
 
 #export TERM=xterm-256color
+CLAWS='claws-mail --status | sed -e "s/^[0-9]*\ \([0-9]*\).*/\1/g" | sed -e "s/^$/0/g"'
 export _JAVA_AWT_WM_NONREPARENTING=1
-[ ! "$UID" = "0" ] && [ ! -z "`find ~/mail/new -type f`" ] && echo "===========You have unread mail===========";
+[ ! "$UID" = "0" ] && [ $(bash -c $CLAWS) != 0 ] && echo "===========You have unread mail===========";
 
 if [[ $TERM == linux ]]; then
     setfont cyr-sun16
@@ -115,6 +116,10 @@ battcheck() {
 }
 
 makeproject() {
+    if [ "$#" -ne 2 ]; then
+        echo "Wrong usage"
+        return 1
+    fi
     mkdir $2
     cd $2
     cp ~/templates/$1/* . -r

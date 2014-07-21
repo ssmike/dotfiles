@@ -21,7 +21,7 @@
     XF86AudioRaiseVolume
 "amixer -q sset Master 10%-"
     XF86AudioLowerVolume
-"sakura -x mocp"
+"sakura -x lyvi"
     control + alt + m
 "amixer -q sset Master toggle"
     XF86AudioMute
@@ -31,3 +31,7 @@
     alt + k
 "amixer -q sset Speaker mute"
     alt + l
+"scrot -e 'mv $f ~/screenshots/'"
+    Print
+"gnome-system-monitor"
+    Control + Escape

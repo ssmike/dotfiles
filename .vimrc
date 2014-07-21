@@ -171,3 +171,7 @@ endif
 if !exists("g:syntastic_c_compiler_options")
     let g:syntastic_c_compiler_options='-ansi -pedantic -Wall'
 endif
+
+"x11 clipboard"
+nmap [p "+p
+

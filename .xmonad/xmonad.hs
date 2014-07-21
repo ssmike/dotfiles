@@ -16,6 +16,7 @@
 -- http://www.haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.8
 --
  
+import XMonad.Actions.WindowGo
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -45,9 +46,7 @@ import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
 import XMonad.Operations
 import XMonad.Layout.SimpleFloat
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
---
+
 myTerminal      = "sakura"
  
 -- Whether focus follows the mouse pointer.
@@ -119,7 +118,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_x), namedScratchpadAction scratchpads "tray")
     , ((modm, xK_s), namedScratchpadAction scratchpads "browser")
     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    
+    --true fullscreen
+    , ((modm, xK_a), sendMessage ToggleStruts)
     --launch gnome-commander
     , ((modm .|. controlMask, xK_r), spawn "oblogout")
 	--launch pcmanfm 
@@ -311,7 +311,7 @@ myLayout = avoidStruts ((onWorkspaces (["9:etc"]) (cross) tiled)  ||| Full ||| c
 myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+> 
     (composeAll . concat $
     [ 
-    [className =? c --> doIgnore | c <- ignore]
+      [className =? c --> doIgnore | c <- ignore]
     , [className =? c --> doFullFloat | c <- fullfloat]
     , [className =? c --> doFloat | c <- float]
     , [className =? c --> doShift "4:media" | c <- media]
@@ -325,19 +325,19 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doShift "7:math" | c <- math]
     , [className =? c --> doShift "8:game" | c <- game]
     ]
-    )
+    )  <+> manageDocks
     where
         game = ["Steam", "dota_linux"] 
-        math = ["XMaxima", "XMathematica", "Wxmaxima", "geogebra-GeoGebra"]
+        math = ["XMaxima", "XMathematica", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["Zathura", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
-        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3"]
+        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["dota_linux"]
-        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "dota_linux"]
+        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "dota_linux", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]
-        media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese"]
+        media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab"]
-        etc = ["Clementine", "Transmission-gtk", "Deluge"]
+        etc = ["Clementine", "Transmission-gtk", "Deluge", "Ekiga", "Claws-mail"]
  
 ------------------------------------------------------------------------
 -- Event handling
@@ -350,8 +350,8 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
 -- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
 -- It will add EWMH event handling to your custom event hooks by
 -- combining them with ewmhDesktopsEventHook.
---
-myEventHook = fullscreenEventHook
+--fullscreenEventHook <+> 
+myEventHook = docksEventHook <+> ewmhDesktopsEventHook
 --mempty 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -383,6 +383,7 @@ myEventHook = fullscreenEventHook
 --
 myStartupHook = do 
     spawn "~/.xmonad/autostart.sh"
+    ewmhDesktopsStartup
     return ()
  
 ------------------------------------------------------------------------
@@ -409,9 +410,11 @@ main = do
     
           -- hooks, layouts
             layoutHook         = smartBorders $ myLayout,
-            manageHook         = myManageHook <+> manageDocks,
+            manageHook         = myManageHook,
             handleEventHook    = myEventHook,
-            logHook            = dynamicLogWithPP $ dzenpp dzen,
+            logHook            = do
+                                    ewmhDesktopsLogHook
+                                    dynamicLogWithPP $ dzenpp dzen,
             startupHook        = myStartupHook
         }
 -- oldcolor = "#1B1D1E"

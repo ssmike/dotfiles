@@ -16,10 +16,15 @@ synclient PalmMinZ=80
 synclient HorizTwoFingerScroll=1
 cdemu-daemon &
 gcdemu &
+#unclutter &
 #setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
 setxkbmap -layout "us,ru" -option "grp:caps_toggle"
 /usr/libexec/polkit-gnome-authentication-agent-1  &
 deluged &
 ~/.xmonad/dzen-auto.sh &
 ~/.mocpscrob/mocp-scrobbler.py --daemon
+# my session
+claws-mail &
+chromium &
+steam &
 #syndaemon -t -i 1 -d 

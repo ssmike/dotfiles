@@ -5,9 +5,13 @@ username = aesc.10b@mail.ru
 port = 995
 password = 
 
+#[destination]
+#type = Maildir
+#path = ~/mail/
+
 [destination]
-type = Maildir
-path = ~/mail/
+type = Mboxrd
+path = ~/mbox
 
 [options]
 read_all=False
