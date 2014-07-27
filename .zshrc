@@ -254,7 +254,7 @@ alias -s vim="vim -S "
 alias popd="popd -q"
 alias femerge='FEATURES="-collision-detect -protect-owned" emerge'
 alias mc=ranger
-alias getmail="/usr/bin/getmail --rcfile=sms --rcfile=aesc --rcfile=mike"
+alias getmail="/usr/bin/getmail --rcfile=sms --rcfile=aesc --rcfile=mike --rcfile=yandex"
 alias emacsd="/bin/emacs --daemon"
 alias emacs="emacsclient -c -a=vim"
 alias ls='ls --classify --color --human-readable --group-directories-first'

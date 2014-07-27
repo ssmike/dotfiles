@@ -5,7 +5,7 @@
 " from ubuntu forums : remove vim-tiny and install vim-nox
 " for ubuntu - vim-nox package
 " vundle created by git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
-" install instructions : 
+" installation instructions : 
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " for python jedi complete 
 " install python-jedi: 
@@ -21,7 +21,7 @@
 "   install ghc-mod 
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
 " for editing java files jdk needed
-" final step : run vim -c ":BundleUpdate"
+" final step : vim -c ":BundleUpdate"
 
 "for project configuration"
 if filereadable(".vim.local")
@@ -83,7 +83,7 @@ nmap <F9> :make<CR>
 nmap <F8> :make run<CR>
 
 " < ./inp<CR>
-"arch vim-conque"
+"vim-conque"
 function! Term()
     ConqueTerm zsh
     nmap <F8> :!./main<CR>
@@ -102,6 +102,7 @@ nmap <F4> :NERDTree<CR>
 nmap [ :resize -5<CR>
 nmap ] :resize +5<CR>
 nmap <F5> :TagbarToggle<CR>
+
 " for pwd following
 "autocmd BufEnter * lcd %:p:h
 
@@ -154,6 +155,8 @@ nmap <C-u> :GhcModInfoPreview<CR>
 imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
 "let g:SuperTabContextTextPrecedence = ['&omnifunc', '&completefunc']"
+
+"local configuration for clang_complete
 
 if !exists("g:clang_user_options") 
     let g:clang_user_options="-std=c++0x"

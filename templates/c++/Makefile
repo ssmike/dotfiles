@@ -1,11 +1,19 @@
-main: clean main.o source
-	g++ ./main.o -o main -pg -w
+CFLAGS+=-g -w -std=c++11
+LDFLAGS+=-pg
+CC=g++
+LD=g++
+
+all: main source
+
+main: main.o
+	$(LD) ./main.o -o main $(LDFLAGS)
 clean:
 	rm -f ./main
 	rm -rf ./*.o
 	rm -f ./gmon.out
-main.o:
-	g++ -ggdb -c ./main.cpp -pg -w -std=c++11
+main.o: main.cpp
+	sed -i 's/\(^.*\$\)/\# \1/g' ./gdb-start
+	$(CC) -c ./main.cpp -pg $(CFLAGS)
 
 check-syntax:
 	clang++ -o nul -Wall -S ${CHK_SOURCES}
@@ -13,7 +21,9 @@ source:
 	./standardfilter.sh
 edit:
 	vim ./main.cpp
-run:
+run: main
 	./main
 	cp ./outp /tmp/outp
-
+	head -n 30 ./outp
+debug: main
+	gdb ./main -x ./gdb-start
