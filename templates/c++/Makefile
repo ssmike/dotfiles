@@ -12,7 +12,7 @@ clean:
 	rm -rf ./*.o
 	rm -f ./gmon.out
 main.o: main.cpp
-	sed -i 's/\(^.*\$\)/\# \1/g' ./gdb-start
+	sed -i 's/\(^[^#].*\$\)/\# \1/g' ./gdb-start
 	$(CC) -c ./main.cpp -pg $(CFLAGS)
 
 check-syntax:
@@ -20,7 +20,7 @@ check-syntax:
 source:
 	./standardfilter.sh
 edit:
-	vim ./main.cpp
+	vim -p ./main.cpp ./gdb-start
 run: main
 	./main
 	cp ./outp /tmp/outp
