@@ -1,14 +1,12 @@
 import sys
-POST_CODE_EXEC='sys.stdin.close();sys.stdout.close()'
-INPUT_FILE, OUTPUT_FILE =['inp', ''], ['outp', '']
-FILE_NUMBER= 0 if len(sys.argv) >= 2 and sys.argv[1] == 'LOCAL_RUN' else 1
-if INPUT_FILE[FILE_NUMBER] == '': POST_CODE_EXEC=''
-else :
-    sys.stdin = open(INPUT_FILE[FILE_NUMBER], "r")
-    sys.stdout = open(OUTPUT_FILE[FILE_NUMBER], "w")
-# -- code beginning
+#-sys.stdin = open('file1') #d
+#-sys.stdout = open('file2', 'w') #d
+sys.stdin = open('inp', 'r') #d
+sys.stdout = open('outp', 'w') #d
 
 
-# -- code end
 
-exec(POST_CODE_EXEC);
+
+
+
+sys.stdout.close() #d

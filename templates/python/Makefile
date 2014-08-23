@@ -5,7 +5,7 @@ clean:
 edit:
 	vim ./main.py
 source:
-	cp ./main.py /tmp/source
+	./filter.sh
 run:
-	python ./main.py LOCAL_RUN
+	python ./main.py
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 if pidof steam; then
-    xdotool key ctrl+alt+F8;
+    xdotool key ctrl+alt+F2;
 else
     startx :1;
 fi

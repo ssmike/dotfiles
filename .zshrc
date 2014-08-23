@@ -1,5 +1,5 @@
-export WINEARCH=win32
-
+#export WINEARCH=win32
+export GOOGLE=8.8.8.8
 export PATH=$PATH:~/.cabal/bin
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -251,6 +251,7 @@ alias -s exe=wine
 alias -s EXE=wine
 alias -s vim="vim -S "
 #gentoo aliases
+alias cp='cp --reflink=auto'
 alias popd="popd -q"
 alias femerge='FEATURES="-collision-detect -protect-owned" emerge'
 alias mc=ranger
