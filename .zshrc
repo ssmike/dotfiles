@@ -251,6 +251,7 @@ alias -s exe=wine
 alias -s EXE=wine
 alias -s vim="vim -S "
 #gentoo aliases
+alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'
 alias cp='cp --reflink=auto'
 alias popd="popd -q"
 alias femerge='FEATURES="-collision-detect -protect-owned" emerge'

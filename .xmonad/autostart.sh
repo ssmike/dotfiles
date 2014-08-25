@@ -21,7 +21,7 @@ setxkbmap -layout "us,ru" -option "grp:caps_toggle"
 /usr/libexec/polkit-gnome-authentication-agent-1  &
 ~/.xmonad/dzen-auto.sh &
 ~/.mocpscrob/mocp-scrobbler.py --daemon &
-deluged &
+#deluged &
 # my session
 claws-mail &
 chromium &

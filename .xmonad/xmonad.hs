@@ -337,7 +337,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         ignore = ["Zenity", "Oblogout"]
         media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab"]
-        etc = ["Clementine", "Transmission-gtk", "Deluge", "Ekiga", "Claws-mail"]
+        etc = ["Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  
 ------------------------------------------------------------------------
 -- Event handling

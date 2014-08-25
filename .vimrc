@@ -176,6 +176,6 @@ if !exists("g:syntastic_c_compiler_options")
 endif
 
 "x11 clipboard"
-vmap [ "+
-nmap [ "+
+vmap . "+
+nmap . "+
 
