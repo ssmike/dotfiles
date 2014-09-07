@@ -382,7 +382,9 @@ myEventHook = docksEventHook <+> ewmhDesktopsEventHook
 -- hook by combining it with ewmhDesktopsStartup.
 --
 myStartupHook = do 
+    spawn "wmname LG3D"
     spawn "~/.xmonad/autostart.sh"
+    spawn "~/.xmonad/dzen-auto.sh"
     ewmhDesktopsStartup
     return ()
  

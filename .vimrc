@@ -179,3 +179,11 @@ endif
 vmap . "+
 nmap . "+
 
+nnoremap <A-F1> 1gt
+nnoremap <A-F2> 2gt
+nnoremap <A-F3> 3gt
+nnoremap <A-F4> 4gt
+nnoremap <A-q> 5gt
+nnoremap <A-w> 6gt
+nnoremap <A-e> 7gt
+nnoremap <A-r> 8gt
