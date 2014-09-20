@@ -1,4 +1,5 @@
 #!/bin/bash
+pgrep nm-applet && exit
 xsetroot -cursor_name left_ptr
 xbindkeys &
 nm-applet &
@@ -8,6 +9,7 @@ nitrogen --restore
 #wmname "LG3D"
 compton -cCGf -D 3 -b
 yandex-disk start &
+~/app-copy/x86_64/CopyAgent &
 synclient RTCornerButton=2
 synclient TapButton1=1
 synclient TapButton2=3
@@ -21,10 +23,12 @@ setxkbmap -layout "us,ru" -option "grp:caps_toggle"
 /usr/libexec/polkit-gnome-authentication-agent-1  &
 #~/.xmonad/dzen-auto.sh &
 ~/.mocpscrob/mocp-scrobbler.py --daemon &
+gnome-keyring-daemon &
 #deluged &
 # my session
 claws-mail &
 chromium &
+clementine &
 #gcdemu &
 #steam &
 #syndaemon -t -i 1 -d 

@@ -23,6 +23,8 @@
 " for editing java files jdk needed
 " final step : vim -c ":BundleUpdate"
 
+set guiheadroom=0
+
 "for project configuration"
 if filereadable(".vim.local")
     so .vim.local
@@ -187,3 +189,10 @@ nnoremap <A-q> 5gt
 nnoremap <A-w> 6gt
 nnoremap <A-e> 7gt
 nnoremap <A-r> 8gt
+
+""" Ivaschenko 
+imap jj <ESC>
+map <C-J> 5j
+map <C-K> 5k
+set timeoutlen=300
+

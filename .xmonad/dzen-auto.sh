@@ -8,7 +8,7 @@ function take {
     done
 }
 
-
+pgrep conky && exit
 #mkfifo ~/.info
 #take ~/.info | dzen2 -y 1000 -dock & 
 conky -c ~/.conkyrc | /bin/sh | dzen2 -y 2000 -dock -e - -ta l & 

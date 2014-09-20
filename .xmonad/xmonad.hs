@@ -16,6 +16,8 @@
 -- http://www.haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.8
 --
  
+import XMonad.Hooks.ScreenCorners
+import XMonad.Hooks.SetWMName
 import XMonad.Actions.WindowGo
 import XMonad
 import Data.Monoid
@@ -332,8 +334,8 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         work = ["Zathura", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
         code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
-        fullfloat = ["dota_linux"]
-        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "dota_linux", "Gcdemu", "Docky"]
+        fullfloat = []
+        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]
         media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab"]
@@ -351,7 +353,9 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
 -- It will add EWMH event handling to your custom event hooks by
 -- combining them with ewmhDesktopsEventHook.
 --fullscreenEventHook <+> 
-myEventHook = docksEventHook <+> ewmhDesktopsEventHook
+myEventHook e = do
+    screenCornerEventHook e
+    docksEventHook e
 --mempty 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -385,7 +389,8 @@ myStartupHook = do
     spawn "wmname LG3D"
     spawn "~/.xmonad/autostart.sh"
     spawn "~/.xmonad/dzen-auto.sh"
-    ewmhDesktopsStartup
+    --setWMName "LG3D"
+    addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
  
 ------------------------------------------------------------------------
@@ -396,7 +401,7 @@ myStartupHook = do
 main = do 
     dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
     --spawn "conky | sh | /usr/bin/dzen2 -dock -x 630 -y 0"
-    xmonad defaultConfig {
+    xmonad $ ewmh defaultConfig {
           -- simple stuff
             terminal           = myTerminal,
             focusFollowsMouse  = False,
@@ -410,13 +415,11 @@ main = do
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
     
-          -- hooks, layouts
-            layoutHook         = smartBorders $ myLayout,
+          -- hooks, layouts 
+            layoutHook         = smartBorders $  myLayout,
             manageHook         = myManageHook,
             handleEventHook    = myEventHook,
-            logHook            = do
-                                    ewmhDesktopsLogHook
-                                    dynamicLogWithPP $ dzenpp dzen,
+            logHook            = dynamicLogWithPP $ dzenpp dzen,
             startupHook        = myStartupHook
         }
 -- oldcolor = "#1B1D1E"

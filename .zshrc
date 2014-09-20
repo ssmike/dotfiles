@@ -1,6 +1,7 @@
 #export WINEARCH=win32
 export GOOGLE=8.8.8.8
 export PATH=$PATH:~/.cabal/bin
+export STEAM_FRAME_FORCE_CLOSE=1
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -273,3 +274,4 @@ alias pulse="pulseaudio -k && pulseaudio --start"
 #alias mv='nocorrect mv --verbose --interactive'
 #alias rm='nocorrect rm -Irv'
 #alias mkdir='nocorrect mkdir'
+alias vncreadonly="x11vnc -usepw -forever -viewonly"

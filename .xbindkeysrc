@@ -1,11 +1,11 @@
-"~/scripts/play-pause.sh"
-    XF86AudioPlay
-"mocp -f"
-    XF86AudioNext
-"mocp -r"
-    XF86AudioPrev
-"mocp -s"
-    XF86AudioStop
+#"~/scripts/play-pause.sh"
+#    XF86AudioPlay
+#"mocp -f"
+#    XF86AudioNext
+#"mocp -r"
+#    XF86AudioPrev
+#"mocp -s"
+#    XF86AudioStop
 
 "slock"
     control + alt + l
