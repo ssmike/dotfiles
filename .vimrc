@@ -42,7 +42,7 @@ Bundle "gmarik/vundle"
 Bundle 'scrooloose/nerdtree'
 Bundle 'clang-complete'
 "vundle compatibility broken
-"Bundle "scrooloose/syntastic"
+"Bundle scrooloose/syntastic
 Bundle "pbrisbin/vim-syntax-shakespeare"
 Bundle 'davidhalter/jedi-vim'
 Bundle "SuperTab"
@@ -189,6 +189,8 @@ nnoremap <A-q> 5gt
 nnoremap <A-w> 6gt
 nnoremap <A-e> 7gt
 nnoremap <A-r> 8gt
+
+command Print !gtklp %
 
 """ Ivaschenko 
 imap jj <ESC>

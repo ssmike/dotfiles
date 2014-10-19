@@ -15,9 +15,11 @@
 --
 -- http://www.haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.8
 --
- 
+import XMonad.Config.Desktop
+import Data.Monoid;
+import Control.Monad
 import XMonad.Hooks.ScreenCorners
-import XMonad.Hooks.SetWMName
+import XMonad.Config.Kde
 import XMonad.Actions.WindowGo
 import XMonad
 import Data.Monoid
@@ -46,56 +48,13 @@ import qualified XMonad.StackSet as S
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
-import XMonad.Operations
-import XMonad.Layout.SimpleFloat
+import XMonad.Util.WindowProperties (getProp32s)
+import GHC.Word
 
-myTerminal      = "sakura"
+myTerminal      = "konsole"
  
--- Whether focus follows the mouse pointer.
- 
--- Width of the window border in pixels.
---
- 
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
 myModMask       = mod4Mask
  
--- NOTE: from 0.9.1 on numlock mask is set automatically. The numlockMask
--- setting should be removed from configs.
---
--- You can safely remove this even on earlier xmonad versions unless you
--- need to set it to something other than the default mod2Mask, (e.g. OSX).
---
--- The mask for the numlock key. Numlock status is "masked" from the
--- current modifier status, so the keybindings will work with numlock on or
--- off. You may need to change this on some systems.
---
--- You can find the numlock modifier by running "xmodmap" and looking for a
--- modifier with Num_Lock bound to it:
---
--- > $ xmodmap | grep Num
--- > mod2        Num_Lock (0x4d)
---
--- Set numlockMask = 0 if you don't have a numlock key, or want to treat
--- numlock status separately.
---
--- myNumlockMask   = mod2Mask -- deprecated in xmonad-0.9.1
-------------------------------------------------------------
- 
- 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
---myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
  
 -- Border colors for unfocused and focused windows, respectively.
@@ -103,12 +62,9 @@ myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", 
 myNormalBorderColor  ="#6A86B2"
 myFocusedBorderColor ="#DB2828"
 
---SetDockType true
-traycommand = "trayer --edge bottom --align right --height 7 --width 10  --transparent true --alpha 255 --expand true --SetDockType false"
 scratchpads = [
     NS "browser" "luakit" (className =? "luakit") 
-        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
-    NS "tray" traycommand (className =? "trayer") defaultFloating
+        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))--,
     ]
 
 ------------------------------------------------------------------------
@@ -116,37 +72,22 @@ scratchpads = [
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
-    [ ((modm, xK_z), scratchpadSpawnActionCustom "sakura --name scratchpad")
-    , ((modm, xK_x), namedScratchpadAction scratchpads "tray")
-    , ((modm, xK_s), namedScratchpadAction scratchpads "browser")
+    [ ((modm, xK_s), namedScratchpadAction scratchpads "browser")
     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    --true fullscreen
     , ((modm, xK_a), sendMessage ToggleStruts)
-    --launch gnome-commander
-    , ((modm .|. controlMask, xK_r), spawn "oblogout")
-	--launch pcmanfm 
-	, ((modm, xK_f), spawn "thunar")
-    , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM") --spawn "dolphin")
+	, ((modm, xK_f), spawn "dolphin")
+    , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
-    --launch screensaver
-    , ((modm .|. shiftMask, xK_l), spawn "xlock -mode matrix")
-    --launch window prompt
+
     , ((modm .|. shiftMask, xK_o     ), windowPromptGoto  defaultXPConfig)
     , ((modm .|. shiftMask, xK_i     ), windowPromptBring  defaultXPConfig)
     , ((modm, xK_o), goToSelected defaultGSConfig)
     -- launch command prompt
     , ((modm .|. shiftMask, xK_p     ), shellPrompt defaultXPConfig)
-    --, ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
  
-    -- launcher
-    , ((modm              , xK_p     ), spawn "gmrun")
-    --, ((modm              , xK_F1), spawn "dmenu_run")
- 
-    -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill1)
 
-     -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
  
     --  Reset the layouts on the current workspace to default
@@ -157,8 +98,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
      
     -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
- 
-    -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
  
     -- Move focus to the previous window
@@ -192,18 +131,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_Right), moveTo Next (WSIs notSP))
     , ((modm             , xK_Left), moveTo Prev (WSIs notSP))
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
- 
-    -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
- 
-    -- Restart xmonad
+
+
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
---	, ((modm .|. shiftMask	  , xK_a), )
 	--send window to etc
     ,((modm .|. shiftMask, xK_a), windows $ W.shift "9:etc")
     ]
@@ -258,41 +188,14 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
  
-------------------------------------------------------------------------
--- Layouts:
- 
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- * NOTE: XMonad.Hooks.EwmhDesktops users must remove the obsolete
--- ewmhDesktopsLayout modifier from layoutHook. It no longer exists.
--- Instead use the 'ewmh' function from that module to modify your
--- defaultConfig as a whole. (See also logHook, handleEventHook, and
--- startupHook ewmh notes.)
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
---myLayout = avoidStruts ((onWorkspaces (tabbedList) (simpleTabbed)  Full) ||| cross ||| tiled ||| Mirror tiled)
 myLayout = avoidStruts ((onWorkspaces (["9:etc"]) (cross) tiled)  ||| Full ||| cross ||| (Mirror tiled))
   where
     tabbedList = ["1:main", "6:work"]
-    --cross layout
     cross = Cross cross_ratio delta
-
     cross_ratio = 6/7 
-    -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
- 
-    -- The default number of windows in the master pane
     nmaster = 1
- 
-    -- Default proportion of screen occupied by master pane
     ratio   = 1/2
- 
-    -- Percent of screen to increment by when resizing panes
     delta   = 5/100
  
 ------------------------------------------------------------------------
@@ -335,10 +238,10 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         web = ["Chromium", "Chromium-browser", "Firefox"]
         code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = []
-        float = ["XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
+        float = ["ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]
         media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
-        fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab"]
+        fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  
 ------------------------------------------------------------------------
@@ -356,10 +259,10 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
 myEventHook e = do
     screenCornerEventHook e
     docksEventHook e
---mempty 
+
 ------------------------------------------------------------------------
 -- Status bars and logging
- 
+
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
@@ -387,8 +290,8 @@ myEventHook e = do
 --
 myStartupHook = do 
     spawn "wmname LG3D"
-    spawn "~/.xmonad/autostart.sh"
-    spawn "~/.xmonad/dzen-auto.sh"
+    --spawn "~/.xmonad/autostart.sh"
+    --spawn "~/.xmonad/dzen-auto.sh"
     --setWMName "LG3D"
     addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
@@ -399,10 +302,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 -- -w 1020
 main = do 
-    dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
-    --spawn "conky | sh | /usr/bin/dzen2 -dock -x 630 -y 0"
-    xmonad $ ewmh defaultConfig {
-          -- simple stuff
+    xmonad $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
             borderWidth        = 3,
@@ -411,18 +311,16 @@ main = do
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor,
     
-          -- key bindings
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
     
-          -- hooks, layouts 
             layoutHook         = smartBorders $  myLayout,
-            manageHook         = myManageHook,
-            handleEventHook    = myEventHook,
-            logHook            = dynamicLogWithPP $ dzenpp dzen,
+            manageHook         = (((className =? "krunner") >>= return . not --> myManageHook) <+> (kdeOverride --> doFloat)),
+            handleEventHook    = (ewmhDesktopsEventHook `mappend` ewmhCopyWindow) <+> handleEventHook kde4Config,
             startupHook        = myStartupHook
         }
--- oldcolor = "#1B1D1E"
+
+
 newcolor = "#000000"
 dzenpp status = defaultPP {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
@@ -436,3 +334,25 @@ dzenpp status = defaultPP {
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status 
            }
+
+--for krunner
+kdeOverride :: Query Bool
+kdeOverride = ask >>= \w -> liftX $ do
+    override <- getAtom "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE"
+    wt <- getProp32s "_NET_WM_WINDOW_TYPE" w
+    return $ maybe False (elem $ fromIntegral override) wt
+
+ewmhCopyWindow :: Event -> X All
+ewmhCopyWindow ClientMessageEvent {
+               ev_window = w,
+               ev_message_type = mt,
+               ev_data = -1 : _
+       } = withWindowSet $ \s -> do
+    let a_cd = 446 :: Word64 --getAtom "_NET_CURRENT_DESKTOP"
+    --spawn $ "notify-send 'debug for notifications'" ++ show mt ++ " " ++ show a_cd
+    when (mt == a_cd) $ do
+        sort' <- getSortByIndex
+        let ws = map W.tag $ sort' $ W.workspaces s
+        windows $ foldr (.) id (map (copyWindow w) ws)
+    return (All True)
+ewmhCopyWindow _ = return (All True)

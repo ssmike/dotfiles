@@ -2,7 +2,7 @@
 
 mount /btrfs-root
 
-SNAME=root-$(date +%Y-%m-%d-%H)
+SNAME=root-$(date +%Y-%m-%d)
 
 cd /btrfs-root
 if ! ls /btrfs-root/snapshots/ | grep $SNAME > /dev/null; then
