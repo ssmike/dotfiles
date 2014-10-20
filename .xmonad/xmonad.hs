@@ -1,20 +1,3 @@
-
---
--- xmonad example config file for xmonad-0.9
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
--- NOTE: Those updating from earlier xmonad versions, who use
--- EwmhDesktops, safeSpawn, WindowGo, or the simple-status-bar
--- setup functions (dzen, xmobar) probably need to change
--- xmonad.hs, please see the notes below, or the following
--- link for more details:
---
--- http://www.haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.8
---
 import XMonad.Config.Desktop
 import Data.Monoid;
 import Control.Monad
@@ -234,11 +217,11 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     where
         game = ["Steam", "dota_linux"] 
         math = ["XMaxima", "XMathematica", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
-        work = ["Zathura", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
+        work = ["Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
-        code = ["Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
+        code = ["Kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = []
-        float = ["ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
+        float = ["Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]
         media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
@@ -320,21 +303,6 @@ main = do
             startupHook        = myStartupHook
         }
 
-
-newcolor = "#000000"
-dzenpp status = defaultPP {
-                ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
-              , ppCurrent           =   dzenColor "#ebac54" newcolor 
-              , ppVisible           =   dzenColor "blue" newcolor
-              , ppHidden            =   dzenColor "white" newcolor
-              , ppUrgent            =   dzenColor "#ff0000" newcolor
-              , ppWsSep             =   " "
-              , ppSep               =   "  |  "
-              , ppLayout            =   dzenColor "#ebac54" newcolor
-              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
-              , ppOutput            =   hPutStrLn status 
-           }
-
 --for krunner
 kdeOverride :: Query Bool
 kdeOverride = ask >>= \w -> liftX $ do
@@ -354,5 +322,6 @@ ewmhCopyWindow ClientMessageEvent {
         sort' <- getSortByIndex
         let ws = map W.tag $ sort' $ W.workspaces s
         windows $ foldr (.) id (map (copyWindow w) ws)
+        windows W.focusDown
     return (All True)
 ewmhCopyWindow _ = return (All True)
