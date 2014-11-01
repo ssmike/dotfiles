@@ -55,8 +55,8 @@ scratchpads = [
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
-    [ ((modm, xK_s), namedScratchpadAction scratchpads "browser")
-    , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
+      ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     , ((modm, xK_a), sendMessage ToggleStruts)
 	, ((modm, xK_f), spawn "dolphin")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
@@ -221,11 +221,11 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         web = ["Chromium", "Chromium-browser", "Firefox"]
         code = ["Kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = []
-        float = ["Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
+        float = ["Kmix", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]
-        media = ["Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        media = ["nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["KMail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  
 ------------------------------------------------------------------------
 -- Event handling
@@ -276,7 +276,7 @@ myStartupHook = do
     --spawn "~/.xmonad/autostart.sh"
     --spawn "~/.xmonad/dzen-auto.sh"
     --setWMName "LG3D"
-    addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
+    --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
  
 ------------------------------------------------------------------------
@@ -316,12 +316,12 @@ ewmhCopyWindow ClientMessageEvent {
                ev_message_type = mt,
                ev_data = -1 : _
        } = withWindowSet $ \s -> do
-    let a_cd = 446 :: Word64 --getAtom "_NET_CURRENT_DESKTOP"
-    --spawn $ "notify-send 'debug for notifications'" ++ show mt ++ " " ++ show a_cd
-    when (mt == a_cd) $ do
-        sort' <- getSortByIndex
-        let ws = map W.tag $ sort' $ W.workspaces s
-        windows $ foldr (.) id (map (copyWindow w) ws)
-        windows W.focusDown
+    --let a_cd = 446 :: Word64 --  getAtom "_NET_CURRENT_DESKTOP"
+    --trace $ "debug for notifications " ++ show mt ++ " " ++ show a_cd
+    --when (mt == a_cd) $ do
+    sort' <- getSortByIndex
+    let ws = map W.tag $ sort' $ W.workspaces s
+    windows $ foldr (.) id (map (copyWindow w) ws)
+    windows W.focusDown
     return (All True)
 ewmhCopyWindow _ = return (All True)

@@ -33,5 +33,8 @@
     alt + l
 "scrot -e 'mv $f ~/screenshots/'"
     Print
+#"ksnapshot"
+#    Print
+
 "gnome-system-monitor"
     Control + Escape
