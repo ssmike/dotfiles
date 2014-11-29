@@ -225,7 +225,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         ignore = ["Zenity", "Oblogout"]
         media = ["nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["KMail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  
 ------------------------------------------------------------------------
 -- Event handling
@@ -273,7 +273,7 @@ myEventHook e = do
 --
 myStartupHook = do 
     spawn "wmname LG3D"
-    --spawn "~/.xmonad/autostart.sh"
+    spawn "~/.xmonad/autostart.sh"
     --spawn "~/.xmonad/dzen-auto.sh"
     --setWMName "LG3D"
     --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
@@ -319,6 +319,7 @@ ewmhCopyWindow ClientMessageEvent {
     --let a_cd = 446 :: Word64 --  getAtom "_NET_CURRENT_DESKTOP"
     --trace $ "debug for notifications " ++ show mt ++ " " ++ show a_cd
     --when (mt == a_cd) $ do
+    trace "notifications hack"
     sort' <- getSortByIndex
     let ws = map W.tag $ sort' $ W.workspaces s
     windows $ foldr (.) id (map (copyWindow w) ws)

@@ -1,5 +1,5 @@
 CFLAGS+=-g -w -std=c++11
-LDFLAGS+=-pg
+LDFLAGS+=-pg -g
 CC=g++
 LD=g++
 

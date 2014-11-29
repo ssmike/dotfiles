@@ -197,4 +197,4 @@ imap jj <ESC>
 map <C-J> 5j
 map <C-K> 5k
 set timeoutlen=300
-
+set mouse=a

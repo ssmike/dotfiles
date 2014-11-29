@@ -7,6 +7,7 @@ mount -o remount,rw /boot
 
 #backup kernel & initramfs
 echo "make backups[Y/n]"
+notify-send "rebuilder" "kernel compilation finished"
 read -r RESPONSE
 if [ ! $RESPONSE = n ] ; then 
     cp /boot/gentoo-kernel /boot/backup-gentoo-kernel

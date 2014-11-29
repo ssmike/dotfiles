@@ -7,8 +7,6 @@
 #"mocp -s"
 #    XF86AudioStop
 
-"slock"
-    control + alt + l
 "~/scripts/steam.sh"
     control + alt + s
 
