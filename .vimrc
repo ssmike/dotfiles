@@ -7,16 +7,8 @@
 " vundle created by git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
 " installation instructions : 
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" for python jedi complete 
-" install python-jedi: 
-"   arch : pacman -S python-jedi [python2-jedi] 
-"   gentoo : emerge dev-python/jedi 
-"   ubuntu : apt-get install python-jedi python3-jedi 
-" for c++ clang complete 
-" install clang 
-"   arch : pacman -S clang 
-"   gentoo : unmask and emerge sys-devel/clang 
-"   ubuntu : apt-get install clang 
+" for python and c-family languages completion
+"   https://github.com/Valloric/YouCompleteMe
 " for haskell:
 "   install ghc-mod 
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
@@ -40,13 +32,11 @@ call vundle#rc()
 filetype plugin indent on   
 Bundle "gmarik/vundle"
 Bundle 'scrooloose/nerdtree'
-Bundle 'clang-complete'
 "vundle compatibility broken
 "Bundle scrooloose/syntastic
 Bundle "pbrisbin/vim-syntax-shakespeare"
-Bundle 'davidhalter/jedi-vim'
-Bundle "SuperTab"
-Bundle "javacomplete"
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'javacomplete'
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
 Bundle "Tagbar"
@@ -123,7 +113,6 @@ set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
 
 nmap S :SyntasticToggleMode<CR>
-set completefunc=localcomplete#allBufferMatches
 
 imap <c-f> <c-x><c-f>
 
@@ -134,17 +123,13 @@ nmap <leader>o zo
 nmap <leader>c zc
 nmap <leader>m :set fdm=manual<CR>
 
-"for python completion"
 set completeopt-=preview
 set splitbelow
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-autocmd FileType python setlocal completefunc=jedi#completions
-
-autocmd Filetype java setlocal completefunc=javacomplete#Complete
-autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+""autocmd Filetype java setlocal completefunc=javacomplete#Complete
+""autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
@@ -156,13 +141,10 @@ nmap <C-F9> :GhcModCheck<CR>
 nmap <C-u> :GhcModInfoPreview<CR>
 imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
-"let g:SuperTabContextTextPrecedence = ['&omnifunc', '&completefunc']"
-
 "local configuration for clang_complete
-
-if !exists("g:clang_user_options") 
-    let g:clang_user_options="-std=c++0x"
-endif
+"for completion use .ycm_extra_conf.py
+"for example https://github.com/Valloric/ycmd/blob/master/cpp/ycm/.ycm_extra_conf.py or ~/.ycm_extra_conf.py
+let g:ycm_confirm_extra_conf = 0
 "let g:clang_user_options="-std=c++0x"
 if !exists("g:syntastic_cpp_compiler")
     let g:syntastic_cpp_compiler='clang++'
@@ -207,4 +189,7 @@ set iminsert=0
 set imsearch=0
 imap  
 ""highlight lCursor guifg=NONE guibg=Cyan
-
+set spelllang=ru_yo,en_us
+let g:syntastic_tex_checkers=['']
+autocmd FileType tex setlocal spell
+autocmd FileType text setlocal spell
