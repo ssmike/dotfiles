@@ -7,13 +7,17 @@
 " vundle created by git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
 " installation instructions : 
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" vim -c ":BundleUpdate"
 " for python and c-family languages completion
-"   https://github.com/Valloric/YouCompleteMe
+"   read README on https://github.com/Valloric/YouCompleteMe or 
+"   (if you have boost and clang >= 3.4 installed) just run
+"   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. \
+"       ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp \
+"       -DUSE_SYSTEM_BOOST=ON; \
+"       make
 " for haskell:
 "   install ghc-mod 
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
-" for editing java files jdk needed
-" final step : vim -c ":BundleUpdate"
 
 set guiheadroom=0
 
@@ -32,16 +36,16 @@ call vundle#rc()
 filetype plugin indent on   
 Bundle "gmarik/vundle"
 Bundle 'scrooloose/nerdtree'
-"vundle compatibility broken
-"Bundle scrooloose/syntastic
+Bundle 'scrooloose/syntastic'
 Bundle "pbrisbin/vim-syntax-shakespeare"
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'javacomplete'
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
-Bundle "Tagbar"
+Bundle 'Tagbar'
 Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
+Bundle 'coot/atp_vim'
 
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
@@ -192,4 +196,7 @@ imap  
 set spelllang=ru_yo,en_us
 let g:syntastic_tex_checkers=['']
 autocmd FileType tex setlocal spell
-autocmd FileType text setlocal spell
+""autocmd FileType text setlocal spell
+let g:ycm_filetype_blacklist = { 
+    \ 'tex' : 1 
+    \}
