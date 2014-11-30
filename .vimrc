@@ -197,4 +197,14 @@ imap jj <ESC>
 map <C-J> 5j
 map <C-K> 5k
 set timeoutlen=300
+
+""" Pershakov
 set mouse=a
+
+""" for tex
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+imap  
+""highlight lCursor guifg=NONE guibg=Cyan
+
