@@ -45,7 +45,7 @@ Bundle "chriskempson/vim-tomorrow-theme"
 Bundle 'Tagbar'
 Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
-Bundle 'coot/atp_vim'
+"Bundle 'coot/atp_vim'
 
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
@@ -191,7 +191,8 @@ set mouse=a
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
-imap  
+map  
+map!  
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 let g:syntastic_tex_checkers=['']
