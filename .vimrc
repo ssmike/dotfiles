@@ -10,7 +10,7 @@
 " vim -c ":BundleUpdate"
 " for python and c-family languages completion
 "   read README on https://github.com/Valloric/YouCompleteMe or 
-"   (if you have boost and clang >= 3.4 installed) just run
+"   (if you have latest boost and clang >= 3.4 installed) just run
 "   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. \
 "       ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp \
 "       -DUSE_SYSTEM_BOOST=ON; \
