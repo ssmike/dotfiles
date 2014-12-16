@@ -1,4 +1,3 @@
-
 "completion function for plain text files"
 
 " for all plugins work vim must be compiled with +python 
@@ -11,10 +10,7 @@
 " for python and c-family languages completion
 "   read README on https://github.com/Valloric/YouCompleteMe or 
 "   (if you have boost and clang >= 3.4 installed) just run
-"   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. \
-"       ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp \
-"       -DUSE_SYSTEM_BOOST=ON; \
-"       make
+"   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
 " for haskell:
 "   install ghc-mod 
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
@@ -34,6 +30,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 filetype plugin indent on   
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+let g:UltiSnipsExpandTrigger="<c-k>"
+
 Bundle "gmarik/vundle"
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
@@ -45,12 +45,13 @@ Bundle "chriskempson/vim-tomorrow-theme"
 Bundle 'Tagbar'
 Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
-"Bundle 'coot/atp_vim'
-
+"Bundle 'honza/vim-snippets'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
-
+"Bundle 'lervag/vim-latex'
+Bundle "gerw/vim-latex-suite"
+set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 
 set tabstop=4
@@ -150,12 +151,12 @@ imap <C-u> <C-O>:GhcModInfoPreview<CR>
 "for example https://github.com/Valloric/ycmd/blob/master/cpp/ycm/.ycm_extra_conf.py or ~/.ycm_extra_conf.py
 let g:ycm_confirm_extra_conf = 0
 "let g:clang_user_options="-std=c++0x"
-if !exists("g:syntastic_cpp_compiler")
+"if !exists("g:syntastic_cpp_compiler")
     let g:syntastic_cpp_compiler='clang++'
-endif
-if !exists("g:syntastic_cpp_compiler_options")
+"endif
+"if !exists("g:syntastic_cpp_compiler_options")
     let g:syntastic_cpp_compiler_options=' -std=c++11'
-endif
+"endif
 if !exists("g:syntastic_c_compiler")
     let g:syntastic_c_compiler="gcc"
 endif
@@ -178,6 +179,13 @@ nnoremap <A-r> 8gt
 
 command Print !gtklp %
 
+function! Includefunction(param)
+    exe 'normal! ggO#include '.a:param
+    exe 'normal ``'
+endfunction
+
+command! -nargs=1 Include call Includefunction('<args>') 
+
 """ Ivaschenko 
 imap jj <ESC>
 map <C-J> 5j
@@ -195,9 +203,21 @@ map  
 map!  
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
+
 let g:syntastic_tex_checkers=['']
-autocmd FileType tex setlocal spell
+"let b:atpTexCompiler='texi2pdf'
 ""autocmd FileType text setlocal spell
-let g:ycm_filetype_blacklist = { 
-    \ 'tex' : 1 
-    \}
+"let g:atp_tab_map=1
+"
+autocmd FileType tex setlocal spell
+
+"let g:ycm_filetype_blacklist = { 
+"    \ 'tex' : 1 
+"    \}
+function! s:javap()
+    setlocal ft=bytecode
+    setl readonly nomodified | %!javap -c -s -verbose <afile>
+endfunction 
+
+au BufReadCmd *.class  call s:javap()
+let g:tex_flavor='latex'
