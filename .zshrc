@@ -83,7 +83,7 @@ function hg_branch_store() {
                     cut -f3 -d " ")
         bookmark=$(hg bookmarks 2>/dev/null | \
                 cut -f4 -d " ")
-        echo -n "(%F{red}hg%f)-(on %F{magenta}$branch%f at %F{yellow}$bookmark%f)" > $hg_file
+        echo -n "(%F{red}hg%f on %F{magenta}$branch%f at %F{yellow}$bookmark%f)" > $hg_file
     fi
     #kill -USR2 $$
 }
@@ -91,7 +91,7 @@ function hg_branch_store() {
 function git_branch_store() {
     if git branch >/dev/null 2>/dev/null; then
         ref=$(git symbolic-ref HEAD | cut -d'/' -f3)
-        echo -n "(%F{red}git%f)-(on %F{green}$ref%f)" > $git_file
+        echo -n "(%F{red}git%f on %F{green}$ref%f)" > $git_file
     else
         echo -n "" > $git_file
     fi
@@ -114,16 +114,19 @@ function periodic() {
 
 #add-zsh-hook preexec launch_back
 
-function svc_prompt() {
-    cat $git_file
-    cat $hg_file
+function cvs_prompt() {
+    if [ -s $hg_file ]; then
+        cat $hg_file
+    else 
+        cat $git_file
+    fi
 }
 
 
 setopt prompt_subst
 
-[ ! "$UID" = "0" ] && PROMPT='$(svc_prompt)%B%F{blue}%~%f%F{blue}%f%b> '
-[  "$UID" = "0" ] && PROMPT='$(svc_prompt)%B%F{red}%~%f%F{blue}%f%b> '
+[ ! "$UID" = "0" ] && PROMPT='$(cvs_prompt)%B%F{blue}%2~%f%F{blue}%f%b> '
+[  "$UID" = "0" ] && PROMPT='$(cvs_prompt)%B%F{red}%2~%f%F{blue}%f%b> '
 RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
 
 # -[ completion ]-
