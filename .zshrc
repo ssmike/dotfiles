@@ -1,6 +1,5 @@
 #export WINEARCH=win32
 . ~/.profile
-. /etc/profile.d/prll.sh
 
 export GOOGLE=8.8.8.8
 export PATH=$PATH:~/.cabal/bin
