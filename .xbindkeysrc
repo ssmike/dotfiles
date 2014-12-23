@@ -7,9 +7,6 @@
 #"mocp -s"
 #    XF86AudioStop
 
-"~/scripts/steam.sh"
-    control + alt + s
-
 "xbacklight -inc 5"
     XF86MonBrightnessUp
 "xbacklight -dec 5"
