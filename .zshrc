@@ -80,8 +80,7 @@ function hg_branch_store() {
     else
         branch=$(hg branch 2>/dev/null | \
                     cut -f3 -d " ")
-        bookmark=$(hg bookmarks 2>/dev/null | \
-                cut -f4 -d " ")
+        bookmark=$(hg bookmark --quiet 2>/dev/null)
         echo -n "(%F{red}hg%f on %F{magenta}$branch%f at %F{yellow}$bookmark%f)" > $hg_file
     fi
     #kill -USR2 $$
