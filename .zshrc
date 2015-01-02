@@ -61,13 +61,10 @@ promptinit
 function chprompt(){
 	prompt adam2;
 }
-bindkey -s "" 'chprompt'
+bindkey -s "" 'chprompt
+'
 
 #[ ! "$UID" = "0" ] && PROMPT='%B%F{blue}%n@%m%f%F{blue}%f%b%(!.#.$) '
-function git_prompt() {
-
-}
-
 mkdir -p /tmp/zsh-temp
 hg_file=/tmp/zsh-temp/$RANDOM$RANDOM$RANDOM
 git_file=/tmp/zsh-temp/$RANDOM$RANDOM$RANDOM
@@ -109,8 +106,6 @@ PERIOD=2
 function periodic() {
     launch_back
 }
-
-#add-zsh-hook preexec launch_back
 
 function cvs_prompt() {
     if [ -s $hg_file ]; then
@@ -171,7 +166,8 @@ edit-cmd() {
 }
 
 #zle -N edit-cmd
-bindkey -s "^X" "edit-cmd"
+bindkey -s "^X" "edit-cmd
+"
 
 mkd() { mkdir $1; cd $1 }
 battcheck() {
