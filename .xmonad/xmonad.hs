@@ -34,7 +34,7 @@ import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
 import GHC.Word
 
-myTerminal      = "konsole"
+myTerminal      = "lxterminal"
  
 myModMask       = mod4Mask
  

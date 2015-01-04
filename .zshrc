@@ -65,9 +65,10 @@ bindkey -s "" 'chprompt
 '
 
 #[ ! "$UID" = "0" ] && PROMPT='%B%F{blue}%n@%m%f%F{blue}%f%b%(!.#.$) '
-mkdir -p /tmp/zsh-temp
-hg_file=/tmp/zsh-temp/$RANDOM$RANDOM$RANDOM
-git_file=/tmp/zsh-temp/$RANDOM$RANDOM$RANDOM
+DIR=/tmp/zsh-temp-$USERNAME
+mkdir -p $DIR
+hg_file=$DIR/$RANDOM$RANDOM$RANDOM
+git_file=$DIR/$RANDOM$RANDOM$RANDOM
 echo -n "" > $hg_file
 echo -n "" > $git_file
 
