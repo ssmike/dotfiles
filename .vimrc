@@ -45,6 +45,7 @@ Bundle "chriskempson/vim-tomorrow-theme"
 Bundle 'Tagbar'
 Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
+Bundle 'kongo2002/fsharp-vim'
 "Bundle 'honza/vim-snippets'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
@@ -201,6 +202,7 @@ set iminsert=0
 set imsearch=0
 map  
 map!  
+nmap  GVgg
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 
@@ -221,3 +223,18 @@ endfunction
 
 au BufReadCmd *.class  call s:javap()
 let g:tex_flavor='latex'
+
+"
+" YouCompleteMe options
+"
+
+let g:ycm_register_as_syntastic_checker = 1 "default 1
+let g:Show_diagnostics_ui = 1 "default 1
+
+"will put icons in Vim's gutter on lines that have a diagnostic set.
+"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
+"highlighting
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_always_populate_location_list = 1 "default 0
+let g:ycm_open_loclist_on_ycm_diags = 1 "default 1

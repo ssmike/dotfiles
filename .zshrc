@@ -307,8 +307,8 @@ alias -s avi=smplayer
 alias -s mkv=smplayer
 alias -s mp4=smplayer
 alias -s mov=smplayer
-alias -s exe=wine
-alias -s EXE=wine
+alias -s exe=mono
+alias -s EXE=mono
 alias -s vim="vim -S "
 #gentoo aliases
 alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'

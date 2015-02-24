@@ -34,7 +34,7 @@ import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
 import GHC.Word
 
-myTerminal      = "lxterminal"
+myTerminal      = "konsole"
  
 myModMask       = mod4Mask
  
@@ -43,7 +43,7 @@ myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", 
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  ="#6A86B2"
-myFocusedBorderColor ="#DB2828"
+myFocusedBorderColor ="#32FFC9"--"#DB2828"
 
 scratchpads = [
     NS "browser" "luakit" (className =? "luakit") 
@@ -57,6 +57,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+      --exit
+    , ((myModMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
 	, ((modm, xK_f), spawn "dolphin")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
@@ -285,6 +287,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 -- -w 1020
 main = do 
+    dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
     xmonad $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
@@ -296,6 +299,7 @@ main = do
     
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
+            logHook            = dynamicLogWithPP $ dzenpp dzen,
     
             layoutHook         = smartBorders $  myLayout,
             manageHook         = (((className =? "krunner") >>= return . not --> myManageHook) <+> (kdeOverride --> doFloat)),
@@ -326,3 +330,17 @@ ewmhCopyWindow ClientMessageEvent {
     windows W.focusDown
     return (All True)
 ewmhCopyWindow _ = return (All True)
+
+newcolor = "#000000"
+dzenpp status = defaultPP {
+                ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
+              , ppCurrent           =   dzenColor "white" newcolor 
+              , ppVisible           =   dzenColor "blue" newcolor
+              , ppHidden            =   dzenColor "#A09BA1" newcolor
+              , ppUrgent            =   dzenColor "#ff0000" newcolor
+              , ppWsSep             =   " "
+              , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "|") ++  "  "
+              , ppLayout            =   dzenColor "#A09BA1" newcolor
+              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
+              , ppOutput            =   hPutStrLn status 
+           }
