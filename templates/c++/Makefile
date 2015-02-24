@@ -1,4 +1,4 @@
-CFLAGS+=-g -w -std=c++11
+CFLAGS+=-g -lmcheck -D_FORTIFY_SOURCE=2 -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -fwhole-program -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector
 LDFLAGS+=-pg -g
 CC=g++
 LD=g++
@@ -22,7 +22,7 @@ source:
 edit:
 	vim -p ./main.cpp ./gdb-start
 run: main
-	./main
+	./main < ./inp > ./outp
 	cp ./outp /tmp/outp
 	head -n 30 ./outp
 debug: main
