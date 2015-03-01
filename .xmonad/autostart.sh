@@ -13,7 +13,8 @@ nm-applet &
 yakuake &
 xbindkeys &
 klipper &
-xautolock -locker "/usr/lib/kde4/libexec/kscreenlocker_greet --immediateLock" -time 15 &
+kmail &
+xautolock -locker "xlock" -time 15 &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 

@@ -1,6 +1,5 @@
 import XMonad.Config.Desktop
 import Data.Monoid;
-import Control.Monad
 import XMonad.Hooks.ScreenCorners
 import XMonad.Config.Kde
 import XMonad.Actions.WindowGo
@@ -27,12 +26,10 @@ import XMonad.Util.Scratchpad
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
 import XMonad.Layout.PerWorkspace
-import qualified XMonad.StackSet as S
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
-import GHC.Word
 
 myTerminal      = "konsole"
  
@@ -43,13 +40,20 @@ myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", 
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  ="#6A86B2"
-myFocusedBorderColor ="#32FFC9"--"#DB2828"
+myFocusedBorderColor ="#DB2828"
 
 scratchpads = [
     NS "browser" "luakit" (className =? "luakit") 
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))--,
     ]
 
+myXPConfig = defaultXPConfig {
+        bgColor = "#000000"
+    ,   fgColor = "#FFFFFF" -- "#5D69B4"
+    ,   borderColor = "#3CB424"
+    ,   font = "Monospace 12"
+    ,   height = 20
+}
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -69,7 +73,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_i     ), windowPromptBring  defaultXPConfig)
     , ((modm, xK_o), goToSelected defaultGSConfig)
     -- launch command prompt
-    , ((modm .|. shiftMask, xK_p     ), shellPrompt defaultXPConfig)
+    , ((modm, xK_p     ), shellPrompt myXPConfig)
  
     , ((modm .|. shiftMask, xK_c     ), kill1)
 
@@ -339,7 +343,7 @@ dzenpp status = defaultPP {
               , ppHidden            =   dzenColor "#A09BA1" newcolor
               , ppUrgent            =   dzenColor "#ff0000" newcolor
               , ppWsSep             =   " "
-              , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "|") ++  "  "
+              , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
               , ppLayout            =   dzenColor "#A09BA1" newcolor
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status 

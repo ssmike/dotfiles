@@ -300,6 +300,7 @@ alias -s fb2=fbless
 alias -s cpp=vim
 alias -s pdf=zathura
 alias -s djvu=zathura
+alias -s hs=runhaskell
 #alias -s mkv=vlc --fbdev=/dev/fb0
 #alias -s mp4=vlc --fbdev=/dev/fb0
 #alias -s mov=vlc --fbdev=/dev/fb0

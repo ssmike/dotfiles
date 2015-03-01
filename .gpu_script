@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $(cat /proc/acpi/bbswitch | sed "s/.* \(.*\)$/\1/") == ON ]; then
-    echo -n GPU ON
+    echo -n ON
 else
-    echo -n GPU OFF
+    echo -n OFF
 fi
