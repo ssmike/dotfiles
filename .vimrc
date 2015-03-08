@@ -11,6 +11,7 @@
 "   read README on https://github.com/Valloric/YouCompleteMe or 
 "   (if you have boost and clang >= 3.4 installed) just run
 "   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
+"   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; ./install.sh  --clang-completer
 " for haskell:
 "   install ghc-mod 
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
@@ -238,5 +239,6 @@ let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_always_populate_location_list = 1 "default 0
 let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']

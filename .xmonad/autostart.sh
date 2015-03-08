@@ -5,7 +5,7 @@ cdemu-daemon &
 #chromium &
 nitrogen --restore &
 krunner &
-xfce4-power-manager
+xfce4-power-manager &
 ~/.xmonad/dzen-auto.sh &
 ~/.xmonad/lightsOn.sh &
 kwalletd &
@@ -14,7 +14,7 @@ yakuake &
 xbindkeys &
 klipper &
 kmail &
-xautolock -locker "xlock" -time 15 &
+xautolock -locker "slock" -time 15 &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
