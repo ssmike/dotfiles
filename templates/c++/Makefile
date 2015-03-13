@@ -3,27 +3,30 @@ LDFLAGS+=-pg -g
 CC=g++
 LD=g++
 
-all: main source
+TASKNAME=main
 
-main: main.o
-	$(LD) ./main.o -o main $(LDFLAGS)
+all: $(TASKNAME) source
+
+$(TASKNAME): $(TASKNAME).o
+	$(LD) ./$(TASKNAME).o -o $(TASKNAME) $(LDFLAGS)
 clean:
-	rm -f ./main
+	rm -f ./$(TASKNAME)
 	rm -rf ./*.o
 	rm -f ./gmon.out
-main.o: main.cpp
+$(TASKNAME).o: $(TASKNAME).cpp
 	sed -i 's/\(^[^#].*\$\)/\# \1/g' ./gdb-start
-	$(CC) -c ./main.cpp -pg $(CFLAGS)
+	$(CC) -c ./$(TASKNAME).cpp -pg $(CFLAGS)
 
 check-syntax:
 	clang++ -o nul -Wall -S ${CHK_SOURCES}
 source:
 	./standardfilter.sh
+	xsel -b < /tmp/source
 edit:
-	vim -p ./main.cpp ./gdb-start
-run: main
-	./main < ./inp > ./outp
+	vim -p ./$(TASKNAME).cpp ./gdb-start
+run: $(TASKNAME)
+	./$(TASKNAME) < ./inp > ./outp
 	cp ./outp /tmp/outp
 	head -n 30 ./outp
-debug: main
-	gdb ./main -x ./gdb-start
+debug: $(TASKNAME)
+	gdb ./$(TASKNAME) -x ./gdb-start

@@ -7,7 +7,7 @@ nitrogen --restore &
 krunner &
 xfce4-power-manager &
 ~/.xmonad/dzen-auto.sh &
-~/.xmonad/lightsOn.sh &
+~/.xmonad/lightsOn.sh 120 &
 kwalletd &
 nm-applet &
 yakuake &

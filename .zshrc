@@ -4,6 +4,7 @@
 export GOOGLE=8.8.8.8
 export PATH=$PATH:~/.cabal/bin
 export STEAM_FRAME_FORCE_CLOSE=1
+export BROWSER=chromium-browser
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -54,6 +55,11 @@ bindkey "^[[1;5C" forward-word
 bindkey "OC" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey "OD" backward-word
+bindkey "[5~" up-line-or-history
+bindkey "[6~" down-line-or-history
+bindkey "[2~" quote-line
+bindkey "^R" history-incremental-search-backward
+
 
 setopt prompt_subst
 autoload -U promptinit
@@ -311,6 +317,22 @@ alias -s mov=smplayer
 alias -s exe=mono
 alias -s EXE=mono
 alias -s vim="vim -S "
+
+insert_sudo () { zle beginning-of-line; zle -U "sudo " }
+zle -N insert-sudo insert_sudo
+bindkey "^[s" insert-sudo
+
+# URL encode something and print it.
+function url-encode; {
+        setopt extendedglob
+        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
+}
+
+# Search google for the given keywords.
+function google; {
+        $BROWSER "http://www.google.com/search?q=`url-encode "${(j: :)@}"`"
+}
+
 #gentoo aliases
 alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'
 alias cp='cp --reflink=auto'
