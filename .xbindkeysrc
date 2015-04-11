@@ -1,11 +1,11 @@
-#"~/scripts/play-pause.sh"
-#    XF86AudioPlay
-#"mocp -f"
-#    XF86AudioNext
-#"mocp -r"
-#    XF86AudioPrev
-#"mocp -s"
-#    XF86AudioStop
+"tomahawk --playpause"
+    XF86AudioPlay
+"tomahawk --next"
+    XF86AudioNext
+"tomahawk --prev"
+    XF86AudioPrev
+"tomahawk --stop"
+    XF86AudioStop
 
 "xbacklight -inc 5"
     XF86MonBrightnessUp

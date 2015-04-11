@@ -56,6 +56,8 @@ Bundle "gerw/vim-latex-suite"
 set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 
+Bundle "wting/rust.vim"
+
 set tabstop=4
 set shiftwidth=4
 set smarttab
@@ -76,6 +78,7 @@ imap {<SPACE>   {}<LEFT>
 set number
 
 filetype plugin on
+autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
 
 "templates api"
 nmap <F9> :make<CR>
@@ -101,6 +104,7 @@ nmap <F4> :NERDTree<CR>
 nmap [ :resize -5<CR>
 nmap ] :resize +5<CR>
 nmap <F5> :TagbarToggle<CR>
+nmap  GVgg
 
 " for pwd following
 "autocmd BufEnter * lcd %:p:h

@@ -15,6 +15,7 @@ xbindkeys &
 klipper &
 kmail &
 xautolock -locker "slock" -time 15 &
+~/app-copy/x86_64/CopyAgent &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
