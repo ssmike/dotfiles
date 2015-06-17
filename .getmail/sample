@@ -1,17 +1,13 @@
 [retriever]
 type = SimplePOP3SSLRetriever
-server = pop.mail.ru
-username = aesc.10b@mail.ru
+server = pop.gmail.com
+username = surinmike@gmail.com
 port = 995
 password = 
 
-#[destination]
-#type = Maildir
-#path = ~/mail/
-
 [destination]
-type = Mboxrd
-path = ~/mbox
+type = Maildir
+path = /home/mike/mail/inbox/
 
 [options]
 read_all=False
