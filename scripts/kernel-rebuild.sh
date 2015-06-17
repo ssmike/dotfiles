@@ -2,7 +2,12 @@
 cd /usr/src/linux
 make -j4
 make modules_install -j4
-emerge @module-rebuild
+#check if we are compiling different kernel
+ACTUAL=$(uname -r)
+NEW=$(cat /usr/src/linux/.config | grep "Kernel Configuration" | sed -e 's/.* \(.*\) Kernel Configuration/\1/g')
+if [ ! $ACTUAL = $NEW ]; then 
+    emerge @module-rebuild
+fi
 mount -o remount,rw /boot
 
 #backup kernel & initramfs
