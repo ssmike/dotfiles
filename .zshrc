@@ -337,7 +337,7 @@ function google; {
 alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'
 #alias cp='cp --reflink=auto'
 alias popd="popd -q"
-alias femerge='FEATURES="-collision-detect -protect-owned" emerge'
+alias femerge='sudo env FEATURES="-collision-detect -protect-owned" emerge'
 alias mc=ranger
 alias getmail="/usr/bin/getmail --rcfile=sms --rcfile=aesc --rcfile=mike --rcfile=yandex"
 alias emacsd="/bin/emacs --daemon"
