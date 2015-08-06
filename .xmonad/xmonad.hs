@@ -64,7 +64,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       --exit
     , ((myModMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
-	, ((modm, xK_f), spawn "dolphin")
+	, ((modm, xK_f), spawn "thunar")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
@@ -280,8 +280,8 @@ myEventHook e = do
 myStartupHook = do 
     spawn "wmname LG3D"
     spawn "~/.xmonad/autostart.sh"
-    --spawn "~/.xmonad/dzen-auto.sh"
-    --setWMName "LG3D"
+    spawn "~/.xmonad/dzen-auto.sh"
+    spawn "xsetroot -cursor_name left_ptr"
     --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
  

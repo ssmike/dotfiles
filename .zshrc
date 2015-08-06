@@ -59,6 +59,8 @@ bindkey "[5~" up-line-or-history
 bindkey "[6~" down-line-or-history
 bindkey "[2~" quote-line
 bindkey "^R" history-incremental-search-backward
+bindkey "^[[1;3D" backward-delete-word
+bindkey "^[[1;3C" delete-word
 
 
 setopt prompt_subst
@@ -332,6 +334,11 @@ function url-encode; {
 function google; {
         $BROWSER "http://www.google.com/search?q=`url-encode "${(j: :)@}"`"
 }
+
+function debug-flags; {
+    echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
+}
+
 
 #gentoo aliases
 alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'

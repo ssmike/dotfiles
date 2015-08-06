@@ -30,6 +30,3 @@
     Print
 #"ksnapshot"
 #    Print
-
-"gnome-system-monitor"
-    Control + Escape

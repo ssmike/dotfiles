@@ -81,8 +81,8 @@ filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
 
 "templates api"
-nmap <F9> :make<CR>
-nmap <F8> :make run<CR>
+nmap <F9> :!make<CR>
+nmap <F8> :!make run<CR>
 
 " < ./inp<CR>
 "vim-conque"
@@ -111,7 +111,12 @@ nmap  GVgg
 
 syn on
 "set mapleader = ",""
-colorscheme Tomorrow-Night
+if has('gui_running')
+    colorscheme Tomorrow
+    set guifont=Inconsolata\ 13
+else
+    colorscheme Tomorrow-Night
+endif 
 
 " tool menu
 set guioptions-=T
