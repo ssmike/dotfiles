@@ -2,6 +2,7 @@ CFLAGS+=-g  -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-e
 LDFLAGS+=-pg -g
 CC=g++
 LD=g++
+VIM=qvim
 
 TASKNAME=main
 
@@ -21,9 +22,9 @@ check-syntax:
 	clang++ -o nul -Wall -S ${CHK_SOURCES}
 source:
 	./standardfilter.sh
-	xsel -b < /tmp/source
+	xsel -ib < /tmp/source
 edit:
-	vim -p ./$(TASKNAME).cpp ./gdb-start
+	$(VIM) -p ./$(TASKNAME).cpp ./gdb-start
 run: $(TASKNAME)
 	./$(TASKNAME) < ./inp > ./outp
 	cp ./outp /tmp/outp

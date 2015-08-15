@@ -81,7 +81,7 @@ filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
 
 "templates api"
-nmap <F9> :!make<CR>
+nmap <F9> :make<CR>
 nmap <F8> :!make run<CR>
 
 " < ./inp<CR>

@@ -8,6 +8,7 @@ export BROWSER=chromium-browser
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
+
 ZSH_HIGHLIGHT_STYLES=(
         'alias'           'fg=green'
         'builtin'         'fg=cyan'
@@ -134,14 +135,34 @@ RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
 # -[ completion ]-
 autoload -Uz compinit
 compinit
-zstyle ':completion:*' menu yes select
+
+#autoload predict-on
+#predict-on
+
+#zstyle ':completion:*' menu yes select
+#zstyle ':completion:*' use-compctl false
+zstyle :predict verbose yes
+zstyle :predict cursor key
+zstyle ':completion:predict:*' completer _oldlist _complete _ignored _history _prefix
+zstyle ':completion:*' completer _complete _match #_approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 
+#source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically.
+#zle-line-init() {
+#    zle autosuggest-start
+#}
+#zle -N zle-line-init
+
+zstyle ':completion:*:processes' menu yes select
+zstyle ':completion:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -xuf'
 zstyle ':completion:*:processes' sort false
 zstyle ':completion:*:processes-names' command 'ps xho command'
