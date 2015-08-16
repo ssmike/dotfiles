@@ -125,6 +125,16 @@ function cvs_prompt() {
     fi
 }
 
+# xterm directory
+chpwd() {
+    [[ -t 1 ]] || return
+    case $TERM in
+      sun-cmd) print -Pn "\e]l%~\e\\"
+        ;;
+      *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
+        ;;
+    esac
+  }
 
 setopt prompt_subst
 
@@ -355,6 +365,9 @@ function url-encode; {
 function google; {
         $BROWSER "http://www.google.com/search?q=`url-encode "${(j: :)@}"`"
 }
+function slovari {
+        $BROWSER "http://slovari.yandex.ru/`url-encode "${(j: :)@}"`/en-ru/"
+}
 
 function debug-flags; {
     echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
@@ -380,8 +393,4 @@ prof() {
     gprof $1 | vim -
 }
 alias pulse="pulseaudio -k && pulseaudio --start"
-#alias cp='nocorrect cp --interactive --verbose --recursive --preserve=all'
-#alias mv='nocorrect mv --verbose --interactive'
-#alias rm='nocorrect rm -Irv'
-#alias mkdir='nocorrect mkdir'
 alias vncreadonly="x11vnc -usepw -forever -viewonly"
