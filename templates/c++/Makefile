@@ -9,23 +9,23 @@ TASKNAME=main
 all: $(TASKNAME) source
 
 $(TASKNAME): $(TASKNAME).o
-	$(LD) ./$(TASKNAME).o -o $(TASKNAME) $(LDFLAGS)
+	$(LD) $(TASKNAME).o -o $(TASKNAME) $(LDFLAGS)
 clean:
-	rm -f ./$(TASKNAME)
-	rm -f ./*.o
-	rm -f ./gmon.out
+	rm -f $(TASKNAME)
+	rm -f *.o
+	rm -f gmon.out
 $(TASKNAME).o: $(TASKNAME).cpp
-	sed -i 's/\(^[^#].*\$\)/\# \1/g' ./gdb-start
-	$(CC) -c ./$(TASKNAME).cpp -pg $(CFLAGS)
+	sed -i 's/\(^[^#].*\$\)/\# \1/g' gdb-start
+	$(CC) -c $(TASKNAME).cpp -pg $(CFLAGS)
 
 source:
 	./standardfilter.sh
 	xsel -ib < /tmp/source
 edit:
-	$(VIM) -p ./$(TASKNAME).cpp ./gdb-start
+	$(VIM) -p $(TASKNAME).cpp gdb-start
 run: $(TASKNAME)
-	./$(TASKNAME)
-	cp ./outp /tmp/outp
-	head -n 30 ./outp
+	$(TASKNAME)
+	cp outp /tmp/outp
+	tail -n 30 outp
 debug: $(TASKNAME)
-	gdb ./$(TASKNAME) -x ./gdb-start
+	gdb $(TASKNAME) -x gdb-start
