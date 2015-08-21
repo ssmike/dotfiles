@@ -12,21 +12,19 @@ $(TASKNAME): $(TASKNAME).o
 	$(LD) ./$(TASKNAME).o -o $(TASKNAME) $(LDFLAGS)
 clean:
 	rm -f ./$(TASKNAME)
-	rm -rf ./*.o
+	rm -f ./*.o
 	rm -f ./gmon.out
 $(TASKNAME).o: $(TASKNAME).cpp
 	sed -i 's/\(^[^#].*\$\)/\# \1/g' ./gdb-start
 	$(CC) -c ./$(TASKNAME).cpp -pg $(CFLAGS)
 
-check-syntax:
-	clang++ -o nul -Wall -S ${CHK_SOURCES}
 source:
 	./standardfilter.sh
 	xsel -ib < /tmp/source
 edit:
 	$(VIM) -p ./$(TASKNAME).cpp ./gdb-start
 run: $(TASKNAME)
-	./$(TASKNAME) < ./inp > ./outp
+	./$(TASKNAME)
 	cp ./outp /tmp/outp
 	head -n 30 ./outp
 debug: $(TASKNAME)

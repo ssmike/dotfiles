@@ -81,6 +81,12 @@ git_file=$DIR/$RANDOM$RANDOM$RANDOM
 echo -n "" > $hg_file
 echo -n "" > $git_file
 
+function zshexit() {
+    rm -f $hg_file
+    rm -f $git_file
+    clear
+}
+
 function hg_branch_store() {
     if ! hg root >/dev/null 2>/dev/null; then 
         echo -n "" > $hg_file
@@ -162,6 +168,9 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*' verbose true
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 
 #source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
 

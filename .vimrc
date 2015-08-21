@@ -57,6 +57,8 @@ set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 
 Bundle "wting/rust.vim"
+Bundle "groovy.vim"
+Bundle "tfnico/vim-gradle"
 
 set tabstop=4
 set shiftwidth=4
