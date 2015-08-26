@@ -24,7 +24,7 @@ source:
 edit:
 	$(VIM) -p $(TASKNAME).cpp gdb-start
 run: $(TASKNAME)
-	$(TASKNAME)
+	./$(TASKNAME)
 	cp outp /tmp/outp
 	tail -n 30 outp
 debug: $(TASKNAME)

@@ -90,17 +90,17 @@
 
 (setq ac-clang-flags 
       (mapcar (lambda (item)(concat "-I" item))
-	                '("/usr/lib/gcc/i686-pc-linux-gnu/4.7.2/include/"
-			  "/usr/include/c++/4.7.2/i686-pc-linux-gnu/"
-			  "/usr/include/" 
-			  "/usr/include/c++/4.7.2"
-			  )))
+                    '("/usr/lib/gcc/i686-pc-linux-gnu/4.7.2/include/"
+              "/usr/include/c++/4.7.2/i686-pc-linux-gnu/"
+              "/usr/include/" 
+              "/usr/include/c++/4.7.2"
+              )))
 ;(setq ac-sources '(ac-source-words-in-same-mode-buffers))
 (defun my-ac-cc-mode-setup ()
   (setq ac-sources (append '(ac-source-clang 
-;    				ac-source-yasnippet
-    			     ac-source-words-in-same-mode-buffers
-	    		     ac-source-files-in-current-dir) ac-sources)))
+;                   ac-source-yasnippet
+                     ac-source-words-in-same-mode-buffers
+                     ac-source-files-in-current-dir) ac-sources)))
 (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
 (add-hook 'c-mode-common-hook 'c-helpers-minor-mode)
 ;(add-hook 'c-mode-common-hook 'flymake-mode)
@@ -116,15 +116,15 @@
 ;(require 'jedi)
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook 
-	(lambda ()
-		(setq jedi:server-command 
-			(list "/usr/bin/python" jedi:server-script))))
+    (lambda ()
+        (setq jedi:server-command 
+            (list "/usr/bin/python" jedi:server-script))))
 (add-hook 'python-mode-hook 'jedi:setup)
 ;(require 'ipython)
 ;(require 'anything) (require 'anything-ipython)
 ;(when (require 'anything-show-completion nil t)
-;	(use-anything-show-completion 'anything-ipython-complete
-;		'(length initial-pattern)))
+;   (use-anything-show-completion 'anything-ipython-complete
+;       '(length initial-pattern)))
 ;(add-hook 'python-mode-hook 'ac-config-default)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -159,7 +159,7 @@
 
 (defun win-resize-top-or-bot () "Figure out if the current window is on top, bottom or in the middle" 
   (let* ((win-edges (window-edges)) (this-window-y-min (nth 1 win-edges)) 
-	 (this-window-y-max (nth 3 win-edges)) (fr-height (frame-height))) 
+     (this-window-y-max (nth 3 win-edges)) (fr-height (frame-height))) 
     (cond ((eq 0 this-window-y-min) "top") ((eq (- fr-height 1) this-window-y-max) "bot") (t "mid"))))
 (defun win-resize-left-or-right () "Figure out if the current window is to the left, right or in the middle" (let* ((win-edges (window-edges)) (this-window-x-min (nth 0 win-edges)) (this-window-x-max (nth 2 win-edges)) (fr-width (frame-width))) (cond ((eq 0 this-window-x-min) "left") ((eq (+ fr-width 4) this-window-x-max) "right") (t "mid"))))
 (defun win-resize-enlarge-horiz () (interactive) (cond ((equal "top" (win-resize-top-or-bot)) (enlarge-window -5)) ((equal "bot" (win-resize-top-or-bot)) (enlarge-window 5)) ((equal "mid" (win-resize-top-or-bot)) (enlarge-window -5)) (t (message "nil")))) 

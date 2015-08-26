@@ -55,10 +55,12 @@ Bundle "eagletmt/neco-ghc"
 Bundle "gerw/vim-latex-suite"
 set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
+Bundle "ctrlp.vim"
+let g:ctrlp_map='<c-f>'
+nmap <c-x> :CtrlPBuffer<CR>
 
 Bundle "wting/rust.vim"
 Bundle "groovy.vim"
-Bundle "tfnico/vim-gradle"
 
 set tabstop=4
 set shiftwidth=4
@@ -100,6 +102,8 @@ set wildmode=list:longest,full
 nmap e :Explore<CR>
 nmap ct :vertical split<CR>
 nmap vt :split<CR>
+set splitright
+set splitbelow
 nmap < :vertical resize -6<CR>
 nmap > :vertical resize +6<CR>
 nmap <F4> :NERDTree<CR>
@@ -114,8 +118,11 @@ nmap  GVgg
 syn on
 "set mapleader = ",""
 if has('gui_running')
-    colorscheme Tomorrow
+    colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 13
+    Bundle "bling/vim-airline"
+    let g:airline#extensions#tabline#enabled = 1
+    set laststatus=2
 else
     colorscheme Tomorrow-Night
 endif 
@@ -159,6 +166,8 @@ nmap <C-F9> :GhcModCheck<CR>
 nmap <C-u> :GhcModInfoPreview<CR>
 imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
+autocmd BufRead *.gradle setlocal syntax=groovy
+
 "local configuration for clang_complete
 "for completion use .ycm_extra_conf.py
 "for example https://github.com/Valloric/ycmd/blob/master/cpp/ycm/.ycm_extra_conf.py or ~/.ycm_extra_conf.py
@@ -199,13 +208,12 @@ endfunction
 
 command! -nargs=1 Include call Includefunction('<args>') 
 
-""" Ivaschenko 
-imap jj <ESC>
-map <C-J> 5j
-map <C-K> 5k
-set timeoutlen=300
+set tags=./tags;/
 
-""" Pershakov
+imap jj <ESC>
+nmap J 10j
+nmap K 10k
+set timeoutlen=300
 set mouse=a
 
 """ for tex
