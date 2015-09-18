@@ -61,6 +61,7 @@ nmap <c-x> :CtrlPBuffer<CR>
 
 Bundle "wting/rust.vim"
 Bundle "groovy.vim"
+Bundle "craigemery/vim-autotag"
 
 set tabstop=4
 set shiftwidth=4
@@ -92,8 +93,8 @@ nmap <F8> :!make run<CR>
 "vim-conque"
 function! Term()
     ConqueTerm zsh
-    nmap <F8> :!./main<CR>
     nmap <F3> :q!<CR>
+    nmap <F8> :!make run<CR>
     nmap <F2> :tabnew<CR>
 endfunction
 nmap t :call Term()<CR>
@@ -150,10 +151,8 @@ nmap <leader>m :set fdm=manual<CR>
 
 set completeopt-=preview
 set splitbelow
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-""autocmd Filetype java setlocal completefunc=javacomplete#Complete
+autocmd Filetype java setlocal completefunc=javacomplete#Complete
 ""autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
@@ -168,17 +167,9 @@ imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
 autocmd BufRead *.gradle setlocal syntax=groovy
 
-"local configuration for clang_complete
-"for completion use .ycm_extra_conf.py
-"for example https://github.com/Valloric/ycmd/blob/master/cpp/ycm/.ycm_extra_conf.py or ~/.ycm_extra_conf.py
 let g:ycm_confirm_extra_conf = 0
-"let g:clang_user_options="-std=c++0x"
-"if !exists("g:syntastic_cpp_compiler")
-    let g:syntastic_cpp_compiler='clang++'
-"endif
-"if !exists("g:syntastic_cpp_compiler_options")
-    let g:syntastic_cpp_compiler_options=' -std=c++11'
-"endif
+let g:syntastic_cpp_compiler='clang++'
+let g:syntastic_cpp_compiler_options=' -std=c++11'
 if !exists("g:syntastic_c_compiler")
     let g:syntastic_c_compiler="gcc"
 endif
@@ -233,9 +224,9 @@ let g:syntastic_tex_checkers=['']
 "
 autocmd FileType tex setlocal spell
 
-"let g:ycm_filetype_blacklist = { 
-"    \ 'tex' : 1 
-"    \}
+let g:ycm_filetype_blacklist = { 
+    \ 'tex' : 1 
+    \}
 function! s:javap()
     setlocal ft=bytecode
     setl readonly nomodified | %!javap -c -s -verbose <afile>
@@ -261,3 +252,5 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
+
+nmap <c-c> :YcmCompleter GoToDeclaration<CR>

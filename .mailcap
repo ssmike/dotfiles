@@ -1,7 +1,7 @@
-application/x-fictionbook+xml;     fbless %s; 
+application/x-fictionbook+xml;     FBReader %s; 
 text/html;                      w3m -I %{charset} %s; nametemplate=%s.html
 text/html;                      w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput; 
 application/vnd.oasis.opendocument.spreadsheet;     soffice %s;
 application/vnd.oasis.opendocument.text; soffice '%s'
-application/x-bittorrent; transmission-qt  '%s'
-application/pdf; zathura '%s'
+application/x-bittorrent; deluge '%s'
+application/pdf;  okular '%s'

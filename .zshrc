@@ -344,6 +344,7 @@ add-zsh-hook precmd notify-command-complete
 
 # -[ alias ]-
 #alias -s avi=vlc --fbdev=/dev/fb0
+alias -s jar=java -jar
 alias -s fb2=fbless
 alias -s cpp=vim
 alias -s pdf=zathura
@@ -389,7 +390,7 @@ alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/appli
 alias popd="popd -q"
 alias femerge='sudo env FEATURES="-collision-detect -protect-owned" emerge'
 alias mc=ranger
-alias getmail="/usr/bin/getmail --rcfile=sms --rcfile=aesc --rcfile=mike --rcfile=yandex"
+alias getmail="/usr/share/scripts/mail.sh"
 alias emacsd="/bin/emacs --daemon"
 alias emacs="emacsclient -c -a=vim"
 alias ls='ls --classify --color --human-readable --group-directories-first'
