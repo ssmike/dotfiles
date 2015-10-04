@@ -378,6 +378,7 @@ function google; {
 function slovari {
         $BROWSER "http://slovari.yandex.ru/`url-encode "${(j: :)@}"`/en-ru/"
 }
+alias t=slovari
 
 function debug-flags; {
     echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
@@ -399,6 +400,7 @@ alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias printFile="gtklp"
 alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
+alias grep='grep -a'
 #alias compile="make 2>./compile-output"
 prof() {
     gprof $1 | vim -

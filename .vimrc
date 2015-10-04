@@ -47,7 +47,6 @@ Bundle 'Tagbar'
 Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
 Bundle 'kongo2002/fsharp-vim'
-"Bundle 'honza/vim-snippets'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
@@ -56,6 +55,8 @@ Bundle "gerw/vim-latex-suite"
 set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
+Bundle 'fugitive.vim'
+let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
 nmap <c-x> :CtrlPBuffer<CR>
 
@@ -108,8 +109,6 @@ set splitbelow
 nmap < :vertical resize -6<CR>
 nmap > :vertical resize +6<CR>
 nmap <F4> :NERDTree<CR>
-nmap [ :resize -5<CR>
-nmap ] :resize +5<CR>
 nmap <F5> :TagbarToggle<CR>
 nmap  GVgg
 
