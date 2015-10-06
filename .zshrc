@@ -74,60 +74,17 @@ bindkey -s "" 'chprompt
 '
 
 #[ ! "$UID" = "0" ] && PROMPT='%B%F{blue}%n@%m%f%F{blue}%f%b%(!.#.$) '
-DIR=/tmp/zsh-temp-$USERNAME
-mkdir -p $DIR
-hg_file=$DIR/$RANDOM$RANDOM$RANDOM
-git_file=$DIR/$RANDOM$RANDOM$RANDOM
-echo -n "" > $hg_file
-echo -n "" > $git_file
 
 function zshexit() {
-    rm -f $hg_file
-    rm -f $git_file
     clear
 }
 
-function hg_branch_store() {
-    if ! hg root >/dev/null 2>/dev/null; then 
-        echo -n "" > $hg_file
-    else
-        branch=$(hg branch 2>/dev/null | \
-                    cut -f3 -d " ")
-        bookmark=$(hg bookmark --quiet 2>/dev/null)
-        echo -n "(%F{red}hg%f on %F{magenta}$branch%f at %F{yellow}$bookmark%f)" > $hg_file
-    fi
-    #kill -USR2 $$
-}
-
-function git_branch_store() {
+function cvs_prompt() {
     if git branch >/dev/null 2>/dev/null; then
         ref=$(git symbolic-ref HEAD | cut -d'/' -f3)
-        echo -n "(%F{red}git%f on %F{green}$ref%f)" > $git_file
+        echo -n "(%F{red}git%f on %F{green}$ref%f)"
     else
-        echo -n "" > $git_file
-    fi
-    #kill -USR2 $$
-}
-
-function launch() {
-    hg_branch_store
-    git_branch_store
-}
-
-function launch_back() {
-    launch $!
-}
-
-PERIOD=2
-function periodic() {
-    launch_back
-}
-
-function cvs_prompt() {
-    if [ -s $hg_file ]; then
-        cat $hg_file
-    else 
-        cat $git_file
+        echo -n ""
     fi
 }
 
