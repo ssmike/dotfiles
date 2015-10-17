@@ -62,7 +62,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
       --exit
-    , ((myModMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
 	, ((modm, xK_f), spawn "thunar")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
@@ -74,7 +74,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_o), goToSelected defaultGSConfig)
     -- launch command prompt
     , ((modm, xK_p     ), shellPrompt myXPConfig)
- 
+    
+    , ((controlMask .|. shiftMask , xK_l), spawn "slock")
+    
     , ((modm .|. shiftMask, xK_c     ), kill1)
 
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -86,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_n     ), refresh)
      
     -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
+    , ((modm,              xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
  
     -- Move focus to the previous window
@@ -222,10 +224,10 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     )  <+> manageDocks
     where
         game = ["Steam", "dota_linux"] 
-        math = ["XMaxima", "XMathematica", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
+        math = ["XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
-        code = ["Kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
+        code = ["kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = []
         float = ["Kmix", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]

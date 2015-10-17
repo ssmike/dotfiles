@@ -27,4 +27,10 @@ echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " DSpeed: ^fg(\#A09BA1)${downspeedf wlp3s0}KB^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " GPU: ^fg(\#A09BA1)${execi 5 ~/.gpu_script}^fg(\#FFFFFF)"
+$if_mpd_playing
+    echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
+    echo -n " Song: ^fg(\#A09BA1)${mpd_title}^fg(\#FFFFFF)"
+$endif
+
+
 echo 
