@@ -1,6 +1,7 @@
 set mbox_type=Maildir
 set spoolfile="~/mail"
 set folder="~/mail"
+set record=+sent
 set header_cache=~/.hcache
 auto_view text/html
 macro pager p  <previous-line>
@@ -48,3 +49,9 @@ color index red black "~N|~O"
 
 # color body brightwhite black '\*+[^*]+\*+'
 # color body brightwhite black '_+[^_]+_+'
+alias dainiak Alex Dainiak <dainiak@gmail.com>
+alias tolstobrov Александр Толстобров <at@itbrat.ru>
+alias raigor Andrei Raigorodskii <raigorodsky@yandex-team.ru>
+alias self Михаил Сурин <surinmike@gmail.com>
+alias slup Probability DIHT <probability.diht@yandex.ru>
+alias cv Святослав Сурин <surincv@gmail.com>

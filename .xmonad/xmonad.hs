@@ -51,7 +51,7 @@ myXPConfig = defaultXPConfig {
         bgColor = "#000000"
     ,   fgColor = "#FFFFFF" -- "#5D69B4"
     ,   borderColor = "#3CB424"
-    ,   font = "Monospace 12"
+    ,   font = "Ubuntu Mono 12"
     ,   height = 20
 }
 ------------------------------------------------------------------------
@@ -227,11 +227,11 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         math = ["XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "Chromium-browser", "Firefox"]
-        code = ["kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
+        code = ["Qvim", "kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = []
         float = ["Kmix", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Zenity", "Oblogout"]
-        media = ["Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        media = ["google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  

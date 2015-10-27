@@ -8,7 +8,6 @@ NEW=$(cat /usr/src/linux/.config | grep "Kernel Configuration" | sed -e 's/.* \(
 if [ ! $ACTUAL = $NEW ]; then 
     emerge @module-rebuild
 fi
-mount -o remount,rw /boot
 
 #backup kernel & initramfs
 echo "make backups[Y/n]"
@@ -24,4 +23,3 @@ cp /usr/src/linux/arch/x86_64/boot/bzImage /boot/gentoo-kernel
 rm /boot/initramfs*
 dracut --host-only --force
 mv /boot/initramfs* /boot/initramfs
-mount -o remount,ro /boot
