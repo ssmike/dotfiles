@@ -357,7 +357,6 @@ alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias printFile="gtklp"
 alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
-alias grep='grep -a'
 #alias compile="make 2>./compile-output"
 prof() {
     gprof $1 | vim -
