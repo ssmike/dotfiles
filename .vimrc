@@ -184,6 +184,7 @@ nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
 nnoremap <A-4> 4gt
+nnoremap <A-5> 4gt
 nnoremap <A-q> 5gt
 nnoremap <A-w> 6gt
 nnoremap <A-e> 7gt
