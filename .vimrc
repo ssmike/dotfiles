@@ -35,11 +35,15 @@ filetype plugin indent on
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger="<c-k>"
 
+
+Bundle 'Valloric/YouCompleteMe'
+let g:ycm_show_diagnostics_ui = 0
+
 Bundle "gmarik/vundle"
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle "pbrisbin/vim-syntax-shakespeare"
-Bundle 'Valloric/YouCompleteMe'
+
 Bundle 'javacomplete'
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
@@ -64,8 +68,10 @@ Bundle "wting/rust.vim"
 Bundle "groovy.vim"
 Bundle "craigemery/vim-autotag"
 
-set tabstop=4
-set shiftwidth=4
+Bundle "rhysd/vim-clang-format"
+
+set tabstop=2
+set shiftwidth=2
 set smarttab
 set expandtab
 
@@ -254,3 +260,8 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 nmap <c-c> :YcmCompleter GoToDeclaration<CR>
+
+let g:clang_format#code_style='google'
+autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
+"let g:clang_format#auto_format=1
