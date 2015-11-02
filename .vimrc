@@ -171,6 +171,7 @@ nmap <C-u> :GhcModInfoPreview<CR>
 imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
 autocmd BufRead *.gradle setlocal syntax=groovy
+autocmd BufRead *.hamlet setlocal syntax=hamlet
 
 let g:ycm_confirm_extra_conf = 0
 let g:syntastic_cpp_compiler='clang++'

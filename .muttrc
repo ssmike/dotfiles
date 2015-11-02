@@ -3,6 +3,9 @@ set spoolfile="~/mail"
 set folder="~/mail"
 set record=+sent
 set header_cache=~/.hcache
+macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html<enter>"
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html<enter>"
+set write_bcc=no
 auto_view text/html
 macro pager p  <previous-line>
 macro pager  <search-opposite>
