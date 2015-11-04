@@ -85,7 +85,7 @@ nmap <F3> :q!<CR>
 nmap s :w<CR>
 
 set autoindent
-imap {<CR>  {<CR>}<LEFT><CR><UP><SPACE><SPACE><SPACE><SPACE>
+imap {<CR>  {<CR>}<LEFT><CR><UP><TAB>
 imap {<SPACE>   {}<LEFT>
 set number
 
