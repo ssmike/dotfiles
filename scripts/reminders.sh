@@ -1,3 +1,3 @@
 #!/bin/bash
-export DISPLAY=:0
-remind -z10 ~/.reminders | xargs -I '{}' -d'\n' notify-send '{}'
+killall remind
+remind -z10 ~/.reminders | xargs -I '{}' -d'\n' notify-send 'напоминалка' '{}' &

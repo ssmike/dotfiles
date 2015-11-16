@@ -15,6 +15,7 @@ yakuake &
 xbindkeys &
 klipper &
 xautolock -locker "slock" -time 15 &
+~/scripts/reminders.sh
 #~/app-copy/x86_64/CopyAgent &
 #yandex-disk start &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &

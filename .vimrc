@@ -170,8 +170,11 @@ nmap <C-F9> :GhcModCheck<CR>
 nmap <C-u> :GhcModInfoPreview<CR>
 imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
-autocmd BufRead *.gradle setlocal syntax=groovy
-autocmd BufRead *.hamlet setlocal syntax=hamlet
+autocmd BufRead *.gradle setlocal ft=groovy
+autocmd BufRead *.hamlet setlocal ft=hamlet
+autocmd BufRead *.julius setlocal ft=julius
+autocmd BufRead *.cassius setlocal ft=cassius
+autocmd BufRead *.lucius setlocal ft=lucius
 
 let g:ycm_confirm_extra_conf = 0
 let g:syntastic_cpp_compiler='clang++'
@@ -209,8 +212,8 @@ command! -nargs=1 Include call Includefunction('<args>')
 set tags=./tags;/
 
 imap jj <ESC>
-nmap J 10j
-nmap K 10k
+map J gt
+map K gT
 set timeoutlen=300
 set mouse=a
 

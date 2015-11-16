@@ -1,9 +1,9 @@
+source /etc/profile
 #export WINEARCH=win32
-. ~/.profile
+
 
 export GOOGLE=8.8.8.8
 export PATH=$PATH:~/.cabal/bin
-export STEAM_FRAME_FORCE_CLOSE=1
 export BROWSER=chromium-browser
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -20,7 +20,7 @@ ZSH_HIGHLIGHT_STYLES=(
         'globbing'        'fg=166'
 )
 
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+#export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 
 NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
 NOTIFY_COMMAND_TIMEOUT=30

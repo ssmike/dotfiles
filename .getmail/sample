@@ -7,7 +7,7 @@ password =
 
 [destination]
 type = Maildir
-path = /home/mike/mail/inbox/
+path = /home/mike/mail/
 
 [options]
 read_all=False
