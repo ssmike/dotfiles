@@ -1,4 +1,4 @@
-CFLAGS+=-g  -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align 
+CFLAGS+=-g  -Wall -Wextra -pedantic -std=c++11 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align 
 LDFLAGS+=-pg -g
 CC=g++
 LD=g++
@@ -26,6 +26,7 @@ edit:
 run: $(TASKNAME)
 	./$(TASKNAME)
 	cp outp /tmp/outp
-	tail -n 30 outp
+	cat outp
+	#tail -n 30 outp
 debug: $(TASKNAME)
 	gdb $(TASKNAME) -x gdb-start

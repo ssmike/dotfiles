@@ -5,4 +5,10 @@ application/vnd.oasis.opendocument.spreadsheet;     soffice %s;
 application/vnd.oasis.opendocument.text; soffice '%s'
 application/x-bittorrent; deluge '%s'
 application/pdf;  okular '%s'
-application/vnd-ms-pow; soffice '%s'
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice '%s'
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice '%s'
+application/vnd.ms-powerpoint; soffice '%s'
+application/msword; soffice '%s'
+application/rar; ark '%s'
+application/zip; ark '%s'
+

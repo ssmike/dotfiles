@@ -14,7 +14,7 @@ nm-applet &
 yakuake &
 xbindkeys &
 klipper &
-xautolock -locker "slock" -time 15 &
+xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
 #~/app-copy/x86_64/CopyAgent &
 #yandex-disk start &

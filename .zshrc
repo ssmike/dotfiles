@@ -310,17 +310,18 @@ alias -s hs=runhaskell
 #alias -s mkv=vlc --fbdev=/dev/fb0
 #alias -s mp4=vlc --fbdev=/dev/fb0
 #alias -s mov=vlc --fbdev=/dev/fb0
-alias -s avi=smplayer
-alias -s mkv=smplayer
-alias -s mp4=smplayer
-alias -s mov=smplayer
-alias -s exe=mono
-alias -s EXE=mono
+alias -s avi=vlc
+alias -s mkv=vlc
+alias -s mp4=vlc
+alias -s mov=vlc
+alias -s exe=wine
+alias -s EXE=wine
+alias -s png=gwenview
 alias -s vim="vim -S "
 
 insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
-bindkey "^[s" insert-sudo
+bindkey "^Z" insert-sudo
 
 # URL encode something and print it.
 function url-encode; {
@@ -349,8 +350,8 @@ alias popd="popd -q"
 alias femerge='sudo env FEATURES="-collision-detect -protect-owned" emerge'
 alias mc=ranger
 alias getmail="/usr/share/scripts/mail.sh"
-alias emacsd="/bin/emacs --daemon"
-alias emacs="emacsclient -c -a=vim"
+#alias emacsd="/bin/emacs --daemon"
+#alias emacs="emacsclient -c -a=vim"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias homefree="df -h | grep home | sed -e 's/\([^ ]*[ ]*\)\{3\}\([^ ]*\)\([ ]*[^ ]*\)\{2\}/\2/g'"
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
@@ -358,6 +359,7 @@ alias printFile="gtklp"
 alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
+alias retray='killall stalonetray; stalonetray --grow-gravity NE --geometry 1x1-0-0 --window-strut bottom -bg "#000000"  --kludges=force_icons_size,fix_window_pos -i 19 &'
 #alias compile="make 2>./compile-output"
 prof() {
     gprof $1 | vim -

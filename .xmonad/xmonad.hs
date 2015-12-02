@@ -64,7 +64,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       --exit
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
-	, ((modm, xK_f), spawn "thunar")
+	, ((modm, xK_f), spawn "krusader")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
@@ -224,16 +224,16 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     )  <+> manageDocks
     where
         game = ["Steam", "dota_linux"] 
-        math = ["XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
-        work = ["Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
+        math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
+        work = ["okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
-        code = ["Qvim", "kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
-        fullfloat = []
+        code = ["jetbrains-idea", "Qvim", "kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
+        fullfloat = ["trayer", "panel"]
         float = ["Kmix", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
-        ignore = ["Zenity", "Oblogout"]
-        media = ["google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        ignore = ["trayer", "Zenity", "Oblogout"]
+        media = ["mpv", "nuvolaplayer3-deezer", "google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  
 ------------------------------------------------------------------------
 -- Event handling
