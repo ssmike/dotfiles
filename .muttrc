@@ -17,7 +17,7 @@ macro index  <next-unread>
 macro pager  <next-unread>
 mime_lookup application/octet-stream
 set sendmail="/usr/sbin/ssmtp"
-set realname="Михаил Сурин"
+set realname="Mikhail Surin"
 set from="surinmike@gmail.com"
 set signature="~/.signature"
 #macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m'
