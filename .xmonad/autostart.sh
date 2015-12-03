@@ -16,8 +16,8 @@ xbindkeys &
 klipper &
 xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
-#~/app-copy/x86_64/CopyAgent &
-#yandex-disk start &
+~/app-copy/x86_64/CopyAgent &
+yandex-disk start &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
