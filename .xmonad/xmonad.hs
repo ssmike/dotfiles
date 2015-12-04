@@ -26,6 +26,7 @@ import XMonad.Util.Scratchpad
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Mosaic
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
@@ -179,14 +180,22 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
  
-myLayout = avoidStruts ((onWorkspaces (["9:etc"]) (cross) tiled)  ||| Full ||| cross ||| (Mirror tiled))
+myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross) $
+                            onWorkspaces ["3:code", "6:work", "7:math"] (mosaic 3 [6, 2, 1]) $
+                            mosaic 3 []
+                          ) 
+                          ||| Full
+                          ||| ( onWorkspaces ["2:web", "4:media"] (Mirror tiled) $
+                                onWorkspaces ["9:etc"] tiled $
+                                cross
+                              )
   where
     tabbedList = ["1:main", "6:work"]
     cross = Cross cross_ratio delta
     cross_ratio = 6/7 
     tiled   = Tall nmaster delta ratio
     nmaster = 1
-    ratio   = 1/2
+    ratio   = 3/4
     delta   = 5/100
  
 ------------------------------------------------------------------------
@@ -220,6 +229,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doShift "6:work" | c <- work]
     , [className =? c --> doShift "7:math" | c <- math]
     , [className =? c --> doShift "8:game" | c <- game]
+    , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doIgnore]
     ]
     )  <+> manageDocks
     where
