@@ -65,7 +65,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       --exit
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
-	, ((modm, xK_f), spawn "krusader")
+	, ((modm, xK_f), spawn "thunar")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
@@ -180,17 +180,17 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
  
-myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross) $
-                            onWorkspaces ["3:code", "6:work", "7:math"] (mosaic 3 [6, 2, 1]) $
-                            mosaic 3 []
+myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
+                            onWorkspaces ["3:code", "6:work", "7:math"] 
+                                (my_mosaic ||| Full ||| tiled) $
+                            onWorkspaces ["2:web", "4:media"] 
+                                (all_equal ||| Full ||| Mirror tiled) $
+                            --["1:main", "5:fm"]
+                            all_equal ||| Full ||| my_mosaic
                           ) 
-                          ||| Full
-                          ||| ( onWorkspaces ["2:web", "4:media"] (Mirror tiled) $
-                                onWorkspaces ["9:etc"] tiled $
-                                cross
-                              )
   where
-    tabbedList = ["1:main", "6:work"]
+    my_mosaic = mosaic 3 [6, 2, 1]
+    all_equal = mosaic 2 []
     cross = Cross cross_ratio delta
     cross_ratio = 6/7 
     tiled   = Tall nmaster delta ratio
@@ -230,9 +230,12 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doShift "7:math" | c <- math]
     , [className =? c --> doShift "8:game" | c <- game]
     , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doIgnore]
+    , [className =? c --> doF W.swapDown | c <- aux]
+    , [isDialog --> doFloat]
     ]
     )  <+> manageDocks
     where
+        aux = ["konsole", "Term", "org.kde.gwenview"]
         game = ["Steam", "dota_linux"] 
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
