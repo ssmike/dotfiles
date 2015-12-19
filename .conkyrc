@@ -33,4 +33,7 @@ $if_mpd_playing
 $endif
 
 
+#echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
+#echo -n " Song: ^fg(\#A09BA1)$(tail -n1 /var/log/emerge.log | grep ">>> emerge" | sed -e "s/ to \///;s/^[0-9]*:  >>> emerge //)^fg(\#FFFFFF)"
+
 echo 

@@ -21,6 +21,21 @@ ZSH_HIGHLIGHT_STYLES=(
 )
 
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+READNULLCMD=less
+
+#insert-square-brackets() {
+#  LBUFFER="${LBUFFER}["
+#  RBUFFER="]${RBUFFER}"
+#}
+#zle -N insert-square-brackets
+#bindkey "[" insert-square-brackets
+#
+#insert-brackets() {
+#  LBUFFER="${LBUFFER}("
+#  RBUFFER=")${RBUFFER}"
+#}
+#zle -N insert-brackets
+#bindkey "(" insert-brackets
 
 NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
 NOTIFY_COMMAND_TIMEOUT=30
@@ -172,8 +187,7 @@ edit-cmd() {
 }
 
 #zle -N edit-cmd
-bindkey -s "^X" "edit-cmd
-"
+bindkey -s "^X" "edit-cmd"
 
 mkd() { mkdir $1; cd $1 }
 battcheck() {
@@ -253,6 +267,7 @@ enum() {
 	cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
+blacklist_regexp="^\(less|nano|vim|mutt|man|qvim|gdb\).*"
 
 function store-command-stats() {
   last_command=$1
@@ -286,10 +301,12 @@ function notify-success() {
 
 function notify-command-complete() {
   last_status=$?
-  if [[ $last_status -gt "0" ]]; then
-    notify-error "$start_time" "$last_command" 2>/dev/null
-  elif [[ -n $start_time ]]; then
-    notify-success "$start_time" "$last_command" 2>/dev/null
+  if ! [[ $last_command =~ $blacklist_regexp ]]; then
+    if [[ $last_status -gt "0" ]]; then
+      notify-error "$start_time" "$last_command" 2>/dev/null
+    elif [[ -n $start_time ]]; then
+      notify-success "$start_time" "$last_command" 2>/dev/null
+    fi
   fi
   unset last_command start_time last_status
 }

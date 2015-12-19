@@ -1,4 +1,5 @@
 #!/bin/bash
+pgrep  compton && exit
 xhost +
 compton -cCGf -D 3 -b
 cdemu-daemon &
@@ -18,6 +19,7 @@ xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
 ~/app-copy/x86_64/CopyAgent &
 yandex-disk start &
+~/.dropbox-dist/dropboxd &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 

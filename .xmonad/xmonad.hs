@@ -31,6 +31,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
+import XMonad.Layout.Named
 
 myTerminal      = "konsole"
  
@@ -190,7 +191,7 @@ myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                           ) 
   where
     my_mosaic = mosaic 3 [6, 2, 1]
-    all_equal = mosaic 2 []
+    all_equal = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
     cross_ratio = 6/7 
     tiled   = Tall nmaster delta ratio
@@ -235,14 +236,14 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     ]
     )  <+> manageDocks
     where
-        aux = ["konsole", "Term", "org.kde.gwenview"]
+        aux = ["kate", "konsole", "Term"]
         game = ["Steam", "dota_linux"] 
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
-        work = ["okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
+        work = ["okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
-        code = ["jetbrains-idea", "Qvim", "kate", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
+        code = ["jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]
-        float = ["Kmix", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gimp", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
+        float = ["Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["trayer", "Zenity", "Oblogout"]
         media = ["mpv", "nuvolaplayer3-deezer", "google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
