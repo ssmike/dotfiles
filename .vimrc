@@ -130,7 +130,7 @@ if has('gui_running')
     let g:airline#extensions#tabline#enabled = 1
     set laststatus=2
 else
-    colorscheme Tomorrow-Night
+    colorscheme pablo
 endif 
 
 " tool menu

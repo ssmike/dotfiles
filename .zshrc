@@ -13,7 +13,7 @@ ZSH_HIGHLIGHT_STYLES=(
         'alias'           'fg=green'
         'builtin'         'fg=cyan'
         'function'        'fg=cyan'
-        'command'         'fg=153,bold'
+        'command'         'fg=255,bold'
         'precommand'      'fg=magenta, underline'
         'hashed-commands' 'fg=cyan'
         'path'            'underline'
@@ -42,7 +42,7 @@ NOTIFY_COMMAND_TIMEOUT=30
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 
-#export TERM=xterm-256color
+export TERM=xterm-256color
 #CLAWS='claws-mail --status | sed -e "s/^[0-9]*\ \([0-9]*\).*/\1/g" | sed -e "s/^$/0/g"'
 #[ ! "$UID" = "0" ] && [ $(bash -c $CLAWS) != 0 ] && echo "===========You have unread mail===========";
 
@@ -365,7 +365,6 @@ alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/appli
 #alias cp='cp --reflink=auto'
 alias popd="popd -q"
 alias femerge='sudo env FEATURES="-collision-detect -protect-owned" emerge'
-alias mc=ranger
 alias getmail="/usr/share/scripts/mail.sh"
 #alias emacsd="/bin/emacs --daemon"
 #alias emacs="emacsclient -c -a=vim"
