@@ -11,4 +11,4 @@ application/vnd.ms-powerpoint; soffice '%s'
 application/msword; soffice '%s'
 application/rar; ark '%s'
 application/zip; ark '%s'
-
+image/jpeg; gwenview '%s'

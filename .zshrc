@@ -183,11 +183,10 @@ edit-cmd() {
     touch $ffile
     vim $ffile -c "set filetype=zsh"
     . $ffile
-    rm $ffile
 }
 
 #zle -N edit-cmd
-bindkey -s "^X" "edit-cmd"
+bindkey -s "" edit-cmd
 
 mkd() { mkdir $1; cd $1 }
 battcheck() {
@@ -267,7 +266,7 @@ enum() {
 	cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
-blacklist_regexp="^\(less|nano|vim|mutt|man|qvim|gdb\).*"
+blacklist_regexp="^\(okular|tmux|less|nano|vim|mutt|man|qvim|gdb\).*"
 
 function store-command-stats() {
   last_command=$1
@@ -354,6 +353,10 @@ function slovari {
         $BROWSER "http://slovari.yandex.ru/`url-encode "${(j: :)@}"`/en-ru/"
 }
 alias t=slovari
+
+function keyw {
+  sudo $EDITOR /etc/portage/package.accept_keywords/$1
+}
 
 function debug-flags; {
     echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2

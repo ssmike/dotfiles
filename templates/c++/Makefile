@@ -27,6 +27,5 @@ run: $(TASKNAME)
 	./$(TASKNAME)
 	cp outp /tmp/outp
 	cat outp
-	#tail -n 30 outp
 debug: $(TASKNAME)
 	gdb $(TASKNAME) -x gdb-start
