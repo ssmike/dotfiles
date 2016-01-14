@@ -16,8 +16,6 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.CycleWS
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Cross
-import XMonad.Layout.DecorationMadness
-import XMonad.Layout.Accordion
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
@@ -33,8 +31,8 @@ import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
 import XMonad.Layout.Named
 
-myTerminal      = "konsole"
- 
+myTerminal      = "term"
+
 myModMask       = mod4Mask
  
 myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
