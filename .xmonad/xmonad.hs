@@ -4,14 +4,12 @@ import XMonad.Hooks.ScreenCorners
 import XMonad.Config.Kde
 import XMonad.Actions.WindowGo
 import XMonad
-import Data.Monoid
 import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
 import System.IO
-import XMonad.Layout.Tabbed
 import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.CycleWS
 import XMonad.Layout.NoBorders
@@ -43,6 +41,9 @@ myNormalBorderColor  ="#6A86B2"
 myFocusedBorderColor ="#DB2828"
 
 scratchpads = [
+    NS "terminal" "xfce4-terminal --role scratchpad" 
+      (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
+      (customFloating $ W.RationalRect (1/12) (0) (5/6) (1/2)),
     NS "browser" "luakit" (className =? "luakit") 
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))--,
     ]
@@ -60,7 +61,8 @@ myXPConfig = defaultXPConfig {
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
-      ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+      ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
+    , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
       --exit
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
@@ -232,7 +234,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doF W.swapDown | c <- aux]
     , [isDialog --> doFloat]
     ]
-    )  <+> manageDocks
+    )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
         aux = ["kate", "konsole", "Term"]
         game = ["Steam", "dota_linux"] 
@@ -247,50 +249,10 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         fM = ["krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["Corebird", "Telegram", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
  
-------------------------------------------------------------------------
--- Event handling
- 
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add EWMH event handling to your custom event hooks by
--- combining them with ewmhDesktopsEventHook.
---fullscreenEventHook <+> 
 myEventHook e = do
     screenCornerEventHook e
     docksEventHook e
 
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
---
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add EWMH logHook actions to your custom log hook by
--- combining it with ewmhDesktopsLogHook.
---
---myLogHook = return ()
- 
-------------------------------------------------------------------------
--- Startup hook
- 
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
---
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add initialization of EWMH support to your custom startup
--- hook by combining it with ewmhDesktopsStartup.
---
 myStartupHook = do 
     spawn "wmname LG3D"
     spawn "~/.xmonad/autostart.sh"
@@ -299,14 +261,9 @@ myStartupHook = do
     --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
  
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
- 
--- Run xmonad with the settings you specify. No need to modify this.
--- -w 1020
 main = do 
     dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
-    xmonad $ kde4Config {
+    xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
             borderWidth        = 3,

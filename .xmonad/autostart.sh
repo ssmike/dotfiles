@@ -12,7 +12,6 @@ xfce4-power-manager &
 gnome-keyring-daemon &
 kwalletd &
 nm-applet &
-yakuake &
 xbindkeys &
 klipper &
 xautolock -locker "slock" -time 5 &
