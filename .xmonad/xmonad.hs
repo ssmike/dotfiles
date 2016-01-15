@@ -45,7 +45,7 @@ scratchpads = [
       (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
       (customFloating $ W.RationalRect (1/12) (0) (5/6) (1/2)),
     NS "browser" "luakit" (className =? "luakit") 
-        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))--,
+        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
     ]
 
 myXPConfig = defaultXPConfig {
@@ -236,7 +236,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     ]
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
-        aux = ["kate", "konsole", "Term"]
+        aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
         game = ["Steam", "dota_linux"] 
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]

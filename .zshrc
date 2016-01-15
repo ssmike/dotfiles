@@ -358,10 +358,25 @@ function keyw {
   sudo $EDITOR /etc/portage/package.accept_keywords/$1
 }
 
+function use {
+  sudo $EDITOR /etc/portage/package.use/$1
+}
+
 function debug-flags; {
     echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
 }
 
+function xsearch() {
+  grep --color -i $1 ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache
+}
+
+function xset() {
+  xdg-mime default $2 $1
+}
+
+function xquery() {
+  xdg-mime query default $1
+}
 
 #gentoo aliases
 alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'
@@ -372,14 +387,14 @@ alias getmail="/usr/share/scripts/mail.sh"
 #alias emacsd="/bin/emacs --daemon"
 #alias emacs="emacsclient -c -a=vim"
 alias ls='ls --classify --color --human-readable --group-directories-first'
-alias homefree="df -h | grep home | sed -e 's/\([^ ]*[ ]*\)\{3\}\([^ ]*\)\([ ]*[^ ]*\)\{2\}/\2/g'"
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias printFile="gtklp"
 alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
-alias retray='killall stalonetray; stalonetray --grow-gravity NE --geometry 1x1-0-0 --window-strut bottom -bg "#000000"  --kludges=force_icons_size,fix_window_pos -i 19 &'
+alias grep="grep --color -i"
 #alias compile="make 2>./compile-output"
+
 prof() {
     gprof $1 | vim -
 }
