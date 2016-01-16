@@ -50,7 +50,6 @@ Bundle "chriskempson/vim-tomorrow-theme"
 Bundle 'Tagbar'
 Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
-Bundle 'kongo2002/fsharp-vim'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
