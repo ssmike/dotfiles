@@ -62,6 +62,8 @@ Bundle 'fugitive.vim'
 let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
 nmap <c-x> :CtrlPBuffer<CR>
+nmap <c-n> :bn<CR>
+nmap <c-p> :bp<CR>
 
 Bundle "wting/rust.vim"
 Bundle "groovy.vim"
@@ -122,12 +124,14 @@ nmap  GVgg
 
 syn on
 "set mapleader = ",""
+
+Bundle "bling/vim-airline"
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+
 if has('gui_running')
     colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 13
-    Bundle "bling/vim-airline"
-    let g:airline#extensions#tabline#enabled = 1
-    set laststatus=2
 else
     colorscheme pablo
 endif 
