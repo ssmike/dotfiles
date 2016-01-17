@@ -4,8 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
-//#include <memory>
-//#include <thread>
+#include <iomanip>
 using namespace std;
 
 #define INF 1e+9
@@ -15,6 +14,7 @@ using namespace std;
 
 int main() {
   ios_base::sync_with_stdio(false);
+  cout << setprecision(10) << fixed;
   freopen("inp", "r", stdin);
   freopen("outp", "w", stdout);
   // freopen("", "r", stdin);

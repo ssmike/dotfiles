@@ -1,19 +1,19 @@
 "completion function for plain text files"
 
-" for all plugins work vim must be compiled with +python 
+" for all plugins work vim must be compiled with +python
 " from ubuntu forums : remove vim-tiny and install vim-nox
 " for ubuntu - vim-nox package
-" vundle created by git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
-" installation instructions : 
+" vundle created by git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" " installation instructions :
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " vim -c ":BundleUpdate"
 " for python and c-family languages completion
-"   read README on https://github.com/Valloric/YouCompleteMe or 
+"   read README on https://github.com/Valloric/YouCompleteMe or
 "   (if you have boost and clang >= 3.4 installed) just run
 "   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
 "   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; ./install.sh  --clang-completer
 " for haskell:
-"   install ghc-mod 
+"   install ghc-mod
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
 
 set guiheadroom=0
@@ -24,13 +24,13 @@ if filereadable(".vim.local")
 endif
 
 set nocompatible
-filetype off  
+filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 
 call vundle#rc()
 
-filetype plugin indent on   
+filetype plugin indent on
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger="<c-k>"
@@ -134,7 +134,7 @@ if has('gui_running')
     set guifont=Inconsolata\ 13
 else
     colorscheme pablo
-endif 
+endif
 
 " tool menu
 set guioptions-=T
@@ -210,7 +210,7 @@ function! Includefunction(param)
     exe 'normal ``'
 endfunction
 
-command! -nargs=1 Include call Includefunction('<args>') 
+command! -nargs=1 Include call Includefunction('<args>')
 
 set tags=./tags;/
 
@@ -237,13 +237,13 @@ let g:syntastic_tex_checkers=['']
 "
 autocmd FileType tex setlocal spell
 
-let g:ycm_filetype_blacklist = { 
-    \ 'tex' : 1 
+let g:ycm_filetype_blacklist = {
+    \ 'tex' : 1
     \}
 function! s:javap()
     setlocal ft=bytecode
     setl readonly nomodified | %!javap -c -s -verbose <afile>
-endfunction 
+endfunction
 
 au BufReadCmd *.class  call s:javap()
 let g:tex_flavor='latex'

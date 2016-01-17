@@ -367,7 +367,7 @@ function debug-flags; {
 }
 
 function xsearch() {
-  grep --color -i $1 ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache
+  grep --color -i $1 ~/.local/share/applications/{mimeapps.list,mimeinfo.cache} /usr/share/applications/mimeinfo.cache
 }
 
 function xset() {
@@ -379,7 +379,7 @@ function xquery() {
 }
 
 #gentoo aliases
-alias ascedit='vim -p ~/.local/share/applications/mimeapps.list /usr/share/applications/mimeinfo.cache'
+alias ascedit='vim ~/.local/share/applications/mimeapps.list ~/.local/share/applications/mimeinfo.cache /usr/share/applications/mimeinfo.cache'
 #alias cp='cp --reflink=auto'
 alias popd="popd -q"
 alias femerge='sudo env FEATURES="-collision-detect -protect-owned" emerge'

@@ -1,8 +1,8 @@
-CFLAGS+=-g  -Wall -Wextra -pedantic -std=c++11 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align 
+CFLAGS+=-g  -Wall -Wextra -pedantic -std=c++11 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align
 LDFLAGS+=-pg -g
 CC=g++
 LD=g++
-VIM=qvim
+VIM=vim
 
 TASKNAME=main
 
@@ -22,7 +22,7 @@ source:
 	./standardfilter.sh
 	xsel -ib < /tmp/source
 edit:
-	$(VIM) -p $(TASKNAME).cpp gdb-start
+	$(VIM) $(TASKNAME).cpp
 run: $(TASKNAME)
 	./$(TASKNAME)
 	cp outp /tmp/outp
