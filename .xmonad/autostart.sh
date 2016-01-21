@@ -19,6 +19,7 @@ xautolock -locker "slock" -time 5 &
 ~/app-copy/x86_64/CopyAgent &
 yandex-disk start &
 ~/.dropbox-dist/dropboxd &
+setxkbmap us,ru 'grp:caps_toggle'
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
