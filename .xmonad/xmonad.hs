@@ -29,22 +29,26 @@ import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
 import XMonad.Layout.Named
 
+myTerminal :: String
 myTerminal      = "term"
 
 myModMask       = mod4Mask
- 
-myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
- 
+
+myWorkspaces :: [String]
+myWorkspaces = fmap (workspaceClickable) ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
+  where
+    workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
+
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  ="#6A86B2"
 myFocusedBorderColor ="#DB2828"
 
 scratchpads = [
-    NS "terminal" "xfce4-terminal --role scratchpad" 
+    NS "terminal" "xfce4-terminal --role scratchpad"
       (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
       (customFloating $ W.RationalRect (1/12) (0) (5/6) (1/2)),
-    NS "browser" "luakit" (className =? "luakit") 
+    NS "browser" "luakit" (className =? "luakit")
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
     ]
 
@@ -66,7 +70,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       --exit
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
-	, ((modm, xK_f), spawn "thunar")
+    , ((modm, xK_f), spawn "thunar")
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
@@ -76,62 +80,43 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_o), goToSelected defaultGSConfig)
     -- launch command prompt
     , ((modm, xK_p     ), shellPrompt myXPConfig)
-    
     , ((controlMask .|. shiftMask , xK_l), spawn "slock")
-    
     , ((modm .|. shiftMask, xK_c     ), kill1)
-
     , ((modm,               xK_space ), sendMessage NextLayout)
- 
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
- 
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
-     
     -- Move focus to the next window
     , ((modm,              xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
- 
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp  )
- 
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
- 
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
- 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
- 
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
- 
     -- Shrink the master area
     , ((modm,               xK_h     ), sendMessage Shrink)
- 
     -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
- 
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
- 
     -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
- 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_Right), moveTo Next (WSIs notSP))
     , ((modm             , xK_Left), moveTo Prev (WSIs notSP))
-
-
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-	--send window to etc
+    --send window to etc
     ,((modm .|. shiftMask, xK_a), windows $ W.shift "9:etc")
     ]
     ++
- 
     --
     -- mod-[1..9], Switch to workspace N
     --
@@ -142,7 +127,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-   	--[((m .|. modm, k), windows $ f i)
+    --[((m .|. modm, k), windows $ f i)
     --    | (i, k) <- zip ["NSP"] [xK_f]
     --    , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     -- ++
@@ -154,54 +139,46 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-	++	
-	[((m .|. modm, k), windows $ f i)
-	 | (i, k) <- zip (XMonad.workspaces conf) [xK_1 ..]
-	, (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, controlMask)]]
-	
+  ++
+  [((m .|. modm, k), windows $ f i)
+   | (i, k) <- zip (XMonad.workspaces conf) [xK_1 ..]
+  , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, controlMask)]]
 
-notSP = (return $ ("NSP" /=) . W.tag) :: X (WindowSpace -> Bool) 
+notSP = (return $ ("NSP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
- 
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
- 
     -- mod-button2, Raise the window to the top of the stack
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
- 
     -- mod-button3, Set the window to floating mode and resize by dragging
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
- 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
- 
 myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
-                            onWorkspaces ["3:code", "6:work", "7:math"] 
+                            onWorkspaces ["3:code", "6:work", "7:math"]
                                 (my_mosaic ||| Full ||| tiled) $
-                            onWorkspaces ["2:web", "4:media"] 
+                            onWorkspaces ["2:web", "4:media"]
                                 (all_equal ||| Full ||| Mirror tiled) $
                             --["1:main", "5:fm"]
                             all_equal ||| Full ||| my_mosaic
-                          ) 
+                          )
   where
     my_mosaic = mosaic 3 [6, 2, 1]
     all_equal = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
-    cross_ratio = 6/7 
+    cross_ratio = 6/7
     tiled   = Tall nmaster delta ratio
     nmaster = 1
     ratio   = 3/4
     delta   = 5/100
- 
 ------------------------------------------------------------------------
 -- Window rules:
- 
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
 -- particular program, or have a client always appear on a particular
@@ -214,9 +191,9 @@ myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+> 
+myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     (composeAll . concat $
-    [ 
+    [
       [className =? c --> doIgnore | c <- ignore]
     , [className =? c --> doFullFloat | c <- fullfloat]
     , [className =? c --> doFloat | c <- float]
@@ -237,7 +214,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
         aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
-        game = ["Steam", "dota_linux"] 
+        game = ["Steam", "dota_linux"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
@@ -248,20 +225,20 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         media = ["mpv", "nuvolaplayer3-deezer", "google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["Corebird", "Telegram", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
- 
+
 myEventHook e = do
     screenCornerEventHook e
     docksEventHook e
 
-myStartupHook = do 
+myStartupHook = do
     spawn "wmname LG3D"
     spawn "~/.xmonad/autostart.sh"
     spawn "~/.xmonad/dzen-auto.sh"
     spawn "xsetroot -cursor_name left_ptr"
     --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
- 
-main = do 
+
+main = do
     dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
@@ -271,11 +248,9 @@ main = do
             workspaces         = myWorkspaces,
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor,
-    
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
             logHook            = dynamicLogWithPP $ dzenpp dzen,
-    
             layoutHook         = smartBorders $  myLayout,
             manageHook         = (((className =? "krunner") >>= return . not --> myManageHook) <+> (kdeOverride --> doFloat)),
             handleEventHook    = (ewmhDesktopsEventHook `mappend` ewmhCopyWindow) <+> handleEventHook kde4Config,
@@ -309,13 +284,15 @@ ewmhCopyWindow _ = return (All True)
 newcolor = "#000000"
 dzenpp status = defaultPP {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
-              , ppCurrent           =   dzenColor "white" newcolor 
+              , ppCurrent           =   dzenColor "white" newcolor
               , ppVisible           =   dzenColor "blue" newcolor
               , ppHidden            =   dzenColor "#A09BA1" newcolor
               , ppUrgent            =   dzenColor "#ff0000" newcolor
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
-              , ppLayout            =   dzenColor "#A09BA1" newcolor
+              , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
-              , ppOutput            =   hPutStrLn status 
+              , ppOutput            =   hPutStrLn status
            }
+           where
+            layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ "^ca()"
