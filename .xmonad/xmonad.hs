@@ -28,6 +28,11 @@ import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
 import XMonad.Layout.Named
+import XMonad.Layout.Minimize
+import XMonad.Hooks.Minimize
+import qualified XMonad.Layout.BoringWindows as B
+import Data.List
+
 
 myTerminal :: String
 myTerminal      = "term"
@@ -64,22 +69,33 @@ myXPConfig = defaultXPConfig {
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
-      ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
+    -- minimize current window
+      ((modm,               xK_m     ), withFocused minimizeWindow)
+    -- restore next window
+    , ((modm .|. shiftMask, xK_m     ), sendMessage RestoreNextMinimizedWin)
+    -- open terminal scratchpad
+    , ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
       --exit
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
+    -- launch file manager
     , ((modm, xK_f), spawn "thunar")
+    -- go to coresponding workspace
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
-
-    , ((modm .|. shiftMask, xK_o     ), windowPromptGoto  defaultXPConfig)
-    , ((modm .|. shiftMask, xK_i     ), windowPromptBring  defaultXPConfig)
+    -- go to window prompt
+    , ((modm .|. shiftMask, xK_o     ), windowPromptGoto  myXPConfig)
+    -- bring window prompt
+    , ((modm .|. shiftMask, xK_i     ), windowPromptBring  myXPConfig)
+    -- open window selection menu
     , ((modm, xK_o), goToSelected defaultGSConfig)
     -- launch command prompt
     , ((modm, xK_p     ), shellPrompt myXPConfig)
+    -- launch screensaver
     , ((controlMask .|. shiftMask , xK_l), spawn "slock")
+    --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
     , ((modm,               xK_space ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
@@ -87,12 +103,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
     -- Move focus to the next window
-    , ((modm,              xK_Tab   ), windows W.focusDown)
-    , ((modm,               xK_j     ), windows W.focusDown)
+    , ((modm,              xK_Tab    ), B.focusDown)
+    -- Move focus to the next window
+    , ((modm,               xK_j     ), B.focusDown)
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
+    , ((modm,               xK_k     ), B.focusUp  )
     -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
+    , ((modm .|. shiftMask,   xK_Tab ), B.focusMaster  )
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
     -- Swap the focused window with the next window
@@ -159,7 +176,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
                                        >> windows W.shiftMaster))
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
-myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
+myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["3:code", "6:work", "7:math"]
                                 (my_mosaic ||| Full ||| tiled) $
                             onWorkspaces ["2:web", "4:media"]
@@ -168,6 +185,7 @@ myLayout = avoidStruts $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             all_equal ||| Full ||| my_mosaic
                           )
   where
+    modifiers = avoidStruts . minimize . B.boringWindows 
     my_mosaic = mosaic 3 [6, 2, 1]
     all_equal = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
@@ -289,11 +307,12 @@ dzenpp status = defaultPP {
               , ppUrgent            =   dzenColor "#ff0000" newcolor
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
-              , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable
+              , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable . deleteMinimize
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
            }
            where
+            deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
             layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ "^ca()"
             workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
 
