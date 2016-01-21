@@ -35,9 +35,8 @@ myTerminal      = "term"
 myModMask       = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = fmap (workspaceClickable) ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
-  where
-    workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
+myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
+
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -208,7 +207,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doShift "7:math" | c <- math]
     , [className =? c --> doShift "8:game" | c <- game]
     , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doIgnore]
-    , [className =? c --> doF W.swapDown | c <- aux]
+--    , [className =? c --> doF W.swapDown | c <- aux]
     , [isDialog --> doFloat]
     ]
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
@@ -223,7 +222,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         float = ["Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "Gimp", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["trayer", "Zenity", "Oblogout"]
         media = ["mpv", "nuvolaplayer3-deezer", "google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
-        fM = ["krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
+        fM = ["k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["Corebird", "Telegram", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
 myEventHook e = do
@@ -285,8 +284,8 @@ newcolor = "#000000"
 dzenpp status = defaultPP {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
               , ppCurrent           =   dzenColor "white" newcolor
-              , ppVisible           =   dzenColor "blue" newcolor
-              , ppHidden            =   dzenColor "#A09BA1" newcolor
+              , ppVisible           =   dzenColor "blue" newcolor . workspaceClickable 
+              , ppHidden            =   dzenColor "#A09BA1" newcolor . workspaceClickable
               , ppUrgent            =   dzenColor "#ff0000" newcolor
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
@@ -296,3 +295,5 @@ dzenpp status = defaultPP {
            }
            where
             layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ "^ca()"
+            workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
+
