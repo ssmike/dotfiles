@@ -48,7 +48,6 @@ Bundle 'javacomplete'
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
 Bundle 'Tagbar'
-Bundle "acx0/Conque-Shell"
 Bundle 'The-NERD-Commenter'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
@@ -99,13 +98,6 @@ nmap <F8> :!make run<CR>
 
 " < ./inp<CR>
 "vim-conque"
-function! Term()
-    ConqueTerm zsh
-    nmap <F3> :q!<CR>
-    nmap <F8> :!make run<CR>
-    nmap <F2> :tabnew<CR>
-endfunction
-nmap t :call Term()<CR>
 
 set wildmode=list:longest,full
 nmap e :Explore<CR>
