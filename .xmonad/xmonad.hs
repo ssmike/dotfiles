@@ -1,3 +1,4 @@
+import Control.Monad
 import XMonad.Config.Desktop
 import Data.Monoid;
 import XMonad.Hooks.ScreenCorners
@@ -32,6 +33,7 @@ import XMonad.Layout.Minimize
 import XMonad.Hooks.Minimize
 import qualified XMonad.Layout.BoringWindows as B
 import Data.List
+import XMonad.Hooks.SetWMName
 
 
 myTerminal :: String
@@ -255,6 +257,10 @@ myStartupHook = do
     --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
     return ()
 
+myLogHook dzen = do
+  dynamicLogWithPP $ dzenpp dzen
+  setWMName "LG3D"
+
 main = do
     dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
     xmonad $ ewmh $ kde4Config {
@@ -267,10 +273,12 @@ main = do
             focusedBorderColor = myFocusedBorderColor,
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
-            logHook            = dynamicLogWithPP $ dzenpp dzen,
+            logHook            = myLogHook dzen,
             layoutHook         = smartBorders $  myLayout,
-            manageHook         = (((className =? "krunner") >>= return . not --> myManageHook) <+> (kdeOverride --> doFloat)),
-            handleEventHook    = (ewmhDesktopsEventHook `mappend` ewmhCopyWindow) <+> handleEventHook kde4Config,
+            manageHook         = myManageHook,
+              --(((className =? "krunner") >>= return . not --> myManageHook) <+> (kdeOverride --> doFloat)),
+            handleEventHook    = ewmhDesktopsEventHook <+> ewmhCopyWindow <+> handleEventHook kde4Config,
+            --(ewmhDesktopsEventHook `mappend` ewmhCopyWindow) <+> handleEventHook kde4Config,
             startupHook        = myStartupHook
         }
 
@@ -287,14 +295,14 @@ ewmhCopyWindow ClientMessageEvent {
                ev_message_type = mt,
                ev_data = -1 : _
        } = withWindowSet $ \s -> do
-    --let a_cd = 446 :: Word64 --  getAtom "_NET_CURRENT_DESKTOP"
-    --trace $ "debug for notifications " ++ show mt ++ " " ++ show a_cd
-    --when (mt == a_cd) $ do
     trace "notifications hack"
-    sort' <- getSortByIndex
-    let ws = map W.tag $ sort' $ W.workspaces s
-    windows $ foldr (.) id (map (copyWindow w) ws)
-    windows W.focusDown
+    a_cd <- getAtom "_NET_CURRENT_DESKTOP" 
+    --trace $ "debug for notifications " ++ show mt ++ " " ++ show a_cd
+    when (mt == a_cd) $ do
+      sort' <- getSortByIndex
+      let ws = map W.tag $ sort' $ W.workspaces s
+      windows $ foldr (.) id (map (copyWindow w) ws)
+      windows W.focusDown
     return (All True)
 ewmhCopyWindow _ = return (All True)
 
