@@ -1,3 +1,4 @@
+import System.Environment
 import Control.Monad
 import XMonad.Config.Desktop
 import Data.Monoid;
@@ -145,12 +146,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-    --[((m .|. modm, k), windows $ f i)
-    --    | (i, k) <- zip ["NSP"] [xK_f]
-    --    , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    -- ++
-
-    --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
@@ -187,7 +182,7 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             all_equal ||| Full ||| my_mosaic
                           )
   where
-    modifiers = avoidStruts . minimize . B.boringWindows 
+    modifiers = avoidStruts . minimize . B.boringWindows
     my_mosaic = mosaic 3 [6, 2, 1]
     all_equal = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
@@ -196,20 +191,7 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
     nmaster = 1
     ratio   = 3/4
     delta   = 5/100
-------------------------------------------------------------------------
--- Window rules:
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
+
 myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     (composeAll . concat $
     [
@@ -250,19 +232,19 @@ myEventHook e = do
     docksEventHook e
 
 myStartupHook = do
-    spawn "wmname LG3D"
     spawn "~/.xmonad/autostart.sh"
     spawn "~/.xmonad/dzen-auto.sh"
     spawn "xsetroot -cursor_name left_ptr"
-    --addScreenCorner SCUpperRight (windowPromptGoto  defaultXPConfig)
+    addScreenCorner SCUpperRight (goToSelected defaultGSConfig)
     return ()
 
 myLogHook dzen = do
   dynamicLogWithPP $ dzenpp dzen
-  setWMName "LG3D"
+  --setWMName "LG3D"
 
 main = do
     dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
+    setEnv "_JAVA_AWT_WM_NONREPARENTING" "1"
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
@@ -276,9 +258,10 @@ main = do
             logHook            = myLogHook dzen,
             layoutHook         = smartBorders $  myLayout,
             manageHook         = myManageHook,
-              --(((className =? "krunner") >>= return . not --> myManageHook) <+> (kdeOverride --> doFloat)),
-            handleEventHook    = ewmhDesktopsEventHook <+> ewmhCopyWindow <+> handleEventHook kde4Config,
-            --(ewmhDesktopsEventHook `mappend` ewmhCopyWindow) <+> handleEventHook kde4Config,
+            handleEventHook    = ewmhDesktopsEventHook <+>
+                                 ewmhCopyWindow <+>
+                                 handleEventHook kde4Config <+>
+                                 screenCornerEventHook,
             startupHook        = myStartupHook
         }
 
@@ -296,7 +279,7 @@ ewmhCopyWindow ClientMessageEvent {
                ev_data = -1 : _
        } = withWindowSet $ \s -> do
     trace "notifications hack"
-    a_cd <- getAtom "_NET_CURRENT_DESKTOP" 
+    a_cd <- getAtom "_NET_CURRENT_DESKTOP"
     --trace $ "debug for notifications " ++ show mt ++ " " ++ show a_cd
     when (mt == a_cd) $ do
       sort' <- getSortByIndex
@@ -310,7 +293,7 @@ newcolor = "#000000"
 dzenpp status = defaultPP {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
               , ppCurrent           =   dzenColor "white" newcolor
-              , ppVisible           =   dzenColor "blue" newcolor . workspaceClickable 
+              , ppVisible           =   dzenColor "blue" newcolor . workspaceClickable
               , ppHidden            =   dzenColor "#A09BA1" newcolor . workspaceClickable
               , ppUrgent            =   dzenColor "#ff0000" newcolor
               , ppWsSep             =   " "
