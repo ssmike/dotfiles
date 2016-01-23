@@ -1,0 +1,3 @@
+#!/bin/bash
+slock &
+qdbus --system org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter

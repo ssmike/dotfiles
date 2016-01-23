@@ -4,6 +4,6 @@ background "#000000"
 kludges fix_window_pos,use_icons_hints,force_icons_size
 icon_size 19
 icon_gravity NE
-geometry 6x1-0-0
+geometry 9x1-0-0
 no_shrink
 window_layer normal

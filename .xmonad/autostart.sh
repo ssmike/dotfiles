@@ -1,6 +1,6 @@
 #!/bin/bash
 pgrep  compton && exit
-xhost +
+#xhost +
 compton -cCGf -D 3 -b
 cdemu-daemon &
 #chromium &
@@ -10,8 +10,8 @@ xfce4-power-manager &
 ~/.xmonad/dzen-auto.sh &
 ~/.xmonad/lightsOn.sh 120 &
 gnome-keyring-daemon &
-kwalletd &
 nm-applet &
+parcellite &
 xbindkeys &
 klipper &
 xautolock -locker "slock" -time 5 &

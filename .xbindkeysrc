@@ -19,5 +19,3 @@
     alt + l
 "scrot -e 'mv $f ~/screenshots/'"
     Print
-#"ksnapshot"
-#    Print
