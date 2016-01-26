@@ -20,6 +20,7 @@ xautolock -locker "slock" -time 5 &
 yandex-disk start &
 ~/.dropbox-dist/dropboxd &
 setxkbmap us,ru 'grp:caps_toggle'
+lxpolkit &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
