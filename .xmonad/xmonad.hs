@@ -97,7 +97,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch command prompt
     , ((modm, xK_p     ), shellPrompt myXPConfig)
     -- launch screensaver
-    , ((controlMask .|. shiftMask , xK_l), spawn "slock")
+    , ((controlMask .|. shiftMask , xK_l), spawn "xscreensaver-command --lock")
     --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -217,7 +217,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
         game = ["Steam", "dota_linux"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
-        work = ["Gimp", "Gimp-2.8", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
+        work = ["Blender", "Gimp", "Gimp-2.8", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Corebird", "Telegram", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]

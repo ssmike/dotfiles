@@ -14,7 +14,9 @@ nm-applet &
 parcellite &
 xbindkeys &
 klipper &
-xautolock -locker "slock" -time 5 &
+
+xscreensaver &
+#xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
 ~/app-copy/x86_64/CopyAgent &
 yandex-disk start &

@@ -1,5 +1,6 @@
 #!/bin/bash
 cd /usr/src/linux
+cp .config ../config-$(uname -r)
 make -j4
 make modules_install -j4
 #check if we are compiling different kernel
