@@ -1,6 +1,6 @@
-"xbacklight -inc 5"
+"xbacklight -inc 15"
     XF86MonBrightnessUp
-"xbacklight -dec 5"
+"xbacklight -dec 15"
     XF86MonBrightnessDown
 
 "amixer -q sset Master 10%+"
