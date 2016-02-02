@@ -17,5 +17,5 @@
     alt + k
 "amixer -q sset Speaker mute"
     alt + l
-"scrot -e 'mv $f ~/screenshots/'"
+"scrot -e 'mv $f ~/Pictures/screenshots/'"
     Print

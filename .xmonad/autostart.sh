@@ -18,7 +18,6 @@ klipper &
 xscreensaver &
 #xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
-~/app-copy/x86_64/CopyAgent &
 yandex-disk start &
 ~/.dropbox-dist/dropboxd &
 setxkbmap us,ru 'grp:caps_toggle'
