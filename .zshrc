@@ -266,7 +266,7 @@ enum() {
 	cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
-blacklist_regexp="^\(livestreamer|okular|tmux|less|nano|vim|mutt|man|qvim|gdb|fbless|htop\).*"
+blacklist_regexp="^\(mc|livestreamer|okular|tmux|less|nano|vim|mutt|man|qvim|gdb|fbless|htop\).*"
 
 function store-command-stats() {
   last_command=$1

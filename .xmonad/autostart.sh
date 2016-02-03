@@ -15,6 +15,7 @@ parcellite &
 xbindkeys &
 klipper &
 
+snapfly &
 xscreensaver &
 #xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
