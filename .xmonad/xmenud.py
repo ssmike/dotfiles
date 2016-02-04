@@ -72,8 +72,10 @@ def create_menu(menus, use_icons=True, launch=launcher_execute):
     def new_item(label, icon, use_icons):
         def get_icon(iconname):
             if (iconname=="" or iconname.find('.')<>-1):
+                print iconname
+                print (xdg.IconTheme.getIconPath(iconname))
                 try:
-                    print (xdg.IconTheme.getIconPath(iconname))
+
                     pixbuf = gtk.gdk.pixbuf_new_from_file(xdg.IconTheme.getIconPath(iconname))
                     ick = gtk.IconSet(pixbuf)
                     scaled = ick.render_icon(gtk.Style(), gtk.TEXT_DIR_LTR, gtk.STATE_NORMAL, gtk.ICON_SIZE_LARGE_TOOLBAR, None, None)
