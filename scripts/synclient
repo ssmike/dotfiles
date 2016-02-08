@@ -1,8 +1,0 @@
-#!/bin/bash
-synclient RTCornerButton=2
-synclient TapButton1=1
-synclient TapButton2=3
-synclient Palmdetect=1
-synclient PalmMinZ=80
-synclient HorizTwoFingerScroll=1
-

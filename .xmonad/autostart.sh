@@ -15,8 +15,7 @@ parcellite &
 xbindkeys &
 klipper &
 
-snapfly &
-xscreensaver &
+xscreensaver -no-splash &
 #xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh
 yandex-disk start &

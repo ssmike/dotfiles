@@ -215,7 +215,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
         aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
-        game = ["Steam", "dota_linux"]
+        game = ["Steam", "dota_linux", "XCOM: Enemy Within"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Opera", "Corebird", "Telegram", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]

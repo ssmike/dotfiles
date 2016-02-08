@@ -1,5 +1,0 @@
-#!/bin/zsh
-mount -o remount,rw /boot
-cp /usr/share/grub/unicode.pf2 /boot/grub/fonts/unicode.pf2
-/bin/zsh
-mount -o remount,ro /boot
