@@ -14,7 +14,7 @@ nm-applet &
 parcellite &
 xbindkeys &
 klipper &
-
+ssh-agent &
 xscreensaver -no-splash &
 #xautolock -locker "slock" -time 5 &
 ~/scripts/reminders.sh

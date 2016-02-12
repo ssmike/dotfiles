@@ -3,12 +3,13 @@ text/html;                      w3m -I %{charset} %s; nametemplate=%s.html
 text/html;                      w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput; 
 application/vnd.oasis.opendocument.spreadsheet;     soffice %s;
 application/vnd.oasis.opendocument.text; soffice '%s'
-application/x-bittorrent; deluge '%s'
-application/pdf;  okular '%s'
+application/x-bittorrent; qbittorrent '%s'
+application/pdf;  zathura '%s'
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice '%s'
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice '%s'
 application/vnd.ms-powerpoint; soffice '%s'
 application/msword; soffice '%s'
 application/rar; ark '%s'
 application/zip; ark '%s'
-image/jpeg; gwenview '%s'
+image/jpeg; nomacs '%s'
+image/png; nomacs '%s'
