@@ -57,12 +57,14 @@ Bundle "gerw/vim-latex-suite"
 set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
-Bundle 'fugitive.vim'
+Bundle "fugitive.vim"
 let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
 nmap <c-x> :CtrlPBuffer<CR>
 nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
+
+Bundle "django.vim"
 
 Bundle "wting/rust.vim"
 Bundle "groovy.vim"
@@ -170,6 +172,7 @@ autocmd BufRead *.hamlet setlocal ft=hamlet
 autocmd BufRead *.julius setlocal ft=julius
 autocmd BufRead *.cassius setlocal ft=cassius
 autocmd BufRead *.lucius setlocal ft=lucius
+autocmd BufRead *.dhtml setlocal ft=django
 
 let g:ycm_confirm_extra_conf = 0
 let g:syntastic_cpp_compiler='clang++'
