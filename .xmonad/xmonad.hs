@@ -54,7 +54,7 @@ myFocusedBorderColor ="#DB2828"
 scratchpads = [
     NS "terminal" "xfce4-terminal --role scratchpad"
       (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
-      (customFloating $ W.RationalRect (1/12) (0) (5/6) (1/2)),
+      (customFloating $ W.RationalRect (1/12) 0 (5/6) (1/2)),
     NS "browser" "luakit" (className =? "luakit")
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
     ]
@@ -69,7 +69,7 @@ myXPConfig = defaultXPConfig {
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
+myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- launch a terminal
     [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
     -- minimize current window
@@ -223,9 +223,9 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         fullfloat = ["trayer", "panel"]
         float = ["Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
-        media = ["nuvolaplayer3", "mpv", "nuvolaplayer3-deezer", "google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        media = ["mpv", "nuvolaplayer3-deezer", "google-music-electron", "Tomahawk", "nuvolaplayer", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["qBittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["nuvolaplayer3", "qBittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
 myEventHook e = do
     screenCornerEventHook e

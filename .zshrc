@@ -1,4 +1,5 @@
 source /etc/profile
+source ~/.profile
 #export WINEARCH=win32
 
 
