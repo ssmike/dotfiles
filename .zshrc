@@ -124,6 +124,7 @@ RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
 # -[ completion ]-
 autoload -Uz compinit
 compinit
+source aws_zsh_completer.sh
 
 #autoload predict-on
 #predict-on
