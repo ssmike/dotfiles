@@ -40,6 +40,11 @@ import XMonad.Hooks.SetWMName
 myTerminal :: String
 myTerminal      = "term"
 
+-- | modMask lets you specify which modkey you want to use. The default
+-- is mod1Mask ("left alt").  You may also consider using mod3Mask
+-- ("right alt"), which does not conflict with emacs keybindings. The
+-- "windows key" is usually mod4Mask.
+
 myModMask       = mod4Mask
 
 myWorkspaces :: [String]
