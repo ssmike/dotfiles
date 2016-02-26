@@ -43,12 +43,13 @@ NOTIFY_COMMAND_TIMEOUT=30
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 
-export TERM=xterm-256color
 #CLAWS='claws-mail --status | sed -e "s/^[0-9]*\ \([0-9]*\).*/\1/g" | sed -e "s/^$/0/g"'
 #[ ! "$UID" = "0" ] && [ $(bash -c $CLAWS) != 0 ] && echo "===========You have unread mail===========";
 
 if [[ $TERM == linux ]]; then
     setfont cyr-sun16
+else
+  export TERM=xterm-256color
 fi;
 
 alias ls='ls --color=auto'
