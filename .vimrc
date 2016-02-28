@@ -268,3 +268,5 @@ autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
 autocmd FileType tex set keymap=russian-jcukenwin
 "let g:clang_format#auto_format=1
+
+let NERDTreeIgnore = ['\.pyc$']

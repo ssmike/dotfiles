@@ -1,5 +1,6 @@
 source /etc/profile
 source ~/.profile
+source virtualenvwrapper.sh
 #export WINEARCH=win32
 
 
