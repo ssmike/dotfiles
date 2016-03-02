@@ -48,7 +48,7 @@ myTerminal      = "term"
 myModMask       = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:main","2:web","3:code","4:media","5:FM", "6:work", "7:math", "8:game", "9:etc"]
+myWorkspaces = ["1:main","2:web","3:code","4:com","5:FM", "6:work", "7:math", "8:game", "9:etc"]
 
 
 -- Border colors for unfocused and focused windows, respectively.
@@ -57,7 +57,7 @@ myNormalBorderColor  ="#6A86B2"
 myFocusedBorderColor ="#DB2828"
 
 scratchpads = [
-    NS "terminal" "xfce4-terminal --role scratchpad"
+    NS "terminal" "term --role scratchpad"
       (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
       (customFloating $ W.RationalRect (1/12) 0 (5/6) (1/2)),
     NS "browser" "luakit" (className =? "luakit")
@@ -181,7 +181,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["3:code", "6:work", "7:math"]
                                 (my_mosaic ||| Full ||| tiled) $
-                            onWorkspaces ["2:web", "4:media"]
+                            onWorkspaces ["2:web", "4:com"]
                                 (all_equal ||| Full ||| Mirror tiled) $
                             --["1:main", "5:fm"]
                             all_equal ||| Full ||| my_mosaic
@@ -203,7 +203,8 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
       [className =? c --> doIgnore | c <- ignore]
     , [className =? c --> doFullFloat | c <- fullfloat]
     , [className =? c --> doFloat | c <- float]
-    , [className =? c --> doShift "4:media" | c <- media]
+    , [className =? c --> doShift "4:com" | c <- im]
+    , [stringProperty "WM_WINDOW_ROLE" =? "Mutt" --> doShift "4:com"]
     , [className =? c --> doShift "5:FM" | c <- fM]
     , [className =? c --> doShift "9:etc" | c <- etc]
     , [resource  =? "desktop_window" --> doIgnore ]
@@ -223,14 +224,15 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         game = ["Steam", "dota_linux", "XCOM: Enemy Within"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
-        web = ["Opera", "Corebird", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
+        web = ["Opera", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]
         float = ["Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
-        media = ["mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        im = ["Corebird", "Slack", "Telegram"]
+        --media = ["mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["Telegram", "nuvolaplayer3-deezer", "nuvolaplayer3", "qBittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["nuvolaplayer3-deezer", "nuvolaplayer3", "qBittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
 myEventHook e = do
     screenCornerEventHook e
