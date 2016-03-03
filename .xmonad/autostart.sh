@@ -13,7 +13,6 @@ gnome-keyring-daemon &
 nm-applet &
 parcellite &
 xbindkeys &
-klipper &
 ssh-agent &
 xscreensaver -no-splash &
 #xautolock -locker "slock" -time 5 &
