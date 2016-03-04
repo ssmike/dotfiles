@@ -396,7 +396,7 @@ alias printFile="gtklp"
 alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
-alias grep="grep --color -i"
+alias grep="grep --color -i -n "
 #alias compile="make 2>./compile-output"
 
 prof() {

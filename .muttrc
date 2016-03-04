@@ -5,8 +5,8 @@ set record=+
 set header_cache=~/.hcache
 set mime_forward=yes 
 set mime_forward_rest=yes
-macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html<enter>"
-macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html<enter>"
+macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
 set write_bcc=no
 auto_view text/html
 macro pager p  <previous-line>
