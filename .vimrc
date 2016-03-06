@@ -58,6 +58,8 @@ set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
+Bundle "tpope/vim-unimpaired"
+
 let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
 nmap <c-x> :CtrlPBuffer<CR>
