@@ -52,7 +52,7 @@ Bundle 'The-NERD-Commenter'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
-"Bundle 'lervag/vim-latex'
+Bundle "nsf/gocode"
 Bundle "gerw/vim-latex-suite"
 set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
@@ -272,3 +272,4 @@ autocmd FileType tex set keymap=russian-jcukenwin
 "let g:clang_format#auto_format=1
 
 let NERDTreeIgnore = ['\.pyc$']
+highlight Pmenu ctermbg=darkgray ctermfg=white
