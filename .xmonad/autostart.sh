@@ -23,7 +23,7 @@ setxkbmap us,ru 'grp:caps_toggle'
 lxpolkit &
 xmutt &
 slack &
-telegram &
+telegram -stratintray &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
