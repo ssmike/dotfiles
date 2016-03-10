@@ -11,7 +11,7 @@
 "   read README on https://github.com/Valloric/YouCompleteMe or
 "   (if you have boost and clang >= 3.4 installed) just run
 "   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
-"   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; python ./install.py  --clang-completer
+"   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; python ./install.py  --clang-completer --gocode-completer
 " for haskell:
 "   install ghc-mod
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
