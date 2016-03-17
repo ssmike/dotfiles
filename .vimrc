@@ -274,3 +274,5 @@ autocmd FileType tex set keymap=russian-jcukenwin
 
 let NERDTreeIgnore = ['\.pyc$']
 highlight Pmenu ctermbg=darkgray ctermfg=white
+highlight Todo term=reverse ctermbg=1 guibg=DarkRed
+highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#0000ff
