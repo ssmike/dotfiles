@@ -221,9 +221,9 @@ set mouse=a
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
-map  
-map!  
-nmap  GVgg
+map <c-a> 
+map! <c-a> 
+nmap <c-a> GVgg
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 
@@ -264,6 +264,7 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 nmap <c-c> :YcmCompleter GoToDeclaration<CR>
+nmap <c-k> :YcmCompleter GetDoc<CR>
 
 let g:clang_format#code_style='google'
 autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
