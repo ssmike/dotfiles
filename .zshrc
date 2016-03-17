@@ -85,11 +85,6 @@ bindkey "^[[1;3C" delete-word
 setopt prompt_subst
 autoload -U promptinit
 promptinit
-function chprompt(){
-	prompt adam2;
-}
-bindkey -s "" 'chprompt
-'
 
 #[ ! "$UID" = "0" ] && PROMPT='%B%F{blue}%n@%m%f%F{blue}%f%b%(!.#.$) '
 
@@ -100,7 +95,7 @@ function zshexit() {
 function cvs_prompt() {
     if git branch >/dev/null 2>/dev/null; then
         ref=$(git symbolic-ref HEAD | cut -d'/' -f3)
-        echo -n "(%F{red}git%f on %F{green}$ref%f)"
+        echo -n "%F{red}git%f on %F{green}$ref%f"
     else
         echo -n ""
     fi
@@ -115,13 +110,33 @@ chpwd() {
       *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
         ;;
     esac
-  }
+}
 
-setopt prompt_subst
-
-[ ! "$UID" = "0" ] && PROMPT='$(cvs_prompt)%B%F{blue}%2~%f%F{blue}%f%b> '
-[  "$UID" = "0" ] && PROMPT='$(cvs_prompt)%B%F{red}%2~%f%F{blue}%f%b> '
+[ ! "$UID" = "0" ] && PROMPT='($(cvs_prompt))%B%F{blue}%2~%f%F{blue}%f%b> '
+[  "$UID" = "0" ] && PROMPT='($(cvs_prompt))%B%F{red}%2~%f%F{blue}%f%b> '
 RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
+
+get_visible_length() {
+    local zero='%([BSUbfksu]|([FB]|){*})'
+    print ${#${(S%%)1//$~zero}}
+}
+
+pre-prompt() {
+  local LEFT_N="%B%F{black}(%b$(cvs_prompt) : %B%F{green}%2~%B%F{black})%b%F{cyan}"
+  local RIGHT_N="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
+  local zero='%([BSUbfksu]|([FBK]|){*})'
+  local LEFT="$(print -P "$LEFT_N")"
+  local RIGHT="$(print -P "$RIGHT_N")"
+  local LEFTWIDTH=$(get_visible_length $LEFT)
+  local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+  print $LEFT${(l:$RIGHTWIDTH::-:)RIGHT}
+}
+
+function chprompt(){
+	
+}
+bindkey -s "" 'chprompt
+'
 
 # -[ completion ]-
 autoload -Uz compinit
