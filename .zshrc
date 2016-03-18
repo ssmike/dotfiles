@@ -84,6 +84,7 @@ bindkey "^[[1;3C" delete-word
 
 setopt prompt_subst
 autoload -U promptinit
+setopt shwordsplit
 promptinit
 
 #[ ! "$UID" = "0" ] && PROMPT='%B%F{blue}%n@%m%f%F{blue}%f%b%(!.#.$) '
@@ -94,7 +95,7 @@ function zshexit() {
 
 function cvs_prompt() {
     if git branch >/dev/null 2>/dev/null; then
-        ref=$(git symbolic-ref HEAD | cut -d'/' -f3)
+        ref=$(git symbolic-ref HEAD | sed -e "s/refs\/heads\///")
         echo -n "%F{red}git%f on %F{green}$ref%f"
     else
         echo -n ""
@@ -117,26 +118,44 @@ chpwd() {
 RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
 
 get_visible_length() {
-    local zero='%([BSUbfksu]|([FB]|){*})'
-    print ${#${(S%%)1//$~zero}}
+    echo `echo $1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | wc -m`
 }
+
+if [[ $1 == '8bit' ]]; then
+  shift
+  if [[ $(echo -n ${LC_ALL:-${LC_CTYPE:-$LANG}} | tr '[:lower:]' '[:upper:]') = *UTF*8* ]]; then
+    prompt_gfx_hyphen=$'\xe2\x94\x80'
+  else
+    prompt_gfx_hyphen=$'\xc4'
+  fi
+else
+  prompt_gfx_hyphen='-'
+fi
 
 pre-prompt() {
-  local LEFT_N="%B%F{black}(%b$(cvs_prompt) : %B%F{green}%2~%B%F{black})%b%F{cyan}"
-  local RIGHT_N="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
-  local zero='%([BSUbfksu]|([FBK]|){*})'
-  local LEFT="$(print -P "$LEFT_N")"
-  local RIGHT="$(print -P "$RIGHT_N")"
-  local LEFTWIDTH=$(get_visible_length $LEFT)
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$(cvs_prompt) : %B%F{blue}%2~%B%F{green})%b"
+  if [ ! -z $VIRTUAL_ENV ]; then
+    LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
+  fi
+  # -- color
+  LEFT="$LEFT%F{black}%B"
+  local RIGHT="."
+  local LEFT_P="$(print -P "$LEFT")"
+  local RIGHT_P="$(print -P "$RIGHT")"
+  local LEFTWIDTH=`get_visible_length "$LEFT_P"`
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
-  print $LEFT${(l:$RIGHTWIDTH::-:)RIGHT}
+  PROMPT='%F{black}%B\`--%f%F{white}>%b%f '
+  RPROMPT="%F{grey}%B(%*)%b%f"
+  print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
 }
 
-function chprompt(){
-	
-}
+
 bindkey -s "" 'chprompt
 '
+
+chprompt() {
+  add-zsh-hook precmd pre-prompt
+}
 
 # -[ completion ]-
 autoload -Uz compinit
@@ -209,7 +228,7 @@ bindkey -s "" edit-cmd
 
 mkd() { mkdir $1; cd $1 }
 battcheck() {
-	(acpi -b | python -c "if int(input().split()[3].split('%')[0]) < 20: exit(1)");
+  (acpi -b | python -c "if int(input().split()[3].split('%')[0]) < 20: exit(1)");
 }
 
 makeproject() {
@@ -236,10 +255,10 @@ log() {
     killall conky -SIGCONT
 }
 rep() {
-	while true; do
-		zsh -c $1;
-		sleep 4;
-	done;
+  while true; do
+    zsh -c $1;
+    sleep 4;
+  done;
 }
 pk () {
  if [ $1 ] ; then
@@ -282,7 +301,7 @@ extract () {
 }
 
 enum() {
-	cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
+  cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
 blacklist_regexp="^\(bpython|gdb|mc|livestreamer|okular|tmux|less|nano|vim|mutt|man|qvim|gdb|fbless|htop\).*"
