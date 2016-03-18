@@ -144,17 +144,24 @@ pre-prompt() {
   local RIGHT_P="$(print -P "$RIGHT")"
   local LEFTWIDTH=`get_visible_length "$LEFT_P"`
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+  if [ $RIGHTWIDTH -lt 1 ]; then
+    LEFT="%F{black}%B.%b%f%B%F{green}(%b%B%F{blue}%1~%B%F{green})%b"
+    LEFT="$LEFT%F{black}%B"
+    LEFT_P="$(print -P "$LEFT")"
+    LEFTWIDTH=`get_visible_length "$LEFT_P"`
+    RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+  fi
+  print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
   PROMPT='%F{black}%B\`--%f%F{white}>%b%f '
   RPROMPT="%F{grey}%B(%*)%b%f"
-  print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
 }
 
 
-bindkey -s "" 'chprompt
-'
+add-zsh-hook precmd pre-prompt
 
 chprompt() {
-  add-zsh-hook precmd pre-prompt
+  RPROMPT=""
+  PROMPT="%B%F{blue}%2~%f%F{blue}%f%b> "
 }
 
 # -[ completion ]-
