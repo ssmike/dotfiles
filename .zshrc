@@ -122,23 +122,27 @@ get_visible_length() {
 }
 
 pre-prompt() {
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$(cvs_prompt) : %B%F{blue}%2~%B%F{green})%b"
+  local PWD_STYLE="%B%F{blue}%2~%b%f"
+  [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$(cvs_prompt) : $PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
-  fi
+  fi 
   # -- color
   LEFT="$LEFT%F{black}%B"
   local RIGHT="."
-  local LEFT_P="$(print -P "$LEFT")"
+  #"%F{green}(%f%F{grey}%n%f%F{green})%f%F{black}%B.%f%b"
+  LEFT_P="$(print -P "$LEFT")"
   local RIGHT_P="$(print -P "$RIGHT")"
   local LEFTWIDTH=`get_visible_length "$LEFT_P"`
+  local RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
     LEFT="%F{black}%B.%b%f%B%F{green}(%b%B%F{blue}%1~%B%F{green})%b"
     LEFT="$LEFT%F{black}%B"
     LEFT_P="$(print -P "$LEFT")"
     LEFTWIDTH=`get_visible_length "$LEFT_P"`
-    RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+    RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH+$RIGHT_DELTA))
   fi
   print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
   PROMPT='%F{black}%B\`--%f%F{white}>%b%f '
