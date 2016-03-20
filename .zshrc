@@ -138,7 +138,9 @@ pre-prompt() {
   local RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
-    LEFT="%F{black}%B.%b%f%B%F{green}(%b%B%F{blue}%1~%B%F{green})%b"
+    PWD_STYLE="%B%F{blue}%1~%b%f"
+    [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%1~%b%f"
+    LEFT="%F{black}%B.%b%f%B%F{green}(%b$PWD_STYLE%B%F{green})%b"
     LEFT="$LEFT%F{black}%B"
     LEFT_P="$(print -P "$LEFT")"
     LEFTWIDTH=`get_visible_length "$LEFT_P"`

@@ -180,7 +180,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["3:code", "6:work", "7:math"]
-                                (my_mosaic ||| Full ||| tiled) $
+                                (my_mosaic ||| Full ||| Mirror tiled) $
                             onWorkspaces ["2:web", "4:com"]
                                 (all_equal ||| Full ||| Mirror tiled) $
                             --["1:main", "5:fm"]
