@@ -121,17 +121,6 @@ get_visible_length() {
     echo `echo $1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | wc -m`
 }
 
-if [[ $1 == '8bit' ]]; then
-  shift
-  if [[ $(echo -n ${LC_ALL:-${LC_CTYPE:-$LANG}} | tr '[:lower:]' '[:upper:]') = *UTF*8* ]]; then
-    prompt_gfx_hyphen=$'\xe2\x94\x80'
-  else
-    prompt_gfx_hyphen=$'\xc4'
-  fi
-else
-  prompt_gfx_hyphen='-'
-fi
-
 pre-prompt() {
   local LEFT="%F{black}%B.%b%f%B%F{green}(%b$(cvs_prompt) : %B%F{blue}%2~%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
