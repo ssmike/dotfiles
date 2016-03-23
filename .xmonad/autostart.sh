@@ -21,7 +21,6 @@ yandex-disk start &
 ~/.dropbox-dist/dropboxd &
 setxkbmap us,ru 'grp:caps_toggle'
 lxpolkit &
-xmutt &
 slack &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
