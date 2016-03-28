@@ -40,15 +40,15 @@ Bundle 'Valloric/YouCompleteMe'
 let g:ycm_show_diagnostics_ui = 0
 
 Bundle "gmarik/vundle"
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
+Bundle "scrooloose/nerdtree"
+Bundle "scrooloose/syntastic"
 Bundle "pbrisbin/vim-syntax-shakespeare"
 
-Bundle 'javacomplete'
+Bundle "javacomplete"
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
-Bundle 'Tagbar'
-Bundle 'The-NERD-Commenter'
+Bundle "Tagbar"
+Bundle "The-NERD-Commenter"
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
