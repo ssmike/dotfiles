@@ -52,7 +52,8 @@ Bundle 'The-NERD-Commenter'
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
 Bundle "eagletmt/neco-ghc"
-Bundle "nsf/gocode"
+Bundle "nsf/gocode", {"rtp": "vim/"}
+
 Bundle "gerw/vim-latex-suite"
 set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
