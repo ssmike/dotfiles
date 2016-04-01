@@ -3,15 +3,18 @@
 " for all plugins work vim must be compiled with +python
 " from ubuntu forums : remove vim-tiny and install vim-nox
 " for ubuntu - vim-nox package
-" vundle created by git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" vundle created by git clone https://github.com/gmarik/vundle.git 
+" ~/.vim/bundle/vundle
 " " installation instructions :
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " vim -c ":BundleUpdate"
 " for python and c-family languages completion
 "   read README on https://github.com/Valloric/YouCompleteMe or
 "   (if you have boost and clang >= 3.4 installed) just run
-"   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
-"   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; python ./install.py  --clang-completer --gocode-completer
+"   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. 
+"   ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
+"   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; python ./install.py  
+"   --clang-completer --gocode-completer
 " for haskell:
 "   install ghc-mod
 "   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
@@ -79,6 +82,9 @@ set tabstop=2
 set shiftwidth=2
 set smarttab
 set expandtab
+set formatoptions+=w
+set tw=80
+nnoremap Q gqip
 
 autocmd FileType make setlocal noexpandtab
 
@@ -277,3 +283,5 @@ let NERDTreeIgnore = ['\.pyc$']
 highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#0000ff
+
+match ErrorMsg '\%>80v.\+'
