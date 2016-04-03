@@ -390,7 +390,7 @@ function google; {
         $BROWSER "http://www.google.com/search?q=`url-encode "${(j: :)@}"`"
 }
 function slovari {
-        $BROWSER "http://slovari.yandex.ru/`url-encode "${(j: :)@}"`/en-ru/"
+        $BROWSER "https://translate.yandex.ru/?text=`url-encode "${(j: :)@}"`&lang=en-ru"
 }
 alias t=slovari
 
