@@ -418,6 +418,10 @@ function xquery() {
   xdg-mime query default $1
 }
 
+function docker-clean() {
+  docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
+}
+
 #gentoo aliases
 alias ascedit='vim ~/.local/share/applications/mimeapps.list ~/.local/share/applications/mimeinfo.cache /usr/share/applications/mimeinfo.cache'
 #alias cp='cp --reflink=auto'
