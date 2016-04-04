@@ -124,7 +124,11 @@ get_visible_length() {
 pre-prompt() {
   local PWD_STYLE="%B%F{blue}%2~%b%f"
   [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$(cvs_prompt) : $PWD_STYLE%B%F{green})%b"
+  local CVS=$(cvs_prompt)
+  if [ ! -z "$CVS" ]; then
+    CVS="$CVS : "
+  fi
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
   fi 
