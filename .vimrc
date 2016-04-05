@@ -39,7 +39,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger="<c-k>"
 
 
-Bundle 'Valloric/YouCompleteMe'
+Bundle "Valloric/YouCompleteMe"
 let g:ycm_show_diagnostics_ui = 0
 
 Bundle "gmarik/vundle"
