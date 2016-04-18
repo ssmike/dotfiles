@@ -22,6 +22,7 @@ yandex-disk start &
 setxkbmap us,ru 'grp:caps_toggle'
 lxpolkit &
 slack &
+Telegram --startintray &
 #~/.mocpscrob/mocp-scrobbler.py --daemon &
 #steam &
 #syndaemon -t -i 1 -d 
