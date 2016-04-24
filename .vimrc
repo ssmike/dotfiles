@@ -82,8 +82,8 @@ set tabstop=2
 set shiftwidth=2
 set smarttab
 set expandtab
-set formatoptions+=w
-set tw=80
+"set formatoptions+=w
+"set tw=80
 nnoremap Q gqip
 
 autocmd FileType make setlocal noexpandtab
@@ -284,4 +284,4 @@ highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#0000ff
 
-match ErrorMsg '\%>80v.\+'
+"match ErrorMsg '\%>80v.\+'
