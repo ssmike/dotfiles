@@ -58,7 +58,7 @@ Bundle "eagletmt/neco-ghc"
 Bundle "nsf/gocode", {"rtp": "vim/"}
 
 Bundle "gerw/vim-latex-suite"
-set rtp+=~/.vim/bundle/vim-latex-suite
+"set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
