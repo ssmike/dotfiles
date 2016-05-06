@@ -1,0 +1,10 @@
+[user]
+	name = mike
+	email = surinmike@gmail.com
+[push]
+	default = simple
+[merge]
+  conflictstyle = diff3
+
+[credential]
+	helper = cache --timeout=3600
