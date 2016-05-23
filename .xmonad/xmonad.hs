@@ -48,7 +48,7 @@ myTerminal      = "term"
 myModMask       = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:main","2:web","3:code","4:com","5:FM", "6:work", "7:math", "8:game", "9:etc"]
+myWorkspaces = ["1:main","2:web","3:code","4:im","5:FM", "6:work", "7:math", "8:game", "9:etc"]
 
 
 -- Border colors for unfocused and focused windows, respectively.
@@ -181,7 +181,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["3:code", "6:work", "7:math"]
                                 (my_mosaic ||| Full ||| Mirror tiled) $
-                            onWorkspaces ["2:web", "4:com"]
+                            onWorkspaces ["2:web", "4:im"]
                                 (all_equal ||| Full ||| Mirror tiled) $
                             --["1:main", "5:fm"]
                             all_equal ||| Full ||| my_mosaic
@@ -203,8 +203,8 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
       [className =? c --> doIgnore | c <- ignore]
     , [className =? c --> doFullFloat | c <- fullfloat]
     , [className =? c --> doFloat | c <- float]
-    , [className =? c --> doShift "4:com" | c <- im]
-    , [stringProperty "WM_WINDOW_ROLE" =? "Mutt" --> doShift "4:com"]
+    , [className =? c --> doShift "4:im" | c <- im]
+    , [stringProperty "WM_WINDOW_ROLE" =? "Mutt" --> doShift "4:im"]
     , [className =? c --> doShift "5:FM" | c <- fM]
     , [className =? c --> doShift "9:etc" | c <- etc]
     , [resource  =? "desktop_window" --> doIgnore ]
