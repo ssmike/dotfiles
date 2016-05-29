@@ -61,7 +61,7 @@ Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
 Bundle "tpope/vim-unimpaired"
-Bundle "raimondi/delimitmate"
+"Bundle raimondi/delimitmate"
 
 let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
