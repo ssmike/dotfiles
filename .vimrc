@@ -60,7 +60,7 @@ Bundle "gerw/vim-latex-suite"
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
-Bundle "tpope/vim-unimpaired"
+"Bundle tpope/vim-unimpaired"
 "Bundle raimondi/delimitmate"
 
 let g:fugitive_git_executable = 'LANG=en git'
@@ -286,3 +286,6 @@ highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#00
 au FileType mail let b:delimitMate_autoclose = 0
 
 "match ErrorMsg '\%>80v.\+'
+nmap ]] :cn<CR>
+nmap [[ :cp<CR>
+
