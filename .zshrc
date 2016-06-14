@@ -166,7 +166,9 @@ chprompt() {
 # -[ completion ]-
 autoload -Uz compinit
 compinit
+
 source aws_zsh_completer.sh
+. <(azure --completion)
 
 #autoload predict-on
 #predict-on
