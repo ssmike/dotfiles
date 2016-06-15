@@ -428,6 +428,11 @@ function docker-clean() {
   docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
 }
 
+function arcwelder() {
+  docker run -it --net host --cpuset-cpus 0 --memory 512mb -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -v ~/.Xauthority:/root/.Xauthority -v $HOME/Downloads:/root/Downloads --device /dev/snd --name arcwelder --privileged thshaw/arc-welder
+  docker rm arcwelder
+}
+
 #gentoo aliases
 alias ascedit='vim ~/.local/share/applications/mimeapps.list ~/.local/share/applications/mimeinfo.cache /usr/share/applications/mimeinfo.cache'
 #alias cp='cp --reflink=auto'
