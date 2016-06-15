@@ -37,13 +37,13 @@ unignore User-Agent:
 # Palette for use with the Linux console.  Black background.
 
 color hdrdefault brightblue default
-color quoted blue default
-color signature blue default
+color quoted brightblue default
+color signature brightblue default
 color attachment red default
 color prompt brightred default
 color message brightred default
 color error brightred default
-color indicator blue default 
+color indicator brightblue default 
 color status magenta brightblack
 #color status brightgreen blue
 color tree white default
