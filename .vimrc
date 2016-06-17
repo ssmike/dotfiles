@@ -61,6 +61,8 @@ Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
 
+Bundle "easymotion/vim-easymotion"
+
 "Bundle sirver/ultisnips"
 "Bundle honza/vim-snippets"
 
@@ -144,6 +146,33 @@ else
     colorscheme pablo
 endif
 
+
+map <Leader> <Plug>(easymotion-prefix)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+set nohlsearch
+
 " tool menu
 set guioptions-=T
 " main menu
@@ -159,11 +188,10 @@ nmap S :SyntasticToggleMode<CR>
 imap <c-f> <c-x><c-f>
 
 " working with folds
-nmap <leader>s :set fdm=syntax<CR>
-nmap <leader><TAB> :set fdm=indent<CR>
-nmap <leader>o zo
-nmap <leader>c zc
-nmap <leader>m :set fdm=manual<CR>
+nmap `s :set fdm=syntax<CR>
+nmap `<TAB> :set fdm=indent<CR>
+nmap `m :set fdm=manual<CR>
+
 
 set completeopt-=preview
 set splitbelow
