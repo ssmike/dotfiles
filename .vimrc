@@ -60,8 +60,14 @@ Bundle "gerw/vim-latex-suite"
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
+
+"Bundle sirver/ultisnips"
+"Bundle honza/vim-snippets"
+
 "Bundle tpope/vim-unimpaired"
 "Bundle raimondi/delimitmate"
+
+"let g:UltiSnipsExpandTrigger=<c-w>"
 
 let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
