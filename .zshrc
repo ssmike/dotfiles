@@ -25,7 +25,7 @@ ZSH_HIGHLIGHT_STYLES=(
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 READNULLCMD=less
 
-#insert-square-brackets() {
+# insert-square-brackets() {
 #  LBUFFER="${LBUFFER}["
 #  RBUFFER="]${RBUFFER}"
 #}
@@ -169,6 +169,17 @@ compinit
 
 source aws_zsh_completer.sh
 . <(azure --completion)
+
+
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip
 
 #autoload predict-on
 #predict-on
