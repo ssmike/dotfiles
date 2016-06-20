@@ -11,11 +11,12 @@
     control + alt + m
 "amixer -q sset Master toggle"
     XF86AudioMute
+"scrot -e 'mv $f ~/Pictures/screenshots/'"
+    Print
+
 "amixer -q sset Master toggle"
-    alt + m
+    alt + l
 "amixer -q sset Speaker unmute"
     alt + k
 "amixer -q sset Speaker mute"
-    alt + l
-"scrot -e 'mv $f ~/Pictures/screenshots/'"
-    Print
+    alt + m
