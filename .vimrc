@@ -323,3 +323,4 @@ au FileType mail let b:delimitMate_autoclose = 0
 nmap ]] :cn<CR>
 nmap [[ :cp<CR>
 
+let g:ycm_python_binary_path='python'
