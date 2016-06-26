@@ -466,3 +466,7 @@ prof() {
 }
 alias pulse="pulseaudio -k && pulseaudio --start"
 alias vncreadonly="x11vnc -usepw -forever -viewonly"
+
+function fix-steam-c++() {
+  cp /usr/lib64/gcc/x86_64-pc-linux-gnu/5.3.0/libstdc++.so.6 /home/mike/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+}
