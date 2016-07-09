@@ -1,21 +1,5 @@
-"completion function for plain text files"
-
-" for all plugins work vim must be compiled with +python
-" from ubuntu forums : remove vim-tiny and install vim-nox
-" for ubuntu - vim-nox package
-" vundle created by git clone https://github.com/gmarik/vundle.git  ~/.vim/bundle/vundle
-" " installation instructions :
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " vim -c ":BundleInstall" 
-" for python and c-family languages completion
-"   read README on https://github.com/Valloric/YouCompleteMe or
-"   (if you have boost and clang >= 3.4 installed) just run
-"   cd ~/.vim/bundle/YouCompleteMe; mkdir ycm_build; cd ycm_build; cmake .. 
-"   ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp -DUSE_SYSTEM_BOOST=ON; make
-"   or (with bundled libs) cd ~/.vim/bundle/YouCompleteMe; python ./install.py --clang-completer --gocode-completer
-" for haskell:
-"   install ghc-mod
-"   vimproc build required - cd ~/.vim/bundle/vimproc.vim && make
 
 set guiheadroom=0
 
@@ -33,30 +17,18 @@ call vundle#rc()
 
 filetype plugin indent on
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:UltiSnipsExpandTrigger="<c-k>"
 
-
-Bundle "Valloric/YouCompleteMe"
 let g:ycm_show_diagnostics_ui = 0
 
 Bundle "gmarik/vundle"
 Bundle "scrooloose/nerdtree"
 Bundle "scrooloose/syntastic"
-Bundle "pbrisbin/vim-syntax-shakespeare"
 
-Bundle "javacomplete"
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
 Bundle "Tagbar"
 Bundle "The-NERD-Commenter"
-Bundle "Shougo/vimproc.vim"
-Bundle "eagletmt/ghcmod-vim"
-Bundle "eagletmt/neco-ghc"
-Bundle "nsf/gocode", {"rtp": "vim/"}
 
-Bundle "gerw/vim-latex-suite"
-"set rtp+=~/.vim/bundle/vim-latex-suite
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "fugitive.vim"
