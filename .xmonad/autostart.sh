@@ -16,5 +16,5 @@ ssh-agent &
 xscreensaver -no-splash &
 #xautolock -locker "slock" -time 5 &
 setxkbmap us,ru 'grp:caps_toggle'
-Telegram --startintray &
+~/Downloads/Telegram/Telegram &
 setxkbmap -layout us,ru -variant -option grp:caps_toggle
