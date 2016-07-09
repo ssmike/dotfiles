@@ -1,14 +1,14 @@
 source /etc/profile
 source ~/.profile
-source virtualenvwrapper.sh
-#export WINEARCH=win32
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+#chromium-browseeexport WINEARCH=win32
 
 
 export GOOGLE=8.8.8.8
 export PATH=$PATH:~/.cabal/bin
-export BROWSER=chromium-browser
+export BROWSER=firefox
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 ZSH_HIGHLIGHT_STYLES=(
@@ -65,15 +65,9 @@ bindkey "[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[OF" end-of-line
-bindkey "[4~" end-of-line
-bindkey "^[[3~" delete-char
-bindkey "^[[3~" delete-char
-bindkey "^[[3~" delete-char
 bindkey "[3~" delete-char
 bindkey "^[[1;5C" forward-word
-bindkey "OC" forward-word
 bindkey "^[[1;5D" backward-word
-bindkey "OD" backward-word
 bindkey "[5~" up-line-or-history
 bindkey "[6~" down-line-or-history
 bindkey "[2~" quote-line
@@ -124,11 +118,11 @@ get_visible_length() {
 pre-prompt() {
   local PWD_STYLE="%B%F{blue}%2~%b%f"
   [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
-  local CVS=$(cvs_prompt)
-  if [ ! -z "$CVS" ]; then
-    CVS="$CVS : "
+  ZSH_CVS=`cvs_prompt`
+  if [ ! -z "$ZSH_CVS" ]; then
+    ZSH_CVS="$ZSH_CVS : "
   fi
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$CVS$PWD_STYLE%B%F{green})%b"
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
   fi 
@@ -166,9 +160,6 @@ chprompt() {
 # -[ completion ]-
 autoload -Uz compinit
 compinit
-
-source aws_zsh_completer.sh
-. <(azure --completion)
 
 
 function _pip_completion {

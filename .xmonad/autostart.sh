@@ -2,7 +2,6 @@
 pgrep  compton && exit
 #xhost +
 compton -cCGf -D 3 -b
-cdemu-daemon &
 #chromium &
 nitrogen --restore &
 #krunner &
@@ -16,12 +15,6 @@ xbindkeys &
 ssh-agent &
 xscreensaver -no-splash &
 #xautolock -locker "slock" -time 5 &
-~/scripts/reminders.sh
-yandex-disk start &
-~/.dropbox-dist/dropboxd &
 setxkbmap us,ru 'grp:caps_toggle'
-lxpolkit &
 Telegram --startintray &
-#~/.mocpscrob/mocp-scrobbler.py --daemon &
-#steam &
-#syndaemon -t -i 1 -d 
+setxkbmap -layout us,ru -variant -option grp:caps_toggle

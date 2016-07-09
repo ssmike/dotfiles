@@ -1,3 +1,4 @@
+import System.Posix.Env (setEnv)
 import System.Environment
 import Control.Monad
 import XMonad.Config.Desktop
@@ -38,7 +39,7 @@ import XMonad.Hooks.SetWMName
 
 
 myTerminal :: String
-myTerminal      = "term"
+myTerminal      = "gnome-terminal"
 
 -- | modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -57,7 +58,7 @@ myNormalBorderColor  ="#6A86B2"
 myFocusedBorderColor ="#DB2828"
 
 scratchpads = [
-    NS "terminal" "term --role scratchpad"
+    NS "terminal" (myTerminal ++ " --role scratchpad")
       (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
       (customFloating $ W.RationalRect (1/12) 0 (5/6) (1/2)),
     NS "browser" "luakit" (className =? "luakit")
@@ -231,7 +232,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
         im = ["Corebird", "Slack", "Telegram"]
         --media = ["mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
-        fM = ["k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
+        fM = ["Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["nuvolaplayer3-deezer", "nuvolaplayer3", "qBittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
 myEventHook e = do
@@ -251,7 +252,7 @@ myLogHook dzen = do
 
 main = do
     dzen <- spawnPipe "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e -"
-    setEnv "_JAVA_AWT_WM_NONREPARENTING" "1"
+    setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
