@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ $(cat /proc/acpi/bbswitch | sed "s/.* \(.*\)$/\1/") == ON ]; then
-    echo -n ON
-else
-    echo -n OFF
-fi
