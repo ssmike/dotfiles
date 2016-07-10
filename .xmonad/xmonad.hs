@@ -89,7 +89,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm, xK_a), sendMessage ToggleStruts)
     -- launch file manager
-    , ((modm, xK_f), spawn "thunar")
+    , ((modm, xK_f), spawn "nautilus")
     -- go to coresponding workspace
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
