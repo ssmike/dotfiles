@@ -21,19 +21,20 @@ filetype plugin indent on
 let g:ycm_show_diagnostics_ui = 0
 
 Bundle "gmarik/vundle"
-Bundle "scrooloose/nerdtree"
+let g:ya_vim#use_plugin#nerdtree="yes"
+let g:ya_vim#use_plugin#fswitch="yes"
 Bundle "scrooloose/syntastic"
-
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
-Bundle "Tagbar"
-Bundle "The-NERD-Commenter"
+let g:ya_vim#use_plugin#indentLine = "yes"
+let g:ya_vim#use_plugin#ctrlp = "yes"
+let g:ya_vim#use_plugin#startify = "yes"
+let g:ya_vim#use_plugin#vcscommand = "yes"
+let g:ya_vim#use_plugin#tagbar = "yes"
+let g:ya_vim#use_plugin#nerdcommenter = "yes"
+let g:ya_vim#use_plugin#vcscommand = "yes"
 
-Bundle "mhinz/vim-startify"
-Bundle "ctrlp.vim"
-Bundle "fugitive.vim"
-
-Bundle "easymotion/vim-easymotion"
+let g:ya_vim#use_plugin#easymotion = "yes"
 
 "Bundle sirver/ultisnips"
 "Bundle honza/vim-snippets"
@@ -43,22 +44,17 @@ Bundle "easymotion/vim-easymotion"
 
 "let g:UltiSnipsExpandTrigger=<c-w>"
 
-let g:fugitive_git_executable = 'LANG=en git'
 let g:ctrlp_map='<c-f>'
 nmap <c-x> :CtrlPBuffer<CR>
 nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
 
-Bundle "django.vim"
-
-Bundle "wting/rust.vim"
-Bundle "groovy.vim"
 Bundle "craigemery/vim-autotag"
 
 Bundle "rhysd/vim-clang-format"
 
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set smarttab
 set expandtab
 "set formatoptions+=w
@@ -107,7 +103,7 @@ nmap  GVgg
 syn on
 "set mapleader = ",""
 
-Bundle "bling/vim-airline"
+let g:ya_vim#use_plugin#airline = "yes"
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
@@ -239,7 +235,6 @@ nmap <c-a> GVgg
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 
-let g:syntastic_tex_checkers=['']
 "let b:atpTexCompiler='texi2pdf'
 ""autocmd FileType text setlocal spell
 "let g:atp_tab_map=1
