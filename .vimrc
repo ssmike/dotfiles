@@ -33,6 +33,7 @@ let g:ya_vim#use_plugin#vcscommand = "yes"
 let g:ya_vim#use_plugin#tagbar = "yes"
 let g:ya_vim#use_plugin#nerdcommenter = "yes"
 let g:ya_vim#use_plugin#vcscommand = "yes"
+let g:ya_vim#use_plugin#spacehi = "yes"
 
 let g:ya_vim#use_plugin#easymotion = "yes"
 
@@ -66,8 +67,6 @@ autocmd FileType make setlocal noexpandtab
 set autoread
 nmap <TAB> :tabn<CR>
 nmap <BACKSPACE> :tabp<CR>
-nmap <F2> :tabnew<CR>
-nmap <F3> :q!<CR>
 nmap s :w<CR>
 
 set autoindent
@@ -77,10 +76,6 @@ set number
 
 filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
-
-"templates api"
-nmap <F9> :make<CR>
-nmap <F8> :!make run<CR>
 
 " < ./inp<CR>
 "vim-conque"
@@ -93,7 +88,6 @@ set splitright
 set splitbelow
 nmap < :vertical resize -6<CR>
 nmap > :vertical resize +6<CR>
-nmap <F4> :NERDTree<CR>
 nmap <F5> :TagbarToggle<CR>
 nmap  GVgg
 
@@ -271,7 +265,9 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 nmap <c-c> :YcmCompleter GoToDeclaration<CR>
+nmap <c-d> :YcmCompleter GoToDefinition<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
+nmap <c-w> :YcmCompleter GoToInclude<CR>
 
 let g:clang_format#code_style='google'
 autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
@@ -287,7 +283,11 @@ highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#00
 au FileType mail let b:delimitMate_autoclose = 0
 
 "match ErrorMsg '\%>80v.\+'
-nmap ]] :cn<CR>
-nmap [[ :cp<CR>
+nmap ] :cn<CR>
+nmap [ :cp<CR>
+nmap ) :bn<CR>
+nmap ( :bp<CR>
+
+nmap t :TagbarToggle<CR>
 
 let g:ycm_python_binary_path='python'
