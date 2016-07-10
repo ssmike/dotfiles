@@ -414,5 +414,6 @@ alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
 alias vim="ya vim"
 alias gdb="ya tool gdb"
-#alias compile="make 2>./compile-output"
+alias ymake="ya make -j4"
 
+source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
