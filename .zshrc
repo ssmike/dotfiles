@@ -1,14 +1,12 @@
 source /etc/profile
 source ~/.profile
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 #chromium-browseeexport WINEARCH=win32
 
 
 export GOOGLE=8.8.8.8
-export PATH=$PATH:~/.cabal/bin
 export BROWSER=firefox
 
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 ZSH_HIGHLIGHT_STYLES=(
@@ -397,52 +395,16 @@ function url-encode; {
 function google; {
         $BROWSER "http://www.google.com/search?q=`url-encode "${(j: :)@}"`"
 }
-function slovari {
-        $BROWSER "https://translate.yandex.ru/?text=`url-encode "${(j: :)@}"`&lang=en-ru"
-}
-alias t=slovari
-
-function keyw {
-  sudo $EDITOR /etc/portage/package.accept_keywords/$1
-}
-
-function use {
-  sudo $EDITOR /etc/portage/package.use/$1
-}
 
 function debug-flags; {
     echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
-}
-
-function xsearch() {
-  grep --color -i $1 ~/.local/share/applications/{mimeapps.list,mimeinfo.cache} /usr/share/applications/mimeinfo.cache
-}
-
-function xset() {
-  xdg-mime default $2 $1
-}
-
-function xquery() {
-  xdg-mime query default $1
 }
 
 function docker-clean() {
   docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
 }
 
-function arcwelder() {
-  docker run -it --net host --cpuset-cpus 0 --memory 512mb -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -v ~/.Xauthority:/root/.Xauthority -v $HOME/Downloads:/root/Downloads --device /dev/snd --name arcwelder --privileged thshaw/arc-welder
-  docker rm arcwelder
-}
-
-#gentoo aliases
-alias ascedit='vim ~/.local/share/applications/mimeapps.list ~/.local/share/applications/mimeinfo.cache /usr/share/applications/mimeinfo.cache'
-#alias cp='cp --reflink=auto'
 alias popd="popd -q"
-alias femerge='sudo env FEATURES="-collision-detect -protect-owned" emerge'
-alias getmail="/usr/share/scripts/mail.sh"
-#alias emacsd="/bin/emacs --daemon"
-#alias emacs="emacsclient -c -a=vim"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias printFile="gtklp"
@@ -450,14 +412,7 @@ alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
+alias vim="ya vim"
+alias gdb="ya tool gdb"
 #alias compile="make 2>./compile-output"
 
-prof() {
-    gprof $1 | vim -
-}
-alias pulse="pulseaudio -k && pulseaudio --start"
-alias vncreadonly="x11vnc -usepw -forever -viewonly"
-
-function fix-steam-c++() {
-  cp /usr/lib64/gcc/x86_64-pc-linux-gnu/5.3.0/libstdc++.so.6 /home/mike/.local/share/Steam/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-}
