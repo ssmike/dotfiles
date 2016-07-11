@@ -267,7 +267,7 @@ let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 nmap <c-c> :YcmCompleter GoToDeclaration<CR>
 nmap <c-d> :YcmCompleter GoToDefinition<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
-nmap <c-w> :YcmCompleter GoToInclude<CR>
+nmap <c-e> :YcmCompleter GoToInclude<CR>
 
 let g:clang_format#code_style='google'
 autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
