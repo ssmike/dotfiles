@@ -415,5 +415,7 @@ alias grep="grep --color -i -n "
 alias vim="ya vim"
 alias gdb="ya tool gdb"
 alias ymake="ya make -j4"
+alias ag="ya tool ag"
+alias valgrind="ya tool valgrind"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
