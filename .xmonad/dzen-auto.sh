@@ -11,7 +11,7 @@ function take {
 pgrep conky && exit
 #mkfifo ~/.info
 #take ~/.info | dzen2 -y 1000 -dock & # -y 2000
-conky -c ~/.conkyrc | /bin/sh | dzen2 -geometry +0-0 -dock -e "onstart=lower" -ta l & 
+conky -c ~/.conkyrc | /bin/sh | dzen2 -geometry +0-0 -dock -e "onstart=lower" -ta r  & 
 sleep 1
 stalonetray &
 #top
