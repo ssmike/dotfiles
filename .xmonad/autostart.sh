@@ -4,7 +4,6 @@ pgrep  compton && exit
 compton -cCGf -D 3 -b
 #chromium &
 nitrogen --restore &
-#krunner &
 xfce4-power-manager &
 ~/.xmonad/dzen-auto.sh &
 ~/.xmonad/lightsOn.sh 120 &
@@ -17,4 +16,5 @@ xscreensaver -no-splash &
 #xautolock -locker "slock" -time 5 &
 setxkbmap us,ru 'grp:caps_toggle'
 ~/Downloads/Telegram/Telegram &
+lxpolkit &
 setxkbmap -layout us,ru -variant -option grp:caps_toggle

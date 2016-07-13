@@ -23,6 +23,7 @@ let g:ycm_show_diagnostics_ui = 0
 Bundle "gmarik/vundle"
 let g:ya_vim#use_plugin#nerdtree="yes"
 let g:ya_vim#use_plugin#fswitch="yes"
+Bundle "tpope/vim-fugitive"
 Bundle "scrooloose/syntastic"
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"

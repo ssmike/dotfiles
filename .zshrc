@@ -417,5 +417,8 @@ alias gdb="ya tool gdb"
 alias ymake="ya make -j4"
 alias ag="ya tool ag"
 alias valgrind="ya tool valgrind"
+alias json='python -m json.tool'
+
+
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
