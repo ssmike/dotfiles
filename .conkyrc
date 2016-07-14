@@ -25,6 +25,6 @@ echo -n " WIFI: ^fg(\#A09BA1)${wireless_essid wlan0}^fg(\#FFFFFF)"
 echo -n "(^fg(\#A09BA1)${execi 1 ~/.wifi-quality}^fg(\#FFFFFF))"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " DSpeed: ^fg(\#A09BA1)${downspeedf wlan0}KB^fg(\#FFFFFF)"
-echo -n "                        >"
+#echo -n "                        >"
 
 echo 

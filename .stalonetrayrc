@@ -1,5 +1,5 @@
 grow_gravity NE
-window_strut bottom 
+window_strut bottom
 background "#000000"
 kludges fix_window_pos,use_icons_hints,force_icons_size
 icon_size 19
