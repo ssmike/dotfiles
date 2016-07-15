@@ -26,6 +26,7 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Mosaic
+import XMonad.Actions.CycleWS
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
@@ -139,7 +140,9 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm             , xK_Left), moveTo Prev (WSIs notSP))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     --send window to etc
-    ,((modm .|. shiftMask, xK_a), windows $ W.shift "9:etc")
+    , ((modm .|. shiftMask, xK_a), windows $ W.shift "9:etc")
+    , ((modm .|. shiftMask, xK_j), swapPrevScreen)
+    , ((modm .|. shiftMask, xK_k), swapNextScreen)
     ]
     ++
     --
@@ -158,10 +161,11 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-  ++
-  [((m .|. modm, k), windows $ f i)
-   | (i, k) <- zip (XMonad.workspaces conf) [xK_1 ..]
-  , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, controlMask)]]
+    ++
+
+    [((m .|. modm, k), windows $ f i)
+     | (i, k) <- zip (XMonad.workspaces conf) [xK_1 ..]
+    , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, controlMask)]]
 
 notSP = (return $ ("NSP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
