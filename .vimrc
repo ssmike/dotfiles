@@ -292,3 +292,6 @@ nmap ( :bp<CR>
 nmap t :TagbarToggle<CR>
 
 let g:ycm_python_binary_path='python'
+
+"ya vim doesn't see my x session
+imap <c-v> <c-r>=system('xsel -b')<cr>
