@@ -365,7 +365,8 @@ add-zsh-hook precmd notify-command-complete
 #alias -s avi=vlc --fbdev=/dev/fb0
 alias -s jar=java -jar
 alias -s fb2=fbless
-alias -s cpp=vim
+alias -s cpp="ya vim"
+alias -s h="ya vim"
 alias -s pdf=okular
 alias -s djvu=okular
 alias -s hs=runhaskell

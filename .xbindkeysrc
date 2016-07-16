@@ -11,7 +11,7 @@
     control + alt + m
 "amixer -q sset Master toggle"
     XF86AudioMute
-"scrot -e 'mv $f ~/Pictures/screenshots/'"
+"gnome-screenshot"
     Print
 
 "amixer -q sset Master toggle"

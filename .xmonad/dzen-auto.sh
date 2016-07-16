@@ -8,7 +8,8 @@ function take {
     done
 }
 
-pgrep conky && exit
+killall conky
+killall stalonetray
 #mkfifo ~/.info
 #take ~/.info | dzen2 -y 1000 -dock & # -y 2000
 conky -c ~/.conkyrc | /bin/sh | dzen2 -geometry +0-0 -dock -e "onstart=lower" -ta l -xs 2 & 
