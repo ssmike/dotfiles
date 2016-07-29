@@ -1,12 +1,7 @@
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" vim -c ":BundleInstall" 
+" vim -c ":BundleInstall"
 
 set guiheadroom=0
-
-"for project configuration"
-if filereadable(".vim.local")
-    so .vim.local
-endif
 
 set nocompatible
 filetype off
@@ -21,22 +16,18 @@ filetype plugin indent on
 let g:ycm_show_diagnostics_ui = 0
 
 Bundle "gmarik/vundle"
-let g:ya_vim#use_plugin#nerdtree="yes"
-let g:ya_vim#use_plugin#fswitch="yes"
 Bundle "tpope/vim-fugitive"
 Bundle "scrooloose/syntastic"
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
-let g:ya_vim#use_plugin#indentLine = "yes"
-let g:ya_vim#use_plugin#ctrlp = "yes"
-let g:ya_vim#use_plugin#startify = "yes"
-let g:ya_vim#use_plugin#vcscommand = "yes"
-let g:ya_vim#use_plugin#tagbar = "yes"
-let g:ya_vim#use_plugin#nerdcommenter = "yes"
-let g:ya_vim#use_plugin#vcscommand = "yes"
-let g:ya_vim#use_plugin#spacehi = "yes"
+Bundle "mhinz/vim-startify"
+Bundle "ctrlp.vim"
+Bundle "bling/vim-airline"
+Bundle "Yggdroot/indentLine"
+Bundle "easymotion/vim-easymotion"
+Bundle "jpalardy/spacehi.vim"
+Bundle "scrooloose/nerdtree"
 
-let g:ya_vim#use_plugin#easymotion = "yes"
 
 "Bundle sirver/ultisnips"
 "Bundle honza/vim-snippets"
@@ -98,7 +89,6 @@ nmap  GVgg
 syn on
 "set mapleader = ",""
 
-let g:ya_vim#use_plugin#airline = "yes"
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
@@ -135,6 +125,8 @@ omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 set nohlsearch
+
+set autochdir
 
 " tool menu
 set guioptions-=T
@@ -295,3 +287,19 @@ let g:ycm_python_binary_path='python'
 
 "ya vim doesn't see my x session
 imap <c-v> <c-r>=system('xsel -b')<cr>
+
+
+function Extcommand(...)
+    normal i<c-r>=system(\'a:000\')<cr>
+endfunction
+
+let parent=1
+let local_vimrc = ".vim.local"
+while parent <= 40
+    if filewritable(local_vimrc)
+        exe ":so " . local_vimrc
+    endif
+    let local_vimrc = "../". local_vimrc
+    let parent = parent+1
+endwhile
+unlet parent local_vimrc

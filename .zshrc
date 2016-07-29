@@ -2,9 +2,13 @@ source /etc/profile
 source ~/.profile
 #chromium-browseeexport WINEARCH=win32
 
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 export GOOGLE=8.8.8.8
-export BROWSER=firefox
+export BROWSER=yandex-browser
+
+export A=~/arc/
+export ext=$A/library/http/fetch/exthttpcodes.h
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -222,7 +226,6 @@ name() {
     command mv $1 $name
 }
 alias composite="compton -cCGf"
-alias yandex="cadaver https://webdav.yandex.ru"
 
 edit-cmd() {
     ffile="/tmp/.zsh-temp$RANDOM"
@@ -365,8 +368,8 @@ add-zsh-hook precmd notify-command-complete
 #alias -s avi=vlc --fbdev=/dev/fb0
 alias -s jar=java -jar
 alias -s fb2=fbless
-alias -s cpp="ya vim"
-alias -s h="ya vim"
+alias -s cpp="vim"
+alias -s h="vim"
 alias -s pdf=okular
 alias -s djvu=okular
 alias -s hs=runhaskell
@@ -405,6 +408,14 @@ function docker-clean() {
   docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
 }
 
+function vim() {
+    if svn info ${@[-1]} >/dev/null 2>&1; then 
+        ya vim $@
+    else
+        /usr/bin/vim $@
+    fi
+}
+
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
@@ -413,13 +424,17 @@ alias akos-proxy="ssh -D 5222 akos -N"
 alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
-alias vim="ya vim"
+alias yvim="ya vim"
 alias gdb="ya tool gdb"
 alias ymake="ya make -j4"
 alias ag="ya tool ag"
 alias valgrind="ya tool valgrind"
 alias json='python -m json.tool'
 
-
-
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
+
+PATH="/home/ssmike/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/ssmike/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/ssmike/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/ssmike/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/ssmike/perl5"; export PERL_MM_OPT;
