@@ -68,6 +68,7 @@ set number
 
 filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
+autocmd! BufRead,BufNewFile *.go 	set filetype=go
 
 " < ./inp<CR>
 "vim-conque"
