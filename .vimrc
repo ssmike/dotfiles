@@ -17,7 +17,6 @@ let g:ycm_show_diagnostics_ui = 0
 
 Bundle "gmarik/vundle"
 Bundle "tpope/vim-fugitive"
-Bundle "scrooloose/syntastic"
 Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
 Bundle "mhinz/vim-startify"
@@ -27,6 +26,8 @@ Bundle "Yggdroot/indentLine"
 Bundle "easymotion/vim-easymotion"
 Bundle "jpalardy/spacehi.vim"
 Bundle "scrooloose/nerdtree"
+
+let g:fugitive_git_executable = 'LANG=en git'
 
 
 "Bundle sirver/ultisnips"
@@ -64,7 +65,9 @@ nmap s :w<CR>
 set autoindent
 imap {<CR>  {<CR>}<LEFT><CR><UP><TAB>
 imap {<SPACE>   {}<LEFT>
+
 set number
+set relativenumber
 
 filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
@@ -74,14 +77,12 @@ autocmd! BufRead,BufNewFile *.go 	set filetype=go
 "vim-conque"
 
 set wildmode=list:longest,full
-nmap e :Explore<CR>
-nmap ct :vertical split<CR>
-nmap vt :split<CR>
 set splitright
 set splitbelow
-nmap < :vertical resize -6<CR>
-nmap > :vertical resize +6<CR>
+"nmap < :vertical resize -6<CR>
+"nmap > :vertical resize +6<CR>
 nmap <F5> :TagbarToggle<CR>
+nmap <F2> :NERDTreeToggle<CR>
 nmap  GVgg
 
 " for pwd following
@@ -101,21 +102,21 @@ else
 endif
 
 
-map <Leader> <Plug>(easymotion-prefix)
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map <L<TAB>ader> <Plug>(easymotion-prefix)
+" <L<TAB>ader>f{char} to move to {char}
+map  <TAB>f <Plug>(easymotion-bd-f)
+nmap <TAB>f <Plug>(easymotion-overwin-f)
 
-" s{char}{char} to move to {char}{char}
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" s{char}{char} to mov<TAB> to {char}{char}
+nmap <TAB>s <Plug>(easymotion-overwin-f2)
 
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <TAB>l <Plug>(easymotion-bd-jk)
+nmap <TAB>l <Plug>(easymotion-overwin-line)
 
 " Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+map  <TAB>w <Plug>(easymotion-bd-w)
+nmap <TAB>w <Plug>(easymotion-overwin-w)
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
@@ -139,7 +140,7 @@ set guioptions-=e
 set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
 
-nmap S :SyntasticToggleMode<CR>
+nmap `S :SyntasticToggleMode<CR>
 
 imap <c-f> <c-x><c-f>
 
@@ -162,8 +163,6 @@ nmap <C-t> :GhcModType<CR>
 imap <C-t> <C-O>:GhcModType<CR>
 " TODO: vmap keybinding
 nmap <C-F9> :GhcModCheck<CR>
-nmap <C-u> :GhcModInfoPreview<CR>
-imap <C-u> <C-O>:GhcModInfoPreview<CR>
 
 autocmd BufRead *.gradle setlocal ft=groovy
 autocmd BufRead *.hamlet setlocal ft=hamlet
@@ -183,8 +182,8 @@ if !exists("g:syntastic_c_compiler_options")
 endif
 
 "x11 clipboard"
-vmap . "+
-nmap . "+
+"vmap . "+
+"nmap . "+
 
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
@@ -208,8 +207,8 @@ command! -nargs=1 Include call Includefunction('<args>')
 set tags=./tags;/
 
 imap jj <ESC>
-map J gt
-map K gT
+"map J gt
+"map K gT
 set timeoutlen=300
 set mouse=a
 
@@ -220,6 +219,14 @@ set imsearch=0
 map <c-a> 
 map! <c-a> 
 nmap <c-a> GVgg
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 
@@ -259,7 +266,7 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 nmap <c-c> :YcmCompleter GoToDeclaration<CR>
-nmap <c-d> :YcmCompleter GoToDefinition<CR>
+nmap <c-x> :YcmCompleter GoToDefinition<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 
@@ -277,12 +284,6 @@ highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#00
 au FileType mail let b:delimitMate_autoclose = 0
 
 "match ErrorMsg '\%>80v.\+'
-nmap ] :cn<CR>
-nmap [ :cp<CR>
-nmap ) :bn<CR>
-nmap ( :bp<CR>
-
-nmap t :TagbarToggle<CR>
 
 let g:ycm_python_binary_path='python'
 
