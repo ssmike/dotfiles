@@ -16,7 +16,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES=(
         'alias'           'fg=green'
         'builtin'         'fg=cyan'
-        'function'        'fg=cyan'
+        'function'        'fg=green'
         'command'         'fg=255,bold'
         'precommand'      'fg=magenta, underline'
         'hashed-commands' 'fg=cyan'
@@ -416,6 +416,8 @@ function vim() {
     fi
 }
 
+
+alias yvim="ya vim"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
@@ -429,7 +431,9 @@ alias gdb="ya tool gdb"
 alias ymake="ya make -j4"
 alias ag="ya tool ag"
 alias valgrind="ya tool valgrind"
-alias json='python -m json.tool'
+alias json="python -m json.tool"
+alias st="svn status -q ~/arc/"
+alias -g ynews="~/arc/yweb/news"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 
