@@ -1,7 +1,7 @@
 "xbacklight -inc 15"
-    XF86MonBrightnessUp
+    control + shift + p
 "xbacklight -dec 15"
-    XF86MonBrightnessDown
+    control + shift + o
 
 "amixer -q sset Master 10%+"
     XF86AudioRaiseVolume
@@ -20,3 +20,6 @@
     alt + k
 "amixer -q sset Speaker mute"
     alt + m
+
+"~/monitor.sh"
+    control + alt + shift + m
