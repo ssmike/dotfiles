@@ -1,4 +1,5 @@
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" nmap 
 " vim -c ":BundleInstall"
 
 set guiheadroom=0
@@ -39,7 +40,7 @@ let g:fugitive_git_executable = 'LANG=en git'
 "let g:UltiSnipsExpandTrigger=<c-w>"
 
 let g:ctrlp_map='<c-f>'
-nmap <c-x> :CtrlPBuffer<CR>
+nmap X :CtrlPBuffer<CR>
 nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
 
@@ -54,7 +55,6 @@ set expandtab
 "set formatoptions+=w
 "set tw=80
 nnoremap Q gqip
-
 autocmd FileType make setlocal noexpandtab
 
 set autoread
@@ -206,7 +206,6 @@ command! -nargs=1 Include call Includefunction('<args>')
 
 set tags=./tags;/
 
-imap jj <ESC>
 "map J gt
 "map K gT
 set timeoutlen=300
@@ -220,10 +219,19 @@ map <c-a> 
 map! <c-a> 
 nmap <c-a> GVgg
 
+"true vimer
+imap jj <ESC>
+imap ii <ESC>
+imap iw <ESC>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+"inoremap <Left> <NOP>
+inoremap <Right> <NOP>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
@@ -266,7 +274,7 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 nmap <c-c> :YcmCompleter GoToDeclaration<CR>
-nmap <c-x> :YcmCompleter GoToDefinition<CR>
+nmap <c-j> :YcmCompleter GoToDefinition<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 
