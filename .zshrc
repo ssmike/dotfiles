@@ -16,7 +16,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES=(
         'alias'           'fg=green'
         'builtin'         'fg=cyan'
-        'function'        'fg=green'
+        'function'        'fg=red'
         'command'         'fg=255,bold'
         'precommand'      'fg=magenta, underline'
         'hashed-commands' 'fg=cyan'
@@ -44,7 +44,6 @@ READNULLCMD=less
 NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
 NOTIFY_COMMAND_TIMEOUT=30
 export _JAVA_AWT_WM_NONREPARENTING=1
-
 
 #CLAWS='claws-mail --status | sed -e "s/^[0-9]*\ \([0-9]*\).*/\1/g" | sed -e "s/^$/0/g"'
 #[ ! "$UID" = "0" ] && [ $(bash -c $CLAWS) != 0 ] && echo "===========You have unread mail===========";
@@ -118,13 +117,14 @@ get_visible_length() {
 }
 
 pre-prompt() {
+  local PREPROMPT="%F{yellow}%m%f%F{blue}/%f"
   local PWD_STYLE="%B%F{blue}%2~%b%f"
   [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
   ZSH_CVS=`cvs_prompt`
   if [ ! -z "$ZSH_CVS" ]; then
     ZSH_CVS="$ZSH_CVS : "
   fi
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$ZSH_CVS$PWD_STYLE%B%F{green})%b"
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
   fi 
@@ -140,15 +140,25 @@ pre-prompt() {
   if [ $RIGHTWIDTH -lt 1 ]; then
     PWD_STYLE="%B%F{blue}%1~%b%f"
     [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%1~%b%f"
-    LEFT="%F{black}%B.%b%f%B%F{green}(%b$PWD_STYLE%B%F{green})%b"
+    LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$PWD_STYLE%B%F{green})%b"
     LEFT="$LEFT%F{black}%B"
     LEFT_P="$(print -P "$LEFT")"
     LEFTWIDTH=`get_visible_length "$LEFT_P"`
     RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH+$RIGHT_DELTA))
   fi
-  print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
-  PROMPT='%F{black}%B\`--%f%F{white}>%b%f '
-  RPROMPT="%F{grey}%B(%*)%b%f"
+  LEFT_P="$(print -P "$LEFT")"
+  RIGHT_P="$(print -P "$RIGHT")"
+  LEFTWIDTH=`get_visible_length "$LEFT_P"`
+  RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
+  RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+  if [ $RIGHTWIDTH -lt 1 ]; then
+    PROMPT=""
+    PROMPT='%F{black}%B-%f%F{white}>%b%f '
+  else
+    print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
+    PROMPT='%F{black}%B\`--%f%F{white}>%b%f '
+    RPROMPT="%F{grey}%B(%*)%b%f"
+  fi
 }
 
 
@@ -406,6 +416,38 @@ function debug-flags; {
 
 function docker-clean() {
   docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
+}
+
+function rollout() {
+    scp -r ~/.zsh ~/.zshrc ~/.vim ~/.vimrc $1:~
+    [ "$2" = "y" ] && ssh $1 bash -c "echo exec zsh >> ~/.bashrc"
+}
+
+function refresh() {
+    git merge master
+}
+
+function up() {
+    local $branch=`git rev-parse --abbrev-ref HEAD`
+    git stash
+    git checkout master
+    svn up $1
+    git commit -a -m "svn up $1 to `svn info $1 | grep Revision | cut -d' ' -f2`"
+    git checkout $branch
+    git stash apply
+    git merge master
+}
+
+function add() {
+    local $branch=`git rev-parse --abbrev-ref HEAD`
+    git stash
+    git checkout master
+    svn add $1>/dev/null
+    git add $1
+    git commit -m "file $1 added"
+    git checkout $branch
+    git stash apply
+    git merge master
 }
 
 function vim() {

@@ -40,6 +40,8 @@ let g:fugitive_git_executable = 'LANG=en git'
 "let g:UltiSnipsExpandTrigger=<c-w>"
 
 let g:ctrlp_map='<c-f>'
+nmap do :diffget<CR>
+nmap dp :diffput<CR>
 nmap X :CtrlPBuffer<CR>
 nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
@@ -82,7 +84,7 @@ set splitbelow
 "nmap < :vertical resize -6<CR>
 "nmap > :vertical resize +6<CR>
 nmap <F5> :TagbarToggle<CR>
-nmap <F2> :NERDTreeToggle<CR>
+nmap <F2> :NERDTree<CR>
 nmap  GVgg
 
 " for pwd following
@@ -140,7 +142,7 @@ set guioptions-=e
 set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
 
-nmap `S :SyntasticToggleMode<CR>
+nmap S :SyntasticToggleMode<CR>
 
 imap <c-f> <c-x><c-f>
 
@@ -206,8 +208,6 @@ command! -nargs=1 Include call Includefunction('<args>')
 
 set tags=./tags;/
 
-"map J gt
-"map K gT
 set timeoutlen=300
 set mouse=a
 
@@ -222,8 +222,9 @@ nmap <c-a> GVgg
 "true vimer
 imap jj <ESC>
 imap ii <ESC>
-imap iw <ESC>
-inoremap <Up> <NOP>
+imap iw <c-w>
+nmap Q <c-w>
+"inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 "inoremap <Left> <NOP>
 inoremap <Right> <NOP>
@@ -293,6 +294,8 @@ au FileType mail let b:delimitMate_autoclose = 0
 
 "match ErrorMsg '\%>80v.\+'
 
+nmap ]] :cn<CR>
+nmap [[ :cp<CR>
 let g:ycm_python_binary_path='python'
 
 "ya vim doesn't see my x session
