@@ -1,6 +1,0 @@
-[scrobbler]
-login = 
-streams = true
-password = 
-hostname = post.audioscrobbler.com
-
