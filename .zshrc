@@ -431,8 +431,8 @@ function up() {
     local $branch=`git rev-parse --abbrev-ref HEAD`
     git stash
     git checkout master
-    svn up $1
-    git commit -a -m "svn up $1 to `svn info $1 | grep Revision | cut -d' ' -f2`"
+    svn up $@
+    git commit -a -m "svn up $@ to `svn info ${@[-1]} | grep Revision | cut -d' ' -f2`"
     git checkout $branch
     git stash apply
     git merge master
@@ -442,9 +442,9 @@ function add() {
     local $branch=`git rev-parse --abbrev-ref HEAD`
     git stash
     git checkout master
-    svn add $1>/dev/null
-    git add $1
-    git commit -m "file $1 added"
+    svn add $@>/dev/null
+    git add $@
+    git commit -m "file(s) $@ added"
     git checkout $branch
     git stash apply
     git merge master
