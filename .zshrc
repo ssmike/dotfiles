@@ -376,6 +376,7 @@ add-zsh-hook precmd notify-command-complete
 
 # -[ alias ]-
 #alias -s avi=vlc --fbdev=/dev/fb0
+alias -s proto="vim"
 alias -s jar=java -jar
 alias -s fb2=fbless
 alias -s cpp="vim"
@@ -428,25 +429,25 @@ function refresh() {
 }
 
 function up() {
-    local $branch=`git rev-parse --abbrev-ref HEAD`
+    local branch=`git rev-parse --abbrev-ref HEAD`
     git stash
     git checkout master
     svn up $@
-    git commit -a -m "svn up $@ to `svn info ${@[-1]} | grep Revision | cut -d' ' -f2`"
+    echo svn up $@ to `svn info ${@[-1]} | grep Revision | cut -d' ' -f2` | git commit -a -F -
     git checkout $branch
-    git stash apply
+    git stash apply -q
     git merge master
 }
 
 function add() {
-    local $branch=`git rev-parse --abbrev-ref HEAD`
+    local branch=`git rev-parse --abbrev-ref HEAD`
     git stash
     git checkout master
     svn add $@>/dev/null
     git add $@
-    git commit -m "file(s) $@ added"
+    echo 'file(s)' $@ added | git commit -F -
     git checkout $branch
-    git stash apply
+    git stash apply -q
     git merge master
 }
 
