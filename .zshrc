@@ -1,14 +1,5 @@
 source /etc/profile
 source ~/.profile
-#chromium-browseeexport WINEARCH=win32
-
-source virtualenvwrapper.sh
-
-export GOOGLE=8.8.8.8
-export BROWSER=yandex-browser
-
-export A=~/arc/
-export ext=$A/library/http/fetch/exthttpcodes.h
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -26,27 +17,9 @@ ZSH_HIGHLIGHT_STYLES=(
 
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 READNULLCMD=less
-
-# insert-square-brackets() {
-#  LBUFFER="${LBUFFER}["
-#  RBUFFER="]${RBUFFER}"
-#}
-#zle -N insert-square-brackets
-#bindkey "[" insert-square-brackets
-#
-#insert-brackets() {
-#  LBUFFER="${LBUFFER}("
-#  RBUFFER=")${RBUFFER}"
-#}
-#zle -N insert-brackets
-#bindkey "(" insert-brackets
-
 NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
 NOTIFY_COMMAND_TIMEOUT=30
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-#CLAWS='claws-mail --status | sed -e "s/^[0-9]*\ \([0-9]*\).*/\1/g" | sed -e "s/^$/0/g"'
-#[ ! "$UID" = "0" ] && [ $(bash -c $CLAWS) != 0 ] && echo "===========You have unread mail===========";
 
 if [[ $TERM == linux ]]; then
     setfont cyr-sun16
@@ -75,7 +48,6 @@ bindkey "[2~" quote-line
 bindkey "^R" history-incremental-search-backward
 bindkey "^[[1;3D" backward-delete-word
 bindkey "^[[1;3C" delete-word
-
 
 setopt prompt_subst
 autoload -U promptinit
@@ -204,14 +176,6 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-#source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
-
-# Enable autosuggestions automatically.
-#zle-line-init() {
-#    zle autosuggest-start
-#}
-#zle -N zle-line-init
-
 zstyle ':completion:*:processes' menu yes select
 zstyle ':completion:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -xuf'
@@ -248,39 +212,8 @@ edit-cmd() {
 bindkey -s "" edit-cmd
 
 mkd() { mkdir $1; cd $1 }
-battcheck() {
-  (acpi -b | python -c "if int(input().split()[3].split('%')[0]) < 20: exit(1)");
-}
-
-makeproject() {
-    if [ "$#" -ne 2 ]; then
-        echo "Wrong usage"
-        return 1
-    fi
-    mkdir $2
-    cd $2
-    cp ~/templates/$1/* . -r
-    make edit
-}
-
-alias mkproject="makeproject c++ "
-alias mkjproject="makeproject java "
-alias mkpproject="makeproject python "
-
 alias rmrf="rm -rf $1"
 
-log() {
-    killall conky -SIGSTOP
-    (bash -c $1) > ~/.info
-    sleep 2s
-    killall conky -SIGCONT
-}
-rep() {
-  while true; do
-    zsh -c $1;
-    sleep 4;
-  done;
-}
 pk () {
  if [ $1 ] ; then
  case $1 in
@@ -369,14 +302,11 @@ function notify-command-complete() {
   unset last_command start_time last_status
 }
 
-alias op="vblank_mode=0 primusrun "
-
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
 
 # -[ alias ]-
 #alias -s avi=vlc --fbdev=/dev/fb0
-alias -s proto="vim"
 alias -s jar=java -jar
 alias -s fb2=fbless
 alias -s cpp="vim"
@@ -400,88 +330,15 @@ insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^Z" insert-sudo
 
-# URL encode something and print it.
-function url-encode; {
-        setopt extendedglob
-        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
-}
-
-# Search google for the given keywords.
-function google; {
-        $BROWSER "http://www.google.com/search?q=`url-encode "${(j: :)@}"`"
-}
-
-function debug-flags; {
-    echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
-}
-
-function docker-clean() {
-  docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
-}
-
-function rollout() {
-    scp -r ~/.zsh ~/.zshrc ~/.vim ~/.vimrc $1:~
-    [ "$2" = "y" ] && ssh $1 bash -c "echo exec zsh >> ~/.bashrc"
-}
-
-function refresh() {
-    git merge master
-}
-
-function up() {
-    local branch=`git rev-parse --abbrev-ref HEAD`
-    git stash
-    git checkout master
-    svn up $@
-    echo svn up $@ to `svn info ${@[-1]} | grep Revision | cut -d' ' -f2` | git commit -a -F -
-    git checkout $branch
-    git stash apply -q
-    git merge master
-}
-
-function add() {
-    local branch=`git rev-parse --abbrev-ref HEAD`
-    git stash
-    git checkout master
-    svn add $@>/dev/null
-    git add $@
-    echo 'file(s)' $@ added | git commit -F -
-    git checkout $branch
-    git stash apply -q
-    git merge master
-}
-
-function vim() {
-    if svn info ${@[-1]} >/dev/null 2>&1; then 
-        ya vim $@
-    else
-        /usr/bin/vim $@
-    fi
-}
-
-
 alias yvim="ya vim"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
-alias printFile="gtklp"
-alias akos-proxy="ssh -D 5222 akos -N"
-alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
 alias yvim="ya vim"
-alias gdb="ya tool gdb"
+alias ygdb="ya tool gdb"
 alias ymake="ya make -j4"
-alias ag="ya tool ag"
-alias valgrind="ya tool valgrind"
+alias yag="ya tool ag"
+alias yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
-alias st="svn status -q ~/arc/"
-alias -g ynews="~/arc/yweb/news"
-
-source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
-PATH="/home/ssmike/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/ssmike/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/ssmike/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/ssmike/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/ssmike/perl5"; export PERL_MM_OPT;

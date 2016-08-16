@@ -1,53 +1,14 @@
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" nmap 
-" vim -c ":BundleInstall"
-
 set guiheadroom=0
 
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-
-call vundle#rc()
-
 filetype plugin indent on
 
-
-let g:ycm_show_diagnostics_ui = 0
-
-Bundle "gmarik/vundle"
-Bundle "tpope/vim-fugitive"
-Bundle "dirkwallenstein/vim-localcomplete"
-Bundle "chriskempson/vim-tomorrow-theme"
-Bundle "mhinz/vim-startify"
-Bundle "ctrlp.vim"
-Bundle "bling/vim-airline"
-Bundle "Yggdroot/indentLine"
-Bundle "easymotion/vim-easymotion"
-Bundle "jpalardy/spacehi.vim"
-Bundle "scrooloose/nerdtree"
-
-let g:fugitive_git_executable = 'LANG=en git'
-
-
-"Bundle sirver/ultisnips"
-"Bundle honza/vim-snippets"
-
-"Bundle tpope/vim-unimpaired"
-"Bundle raimondi/delimitmate"
-
-"let g:UltiSnipsExpandTrigger=<c-w>"
-
-let g:ctrlp_map='<c-f>'
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
-nmap X :CtrlPBuffer<CR>
 nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
-nmap <F3> :qa<CR>
-
-Bundle "craigemery/vim-autotag"
 
 set tabstop=4
 set shiftwidth=4
@@ -64,7 +25,7 @@ nmap <BACKSPACE> :tabp<CR>
 nmap s :w<CR>
 
 set autoindent
-imap {<CR>  {<CR>}iiO<TAB>
+imap {<CR>  {<CR>}<LEFT><CR><UP><TAB>
 imap {<SPACE>   {}<LEFT>
 
 set number
@@ -91,8 +52,6 @@ nmap  GVgg
 
 syn on
 "set mapleader = ",""
-
-let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
 if has('gui_running')
@@ -101,35 +60,6 @@ if has('gui_running')
 else
     colorscheme pablo
 endif
-
-
-map <TAB>p <Plug>(easymotion-prefix)
-" <L<TAB>ader>f{char} to move to {char}
-map  <TAB>f <Plug>(easymotion-bd-f)
-nmap <TAB>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to mov<TAB> to {char}{char}
-nmap <TAB>s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <TAB>l <Plug>(easymotion-bd-jk)
-nmap <TAB>l <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <TAB>w <Plug>(easymotion-bd-w)
-nmap <TAB>w <Plug>(easymotion-overwin-w)
-
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-"map ? <Plug>(easymotion-sp)
-"omap ? <Plug>(easymotion-tp)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-set nohlsearch
 
 set autochdir
 
@@ -141,9 +71,6 @@ set guioptions-=m
 set guioptions-=e
 
 set completeopt=menu,menuone
-let g:syntastic_enable_signs=1
-
-nmap S :SyntasticToggleMode<CR>
 
 imap <c-f> <c-x><c-f>
 
@@ -156,37 +83,12 @@ nmap `m :set fdm=manual<CR>
 set completeopt-=preview
 set splitbelow
 
-autocmd Filetype java setlocal completefunc=javacomplete#Complete
-""autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
-
-nmap <C-t> :GhcModType<CR>
-imap <C-t> <C-O>:GhcModType<CR>
-" TODO: vmap keybinding
-nmap <C-F9> :GhcModCheck<CR>
-
 autocmd BufRead *.gradle setlocal ft=groovy
 autocmd BufRead *.hamlet setlocal ft=hamlet
 autocmd BufRead *.julius setlocal ft=julius
 autocmd BufRead *.cassius setlocal ft=cassius
 autocmd BufRead *.lucius setlocal ft=lucius
 autocmd BufRead *.dhtml setlocal ft=django
-
-let g:ycm_confirm_extra_conf = 0
-let g:syntastic_cpp_compiler='clang++'
-let g:syntastic_cpp_compiler_options=' -std=c++11'
-if !exists("g:syntastic_c_compiler")
-    let g:syntastic_c_compiler="gcc"
-endif
-if !exists("g:syntastic_c_compiler_options")
-    let g:syntastic_c_compiler_options='-ansi -pedantic -Wall'
-endif
-
-"x11 clipboard"
-"vmap . "+
-"nmap . "+
 
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
@@ -210,7 +112,6 @@ command! -nargs=1 Include call Includefunction('<args>')
 set tags=./tags;/
 
 set timeoutlen=300
-set mouse=a
 
 """ for tex
 set keymap=russian-jcukenwin
@@ -226,9 +127,9 @@ imap ii <ESC>
 imap iw <c-w>
 nmap Q <c-w>
 "inoremap <Up> <NOP>
-"inoremap <Down> <NOP>
+inoremap <Down> <NOP>
 "inoremap <Left> <NOP>
-"inoremap <Right> <NOP>
+inoremap <Right> <NOP>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -257,37 +158,14 @@ endfunction
 au BufReadCmd *.class  call s:javap()
 let g:tex_flavor='latex'
 
-"
-" YouCompleteMe options
-"
-
-let g:ycm_register_as_syntastic_checker = 1 "default 1
-let g:Show_diagnostics_ui = 1 "default 1
-
-"will put icons in Vim's gutter on lines that have a diagnostic set.
-"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
-"highlighting
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_always_populate_location_list = 1 "default 0
-let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
-
-let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
-
-nmap <c-c> :YcmCompleter GoToDeclaration<CR>
-nmap <c-j> :YcmCompleter GoToDefinition<CR>
-nmap <c-k> :YcmCompleter GetDoc<CR>
-nmap <c-e> :YcmCompleter GoToInclude<CR>
-
-autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
 autocmd FileType tex set keymap=russian-jcukenwin
+"let g:clang_format#auto_format=1
 
 let NERDTreeIgnore = ['\.pyc$']
 highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#0000ff
+highlight StatusLine ctermfg=white ctermbg=darkgrey
 
 au FileType mail let b:delimitMate_autoclose = 0
 
