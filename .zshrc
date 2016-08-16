@@ -2,7 +2,7 @@ source /etc/profile
 source ~/.profile
 #chromium-browseeexport WINEARCH=win32
 
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source virtualenvwrapper.sh
 
 export GOOGLE=8.8.8.8
 export BROWSER=yandex-browser
