@@ -12,6 +12,7 @@ parcellite &
 xbindkeys &
 ssh-agent &
 xscreensaver -no-splash &
+yandex-disk start &
 #xautolock -locker "slock" -time 5 &
 setxkbmap us,ru 'grp:caps_toggle'
 ~/Downloads/Telegram/Telegram &
