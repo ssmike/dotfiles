@@ -45,10 +45,9 @@ nmap dp :diffput<CR>
 nmap X :CtrlPBuffer<CR>
 nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
+nmap <F3> :qa<CR>
 
 Bundle "craigemery/vim-autotag"
-
-Bundle "rhysd/vim-clang-format"
 
 set tabstop=4
 set shiftwidth=4
@@ -65,7 +64,7 @@ nmap <BACKSPACE> :tabp<CR>
 nmap s :w<CR>
 
 set autoindent
-imap {<CR>  {<CR>}jjO<TAB>
+imap {<CR>  {<CR>}iiO<TAB>
 imap {<SPACE>   {}<LEFT>
 
 set number
@@ -104,7 +103,7 @@ else
 endif
 
 
-map <L<TAB>ader> <Plug>(easymotion-prefix)
+map <TAB>p <Plug>(easymotion-prefix)
 " <L<TAB>ader>f{char} to move to {char}
 map  <TAB>f <Plug>(easymotion-bd-f)
 nmap <TAB>f <Plug>(easymotion-overwin-f)
@@ -122,6 +121,8 @@ nmap <TAB>w <Plug>(easymotion-overwin-w)
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+"map ? <Plug>(easymotion-sp)
+"omap ? <Plug>(easymotion-tp)
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
@@ -279,11 +280,9 @@ nmap <c-j> :YcmCompleter GoToDefinition<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 
-let g:clang_format#code_style='google'
 autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
 autocmd FileType tex set keymap=russian-jcukenwin
-"let g:clang_format#auto_format=1
 
 let NERDTreeIgnore = ['\.pyc$']
 highlight Pmenu ctermbg=darkgray ctermfg=white
