@@ -419,11 +419,6 @@ function docker-clean() {
   docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
 }
 
-function rollout() {
-    scp -r ~/.zsh ~/.zshrc ~/.vim ~/.vimrc $1:~
-    [ "$2" = "y" ] && ssh $1 bash -c "echo exec zsh >> ~/.bashrc"
-}
-
 function refresh() {
     git merge master
 }
