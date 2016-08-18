@@ -479,9 +479,3 @@ alias st="svn status -q ~/arc/"
 alias -g ynews="~/arc/yweb/news"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
-PATH="/home/ssmike/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/ssmike/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/ssmike/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/ssmike/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/ssmike/perl5"; export PERL_MM_OPT;
