@@ -384,6 +384,7 @@ alias -s h="vim"
 alias -s pdf=okular
 alias -s djvu=okular
 alias -s hs=runhaskell
+alias -s txt="vim"
 #alias -s mkv=vlc --fbdev=/dev/fb0
 #alias -s mp4=vlc --fbdev=/dev/fb0
 #alias -s mov=vlc --fbdev=/dev/fb0
@@ -474,3 +475,5 @@ alias st="svn status -q ~/arc/"
 alias -g ynews="~/arc/yweb/news"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
+
+export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
