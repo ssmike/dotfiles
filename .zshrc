@@ -477,3 +477,4 @@ alias -g ynews="~/arc/yweb/news"
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 
 export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
+export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
