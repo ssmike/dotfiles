@@ -427,10 +427,10 @@ function refresh() {
 function up() {
     local branch=`git rev-parse --abbrev-ref HEAD`
     git stash
-    git checkout master
+    git checkout -f master
     svn up $@
     echo svn up $@ to `svn info ${@[-1]} | grep Revision | cut -d' ' -f2` | git commit -a -F -
-    git checkout $branch
+    git checkout -f $branch
     git stash apply -q
     git merge master
 }
@@ -473,8 +473,12 @@ alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc/"
 alias -g ynews="~/arc/yweb/news"
+alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 
 export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
 export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
+
+# Allow SSH tab completion for mosh hostnames
+compdef mosh=ssh
