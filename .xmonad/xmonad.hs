@@ -104,7 +104,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- launch command prompt
     , ((modm, xK_p     ), shellPrompt myXPConfig)
     -- launch screensaver
-    , ((controlMask .|. shiftMask , xK_l), spawn "gnome-screensaver-command -l")
+    , ((controlMask .|. shiftMask , xK_l), spawn "xlock")
     --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
     , ((modm,               xK_space ), sendMessage NextLayout)
