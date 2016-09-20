@@ -18,3 +18,4 @@ setxkbmap us,ru 'grp:caps_toggle'
 ~/Downloads/Telegram/Telegram &
 lxpolkit &
 setxkbmap -layout us,ru -variant -option grp:caps_toggle
+xinput set-prop 15 "Device Enabled" 0
