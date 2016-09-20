@@ -468,12 +468,13 @@ alias grep="grep --color -i -n "
 alias yvim="ya vim"
 alias gdb="ya tool gdb"
 alias ymake="ya make -j4"
-alias ag="ya tool ag"
+alias ag="ya tool ag --color"
 alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc/"
 alias -g ynews="~/arc/yweb/news"
 alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
+alias less="less -r"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 
