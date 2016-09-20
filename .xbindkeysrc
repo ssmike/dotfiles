@@ -1,14 +1,12 @@
 "xbacklight -inc 15"
-    control + shift + p
+    alt + shift + p
 "xbacklight -dec 15"
-    control + shift + o
+    alt + shift + o
 
 "amixer -q sset Master 10%+"
     XF86AudioRaiseVolume
 "amixer -q sset Master 10%-"
     XF86AudioLowerVolume
-"sakura -x lyvi"
-    control + alt + m
 "amixer -q sset Master toggle"
     XF86AudioMute
 "gnome-screenshot"
