@@ -64,7 +64,7 @@ nmap <BACKSPACE> :tabp<CR>
 nmap s :w<CR>
 
 set autoindent
-imap {<CR>  {<CR>}iiO<TAB>
+imap {<CR>  {<CR>}iiO
 imap {<SPACE>   {}<LEFT>
 
 set number
@@ -225,14 +225,6 @@ imap jj <ESC>
 imap ii <ESC>
 imap iw <c-w>
 nmap Q <c-w>
-"inoremap <Up> <NOP>
-"inoremap <Down> <NOP>
-"inoremap <Left> <NOP>
-"inoremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
 
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
