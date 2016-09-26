@@ -456,6 +456,7 @@ function vim() {
 }
 
 
+alias make-patch="svn diff --internal-diff"
 alias yvim="ya vim"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
@@ -473,6 +474,7 @@ alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc/"
 alias -g ynews="~/arc/yweb/news"
+
 alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
 alias less="less -r"
 
