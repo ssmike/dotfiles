@@ -1,0 +1,10 @@
+let g:ya_vim#use_plugin#nerdtree="yes"
+let g:ya_vim#use_plugin#vcscommand = "yes"
+let g:ya_vim#use_plugin#tagbar = "yes"
+let g:ya_vim#use_plugin#vcscommand = "yes"
+let g:ya_vim#use_plugin#ycm = "yes"
+let g:systastic_c_include_dirs=['~/arc']
+let g:systastic_cpp_include_dirs=['~/arc']
+autocmd FileType cpp imap <buffer> {<CR>  {<CR>}iiO
+autocmd FileType cpp nmap <buffer> K :CodeSearchWord<CR>
+"imap {<CR>  {<CR>}iiO<TAB>
