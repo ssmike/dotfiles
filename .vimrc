@@ -27,6 +27,7 @@ Bundle "Yggdroot/indentLine"
 Bundle "easymotion/vim-easymotion"
 Bundle "jpalardy/spacehi.vim"
 Bundle "scrooloose/nerdtree"
+Bundle "gerw/vim-latex-suite"
 
 let g:fugitive_git_executable = 'LANG=en git'
 
@@ -307,3 +308,5 @@ while parent <= 40
     let parent = parent+1
 endwhile
 unlet parent local_vimrc
+
+let g:tex_conceal = ""
