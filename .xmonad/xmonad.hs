@@ -141,8 +141,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     --send window to etc
     , ((modm .|. shiftMask, xK_a), windows $ W.shift "9:etc")
-    , ((modm .|. shiftMask, xK_j), swapPrevScreen)
-    , ((modm .|. shiftMask, xK_k), swapNextScreen)
+    , ((modm .|. shiftMask, xK_h), swapPrevScreen)
+    , ((modm .|. shiftMask, xK_l), swapNextScreen)
     ]
     ++
     --
