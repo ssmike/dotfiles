@@ -5,7 +5,7 @@ source ~/.profile
 source virtualenvwrapper.sh
 
 export GOOGLE=8.8.8.8
-export BROWSER=yandex-browser
+export BROWSER=chromium
 
 export A=~/arc/
 export ext=$A/library/http/fetch/exthttpcodes.h
@@ -458,6 +458,7 @@ function vim() {
 
 alias make-patch="svn diff --internal-diff"
 alias yvim="ya vim"
+alias hg="ya tool hg"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
