@@ -1,2 +1,2 @@
 #!/bin/sh
-/sbin/iwconfig wlan0 | grep "Link Quality" | sed -e "s/  Signal.*$//" | sed -e "s/^.*=//"
+/sbin/iwconfig wlp1s0 | grep "Link Quality" | sed -e "s/  Signal.*$//" | sed -e "s/^.*=//"

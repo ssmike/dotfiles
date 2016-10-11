@@ -1,5 +1,5 @@
 import System.Posix.Env (setEnv)
-import System.Environment
+import qualified System.Environment as E
 import Control.Monad
 import XMonad.Config.Desktop
 import Data.Monoid;

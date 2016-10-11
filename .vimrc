@@ -16,6 +16,7 @@ filetype plugin indent on
 
 let g:ycm_show_diagnostics_ui = 0
 
+Bundle "ludovicchabant/vim-lawrencium"
 Bundle "gmarik/vundle"
 Bundle "tpope/vim-fugitive"
 Bundle "dirkwallenstein/vim-localcomplete"

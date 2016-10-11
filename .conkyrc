@@ -1,10 +1,8 @@
 out_to_console yes
-#gap_y -540
 out_to_x no
 update_interval 2
 total_run_times 0
 use_spacer none
-#99CCFF
 
 TEXT
 echo -n " ^fg(\#A09BA1)^ca(1,xte 'key Caps_Lock')${execi 1 skb -}^ca()^fg(\#FFFFFF)"
