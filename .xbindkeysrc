@@ -1,6 +1,6 @@
-"xbacklight -inc 15"
+"xbacklight -inc 20"
     alt + shift + p
-"xbacklight -dec 15"
+"xbacklight -dec 20"
     alt + shift + o
 
 "amixer -q sset Master 10%+"

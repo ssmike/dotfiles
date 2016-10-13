@@ -70,8 +70,8 @@ myXPConfig = defaultXPConfig {
         bgColor = "#000000"
     ,   fgColor = "#FFFFFF" -- "#5D69B4"
     ,   borderColor = "#3CB424"
-    ,   font = "Ubuntu Mono 12"
-    ,   height = 20
+    --,   font = "Ubuntu Mono 17"
+    ,   height = 30
 }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -95,16 +95,12 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
-    -- go to window prompt
-    , ((modm .|. shiftMask, xK_o     ), windowPromptGoto  myXPConfig)
-    -- bring window prompt
-    , ((modm .|. shiftMask, xK_i     ), windowPromptBring  myXPConfig)
     -- open window selection menu
     , ((modm, xK_o), goToSelected defaultGSConfig)
     -- launch command prompt
-    , ((modm, xK_p     ), shellPrompt myXPConfig)
+    , ((modm, xK_p     ), spawn "dmenu_run")
     -- launch screensaver
-    , ((controlMask .|. shiftMask , xK_l), spawn "xlock")
+    , ((controlMask .|. shiftMask , xK_l), spawn "xscreensaver-command --lock")
     --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -183,6 +179,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
                                        >> windows W.shiftMaster))
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
+
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["3:code", "6:work", "7:math"]
                                 (my_mosaic ||| Full ||| Mirror tiled) $
@@ -237,7 +234,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         im = ["Pidgin", "Corebird", "Slack", "Telegram"]
         --media = ["mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["nuvolaplayer3-deezer", "nuvolaplayer3", "qBittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["nuvolaplayer3-deezer", "nuvolaplayer3", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
 myEventHook e = do
     screenCornerEventHook e
@@ -311,11 +308,12 @@ dzenpp status = defaultPP {
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
               , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable . deleteMinimize
-              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
+              , ppTitle             =   (" " ++) . titleClickable . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
            }
            where
             deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
             layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ "^ca()"
+            titleClickable s = "^ca(1,xdotool key super+shift+c)" ++ s ++ "^ca()"
             workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
 
