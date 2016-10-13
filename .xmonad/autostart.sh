@@ -10,7 +10,6 @@ gnome-keyring-daemon &
 nm-applet &
 parcellite &
 xbindkeys &
-ssh-agent &
 xscreensaver -no-splash &
 yandex-disk start &
 #xautolock -locker "slock" -time 5 &
@@ -18,4 +17,5 @@ setxkbmap us,ru 'grp:caps_toggle'
 ~/Telegram/Telegram &
 lxpolkit &
 setxkbmap -layout us,ru -variant -option grp:caps_toggle
-xinput set-prop 12 "Device Enabled" 0
+xinput set-prop 13 "Device Enabled" 0
+xsetroot -cursor_name left_ptr

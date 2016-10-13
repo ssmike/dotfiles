@@ -2,7 +2,7 @@ grow_gravity NE
 window_strut bottom
 background "#000000"
 kludges fix_window_pos,use_icons_hints,force_icons_size
-icon_size 19
+icon_size 29
 icon_gravity NE
 geometry 7x1-0-0
 no_shrink
