@@ -122,7 +122,7 @@ pre-prompt() {
   local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
-  fi 
+  fi
   # -- color
   LEFT="$LEFT%F{black}%B"
   local RIGHT="."
@@ -442,15 +442,6 @@ function add() {
     git merge master
 }
 
-function vim() {
-    if svn info ${@[-1]} >/dev/null 2>&1; then 
-        ya vim $@
-    else
-        /usr/bin/vim $@
-    fi
-}
-
-
 alias make-patch="svn diff --internal-diff"
 alias yvim="ya vim"
 alias hg="ya tool hg"
@@ -468,8 +459,9 @@ alias ymake="ya make -j4"
 alias ag="ya tool ag --color"
 alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
-alias st="svn status -q ~/arc/"
+alias st="svn status -q ~/arc-svn/"
 alias -g ynews="~/arc/yweb/news"
+alias hg-patch='hg diff -r . -r `hg debugancestor . default`'
 
 alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
 alias less="less -r"
