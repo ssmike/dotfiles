@@ -1,5 +1,5 @@
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" nmap 
+" nmap
 " vim -c ":BundleInstall"
 
 set guiheadroom=0
@@ -16,6 +16,7 @@ filetype plugin indent on
 
 let g:ycm_show_diagnostics_ui = 0
 
+Bundle "Valloric/YouCompleteMe"
 Bundle "ludovicchabant/vim-lawrencium"
 Bundle "gmarik/vundle"
 Bundle "tpope/vim-fugitive"
@@ -29,6 +30,8 @@ Bundle "easymotion/vim-easymotion"
 Bundle "jpalardy/spacehi.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
+Bundle "Tagbar"
+Bundle "vcscommand.vim"
 
 let g:fugitive_git_executable = 'LANG=en git'
 

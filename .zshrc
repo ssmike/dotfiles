@@ -443,7 +443,6 @@ function add() {
 }
 
 alias make-patch="svn diff --internal-diff"
-alias yvim="ya vim"
 alias hg="ya tool hg"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
