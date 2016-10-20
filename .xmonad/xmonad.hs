@@ -252,7 +252,7 @@ myLogHook dzen = do
   --setWMName "LG3D"
 
 main = do
-    dzen <- spawnPipe "/usr/bin/dzen2 -xs 2 -ta l -dock -x 0 -y 0 -e -"
+    dzen <- spawnPipe "/usr/bin/dzen2 -xs 1 -ta l -dock -x 0 -y 0 -e -"
     setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,

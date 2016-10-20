@@ -17,5 +17,5 @@ setxkbmap us,ru 'grp:caps_toggle'
 ~/Telegram/Telegram &
 lxpolkit &
 setxkbmap -layout us,ru -variant -option grp:caps_toggle
-xinput set-prop 13 "Device Enabled" 0
+#xinput set-prop 13 "Device Enabled" 0
 xsetroot -cursor_name left_ptr
