@@ -121,7 +121,7 @@ pre-prompt() {
   fi
   local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
-    LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | cut -d'/' -f5`]%f"
+    LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
   # -- color
   LEFT="$LEFT%F{black}%B"
