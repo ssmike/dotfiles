@@ -29,7 +29,6 @@ imap {<CR>  {<CR>}<LEFT><CR><UP><TAB>
 imap {<SPACE>   {}<LEFT>
 
 set number
-set relativenumber
 
 filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
@@ -67,7 +66,7 @@ set autochdir
 set guioptions-=T
 " main menu
 set guioptions-=m
-" tab appearance
+"a tab appearance
 set guioptions-=e
 
 set completeopt=menu,menuone
@@ -134,9 +133,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
 
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
