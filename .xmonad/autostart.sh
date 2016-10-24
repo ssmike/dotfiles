@@ -14,7 +14,7 @@ xscreensaver -no-splash &
 yandex-disk start &
 #xautolock -locker "slock" -time 5 &
 setxkbmap us,ru 'grp:caps_toggle'
-~/Telegram/Telegram &
+~/.local/share/Telegram/Telegram &
 lxpolkit &
 setxkbmap -layout us,ru -variant -option grp:caps_toggle
 #xinput set-prop 13 "Device Enabled" 0
