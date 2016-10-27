@@ -31,7 +31,7 @@ Bundle "jpalardy/spacehi.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
-Bundle "vcscommand.vim"
+Bundle "juneedahamed/svnj.vim"
 
 let g:fugitive_git_executable = 'LANG=en git'
 
