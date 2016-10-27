@@ -16,4 +16,3 @@ yandex-disk start &
 ~/.local/share/Telegram/Telegram &
 lxpolkit &
 #xinput set-prop 13 "Device Enabled" 0
-xsetroot -cursor_name left_ptr
