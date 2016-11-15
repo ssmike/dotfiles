@@ -84,7 +84,7 @@ diff-cmd = /home/ssmike/diffwrap.sh
 ### passed to the tunnel agent as <user>@<hostname>.)  If the
 ### built-in ssh scheme were not predefined, it could be defined
 ### as:
-ssh = $SVN_SSH ssh -o ControlMaster=no
+ssh = $SVN_SSH ssh -o ControlMaster=no -q
 ### If you wanted to define a new 'rsh' scheme, to be used with
 ### 'svn+rsh:' URLs, you could do so as follows:
 # rsh = rsh
