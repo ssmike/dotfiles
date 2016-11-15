@@ -12,7 +12,8 @@ parcellite &
 xbindkeys &
 xscreensaver -no-splash &
 yandex-disk start &
+pidgin &
+Telegram &
 #xautolock -locker "slock" -time 5 &
-~/.local/share/Telegram/Telegram &
-lxpolkit &
+/usr/libexec/polkit-gnome-authentication-agent-1 &
 #xinput set-prop 13 "Device Enabled" 0
