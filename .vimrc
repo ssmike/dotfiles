@@ -2,6 +2,8 @@
 " nmap
 " vim -c ":BundleInstall"
 
+set viminfo='100,n$HOME/.vim/files/info/viminfo
+
 set guiheadroom=0
 
 set nocompatible
@@ -12,7 +14,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 filetype plugin indent on
-
 
 let g:ycm_show_diagnostics_ui = 0
 
@@ -32,6 +33,7 @@ Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
 Bundle "juneedahamed/svnj.vim"
+Bundle "tpope/vim-fireplace"
 
 let g:fugitive_git_executable = 'LANG=en git'
 
