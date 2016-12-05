@@ -302,6 +302,12 @@ function notify-command-complete() {
   unset last_command start_time last_status
 }
 
+# URL encode something and print it.
+function url-encode; {
+        setopt extendedglob
+        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
+}
+
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
 
