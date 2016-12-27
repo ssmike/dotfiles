@@ -34,6 +34,9 @@ Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
 Bundle "juneedahamed/svnj.vim"
 Bundle "tpope/vim-fireplace"
+Bundle "suan/vim-instant-markdown"
+
+let g:instant_markdown_slow = 1
 
 let g:fugitive_git_executable = 'LANG=en git'
 
