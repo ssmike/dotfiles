@@ -50,7 +50,7 @@ myTerminal      = "gnome-terminal"
 myModMask       = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:main","2:web","3:code","4:im","5:FM", "6:work", "7:math", "8:game", "9:etc"]
+myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:work", "7:math", "8:game", "9:etc"]
 
 
 -- Border colors for unfocused and focused windows, respectively.
@@ -92,7 +92,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- launch file manager
     , ((modm, xK_f), spawn "nautilus")
     -- go to coresponding workspace
-    , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:FM")
+    , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
     -- open window selection menu
@@ -100,7 +100,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- launch command prompt
     , ((modm, xK_p     ), spawn "dmenu_run")
     -- launch screensaver
-    , ((controlMask .|. shiftMask , xK_l), spawn "xscreensaver-command --lock")
+    , ((controlMask .|. shiftMask , xK_l), spawn "slock")
     --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -207,7 +207,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
     , [className =? c --> doFloat | c <- float]
     , [className =? c --> doShift "4:im" | c <- im]
     , [stringProperty "WM_WINDOW_ROLE" =? "Mutt" --> doShift "4:im"]
-    , [className =? c --> doShift "5:FM" | c <- fM]
+    , [className =? c --> doShift "5:fm" | c <- fM]
     , [className =? c --> doShift "9:etc" | c <- etc]
     , [resource  =? "desktop_window" --> doIgnore ]
     , [resource  =? "kdesktop"       --> doIgnore ]

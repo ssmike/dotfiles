@@ -10,10 +10,9 @@ gnome-keyring-daemon &
 nm-applet &
 parcellite &
 xbindkeys &
-xscreensaver -no-splash &
+#xscreensaver -no-splash &
 yandex-disk start &
-pidgin &
 Telegram &
-#xautolock -locker "slock" -time 5 &
+xautolock -locker "slock" -time 10 -detectsleep &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 #xinput set-prop 13 "Device Enabled" 0
