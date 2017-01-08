@@ -302,6 +302,12 @@ function notify-command-complete() {
   unset last_command start_time last_status
 }
 
+# URL encode something and print it.
+function url-encode; {
+        setopt extendedglob
+        echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
+}
+
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
 
@@ -333,13 +339,13 @@ bindkey "^Z" insert-sudo
 alias yvim="ya vim"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
-alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
-alias yvim="ya vim"
-alias ygdb="ya tool gdb"
-alias ymake="ya make -j4"
+alias -g yvim="ya vim"
+alias -g ygdb="ya tool gdb"
+alias ymake="ya make -j20"
 alias yag="ya tool ag"
-alias yvalgrind="ya tool valgrind"
+alias -g yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias svn="ya tool svn"
+alias -g bn="/Berkanavt/news/"
