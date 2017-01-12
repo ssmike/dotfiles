@@ -225,7 +225,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
         game = ["Steam", "dota_linux", "XCOM: Enemy Within"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
-        work = ["Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
+        work = ["Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]
@@ -241,10 +241,11 @@ myEventHook e = do
     docksEventHook e
 
 myStartupHook = do
+    liftIO $ setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
+    liftIO $ setEnv "XDG_CURRENT_DESKTOP" "GNOME" True
     spawn "~/.xmonad/autostart.sh"
     spawn "~/.xmonad/dzen-auto.sh"
     spawn "xsetroot -cursor_name left_ptr"
-    addScreenCorner SCUpperRight (goToSelected defaultGSConfig)
     return ()
 
 myLogHook dzen = do
@@ -253,7 +254,6 @@ myLogHook dzen = do
 
 main = do
     dzen <- spawnPipe "/usr/bin/dzen2 -xs 1 -ta l -dock -x 0 -y 0 -e -"
-    setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
