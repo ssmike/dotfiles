@@ -194,6 +194,33 @@ setopt append_history hist_ignore_all_dups hist_ignore_space autocd extendedglob
 export LS_COLORS='*.py=3'
 
 # -[ functions ]-
+
+swap() {
+    swap-impl() {
+        if [ -z "$1" ]; then
+            echo "wrong usage";
+            exit 1;
+        fi
+        binary_path=$1
+        binary_name=`echo $1 | rev | cut -d'/' -f1 | rev`
+        target=`readlink /Berkanavt/bin/$binary_name`
+        echo -n "cp $binary_path $target.new;"
+        echo -n "mv $target.new $target;"
+        rc_script="/Berkanavt/bin/news/rc/$binary_name"
+        if [ -z "$2" ]; then
+            if ! [ -e "$rc_script" ]; then 
+                rc_script="$rc_script.russian";
+            fi
+        else
+            rc_script="$rc_script.$2";
+        fi
+        echo -n "$rc_script restart"
+    }
+    echo `swap-impl $@`
+    read "ret"
+    sudo -u ynews bash -c "`swap-impl $@`"
+}
+
 name() {
     name=$1
     vared -c -p 'rename to: ' name
