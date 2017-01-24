@@ -1,2 +1,9 @@
 #!/bin/bash
-amixer get Master | awk -F'[]%[]' '/%/ {if ($7 == "off") {print "Mute" } else {print "",$2"%" }}' | head -n1
+volume=`amixer -c 0 get Master | grep Mono: | cut -d " " -f6`
+state=`amixer -c 0 get Master | grep Mono: | cut -d " " -f8`
+if [ $state = "[off]" ]; then
+    echo "[off]";
+else
+    echo $volume;
+fi
+#amixer get Master | awk -F'[]%[]' '/%/ {if ($7 == "off") {print "Mute" } else {print "",$2"%" }}' | head -n1
