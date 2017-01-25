@@ -1,8 +1,27 @@
-set mbox_type=Maildir
-set spoolfile="~/mail"
-set folder="~/mail"
-set record=+
-set header_cache=~/.hcache
+mailboxes =INBOX
+set imap_user = "ssmike"
+source "cat ~/.mutt/pass |"
+set folder=imaps://imap.yandex-team.ru/
+#set smtp_url=smtps://smtp.yandex-team.ru/
+#set sendmail="/usr/bin/msmtp"
+set timeout = 15
+set mail_check = 60
+set beep_new = yes
+set imap_keepalive = 300
+set imap_pipeline_depth=0
+set spoolfile=imaps://imap.yandex-team.ru/
+set record="=Отправленные"
+set postponed="=Черновики"
+set trash="=Удаленные"
+unset imap_passive
+set imap_check_subscribed
+set charset=utf-8
+set folder_format="%2C %t %N %8s %d %f"
+set header_cache="~/.mutt/cache/headers"
+set message_cachedir="~/.mutt/cache/bodies"
+set certificate_file="~/.mutt/certificates"
+
+
 set mime_forward=yes 
 set mime_forward_rest=yes
 macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
@@ -16,9 +35,8 @@ macro index r <search-opposite>
 macro index  <next-unread>
 macro pager  <next-unread>
 mime_lookup application/octet-stream
-set sendmail="/usr/sbin/ssmtp"
-set realname="Mikhail Surin"
-set from="surinmike@gmail.com"
+set realname="Михаил Сурин"
+set from="Михаил Сурин <ssmike@yandex-team.ru>"
 set signature="~/.signature"
 #macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m'
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
@@ -44,13 +62,13 @@ color prompt brightred default
 color message brightred default
 color error brightred default
 color indicator brightblue default 
-color status magenta brightblack
+color status brightblue brightblack
 #color status brightgreen blue
 color tree white default
 color normal white default
 color markers red default
 color search white default
-color tilde brightmagenta default
+color tilde brightblue default
 color index blue default ~F
 color index red default "~N|~O"
 color index green default "~v~(!~N)~(!~F)" # collapsed thread with no New or Flagged
