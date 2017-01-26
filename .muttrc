@@ -7,7 +7,7 @@ set folder=imaps://imap.yandex-team.ru/
 set timeout = 15
 set mail_check = 60
 set beep_new = yes
-set imap_keepalive = 300
+set imap_keepalive = 60
 set imap_pipeline_depth=0
 set spoolfile=imaps://imap.yandex-team.ru/
 set record="=Отправленные"
@@ -22,7 +22,7 @@ set message_cachedir="~/.mutt/cache/bodies"
 set certificate_file="~/.mutt/certificates"
 
 
-set mime_forward=yes 
+set mime_forward=yes
 set mime_forward_rest=yes
 macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
 macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
@@ -61,8 +61,8 @@ color attachment red default
 color prompt brightred default
 color message brightred default
 color error brightred default
-color indicator brightblue default 
-color status brightblue brightblack
+color indicator brightblue default
+color status blue default
 #color status brightgreen blue
 color tree white default
 color normal white default
