@@ -264,12 +264,6 @@ alias mkpproject="makeproject python "
 
 alias rmrf="rm -rf $1"
 
-log() {
-    killall conky -SIGSTOP
-    (bash -c $1) > ~/.info
-    sleep 2s
-    killall conky -SIGCONT
-}
 rep() {
   while true; do
     zsh -c $1;
