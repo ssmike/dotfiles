@@ -3,7 +3,6 @@ import qualified System.Environment as E
 import Control.Monad
 import XMonad.Config.Desktop
 import Data.Monoid;
-import XMonad.Hooks.ScreenCorners
 import XMonad.Config.Kde
 import XMonad.Actions.WindowGo
 import XMonad
@@ -199,7 +198,7 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
     ratio   = 3/4
     delta   = 5/100
 
-myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
+myManageHook =
     (composeAll . concat $
     [
       [className =? c --> doIgnore | c <- ignore]
@@ -226,7 +225,7 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         game = ["Steam", "dota_linux", "XCOM: Enemy Within"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         work = ["Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
-        web = ["yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
+        web = ["orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]
         float = ["Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
@@ -237,7 +236,6 @@ myManageHook = (scratchpadManageHook (W.RationalRect 0 0 1 0.4)) <+>
         etc = ["nuvolaplayer3-deezer", "nuvolaplayer3", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
 myEventHook e = do
-    screenCornerEventHook e
     docksEventHook e
 
 myStartupHook = do
@@ -269,8 +267,7 @@ main = do
             manageHook         = myManageHook,
             handleEventHook    = ewmhDesktopsEventHook <+>
                                  ewmhCopyWindow <+>
-                                 handleEventHook kde4Config <+>
-                                 screenCornerEventHook,
+                                 handleEventHook kde4Config,
             startupHook        = myStartupHook
         }
 
