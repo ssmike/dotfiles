@@ -207,14 +207,18 @@ swap() {
         echo -n "cp $binary_path $target.new;"
         echo -n "mv $target.new $target;"
         rc_script="/Berkanavt/bin/news/rc/$binary_name"
+        rc_log="/Berkanavt/news/logs/$binary_name"
         if [ -z "$2" ]; then
             if ! [ -e "$rc_script" ]; then 
                 rc_script="$rc_script.russian";
+                rc_log="$rc_log.russian";
             fi
         else
             rc_script="$rc_script.$2";
+            rc_log="$rc_log.$2"
         fi
-        echo -n "$rc_script restart"
+        echo -n "$rc_script restart";
+        echo -n "tail -f $rc_log.rc.log";
     }
     echo `swap-impl $@`
     read "ret"
