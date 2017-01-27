@@ -217,8 +217,8 @@ swap() {
             rc_script="$rc_script.$2";
             rc_log="$rc_log.$2"
         fi
-        echo -n "$rc_script restart";
-        echo -n "tail -f $rc_log.rc.log";
+        echo -n "$rc_script restart;";
+        echo -n "tail -f $rc_log.rc.log;";
     }
     echo `swap-impl $@`
     read "ret"
