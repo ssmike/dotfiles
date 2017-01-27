@@ -1,9 +1,17 @@
 #!/bin/bash
-volume=`amixer -c 0 get Master | grep Mono: | cut -d " " -f6`
-state=`amixer -c 0 get Master | grep Mono: | cut -d " " -f8`
-if [ $state = "[off]" ]; then
-    echo "[off]";
+function volume_level() {
+    volume=`amixer -c 0 get Master | grep Mono: | cut -d " " -f6`
+    state=`amixer -c 0 get Master | grep Mono: | cut -d " " -f8`
+    if [ $state = "[off]" ]; then
+        echo -n "[off]";
+    else
+        echo -n $volume;
+    fi
+}
+active_port=`LC_ALL=C pactl list sinks  | grep 'Active Port' | cut -d' ' -f3`
+if [ $active_port = "analog-output-headphones" ]; then
+    echo -n `volume_level`;
 else
-    echo $volume;
+    echo -n `volume_level` | sed -e 's/\[\(.*\)\]/\1/';
 fi
 #amixer get Master | awk -F'[]%[]' '/%/ {if ($7 == "off") {print "Mute" } else {print "",$2"%" }}' | head -n1
