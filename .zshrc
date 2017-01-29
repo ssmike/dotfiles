@@ -41,7 +41,7 @@ READNULLCMD=less
 #zle -N insert-brackets
 #bindkey "(" insert-brackets
 
-NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
+NOTIFY_ICON="terminal"
 NOTIFY_COMMAND_TIMEOUT=30
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -330,7 +330,7 @@ function notify-error {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -i $NOTIFY_ICON "$2 failed";
+    notify-send -u critical -i $NOTIFY_ICON "$2 failed";
   fi
 }
 
@@ -342,7 +342,7 @@ function notify-success() {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -i $NOTIFY_ICON "$2 finished";
+    notify-send -u normal -i $NOTIFY_ICON "$2 finished";
   fi
 }
 
