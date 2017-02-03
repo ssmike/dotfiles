@@ -407,6 +407,7 @@ function debug-flags; {
 
 function docker-clean() {
   docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
+  docker rmi $(docker images -f dangling=true -q)
 }
 
 function refresh() {
