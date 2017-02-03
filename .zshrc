@@ -147,11 +147,11 @@ pre-prompt() {
   RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
-    PROMPT=""
+    RPROMPT=""
     PROMPT='%F{black}%B-%f%F{white}>%b%f '
   else
-    print  $LEFT_P${(l:$RIGHTWIDTH::-:)RIGHT_P}
-    PROMPT='%F{black}%B\`--%f%F{white}>%b%f '
+    PROMPT="$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
+%F{black}%B\`--%f%F{white}>%b%f '
     RPROMPT="%F{grey}%B(%*)%b%f"
   fi
 }
