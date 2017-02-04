@@ -57,6 +57,8 @@ nmap <c-n> :bn<CR>
 nmap <c-p> :bp<CR>
 nmap <F3> :qa<CR>
 
+nmap Q <c-w>
+
 Bundle "craigemery/vim-autotag"
 
 set tabstop=4
