@@ -2,6 +2,7 @@
 " nmap
 " vim -c ":BundleInstall"
 
+set nocp
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 set guiheadroom=0
@@ -53,8 +54,6 @@ let g:ctrlp_map='<c-f>'
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
 nmap X :CtrlPBuffer<CR>
-nmap <c-n> :bn<CR>
-nmap <c-p> :bp<CR>
 nmap <F3> :qa<CR>
 
 nmap Q <c-w>
@@ -71,8 +70,8 @@ nnoremap Q gqip
 autocmd FileType make setlocal noexpandtab
 
 set autoread
-nmap <TAB> :tabn<CR>
-nmap <BACKSPACE> :tabp<CR>
+nmap <TAB> :bn<CR>
+nmap <BACKSPACE> :bp<CR>
 nmap s :w<CR>
 
 set autoindent
@@ -151,6 +150,11 @@ set guioptions-=T
 set guioptions-=m
 " tab appearance
 set guioptions-=e
+" scrollbars
+set guioptions-=r
+set guioptions-=R
+
+set guiheadroom=0
 
 set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
@@ -275,7 +279,6 @@ let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_always_populate_location_list = 1 "default 0
 let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
