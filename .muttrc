@@ -7,7 +7,7 @@ set folder=imaps://imap.yandex-team.ru/
 set timeout = 15
 set mail_check = 60
 set beep_new = yes
-set imap_keepalive = 60
+set imap_keepalive = 10
 set imap_pipeline_depth=0
 set spoolfile=imaps://imap.yandex-team.ru/
 set record="=Отправленные"
