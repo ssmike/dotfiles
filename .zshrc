@@ -380,3 +380,6 @@ alias -g yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias svn="ya tool svn"
 alias -g bn="/Berkanavt/news/"
+
+export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
+export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
