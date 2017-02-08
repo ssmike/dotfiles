@@ -114,8 +114,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- Move focus to the previous window
     , ((modm,               xK_k     ), B.focusUp  )
     -- Move focus to the master window
-    , ((modm .|. shiftMask,   xK_Tab ), B.focusMaster  )
-    -- Swap the focused window and the master window
+        , ((modm .|. shiftMask,   xK_Tab ), B.focusMaster  )
+        -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -134,8 +134,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm              , xK_Right), moveTo Next (WSIs notSP))
     , ((modm             , xK_Left), moveTo Prev (WSIs notSP))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-    --send window to etc
-    , ((modm .|. shiftMask, xK_a), windows $ W.shift "9:etc")
+    --toggle workstation mode
+    , ((modm .|. shiftMask, xK_a), spawn "~/.xmonad/toggle-helper.sh")
     , ((modm .|. shiftMask, xK_h), swapPrevScreen)
     , ((modm .|. shiftMask, xK_l), swapNextScreen)
     ]
