@@ -32,6 +32,8 @@ alias ls='ls --color=auto'
 
 export EDITOR=vim
 
+bindkey "^[OC" forward-word
+bindkey "^[OD" backward-word
 bindkey "^[[0~" beginning-of-line
 bindkey "^[OH" beginning-of-line
 bindkey "^[[H" beginning-of-line
