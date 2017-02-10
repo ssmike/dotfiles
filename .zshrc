@@ -5,7 +5,7 @@ source ~/.profile
 source virtualenvwrapper.sh
 
 export GOOGLE=8.8.8.8
-export BROWSER=chromium
+export BROWSER=yandex-browser-beta
 
 export A=~/arc/
 export ext=$A/library/http/fetch/exthttpcodes.h
@@ -54,6 +54,8 @@ alias ls='ls --color=auto'
 
 export EDITOR=vim
 
+bindkey "^[OC" forward-word
+bindkey "^[OD" backward-word
 bindkey "^[[0~" beginning-of-line
 bindkey "^[OH" beginning-of-line
 bindkey "^[[H" beginning-of-line
