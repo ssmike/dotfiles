@@ -206,6 +206,7 @@ myManageHook =
     , [className =? c --> doFloat | c <- float]
     , [className =? c --> doShift "4:im" | c <- im]
     , [stringProperty "WM_WINDOW_ROLE" =? "Mutt" --> doShift "4:im"]
+    , [stringProperty "WM_WINDOW_ROLE" =? "browser" --> doShift "2:web"]
     , [className =? c --> doShift "5:fm" | c <- fM]
     , [className =? c --> doShift "9:etc" | c <- etc]
     , [resource  =? "desktop_window" --> doIgnore ]
