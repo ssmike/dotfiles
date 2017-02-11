@@ -36,6 +36,7 @@ Bundle "Tagbar"
 Bundle "juneedahamed/svnj.vim"
 Bundle "tpope/vim-fireplace"
 Bundle "suan/vim-instant-markdown"
+Bundle "guns/vim-sexp"
 let g:fugitive_github_domains=['github.yandex-team.ru']
 
 let g:instant_markdown_slow = 1
