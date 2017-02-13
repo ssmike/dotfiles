@@ -49,7 +49,7 @@ myTerminal      = "gnome-terminal"
 myModMask       = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:work", "7:math", "8:game", "9:etc"]
+myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:doc", "7:math", "8:game", "9:etc"]
 
 
 -- Border colors for unfocused and focused windows, respectively.
@@ -92,7 +92,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm, xK_f), spawn "nautilus")
     -- go to coresponding workspace
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
-    , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:work")
+    , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:doc")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
     -- open window selection menu
     , ((modm, xK_o), goToSelected defaultGSConfig)
@@ -180,7 +180,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
-                            onWorkspaces ["3:code", "6:work", "7:math"]
+                            onWorkspaces ["3:code", "6:doc", "7:math"]
                                 (my_mosaic ||| Full ||| Mirror tiled) $
                             onWorkspaces ["2:web", "4:im"]
                                 (all_equal ||| Full ||| Mirror tiled) $
@@ -213,7 +213,7 @@ myManageHook =
     , [resource  =? "kdesktop"       --> doIgnore ]
     , [className =? c --> doShift "2:web" | c <- web]
     , [className =? c --> doShift "3:code" | c <- code]
-    , [className =? c --> doShift "6:work" | c <- work]
+    , [className =? c --> doShift "6:doc" | c <- work]
     , [className =? c --> doShift "7:math" | c <- math]
     , [className =? c --> doShift "8:game" | c <- game]
     , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doIgnore]
