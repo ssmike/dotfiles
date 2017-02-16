@@ -239,7 +239,6 @@ map <c-a> 
 map! <c-a> 
 nmap <c-a> GVgg
 
-"true vimer
 imap jj <ESC>
 imap ii <ESC>
 imap iw <c-w>

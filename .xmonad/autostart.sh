@@ -16,3 +16,8 @@ Telegram &
 xautolock -locker "slock" -time 10 -detectsleep &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 #xinput set-prop 13 "Device Enabled" 0
+
+/usr/libexec/tracker-miner-fs &
+/usr/libexec/tracker-extract &
+/usr/libexec/tracker-miner-user-guides &
+/usr/libexec/tracker-store &
