@@ -7,8 +7,8 @@ filetype plugin indent on
 
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
-nmap <c-n> :bn<CR>
-nmap <c-p> :bp<CR>
+nmap <TAB> :bn<CR>
+nmap <BACKSPACE> :bp<CR>
 
 set tabstop=4
 set shiftwidth=4
@@ -20,8 +20,6 @@ nnoremap Q gqip
 autocmd FileType make setlocal noexpandtab
 
 set autoread
-nmap <TAB> :tabn<CR>
-nmap <BACKSPACE> :tabp<CR>
 nmap s :w<CR>
 
 set autoindent
