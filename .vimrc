@@ -58,6 +58,7 @@ nmap do :diffget<CR>
 nmap dp :diffput<CR>
 nmap X :CtrlPBuffer<CR>
 nmap <F3> :qa<CR>
+nmap <F4> :bd<CR>
 
 nmap Q <c-w>
 
