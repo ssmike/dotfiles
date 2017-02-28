@@ -5,7 +5,7 @@ source ~/.profile
 source virtualenvwrapper.sh
 
 export GOOGLE=8.8.8.8
-export BROWSER=yandex-browser-beta
+export BROWSER=chromium
 
 export A=~/arc/
 export ext=$A/library/http/fetch/exthttpcodes.h
@@ -450,9 +450,8 @@ alias pasteit='pastebinit -b "http://slexy.org"'
 alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
 alias yvim="ya vim"
-alias gdb="ya tool gdb"
+alias ygdb="ya tool gdb"
 alias ymake="ya make -j4"
-alias ag="ya tool ag --color"
 alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc-svn/"
