@@ -251,9 +251,7 @@ autocmd InsertLeave * :set relativenumber
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 
-"let b:atpTexCompiler='texi2pdf'
 ""autocmd FileType text setlocal spell
-"let g:atp_tab_map=1
 "
 autocmd FileType tex setlocal spell
 
@@ -309,7 +307,6 @@ let g:ycm_python_binary_path='python'
 
 "ya vim doesn't see my x session
 imap <c-v> <c-r>=system('xsel -b')<cr>
-
 
 function Extcommand(...)
     normal i<c-r>=system(\'a:000\')<cr>
