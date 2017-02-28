@@ -324,3 +324,5 @@ endwhile
 unlet parent local_vimrc
 
 let g:tex_conceal = ""
+
+autocmd! bufwritepost ~/.vimrc execute "normal! :source ~/.vimrc"
