@@ -35,9 +35,11 @@ Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
 Bundle "juneedahamed/svnj.vim"
 Bundle "tpope/vim-fireplace"
-Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-salve"
+Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-dispatch"
+Bundle "rking/ag.vim"
+
 let g:fugitive_github_domains=['github.yandex-team.ru']
 
 let g:instant_markdown_slow = 1
