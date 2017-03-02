@@ -5,7 +5,7 @@ source ~/.profile
 source virtualenvwrapper.sh
 
 export GOOGLE=8.8.8.8
-export BROWSER=chromium
+export BROWSER=vivaldi
 
 export A=~/arc/
 export ext=$A/library/http/fetch/exthttpcodes.h

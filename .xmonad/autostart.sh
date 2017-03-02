@@ -2,7 +2,6 @@
 pgrep  compton && exit
 #xhost +
 compton -cCGf -D 3 -b
-#chromium &
 nitrogen --restore &
 xfce4-power-manager &
 ~/.xmonad/lightsOn.sh 120 &
@@ -12,6 +11,7 @@ parcellite &
 xbindkeys &
 #xscreensaver -no-splash &
 yandex-disk start &
+vivaldi &
 Telegram &
 xautolock -locker "slock" -time 10 -detectsleep &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
