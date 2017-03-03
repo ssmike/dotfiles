@@ -456,7 +456,8 @@ alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc-svn/"
 alias -g ynews="~/arc/yweb/news"
-alias hg-patch='hg diff -r . -r `hg debugancestor . default`'
+alias -g yhg="ya tool hg"
+alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
 
 alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
 alias less="less -r"
@@ -467,4 +468,6 @@ export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
 export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
 
 # Allow SSH tab completion for mosh hostnames
+compdef mosh=ssh
+# Allow mercurial completion for arcadia hg
 compdef mosh=ssh
