@@ -256,7 +256,7 @@ makeproject() {
     fi
     mkdir $2
     cd $2
-    cp ~/templates/$1/* . -r
+    cp ~/Documents/templates/$1/* . -r
     make edit
 }
 
