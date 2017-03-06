@@ -19,5 +19,5 @@
 "amixer -q sset Speaker mute"
     alt + m
 
-"~/nm.sh"
+"~/.xmonad/nm.sh"
     control + alt + shift + m
