@@ -1,6 +1,5 @@
 source /etc/profile
 source ~/.profile
-#chromium-browseeexport WINEARCH=win32
 
 source virtualenvwrapper.sh
 
@@ -12,6 +11,10 @@ export ext=$A/library/http/fetch/exthttpcodes.h
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
+
+if [ "$TTY" = "linux" ]; then
+    export LC_ALL=C;
+fi
 
 ZSH_HIGHLIGHT_STYLES=(
         'alias'           'fg=green'
