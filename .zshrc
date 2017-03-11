@@ -88,12 +88,37 @@ function zshexit() {
     clear
 }
 
+function get_hg_branch() {
+    max_depth=${#${PWD//[^\/]}}
+    i=1
+    cur_dir=$PWD
+    while (( $i <= $max_depth )); do
+        if [ ! -w $cur_dir ]; then
+            return 1;
+        fi
+        branch_file="$cur_dir/.hg/branch"
+        if [ -f $branch_file ]; then
+            cat $branch_file;
+            return 0;
+        fi
+        cur_dir="$cur_dir/.."
+        ((i++))
+    done
+    return 1;
+}
+
 function cvs_prompt() {
-    if git branch >/dev/null 2>/dev/null; then
-        ref=$(git symbolic-ref HEAD | sed -e "s/refs\/heads\///")
-        echo -n "%F{red}git%f on %F{green}$ref%f"
-    else
-        echo -n ""
+    hg_branch=`get_hg_branch 2>/dev/null`
+    if [ "x$hg_branch" != "x" ]; then
+        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f)"
+        #  at %F{yellow}$bookmark%f
+    else 
+        if git branch >/dev/null 2>&1; then
+            ref=$(git symbolic-ref HEAD | sed -e "s/refs\/heads\///")
+            echo -n "%F{red}git%f on %F{green}$ref%f"
+        else
+            echo -n ""
+        fi
     fi
 }
 
