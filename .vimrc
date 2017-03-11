@@ -33,12 +33,14 @@ Bundle "jpalardy/spacehi.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
-Bundle "juneedahamed/svnj.vim"
+Bundle "juneedahamed/vc.vim"
 Bundle "tpope/vim-fireplace"
 Bundle "tpope/vim-salve"
 Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-dispatch"
 Bundle "rking/ag.vim"
+
+let g:vc_browse_cache_all = 1
 
 let g:fugitive_github_domains=['github.yandex-team.ru']
 
