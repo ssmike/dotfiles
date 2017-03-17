@@ -110,9 +110,8 @@ function get_hg_branch() {
 function cvs_prompt() {
     hg_branch=`get_hg_branch 2>/dev/null`
     if [ "x$hg_branch" != "x" ]; then
-        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f)"
-        #  at %F{yellow}$bookmark%f
-    else 
+        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f"
+    else
         if git branch >/dev/null 2>&1; then
             ref=$(git symbolic-ref HEAD | sed -e "s/refs\/heads\///")
             echo -n "%F{red}git%f on %F{green}$ref%f"
