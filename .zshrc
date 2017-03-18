@@ -108,16 +108,20 @@ function get_hg_branch() {
 }
 
 function cvs_prompt() {
+    svn_url=`svn info . 2>/dev/null | grep Relative | cut -d ':' -f3`
+    if [ "x$svn_url" != "x" ]; then
+        echo -n "%F{red}svn%f on%F{yellow}%B$svn_url%b%f";
+        return 0;
+    fi
     hg_branch=`get_hg_branch 2>/dev/null`
     if [ "x$hg_branch" != "x" ]; then
-        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f"
-    else
-        if git branch >/dev/null 2>&1; then
-            ref=$(git symbolic-ref HEAD | sed -e "s/refs\/heads\///")
-            echo -n "%F{red}git%f on %F{green}$ref%f"
-        else
-            echo -n ""
-        fi
+        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f";
+        return 0;
+    fi
+    git_branch=`git symbolic-ref HEAD 2>/dev/null | sed -e "s/refs\/heads\///"`
+    if [ "x$git_branch" != "x" ]; then
+        echo -n "%F{red}git%f on %F{green}$git_branch%f";
+        return 0;
     fi
 }
 
@@ -148,7 +152,7 @@ pre-prompt() {
   if [ ! -z "$ZSH_CVS" ]; then
     ZSH_CVS="$ZSH_CVS : "
   fi
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%f%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
