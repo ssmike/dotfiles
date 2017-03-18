@@ -13,7 +13,7 @@ xbindkeys &
 yandex-disk start &
 vivaldi &
 Telegram &
-xautolock -locker "slock" -time 10 -detectsleep &
+#xautolock -locker "slock" -time 10 -detectsleep &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 #xinput set-prop 13 "Device Enabled" 0
 
