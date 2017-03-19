@@ -39,6 +39,7 @@ Bundle "tpope/vim-salve"
 Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-dispatch"
 Bundle "rking/ag.vim"
+Bundle "glsl.vim"
 
 let g:vc_browse_cache_all = 1
 
@@ -92,6 +93,7 @@ set relativenumber
 filetype plugin on
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
 autocmd! BufRead,BufNewFile *.go 	set filetype=go
+autocmd! BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl set filetype=glsl
 
 " < ./inp<CR>
 "vim-conque"
