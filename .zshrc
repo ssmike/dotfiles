@@ -107,22 +107,24 @@ function get_hg_branch() {
     return 1;
 }
 
-function cvs_prompt() {
+function with_cvs() {
+    local PWD_STYLE=$1
     svn_url=`svn info . 2>/dev/null | grep Relative | cut -d ':' -f3`
     if [ "x$svn_url" != "x" ]; then
         echo -n "%F{red}svn%f on%F{yellow}%B$svn_url%b%f";
         return 0;
     fi
-    hg_branch=`get_hg_branch 2>/dev/null`
-    if [ "x$hg_branch" != "x" ]; then
-        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f";
-        return 0;
-    fi
     git_branch=`git symbolic-ref HEAD 2>/dev/null | sed -e "s/refs\/heads\///"`
     if [ "x$git_branch" != "x" ]; then
-        echo -n "%F{red}git%f on %F{green}$git_branch%f";
+        echo -n "%F{red}git%f on %F{green}$git_branch%f : $PWD_STYLE";
         return 0;
     fi
+    hg_branch=`get_hg_branch 2>/dev/null`
+    if [ "x$hg_branch" != "x" ]; then
+        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f : $PWD_STYLE";
+        return 0;
+    fi
+    echo -n "$PWD_STYLE"
 }
 
 # xterm directory
@@ -148,11 +150,8 @@ pre-prompt() {
   local PREPROMPT="%F{yellow}%m%f%F{blue}/%f"
   local PWD_STYLE="%B%F{blue}%2~%b%f"
   [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
-  ZSH_CVS=`cvs_prompt`
-  if [ ! -z "$ZSH_CVS" ]; then
-    ZSH_CVS="$ZSH_CVS : "
-  fi
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%f%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
+  local WITH_CVS=`with_cvs "$PWD_STYLE"`
+  local LEFT="%F{black}%B.%b%f%B%F{green}(%f%b$PREPROMPT$WITH_CVS%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
