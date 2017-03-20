@@ -40,6 +40,7 @@ Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-dispatch"
 Bundle "rking/ag.vim"
 Bundle "glsl.vim"
+Bundle "mhinz/vim-signify"
 
 let g:vc_browse_cache_all = 1
 
@@ -299,9 +300,15 @@ autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
 autocmd FileType tex set keymap=russian-jcukenwin
 
 let NERDTreeIgnore = ['\.pyc$']
+
 highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#0000ff
+
+highlight SignColumn ctermbg=None
+highlight SignifySignDelete ctermbg=None ctermfg=red
+highlight SignifySignAdd ctermbg=None ctermfg=green
+highlight SignifySignChange ctermbg=None ctermfg=magenta
 
 au FileType mail let b:delimitMate_autoclose = 0
 
