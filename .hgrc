@@ -1,0 +1,12 @@
+[ui]
+username = Mikhail Surin <ssmike@yandex-team.ru>
+editor=vim
+
+[extensions]
+shelve=
+purge=
+mq=
+rebase=
+
+[web]
+cacerts = /etc/ssl/certs/ca-certificates.crt
