@@ -500,4 +500,4 @@ export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
 # Allow SSH tab completion for mosh hostnames
 compdef mosh=ssh
 # Allow mercurial completion for arcadia hg
-compdef mosh=ssh
+compdef yhg=hg
