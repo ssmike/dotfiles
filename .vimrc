@@ -41,6 +41,8 @@ Bundle "tpope/vim-dispatch"
 Bundle "rking/ag.vim"
 Bundle "glsl.vim"
 Bundle "mhinz/vim-signify"
+Bundle "gnupg.vim" 
+
 
 let g:vc_browse_cache_all = 1
 
