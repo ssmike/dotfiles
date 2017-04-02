@@ -462,6 +462,11 @@ function add() {
     git merge master
 }
 
+function totp {
+    eval `gpg -d ~/.secrets.gpg`
+    eval oathtool --totp \$$1 --base32
+}
+
 alias make-patch="svn diff --internal-diff"
 #alias hg="ya tool hg"
 alias popd="popd -q"
