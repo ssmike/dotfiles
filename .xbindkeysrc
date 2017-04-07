@@ -12,12 +12,6 @@
 "gnome-screenshot"
     Print
 
-"amixer -q sset Master toggle"
-    alt + l
-"amixer -q sset Speaker unmute"
-    alt + k
-"amixer -q sset Speaker mute"
-    alt + m
 
 "~/.xmonad/nm.sh"
     control + alt + shift + m
