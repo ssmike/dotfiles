@@ -224,7 +224,8 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-#source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^E' autosuggest-accept
 
 # Enable autosuggestions automatically.
 #zle-line-init() {
