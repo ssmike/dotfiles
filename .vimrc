@@ -41,7 +41,7 @@ Bundle "tpope/vim-dispatch"
 Bundle "rking/ag.vim"
 Bundle "glsl.vim"
 Bundle "mhinz/vim-signify"
-Bundle "gnupg.vim" 
+Bundle "gnupg.vim"
 
 
 let g:vc_browse_cache_all = 1
@@ -341,3 +341,14 @@ unlet parent local_vimrc
 let g:tex_conceal = ""
 
 autocmd! bufwritepost ~/.vimrc execute "normal! :source ~/.vimrc"
+
+function! SwitchSourceHeader()
+  "update!
+  if (expand ("%:e") == "cpp")
+    find %:t:r.h
+  else
+    find %:t:r.cpp
+  endif
+endfunction
+
+nmap ,s :call SwitchSourceHeader()<CR>
