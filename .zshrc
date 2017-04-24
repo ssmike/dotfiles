@@ -2,6 +2,10 @@ source /etc/profile
 source ~/.profile
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^E' autosuggest-accept
+
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 ZSH_HIGHLIGHT_STYLES=(
