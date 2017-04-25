@@ -244,8 +244,8 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
 # -[ history ]-
 HISTFILE=~/.zsh_history
-HISTSIZE=2000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 setopt append_history hist_ignore_all_dups hist_ignore_space autocd extendedglob autopushd
 export LS_COLORS='*.py=3'
