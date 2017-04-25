@@ -75,6 +75,11 @@ function cvs_prompt() {
     fi
 }
 
+function root_shell() {
+    export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    ~/bin/zsh $@
+}
+
 # xterm directory
 chpwd() {
     [[ -t 1 ]] || return
@@ -105,7 +110,7 @@ pre-prompt() {
   local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
-  fi 
+  fi
   # -- color
   LEFT="$LEFT%F{black}%B"
   local RIGHT="."
@@ -215,7 +220,7 @@ swap() {
         rc_script="/Berkanavt/bin/news/rc/$binary_name"
         rc_log="/Berkanavt/news/logs/$binary_name"
         if [ -z "$2" ]; then
-            if ! [ -e "$rc_script" ]; then 
+            if ! [ -e "$rc_script" ]; then
                 rc_script="$rc_script.russian";
                 rc_log="$rc_log.russian";
             fi
