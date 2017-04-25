@@ -266,7 +266,7 @@ edit-cmd() {
 }
 
 #zle -N edit-cmd
-bindkey -s "" edit-cmd
+bindkey -s "" "edit-cmd\n"
 
 mkd() { mkdir $1; cd $1 }
 battcheck() {
