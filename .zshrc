@@ -159,7 +159,7 @@ pre-prompt() {
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
     PWD_STYLE="%B%F{blue}%1~%b%f"
-    [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%1~%b%f"
+    PWD_STYLE="%B%F{red}%1~%b%f"
     LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$PWD_STYLE%B%F{green})%b"
     LEFT="$LEFT%F{black}%B"
     LEFT_P="$(print -P "$LEFT")"
@@ -171,12 +171,14 @@ pre-prompt() {
   LEFTWIDTH=`get_visible_length "$LEFT_P"`
   RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+  local GREETER="%F{white}%B>%b%f"
+  [  "$UID" = "0" ] && GREETER="%F{red}%B>%b%f"
   if [ $RIGHTWIDTH -lt 1 ]; then
     RPROMPT=""
-    PROMPT='%F{black}%B-%f%F{white}>%b%f '
+    PROMPT='%F{black}%B-%b%f'"$GREETER "
   else
     PROMPT="$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
-%F{black}%B\`--%f%F{white}>%b%f '
+%F{black}%B\`--%b%f'"$GREETER "
     RPROMPT="%F{grey}%B(%*)%b%f"
   fi
 }
