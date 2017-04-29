@@ -159,7 +159,7 @@ pre-prompt() {
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
     PWD_STYLE="%B%F{blue}%1~%b%f"
-    PWD_STYLE="%B%F{red}%1~%b%f"
+    [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%1~%b%f"
     LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$PWD_STYLE%B%F{green})%b"
     LEFT="$LEFT%F{black}%B"
     LEFT_P="$(print -P "$LEFT")"
