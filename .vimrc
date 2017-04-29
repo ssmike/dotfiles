@@ -61,10 +61,11 @@ let g:fugitive_git_executable = 'LANG=en git'
 
 "let g:UltiSnipsExpandTrigger=<c-w>"
 
-let g:ctrlp_map='<c-f>'
+"let g:ctrlp_map='<c-f>'
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
 nmap X :CtrlPBuffer<CR>
+nmap <c-f> :CtrlPMRUFiles<CR>
 nmap <F3> :qa<CR>
 nmap <F4> :bd<CR>
 
@@ -251,7 +252,6 @@ nmap <c-a> GVgg
 
 imap jj <ESC>
 imap ii <ESC>
-imap iw <c-w>
 nmap Q <c-w>
 
 autocmd InsertEnter * :set norelativenumber
