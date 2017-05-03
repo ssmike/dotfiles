@@ -36,6 +36,7 @@ import XMonad.Hooks.Minimize
 import qualified XMonad.Layout.BoringWindows as B
 import Data.List
 import XMonad.Hooks.SetWMName
+import Data.Maybe (fromJust)
 
 
 myTerminal :: String
@@ -252,7 +253,9 @@ myLogHook dzen = do
   --setWMName "LG3D"
 
 main = do
-    dzen <- spawnPipe "/usr/bin/dzen2 -xs 2 -ta l -dock -x 0 -y 0 -e -"
+    homePath <- E.getEnv "HOME"
+    monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
+    dzen <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
