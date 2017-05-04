@@ -36,6 +36,7 @@ import XMonad.Hooks.Minimize
 import qualified XMonad.Layout.BoringWindows as B
 import Data.List
 import XMonad.Hooks.SetWMName
+import Data.Maybe (fromJust)
 
 
 myTerminal :: String
@@ -114,8 +115,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- Move focus to the previous window
     , ((modm,               xK_k     ), B.focusUp  )
     -- Move focus to the master window
-        , ((modm .|. shiftMask,   xK_Tab ), B.focusMaster  )
-        -- Swap the focused window and the master window
+    , ((modm .|. shiftMask,   xK_Tab ), B.focusMaster  )
+    -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -227,7 +228,7 @@ myManageHook =
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         doc = ["calibre", "FBReader", "Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Vivaldi-stable", "Vivaldi-snapshot", "orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
-        code = ["QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
+        code = ["jetbrains-pycharm-ce", "jetbrains-clion", "QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]
         float = ["Pavucontrol", "Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Vlc", "Gnuplot", "VirtualBox", "Wine", "Gcdemu", "Docky"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
@@ -252,7 +253,9 @@ myLogHook dzen = do
   --setWMName "LG3D"
 
 main = do
-    dzen <- spawnPipe "/usr/bin/dzen2 -xs 2 -ta l -dock -x 0 -y 0 -e -"
+    homePath <- E.getEnv "HOME"
+    monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
+    dzen <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
     xmonad $ ewmh $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,

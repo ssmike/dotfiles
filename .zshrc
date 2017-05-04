@@ -171,12 +171,14 @@ pre-prompt() {
   LEFTWIDTH=`get_visible_length "$LEFT_P"`
   RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
+  local GREETER="%F{white}%B>%b%f"
+  [  "$UID" = "0" ] && GREETER="%F{red}%B>%b%f"
   if [ $RIGHTWIDTH -lt 1 ]; then
     RPROMPT=""
-    PROMPT='%F{black}%B-%f%F{white}>%b%f '
+    PROMPT='%F{black}%B-%b%f'"$GREETER "
   else
     PROMPT="$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
-%F{black}%B\`--%f%F{white}>%b%f '
+%F{black}%B\`--%b%f'"$GREETER "
     RPROMPT="%F{grey}%B(%*)%b%f"
   fi
 }
@@ -224,7 +226,8 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-#source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^E' autosuggest-accept
 
 # Enable autosuggestions automatically.
 #zle-line-init() {
@@ -243,8 +246,8 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
 # -[ history ]-
 HISTFILE=~/.zsh_history
-HISTSIZE=2000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 setopt append_history hist_ignore_all_dups hist_ignore_space autocd extendedglob autopushd
 export LS_COLORS='*.py=3'
@@ -265,7 +268,7 @@ edit-cmd() {
 }
 
 #zle -N edit-cmd
-bindkey -s "" edit-cmd
+bindkey -s "" "edit-cmd\n"
 
 mkd() { mkdir $1; cd $1 }
 battcheck() {
