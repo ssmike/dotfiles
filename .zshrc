@@ -236,6 +236,15 @@ swap() {
     sudo -u ynews bash -c "`swap-impl $@`"
 }
 
+source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
+
+get-yatool() {
+    "svn" co svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/devtools/ya ~/yatool
+    echo 'PATH=$PATH:~/yatool' >> ~/.profile
+    ~/yatool/ya completion --zsh
+    exec zsh
+}
+
 name() {
     name=$1
     vared -c -p 'rename to: ' name
