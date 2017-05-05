@@ -242,6 +242,7 @@ get-yatool() {
     "svn" co svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/devtools/ya ~/yatool
     echo 'PATH=$PATH:~/yatool' >> ~/.profile
     ~/yatool/ya completion --zsh
+    chmod 755 -R ~/.ya.completion
     exec zsh
 }
 
