@@ -43,7 +43,6 @@ Bundle "glsl.vim"
 Bundle "mhinz/vim-signify"
 Bundle "gnupg.vim"
 
-
 let g:vc_browse_cache_all = 1
 
 let g:fugitive_github_domains=['github.yandex-team.ru']
