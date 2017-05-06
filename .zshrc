@@ -438,6 +438,9 @@ function docker-clean() {
   docker rmi $(docker images -f dangling=true -q)
 }
 
+function set-title() {
+    echo -ne "\033]0;$@\007"
+}
 
 function totp {
     eval `gpg -d ~/.secrets.gpg`
