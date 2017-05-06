@@ -438,32 +438,6 @@ function docker-clean() {
   docker rmi $(docker images -f dangling=true -q)
 }
 
-function refresh() {
-    git merge master
-}
-
-function up() {
-    local branch=`git rev-parse --abbrev-ref HEAD`
-    git stash
-    git checkout -f master
-    svn up $@
-    echo svn up $@ to `svn info ${@[-1]} | grep Revision | cut -d' ' -f2` | git commit -a -F -
-    git checkout -f $branch
-    git stash apply -q
-    git merge master
-}
-
-function add() {
-    local branch=`git rev-parse --abbrev-ref HEAD`
-    git stash
-    git checkout master
-    svn add $@>/dev/null
-    git add $@
-    echo 'file(s)' $@ added | git commit -F -
-    git checkout $branch
-    git stash apply -q
-    git merge master
-}
 
 function totp {
     eval `gpg -d ~/.secrets.gpg`
