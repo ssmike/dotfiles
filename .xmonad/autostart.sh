@@ -2,7 +2,7 @@
 pgrep  compton && exit
 #xhost +
 redshift &
-compton -cCGf -D 3 -b
+compton -f -D 3 -b
 nitrogen --restore &
 xfce4-power-manager &
 ~/.xmonad/lightsOn.sh 120 &
