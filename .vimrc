@@ -28,7 +28,6 @@ Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "bling/vim-airline"
 Bundle "easymotion/vim-easymotion"
-Bundle "jpalardy/spacehi.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
@@ -36,11 +35,16 @@ Bundle "juneedahamed/vc.vim"
 Bundle "tpope/vim-fireplace"
 Bundle "tpope/vim-salve"
 Bundle "suan/vim-instant-markdown"
-Bundle "tpope/vim-dispatch"
 Bundle "rking/ag.vim"
 Bundle "glsl.vim"
 Bundle "mhinz/vim-signify"
 Bundle "gnupg.vim"
+
+Bundle "tpope/vim-dispatch"
+let g:dispatch_handlers = [
+    \ 'tmux',
+    \ 'headless',
+    \ ]
 
 let g:vc_browse_cache_all = 1
 
