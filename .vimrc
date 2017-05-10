@@ -32,6 +32,7 @@ Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
 Bundle "juneedahamed/vc.vim"
+Bundle "eagletmt/neco-ghc"
 Bundle "tpope/vim-fireplace"
 Bundle "tpope/vim-salve"
 Bundle "suan/vim-instant-markdown"
@@ -193,6 +194,7 @@ autocmd Filetype java setlocal completefunc=javacomplete#Complete
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 nmap <C-t> :GhcModType<CR>
 imap <C-t> <C-O>:GhcModType<CR>
