@@ -232,6 +232,12 @@ nnoremap <A-r> 8gt
 
 command Print !gtklp %
 
+function! YDocFunction()
+    exe ':YcmCompleter GetDoc'
+endfunction
+
+command! YDoc call YDocFunction()
+
 function! Includefunction(param)
     exe 'normal! ggO#include '.a:param
     exe 'normal ``'
