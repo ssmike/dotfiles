@@ -11,7 +11,15 @@ echo -n " Free: ^fg(\#A09BA1) ${fs_free /}^fg(\#FFFFFF) ^ca()"
 echo -n " ^ca(1,pavucontrol)^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " Volume: ^fg(\#A09BA1)${execi 1 ~/.volumescript}^fg(\#FFFFFF)^ca()"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
-echo -n " Battery: ^fg(\#A09BA1)${battery BAT0}^fg(\#FFFFFF)"
+
+echo -n " Battery: "
+if [ "${battery_percent BAT0}" -lt "20" ]; then
+    echo -n "^fg(\#FF0000)"
+else
+    echo -n "^fg(\#A09BA1)"
+fi
+echo -n "${battery BAT0}^fg(\#FFFFFF)"
+
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " Cpu: ^fg(\#A09BA1)${cpu}%^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
