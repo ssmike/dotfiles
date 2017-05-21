@@ -311,6 +311,8 @@ autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
 autocmd FileType tex set keymap=russian-jcukenwin
 
+autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
+
 let NERDTreeIgnore = ['\.pyc$']
 
 highlight Pmenu ctermbg=darkgray ctermfg=white
