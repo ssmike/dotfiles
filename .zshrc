@@ -120,17 +120,6 @@ function with_cvs() {
     echo -n "$PWD_STYLE"
 }
 
-# xterm directory
-chpwd() {
-    [[ -t 1 ]] || return
-    case $TERM in
-      sun-cmd) print -Pn "\e]l%~\e\\"
-        ;;
-      *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
-        ;;
-    esac
-}
-
 [ ! "$UID" = "0" ] && PROMPT='($(cvs_prompt))%B%F{blue}%2~%f%F{blue}%f%b> '
 [  "$UID" = "0" ] && PROMPT='($(cvs_prompt))%B%F{red}%2~%f%F{blue}%f%b> '
 RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
@@ -229,12 +218,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^E' autosuggest-accept
 
-# Enable autosuggestions automatically.
-#zle-line-init() {
-#    zle autosuggest-start
-#}
-#zle -N zle-line-init
-
 zstyle ':completion:*:processes' menu yes select
 zstyle ':completion:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -xuf'
@@ -258,22 +241,8 @@ name() {
     vared -c -p 'rename to: ' name
     command mv $1 $name
 }
-alias composite="compton -cCGf"
-
-edit-cmd() {
-    ffile="/tmp/.zsh-temp$RANDOM"
-    touch $ffile
-    vim $ffile -c "set filetype=zsh"
-    . $ffile
-}
-
-#zle -N edit-cmd
-bindkey -s "" "edit-cmd\n"
 
 mkd() { mkdir $1; cd $1 }
-battcheck() {
-  (acpi -b | python -c "if int(input().split()[3].split('%')[0]) < 20: exit(1)");
-}
 
 makeproject() {
     if [ "$#" -ne 2 ]; then
@@ -292,12 +261,6 @@ alias mkpproject="makeproject python "
 
 alias rmrf="rm -rf $1"
 
-rep() {
-  while true; do
-    zsh -c $1;
-    sleep 4;
-  done;
-}
 pk () {
  if [ $1 ] ; then
  case $1 in
@@ -336,10 +299,6 @@ extract () {
  else
  echo "'$1' is not a valid file"
  fi
-}
-
-enum() {
-  cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
 blacklist_regexp="^\(bpython|gdb|mc|livestreamer|okular|zathura|tmux|less|nano|vim|vi|mutt|man|qvim|gdb|fbless|htop\).*"
@@ -447,7 +406,6 @@ function totp {
     eval oathtool --totp \$$1 --base32
 }
 
-alias make-patch="svn diff --internal-diff"
 #alias hg="ya tool hg"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
@@ -463,7 +421,6 @@ alias ymake="ya make -j4"
 alias valgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc-svn/"
-alias -g ynews="~/arc/yweb/news"
 alias -g yhg="ya tool hg"
 alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
 
@@ -471,9 +428,6 @@ alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
 alias less="less -r"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
-export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
-export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
 
 # Allow SSH tab completion for mosh hostnames
 compdef mosh=ssh
