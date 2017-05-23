@@ -307,9 +307,11 @@ nmap <c-x> :YcmCompleter GoToDefinition<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 
+autocmd Filetype c,cpp,python nmap <buffer> <c-]> :YcmCompleter GoToDeclaration<CR>
+autocmd Filetype c,cpp,python nmap <buffer> <c-[> :YcmCompleter GoToDefinition<CR>
 autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
-autocmd FileType tex set keymap=russian-jcukenwin
+autocmd FileType tex setlocal keymap=russian-jcukenwin
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
