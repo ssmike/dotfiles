@@ -6,4 +6,4 @@ icon_size 29
 icon_gravity NE
 geometry 7x1-0-0
 no_shrink
-window_layer normal
+window_layer bottom
