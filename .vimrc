@@ -40,7 +40,7 @@ Bundle "rking/ag.vim"
 Bundle "glsl.vim"
 Bundle "mhinz/vim-signify"
 Bundle "gnupg.vim"
-
+Bundle "tpope/vim-rhubarb"
 Bundle "tpope/vim-dispatch"
 let g:dispatch_handlers = [
     \ 'tmux',
