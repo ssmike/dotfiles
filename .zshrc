@@ -4,7 +4,6 @@ source ~/.profile
 source virtualenvwrapper_lazy.sh
 
 export GOOGLE=8.8.8.8
-export BROWSER=vivaldi
 
 export A=~/arc/
 export ext=$A/library/http/fetch/exthttpcodes.h
