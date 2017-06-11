@@ -12,7 +12,6 @@ parcellite &
 xbindkeys &
 #xscreensaver -no-splash &
 yandex-disk start &
-vivaldi &
 thunderbird &
 Telegram &
 #xautolock -locker "slock" -time 10 -detectsleep &
