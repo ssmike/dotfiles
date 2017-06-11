@@ -194,7 +194,7 @@ autocmd Filetype java setlocal completefunc=javacomplete#Complete
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:ycm_semantic_triggers = {'haskell' : ['.'], 'clojure' : ['/', '.']}
 
 nmap <C-t> :GhcModType<CR>
 imap <C-t> <C-O>:GhcModType<CR>
