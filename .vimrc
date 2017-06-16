@@ -33,8 +33,9 @@ Bundle "gerw/vim-latex-suite"
 Bundle "Tagbar"
 Bundle "juneedahamed/vc.vim"
 Bundle "eagletmt/neco-ghc"
-Bundle "tpope/vim-fireplace"
 Bundle "tpope/vim-salve"
+Bundle "clojure-vim/vim-cider"
+Bundle "tpope/vim-fireplace"
 Bundle "suan/vim-instant-markdown"
 Bundle "rking/ag.vim"
 Bundle "glsl.vim"
@@ -46,6 +47,16 @@ let g:dispatch_handlers = [
     \ 'tmux',
     \ 'headless',
     \ ]
+
+let g:cider_no_maps=1 " Disable built-in mappings
+"just maps from set_up without <F4>-<F5>
+nmap <buffer> cf <Plug>CiderFormat
+nmap <buffer> cff <Plug>CiderCountFormat
+nmap <buffer> cF ggcfG
+nmap <buffer> cdd <Plug>CiderUndef
+nmap <buffer> cn <Plug>RefactorCleanNs
+nmap <buffer> cRR <Plug>RefactorResolveMissing
+nmap <buffer> cfs <Plug>RefactorFindSymbol
 
 let g:vc_browse_cache_all = 1
 
