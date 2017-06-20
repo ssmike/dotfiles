@@ -406,6 +406,7 @@ function totp {
 }
 
 #alias hg="ya tool hg"
+alias lein-repl="LEIN_FAST_TRAMPOLINE=y lein trampoline run -m clojure.main"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
