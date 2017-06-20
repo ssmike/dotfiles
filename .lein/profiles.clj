@@ -2,4 +2,5 @@
                   [lein-pprint "1.1.2"]
                   [lein-checkout-deps "1.0.0"]
                   [lein-try "0.4.3"]
-                  [refactor-nrepl "1.1.0"]]}}
+                  [refactor-nrepl "1.1.0"]
+                  [com.jakemccrary/lein-test-refresh "0.20.0"]]}}
