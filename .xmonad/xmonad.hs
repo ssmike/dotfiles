@@ -37,7 +37,7 @@ import qualified XMonad.Layout.BoringWindows as B
 import Data.List
 import XMonad.Hooks.SetWMName
 import Data.Maybe (fromJust)
-
+import XMonad.Hooks.UrgencyHook
 
 myTerminal :: String
 myTerminal      = "gnome-terminal"
@@ -139,6 +139,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_a), spawn "~/.xmonad/toggle-helper.sh")
     , ((modm .|. shiftMask, xK_h), swapPrevScreen)
     , ((modm .|. shiftMask, xK_l), swapNextScreen)
+    , ((modm              , xK_BackSpace), focusUrgent)
+    , ((modm .|. shiftMask, xK_BackSpace), clearUrgents)
     ]
     ++
     --
@@ -256,7 +258,8 @@ main = do
     homePath <- E.getEnv "HOME"
     monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
     dzen <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
-    xmonad $ ewmh $ kde4Config {
+    let modifiers = (withUrgencyHook NoUrgencyHook) . ewmh
+    xmonad $ modifiers $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
             borderWidth        = 3,
