@@ -111,6 +111,7 @@ set number
 set relativenumber
 
 filetype plugin on
+autocmd! BufRead,BufNewFile *.tex   set makeprg=make
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
 autocmd! BufRead,BufNewFile *.go 	set filetype=go
 autocmd! BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl set filetype=glsl
