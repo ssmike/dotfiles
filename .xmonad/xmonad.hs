@@ -314,6 +314,14 @@ dzenpp status = def {
               , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable . deleteMinimize
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
+              , ppExtras            = [withWindowSet $
+                                        (\windowset -> do
+                                            let wincount = length $ W.index windowset
+                                            return $
+                                                if wincount > 1
+                                                    then Just $ show $ wincount
+                                                    else Nothing
+                                            )]
            }
            where
             deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
