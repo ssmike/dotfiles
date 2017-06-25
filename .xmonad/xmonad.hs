@@ -66,7 +66,7 @@ scratchpads = [
         (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
     ]
 
-myXPConfig = defaultXPConfig {
+myXPConfig = def {
         bgColor = "#000000"
     ,   fgColor = "#FFFFFF" -- "#5D69B4"
     ,   borderColor = "#3CB424"
@@ -96,7 +96,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:doc")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:math")
     -- open window selection menu
-    , ((modm, xK_o), goToSelected defaultGSConfig)
+    , ((modm, xK_o), goToSelected def)
     -- launch command prompt
     , ((modm, xK_p     ), spawn "dmenu_run")
     -- launch screensaver
@@ -300,7 +300,7 @@ ewmhCopyWindow ClientMessageEvent {
 ewmhCopyWindow _ = return (All True)
 
 newcolor = "#000000"
-dzenpp status = defaultPP {
+dzenpp status = def {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
               , ppCurrent           =   dzenColor "white" newcolor
               , ppVisible           =   dzenColor "blue" newcolor . workspaceClickable
