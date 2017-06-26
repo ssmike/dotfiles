@@ -319,7 +319,7 @@ dzenpp status = def {
                                             let wincount = length $ W.index windowset
                                             return $
                                                 if wincount > 1
-                                                    then Just $ show $ wincount
+                                                    then Just $ (show wincount) ++ " windows"
                                                     else Nothing
                                             )]
            }
