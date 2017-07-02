@@ -3,4 +3,9 @@
                   [lein-checkout-deps "1.0.0"]
                   [lein-try "0.4.3"]
                   [refactor-nrepl "1.1.0"]
-                  [com.jakemccrary/lein-test-refresh "0.20.0"]]}}
+                  [com.jakemccrary/lein-test-refresh "0.20.0"]
+                  [lein-ancient "0.6.10"]
+                  [jonase/eastwood "0.2.4"]
+                  [lein-bikeshed "0.4.1"]
+                  [lein-kibit "0.1.5"]
+                  [lein-cloverage "1.0.9"]]}}
