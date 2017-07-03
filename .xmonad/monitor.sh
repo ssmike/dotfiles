@@ -1,6 +1,5 @@
 #!/bin/bash
 killall dzen2
-killall stalonetray
 killall nm-applet
 if xrandr  | grep "DP1-1 connected"; then
     echo multiple
