@@ -1,6 +1,6 @@
 mailboxes =INBOX
 set imap_user = "ssmike"
-source "gpg -d ~/.mutt/pass |"
+source "gpg -d ~/.mutt/pass.gpg |"
 set folder=imaps://imap.yandex-team.ru/
 #set smtp_url=smtps://smtp.yandex-team.ru/
 #set sendmail="/usr/bin/msmtp"
