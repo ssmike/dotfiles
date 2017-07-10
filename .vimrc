@@ -45,6 +45,8 @@ Bundle "mhinz/vim-signify"
 Bundle "gnupg.vim"
 Bundle "tpope/vim-rhubarb"
 Bundle "tpope/vim-dispatch"
+Bundle "rust-lang/rust.vim"
+
 let g:dispatch_handlers = [
     \ 'tmux',
     \ 'headless',
@@ -381,3 +383,5 @@ endfunction
 nmap ,s :call SwitchSourceHeader()<CR>
 
 let g:ag_prg="rg --vimgrep --smart-case"
+
+let g:ycm_rust_src_path = '~/.local/rust/src/'
