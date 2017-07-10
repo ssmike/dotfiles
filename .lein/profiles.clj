@@ -8,4 +8,4 @@
                   [jonase/eastwood "0.2.4"]
                   [lein-bikeshed "0.4.1"]
                   [lein-kibit "0.1.5"]
-                  [lein-cloverage "1.0.9"]]}}
+                  [lein-cloverage "1.0.10-SNAPSHOT"]]}}
