@@ -379,3 +379,5 @@ function! SwitchSourceHeader()
 endfunction
 
 nmap ,s :call SwitchSourceHeader()<CR>
+
+let g:ag_prg="rg --vimgrep --smart-case"
