@@ -87,7 +87,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
       --exit
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_r     ), io (exitWith ExitSuccess))
+
     , ((modm, xK_a), sendMessage ToggleStruts)
     -- launch file manager
     , ((modm, xK_f), spawn "nautilus")
@@ -134,11 +135,13 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_Right), moveTo Next (WSIs notSP))
     , ((modm             , xK_Left), moveTo Prev (WSIs notSP))
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm              , xK_r     ), spawn "xmonad --recompile; xmonad --restart")
     --toggle workstation mode
     , ((modm .|. shiftMask, xK_a), spawn "~/.xmonad/toggle-helper.sh")
+
     , ((modm .|. shiftMask, xK_h), swapPrevScreen)
     , ((modm .|. shiftMask, xK_l), swapNextScreen)
+
     , ((modm              , xK_BackSpace), focusUrgent)
     , ((modm .|. shiftMask, xK_BackSpace), clearUrgents)
     ]
@@ -153,11 +156,11 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+    -- mod-{q,w,e}, Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{q,w,e}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        | (key, sc) <- zip [xK_q, xK_w, xK_e] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
 
