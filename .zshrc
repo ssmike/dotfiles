@@ -241,7 +241,7 @@ source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 get-arcadia() {
     local DIR=$1
     "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python - clone $DIR
-    echo "PATH=$PATH:~/$DIR" >> ~/.profile
+    echo 'PATH=$PATH:'$DIR >> ~/.profile
     $DIR/ya completion --zsh
     chmod 755 -R ~/.ya.completion
     exec zsh
