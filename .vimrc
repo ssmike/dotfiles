@@ -47,10 +47,10 @@ Bundle "tpope/vim-rhubarb"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
 
-let g:dispatch_handlers = [
-    \ 'tmux',
-    \ 'headless',
-    \ ]
+"let g:dispatch_handlers = [
+"    \ 'tmux',
+"   \ 'headless',
+"    \ ]
 
 let g:cider_no_maps=1 " Disable built-in mappings
 "just maps from set_up without <F4>-<F5>
@@ -192,7 +192,7 @@ set guiheadroom=0
 set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
 
-nmap S :SyntasticToggleMode<CR>
+
 
 imap <c-f> <c-x><c-f>
 
