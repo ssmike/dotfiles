@@ -138,13 +138,20 @@ syn on
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
-if has('gui_running')
+if exists('g:nyaovim_version') "nyaovim
+    colorscheme Tomorrow
+elseif has('gui_running') "gvim
     colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 13
 else
-    colorscheme pablo
+    colorscheme pablo "terminal
 endif
 
+if !has("nvim")
+    set guiheadroom=0
+else
+    Bundle 'mklabs/split-term.vim'
+endif
 
 map <TAB>p <Plug>(easymotion-prefix)
 " <L<TAB>ader>f{char} to move to {char}
@@ -186,14 +193,8 @@ set guioptions-=e
 set guioptions-=r
 set guioptions-=R
 
-if !has("nvim") 
-    set guiheadroom=0
-endif
-
 set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
-
-
 
 imap <c-f> <c-x><c-f>
 
