@@ -45,6 +45,7 @@ Bundle "gnupg.vim"
 Bundle "tpope/vim-rhubarb"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
+Bundle 'flazz/vim-colorschemes'
 
 "let g:dispatch_handlers = [
 "    \ 'tmux',
@@ -139,7 +140,7 @@ let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
 if exists('g:nyaovim_version') "nyaovim
-    colorscheme Tomorrow
+    colorscheme hornet
 elseif has('gui_running') "gvim
     colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 13
@@ -336,9 +337,9 @@ let NERDTreeIgnore = ['\.pyc$']
 
 highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
-highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#ffff00 guibg=#0000ff
+highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#6C6C6C guibg=#ffffff
 
-highlight SignColumn ctermbg=None
+highlight SignColumn ctermbg=None guibg=None
 highlight SignifySignDelete ctermbg=None ctermfg=red
 highlight SignifySignAdd ctermbg=None ctermfg=green
 highlight SignifySignChange ctermbg=None ctermfg=magenta
