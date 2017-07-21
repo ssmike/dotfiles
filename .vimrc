@@ -5,8 +5,6 @@
 set nocp
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
-set guiheadroom=0
-
 set nocompatible
 filetype off
 
@@ -188,7 +186,9 @@ set guioptions-=e
 set guioptions-=r
 set guioptions-=R
 
-set guiheadroom=0
+if !has("nvim") 
+    set guiheadroom=0
+endif
 
 set completeopt=menu,menuone
 let g:syntastic_enable_signs=1
