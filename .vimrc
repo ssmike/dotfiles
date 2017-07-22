@@ -339,7 +339,7 @@ highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#6C6C6C guibg=#ffffff
 
-highlight SignColumn ctermbg=None guibg=None
+silent! highlight SignColumn ctermbg=None guibg=None
 highlight SignifySignDelete ctermbg=None ctermfg=red
 highlight SignifySignAdd ctermbg=None ctermfg=green
 highlight SignifySignChange ctermbg=None ctermfg=magenta
