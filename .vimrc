@@ -208,6 +208,7 @@ nmap `m :set fdm=manual<CR>
 set completeopt-=preview
 set splitbelow
 
+Bundle "artur-shaik/vim-javacomplete2"
 autocmd Filetype java setlocal completefunc=javacomplete#Complete
 ""autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
