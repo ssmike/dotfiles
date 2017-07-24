@@ -36,7 +36,6 @@ Bundle "eagletmt/ghcmod-vim"
 Bundle "tpope/vim-salve"
 Bundle "clojure-vim/vim-cider"
 Bundle "tpope/vim-fireplace"
-Bundle "suan/vim-instant-markdown"
 Bundle "rking/ag.vim"
 Bundle "Chun-Yang/vim-action-ag"
 Bundle "glsl.vim"
@@ -52,6 +51,16 @@ Bundle 'flazz/vim-colorschemes'
 "   \ 'headless',
 "    \ ]
 
+if exists('g:nyaovim_version')
+    Bundle "rhysd/nyaovim-popup-tooltip"
+    Bundle "rhysd/nyaovim-markdown-preview"
+    Bundle "rhysd/nyaovim-mini-browser"
+    nnoremap <Leader>o :<C-u>MiniBrowser <C-r><C-p><CR>
+else
+    Bundle "suan/vim-instant-markdown"
+    let g:instant_markdown_slow = 1
+endif
+
 let g:cider_no_maps=1 " Disable built-in mappings
 "just maps from set_up without <F4>-<F5>
 nmap <buffer> cf <Plug>CiderFormat
@@ -65,8 +74,6 @@ nmap <buffer> cfs <Plug>RefactorFindSymbol
 let g:vc_browse_cache_all = 1
 
 let g:fugitive_github_domains=['github.yandex-team.ru']
-
-let g:instant_markdown_slow = 1
 
 let g:fugitive_git_executable = 'LANG=en git'
 
