@@ -54,7 +54,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 alias ls='ls --color=auto'
 
 
-export EDITOR=vim
+export EDITOR=vi
 
 if [ -f "$HOME/.zsh/default-keybinds" ]; then
     source "$HOME/.zsh/default-keybinds";
