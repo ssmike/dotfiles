@@ -415,6 +415,9 @@ function totp {
 }
 
 #alias hg="ya tool hg"
+if which rg >/dev/null; then
+    alias ag="rg";
+fi
 alias gst="git status"
 alias lein-repl="LEIN_FAST_TRAMPOLINE=y lein trampoline run -m clojure.main"
 alias popd="popd -q"
