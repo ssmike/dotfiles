@@ -421,7 +421,12 @@ fi
 alias gst="git status"
 alias lein-repl="LEIN_FAST_TRAMPOLINE=y lein trampoline run -m clojure.main"
 alias popd="popd -q"
-alias ls='ls --classify --color --human-readable --group-directories-first'
+if which exa >/dev/null; then
+    alias ls="exa"
+    # https://github.com/ogham/exa
+else
+    alias ls='ls --classify --color --human-readable --group-directories-first'
+fi
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias printFile="gtklp"
 alias akos-proxy="ssh -D 5222 akos -N"
