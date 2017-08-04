@@ -191,7 +191,7 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["2:web", "4:im"]
                                 (Full ||| all_equal ||| Mirror tiled) $
                             --["1:main", "5:fm", "6:doc"]
-                            all_equal ||| Full ||| my_mosaic
+                            all_equal ||| Full ||| (Mirror tiled)
                           )
   where
     modifiers = avoidStruts . minimize . B.boringWindows
