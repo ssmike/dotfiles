@@ -1,5 +1,5 @@
 #!/bin/bash
-VPN=`systemctl --no-pager | grep vpn-client | sed -e 's/^openvpn-client@\(.*\)\.service.*$/\1/g'`
+VPN=`systemctl --no-pager | grep ^openvpn-client | sed -e 's/^openvpn-client@\(.*\)\.service.*$/\1/g'`
 if [ x"$VPN" != x ]; then
-    echo [$VPN] 
+    echo [$VPN]
 fi
