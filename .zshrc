@@ -51,9 +51,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #[ ! "$UID" = "0" ] && [ $(bash -c $CLAWS) != 0 ] && echo "===========You have unread mail===========";
 
 
-alias ls='ls --color=auto'
-
-
 export EDITOR=vi
 
 if [ -f "$HOME/.zsh/default-keybinds" ]; then
