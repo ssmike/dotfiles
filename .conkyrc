@@ -1,10 +1,13 @@
-out_to_console yes
-out_to_x no
-update_interval 2
-total_run_times 0
-use_spacer none
+conky.config = {
+	out_to_console = true,
+	out_to_x = false,
+	update_interval = 2,
+	total_run_times = 0,
+	use_spacer = 'none',
 
-TEXT
+};
+
+conky.text = [[
 echo -n " ^fg(\#A09BA1)^ca(1,xte 'key Caps_Lock')${execi 1 skb -}^ca()^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)^ca(1, baobab ~)"
 echo -n " Free: ^fg(\#A09BA1) ${fs_free /}^fg(\#FFFFFF) ^ca()"
@@ -37,3 +40,4 @@ echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " DSpeed: ^fg(\#A09BA1)${downspeedf wlp1s0}KB^fg(\#FFFFFF)"
 
 echo
+]];
