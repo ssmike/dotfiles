@@ -261,6 +261,18 @@ nnoremap <A-r> 8gt
 
 command Print !gtklp %
 
+function! DisplayHiddenCharacters()
+    set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣,nbsp:+
+    set list
+endfunction
+
+function! HideHiddenCharacters()
+    set nolist
+endfunction
+
+command! Hide call HideHiddenCharacters()
+command! Show call DisplayHiddenCharacters()
+
 function! YDocFunction()
     exe ':YcmCompleter GetDoc'
 endfunction
