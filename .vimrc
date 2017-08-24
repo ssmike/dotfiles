@@ -28,7 +28,6 @@ Bundle "bling/vim-airline"
 Bundle "easymotion/vim-easymotion"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
-Bundle "Tagbar"
 Bundle "juneedahamed/vc.vim"
 Bundle "eagletmt/neco-ghc"
 Bundle "Shougo/vimproc.vim"
@@ -133,7 +132,6 @@ set splitright
 set splitbelow
 "nmap < :vertical resize -6<CR>
 "nmap > :vertical resize +6<CR>
-nmap <F5> :TagbarToggle<CR>
 nmap <F2> :NERDTree<CR>
 nmap  GVgg
 
