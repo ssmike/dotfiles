@@ -25,7 +25,6 @@ Bundle "chriskempson/vim-tomorrow-theme"
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
 Bundle "bling/vim-airline"
-Bundle "easymotion/vim-easymotion"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "juneedahamed/vc.vim"
@@ -159,32 +158,6 @@ else
     Bundle 'mklabs/split-term.vim'
 endif
 
-map <TAB>p <Plug>(easymotion-prefix)
-" <L<TAB>ader>f{char} to move to {char}
-map  <TAB>f <Plug>(easymotion-bd-f)
-nmap <TAB>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to mov<TAB> to {char}{char}
-nmap <TAB>s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <TAB>l <Plug>(easymotion-bd-jk)
-nmap <TAB>l <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <TAB>w <Plug>(easymotion-bd-w)
-nmap <TAB>w <Plug>(easymotion-overwin-w)
-
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-"map ? <Plug>(easymotion-sp)
-"omap ? <Plug>(easymotion-tp)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
 set nohlsearch
 
 set autochdir
