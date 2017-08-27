@@ -433,11 +433,12 @@ alias grep="grep --color -i -n "
 alias yvim="ya vim"
 alias ygdb="ya tool gdb"
 alias ymake="ya make -j4"
-alias valgrind="ya tool valgrind"
+alias yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc-svn/"
 alias -g yhg="ya tool hg"
 alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
+alias vf='vi `fzf`'
 
 alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
 alias less="less -r"
