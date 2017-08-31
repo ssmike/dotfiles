@@ -118,7 +118,7 @@ set number
 set relativenumber
 
 filetype plugin on
-autocmd! BufRead,BufNewFile *.tex   set makeprg=make
+
 autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
 autocmd! BufRead,BufNewFile *.go 	set filetype=go
 autocmd! BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl set filetype=glsl
@@ -263,13 +263,36 @@ set timeoutlen=300
 set mouse=a
 
 """ for tex
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-map <c-a> 
-map! <c-a> 
-nmap <c-a> GVgg
+function! DualLangMode() 
+    setlocal keymap=russian-jcukenwin
+    map <buffer> <c-a> 
+    map! <buffer> <c-a> 
+endfunction
 
+command Ru :call DualLangMode()
+
+""highlight lCursor guifg=NONE guibg=Cyan
+set spelllang=ru_yo,en_us
+
+autocmd! BufRead,BufNewFile *.tex   set makeprg=make
+
+let g:ycm_filetype_blacklist = {
+    \ 'tex' : 1
+    \}
+
+let g:tex_flavor='latex'
+
+function TexMode()
+    let g:tex_conceal = ""
+    setlocal iminsert=0
+    setlocal imsearch=0
+    setlocal spell
+    call DualLangMode()
+endfunction
+
+autocmd FileType tex call TexMode()
+
+nmap <c-a> GVgg
 imap jj <ESC>
 imap ii <ESC>
 nmap Q <c-w>
@@ -277,23 +300,12 @@ nmap Q <c-w>
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
-""highlight lCursor guifg=NONE guibg=Cyan
-set spelllang=ru_yo,en_us
-
-""autocmd FileType text setlocal spell
-"
-autocmd FileType tex setlocal spell
-
-let g:ycm_filetype_blacklist = {
-    \ 'tex' : 1
-    \}
 function! s:javap()
     setlocal ft=bytecode
     setl readonly nomodified | %!javap -c -s -verbose <afile>
 endfunction
 
 au BufReadCmd *.class  call s:javap()
-let g:tex_flavor='latex'
 
 "
 " YouCompleteMe options
@@ -320,7 +332,6 @@ nmap <c-e> :YcmCompleter GoToInclude<CR>
 autocmd Filetype c,cpp,python nmap <buffer> <c-]> :YcmCompleter GoToDeclaration<CR>
 autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
-autocmd FileType tex setlocal keymap=russian-jcukenwin
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
@@ -361,7 +372,6 @@ while parent <= 40
 endwhile
 unlet parent local_vimrc
 
-let g:tex_conceal = ""
 
 autocmd! bufwritepost ~/.vimrc execute "normal! :source ~/.vimrc"
 
