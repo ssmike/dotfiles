@@ -13,7 +13,6 @@ xbindkeys &
 #xscreensaver -no-splash &
 yandex-disk start &
 thunderbird &
-VK &
 Telegram &
 #xautolock -locker "slock" -time 10 -detectsleep &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
