@@ -1,10 +1,9 @@
 conky.config = {
-	out_to_console = true,
-	out_to_x = false,
-	update_interval = 2,
-	total_run_times = 0,
-	use_spacer = 'none',
-
+    out_to_console = true,
+    out_to_x = false,
+    update_interval = 2,
+    total_run_times = 0,
+    use_spacer = 'none',
 };
 
 conky.text = [[
@@ -34,8 +33,21 @@ echo -n " Time: ^fg(\#A09BA1)${time %k}:${time %M}^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " WIFI: ^fg(\#A09BA1)${wireless_essid wlp1s0}^fg(\#FFFFFF)"
 echo -n "(^fg(\#A09BA1)${execi 1 ~/.wifi-quality}^fg(\#FFFFFF))"
-echo -n "^fg(\#A09BA1)${execi 1 ~/.vpn-name}^fg(\#FFFFFF)"
-#4ECA31
+
+#echo -n "^fg(\#A09BA1)${execi 1 ~/.vpn-name}^fg(\#FFFFFF)"
+
+echo -n " ";
+if [ `systemctl is-active openvpn-client@yandex.service` = "active" ]; then
+    echo -n "^ca(1, systemctl stop openvpn-client@yandex.service)";
+    echo -n "^ca(3, systemctl restart openvpn-client@yandex.service)";
+    echo -n "^fg(\#FF1717)Y^fg(\#FFFFFF)";
+    echo -n "^ca()"
+else
+    echo -n "^ca(1, systemctl start openvpn-client@yandex.service)";
+    echo -n "^fg(\#2AB900)Y^fg(\#FFFFFF)";
+fi
+echo -n "^ca()"
+
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " DSpeed: ^fg(\#A09BA1)${downspeedf wlp1s0}KB^fg(\#FFFFFF)"
 
