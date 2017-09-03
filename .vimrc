@@ -2,6 +2,10 @@
 " nmap
 " vim -c ":BundleInstall"
 
+if has('nvim')
+    set rtp+=/usr/share/vim/vimfiles
+endif
+
 set nocp
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
@@ -263,7 +267,7 @@ set timeoutlen=300
 set mouse=a
 
 """ for tex
-function! DualLangMode() 
+function! DualLangMode()
     setlocal keymap=russian-jcukenwin
     map <buffer> <c-a> 
     map! <buffer> <c-a> 
