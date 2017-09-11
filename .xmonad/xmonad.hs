@@ -248,8 +248,8 @@ myEventHook e = do
 myStartupHook = do
     liftIO $ setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
     liftIO $ setEnv "XDG_CURRENT_DESKTOP" "GNOME" True
-    spawn "~/.xmonad/autostart.sh"
     spawn "~/.xmonad/dzen-auto.sh"
+    spawn "~/.xmonad/autostart.sh"
     spawn "xsetroot -cursor_name left_ptr"
     return ()
 
