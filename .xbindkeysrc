@@ -9,9 +9,15 @@
     XF86AudioLowerVolume
 "amixer -q sset Master toggle"
     XF86AudioMute
-"gnome-screenshot"
-    Print
 
+"shutter --full"
+    Print
+"shutter --select"
+    control + Print
+"shutter --window"
+    shift + Print
+"shutter --active"
+    alt + Print
 
 "~/.xmonad/nm.sh"
     control + alt + shift + m
