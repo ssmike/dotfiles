@@ -47,10 +47,19 @@ Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
 Bundle 'flazz/vim-colorschemes'
 
-"let g:dispatch_handlers = [
-"    \ 'tmux',
-"   \ 'headless',
-"    \ ]
+Bundle 'luochen1990/rainbow'
+let g:rainbow_active = 1
+
+let g:rainbow_conf = {
+    \   'guifgs': ['SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3'],
+    \   'ctermfgs': ['Darkblue','darkgray','darkgreen','darkcyan','darkred','darkmagenta','brown','gray','black','darkmagenta','Darkblue','brown','darkgreen','darkcyan','darkred'],
+    \   'operators': '_,_',
+    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \   'separately' : {
+    \       '*': 0,
+    \       'clojure': {}
+    \   }
+    \}
 
 if exists('g:nyaovim_version')
     Bundle "rhysd/nyaovim-popup-tooltip"
@@ -122,8 +131,8 @@ set relativenumber
 
 filetype plugin on
 
-autocmd! BufRead,BufNewFile *.rs 	set filetype=rust
-autocmd! BufRead,BufNewFile *.go 	set filetype=go
+autocmd! BufRead,BufNewFile *.rs    set filetype=rust
+autocmd! BufRead,BufNewFile *.go    set filetype=go
 autocmd! BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl set filetype=glsl
 
 " < ./inp<CR>
