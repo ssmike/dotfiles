@@ -137,7 +137,7 @@ pre-prompt() {
   LEFT="$LEFT%F{black}%B"
   local RIGHT="."
   #"%F{green}(%f%F{grey}%n%f%F{green})%f%F{black}%B.%f%b"
-  LEFT_P="$(print -P "$LEFT")"
+  local LEFT_P="$(print -P "$LEFT")"
   local RIGHT_P="$(print -P "$RIGHT")"
   local LEFTWIDTH=`get_visible_length "$LEFT_P"`
   local RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
