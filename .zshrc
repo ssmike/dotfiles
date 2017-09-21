@@ -440,7 +440,7 @@ alias -g yhg="ya tool hg"
 alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
 alias vf='vi `fzf`'
 
-alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
+alias mosh="LC_ALL=en_US.UTF-8 mosh"
 alias less="less -r"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
@@ -449,3 +449,5 @@ source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 compdef mosh=ssh
 # Allow mercurial completion for arcadia hg
 compdef yhg=hg
+
+source /home/ssmike/.yql/shell_completion
