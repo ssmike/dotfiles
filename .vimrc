@@ -47,17 +47,21 @@ Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
 Bundle 'flazz/vim-colorschemes'
 
+Bundle "l04m33/vlime", {'rtp': 'vim/'}
+let maplocalleader = "\<Space>"
+
 Bundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
 let g:rainbow_conf = {
     \   'guifgs': ['SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3'],
-    \   'ctermfgs': ['Darkblue','darkgray','darkgreen','darkcyan','darkred','darkmagenta','brown','gray','black','darkmagenta','Darkblue','brown','darkgreen','darkcyan','darkred'],
+    \   'ctermfgs': ['Darkblue','darkgray','darkgreen','darkcyan','darkred','darkmagenta','brown','gray','darkmagenta','Darkblue','brown','darkgreen','darkcyan','darkred'],
     \   'operators': '_,_',
     \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
     \   'separately' : {
     \       '*': 0,
-    \       'clojure': {}
+    \       'clojure': {},
+    \       'lisp': {}
     \   }
     \}
 
