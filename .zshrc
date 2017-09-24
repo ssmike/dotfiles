@@ -449,5 +449,3 @@ source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 compdef mosh=ssh
 # Allow mercurial completion for arcadia hg
 compdef yhg=hg
-
-source /home/ssmike/.yql/shell_completion
