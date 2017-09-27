@@ -1,0 +1,9 @@
+map x :q<CR>
+map j <down>
+map k <up>
+nnoremap J gT
+nnoremap K gt
+set hintchars=asdfgqwertzxcvb
+map D :tabdetach<CR>
+map > :tabm +1<CR>
+map < :tabm -1<CR>
