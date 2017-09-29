@@ -315,7 +315,7 @@ dzenpp status = def {
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
               , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable . deleteMinimize
-              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
+              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . titleClickable . dzenEscape
               , ppOutput            =   hPutStrLn status
               , ppExtras            = [withWindowSet $
                                         (\windowset -> do
@@ -328,7 +328,7 @@ dzenpp status = def {
            }
            where
             deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
-            layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ "^ca()"
-            titleClickable s = "^ca(1,xdotool key super+shift+c)" ++ s ++ "^ca()"
+            layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ " ^ca()"
+            titleClickable s = "^ca(1,xdotool key super+j)" ++ s ++ " ^ca()"
             workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
 
