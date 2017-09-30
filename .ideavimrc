@@ -1,0 +1,16 @@
+nmap <F3> :qa<CR>
+nmap <TAB> :bn<CR>
+nmap <BACKSPACE> :bp<CR>
+nmap s :w<CR>
+nmap Q <c-w>
+
+set wildmode=list:longest,full
+set splitright
+set splitbelow
+nmap  GVgg
+imap {<CR>  {<CR>}iiO
+imap {<SPACE>   {}<LEFT>
+
+imap jj <ESC>
+imap ii <ESC>
+set timeoutlen=300
