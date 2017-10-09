@@ -8,8 +8,6 @@ set wildmode=list:longest,full
 set splitright
 set splitbelow
 nmap  GVgg
-imap {<CR>  {<CR>}iiO
-imap {<SPACE>   {}<LEFT>
 
 imap jj <ESC>
 imap ii <ESC>
