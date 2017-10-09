@@ -425,20 +425,14 @@ else
     alias ls='ls --classify --color --human-readable --group-directories-first'
 fi
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
-alias printFile="gtklp"
-alias akos-proxy="ssh -D 5222 akos -N"
-alias pasteit='pastebinit -b "http://slexy.org"'
-alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
-alias yvim="ya vim"
+alias yvim="ya nvim"
 alias ygdb="ya tool gdb"
-alias ymake="ya make -j4"
 alias yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc-svn/"
 alias -g yhg="ya tool hg"
 alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
-alias vf='vi `fzf`'
 
 alias mosh="LC_ALL=en_US.UTF-8 mosh"
 alias less="less -r"
