@@ -6,8 +6,10 @@ conky.config = {
     use_spacer = 'none',
 };
 
+-- https://github.com/nonpop/xkblayout-state
+
 conky.text = [[
-echo -n " ^fg(\#A09BA1)^ca(1,xte 'key Caps_Lock')${execi 1 skb -}^ca()^fg(\#FFFFFF)"
+echo -n " ^fg(\#A09BA1)^ca(1,~/.xmonad/xkblayout-state set +1)${execi 1 ~/.xmonad/xkblayout-state print '%s'}^ca()^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)^ca(1, baobab ~)"
 echo -n " Free: ^fg(\#A09BA1) ${fs_free /}^fg(\#FFFFFF) ^ca()"
 echo -n " ^ca(1,pavucontrol)^fg(\#08FF00)\^fg(\#FFFFFF)"
