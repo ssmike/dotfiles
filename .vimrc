@@ -347,8 +347,6 @@ nmap <c-k> :YcmCompleter GetDoc<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 
 autocmd Filetype c,cpp,python nmap <buffer> <c-]> :YcmCompleter GoToDeclaration<CR>
-autocmd FileType c,cpp,objc nnoremap <c-k> :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <c-k> :ClangFormat<CR>
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
