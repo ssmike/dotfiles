@@ -137,7 +137,7 @@ pre-prompt() {
   LEFT="$LEFT%F{black}%B"
   local RIGHT="."
   #"%F{green}(%f%F{grey}%n%f%F{green})%f%F{black}%B.%f%b"
-  LEFT_P="$(print -P "$LEFT")"
+  local LEFT_P="$(print -P "$LEFT")"
   local RIGHT_P="$(print -P "$RIGHT")"
   local LEFTWIDTH=`get_visible_length "$LEFT_P"`
   local RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
@@ -425,22 +425,16 @@ else
     alias ls='ls --classify --color --human-readable --group-directories-first'
 fi
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
-alias printFile="gtklp"
-alias akos-proxy="ssh -D 5222 akos -N"
-alias pasteit='pastebinit -b "http://slexy.org"'
-alias gateway='ip route | grep default | cut -d" " -f3'
 alias grep="grep --color -i -n "
-alias yvim="ya vim"
+alias yvim="ya nvim"
 alias ygdb="ya tool gdb"
-alias ymake="ya make -j4"
 alias yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias st="svn status -q ~/arc-svn/"
 alias -g yhg="ya tool hg"
 alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
-alias vf='vi `fzf`'
 
-alias mosh="LC_ALL=en_US.UTF-8 mosh --server='~/bin/mosh-server'"
+alias mosh="LC_ALL=en_US.UTF-8 mosh"
 alias less="less -r"
 
 source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'

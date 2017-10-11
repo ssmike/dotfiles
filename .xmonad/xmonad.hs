@@ -42,13 +42,6 @@ import XMonad.Hooks.UrgencyHook
 myTerminal :: String
 myTerminal      = "gnome-terminal"
 
--- | modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
-
-myModMask       = mod4Mask
-
 myWorkspaces :: [String]
 myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:doc", "7:sci", "8:low", "9:etc"]
 
@@ -242,9 +235,6 @@ myManageHook =
         fM = ["Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
-myEventHook e = do
-    docksEventHook e
-
 myStartupHook = do
     liftIO $ setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
     liftIO $ setEnv "XDG_CURRENT_DESKTOP" "GNOME" True
@@ -257,6 +247,11 @@ myLogHook dzen = do
   dynamicLogWithPP $ dzenpp dzen
   --setWMName "LG3D"
 
+myEventHook =
+    ewmhDesktopsEventHook <+>
+    ewmhCopyWindow <+>
+    (handleEventHook kde4Config)
+
 main = do
     homePath <- E.getEnv "HOME"
     monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
@@ -266,7 +261,11 @@ main = do
             terminal           = myTerminal,
             focusFollowsMouse  = False,
             borderWidth        = 3,
-            modMask            = myModMask,
+            -- | modMask lets you specify which modkey you want to use. The default
+            -- is mod1Mask ("left alt").  You may also consider using mod3Mask
+            -- ("right alt"), which does not conflict with emacs keybindings. The
+            -- "windows key" is usually mod4Mask.
+            modMask            = mod3Mask,
             workspaces         = myWorkspaces,
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor,
@@ -275,9 +274,7 @@ main = do
             logHook            = myLogHook dzen,
             layoutHook         = smartBorders $  myLayout,
             manageHook         = myManageHook,
-            handleEventHook    = ewmhDesktopsEventHook <+>
-                                 ewmhCopyWindow <+>
-                                 handleEventHook kde4Config,
+            handleEventHook    = myEventHook,
             startupHook        = myStartupHook
         }
 
@@ -309,12 +306,12 @@ newcolor = "#000000"
 dzenpp status = def {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
               , ppCurrent           =   dzenColor "white" newcolor
-              , ppVisible           =   dzenColor "blue" newcolor . workspaceClickable
-              , ppHidden            =   dzenColor "#A09BA1" newcolor . workspaceClickable
+              , ppVisible           =   dzenColor "blue" newcolor
+              , ppHidden            =   dzenColor "#A09BA1" newcolor
               , ppUrgent            =   dzenColor "#ff0000" newcolor
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
-              , ppLayout            =   dzenColor "#A09BA1" newcolor . layoutClickable . deleteMinimize
+              , ppLayout            =   dzenColor "#A09BA1" newcolor . deleteMinimize
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
               , ppExtras            = [withWindowSet $
@@ -328,7 +325,7 @@ dzenpp status = def {
            }
            where
             deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
-            layoutClickable s = "^ca(1,xdotool key super+space)" ++ s ++ "^ca()"
-            titleClickable s = "^ca(1,xdotool key super+shift+c)" ++ s ++ "^ca()"
-            workspaceClickable s = "^ca(1,xdotool key super+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
+            layoutClickable s = "^ca(1,xdotool key alt+space)" ++ s ++ " ^ca()"
+            titleClickable s = "^ca(1,xdotool key alt+j)" ++ s ++ " ^ca()"
+            workspaceClickable s = "^ca(1,xdotool key alt+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
 
