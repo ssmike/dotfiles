@@ -306,13 +306,13 @@ newcolor = "#000000"
 dzenpp status = def {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
               , ppCurrent           =   dzenColor "white" newcolor
-              , ppVisible           =   dzenColor "blue" newcolor
-              , ppHidden            =   dzenColor "#A09BA1" newcolor
-              , ppUrgent            =   dzenColor "#ff0000" newcolor
+              , ppVisible           =   dzenColor "blue" newcolor . workspaceClickable
+              , ppHidden            =   dzenColor "#A09BA1" newcolor . workspaceClickable
+              , ppUrgent            =   dzenColor "#ff0000" newcolor . workspaceClickable
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
               , ppLayout            =   dzenColor "#A09BA1" newcolor . deleteMinimize
-              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
+              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . titleClickable . dzenEscape
               , ppOutput            =   hPutStrLn status
               , ppExtras            = [withWindowSet $
                                         (\windowset -> do
@@ -326,6 +326,7 @@ dzenpp status = def {
            where
             deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
             layoutClickable s = "^ca(1,xdotool key alt+space)" ++ s ++ " ^ca()"
-            titleClickable s = "^ca(1,xdotool key alt+j)" ++ s ++ " ^ca()"
-            workspaceClickable s = "^ca(1,xdotool key alt+" ++ (take 1 s) ++ ")" ++ s ++ "^ca()"
+            titleClickable s = "^ca(1,wmctrl -c :ACTIVE:)" ++ s ++ " ^ca()"
+            wnum name = (read :: [Char] -> Int) $ take 1 name
+            workspaceClickable s = "^ca(1,wmctrl -s " ++ show ((wnum s) - 1) ++ ")" ++ s ++ "^ca()"
 
