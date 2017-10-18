@@ -1,5 +1,3 @@
-set guiheadroom=0
-
 set nocompatible
 filetype off
 
