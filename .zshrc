@@ -326,7 +326,7 @@ function notify-error {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    ya notify "$2 failed"
+    ya notify "$2 failed on `hostname`"
   fi
 }
 
@@ -338,7 +338,7 @@ function notify-success() {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-     ya notify "$2 finished"
+     ya notify "$2 finished on `hostname`"
   fi
 }
 
