@@ -21,8 +21,7 @@ ZSH_HIGHLIGHT_STYLES=(
 
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 READNULLCMD=less
-NOTIFY_ICON="/usr/share/icons/gnome/32x32/apps/konsole.png"
-NOTIFY_COMMAND_TIMEOUT=30
+NOTIFY_COMMAND_TIMEOUT=90
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 if [[ $TERM == linux ]]; then
@@ -327,7 +326,7 @@ function notify-error {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -i $NOTIFY_ICON "$2 failed";
+    ya notify "$2 failed"
   fi
 }
 
@@ -339,7 +338,7 @@ function notify-success() {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -i $NOTIFY_ICON "$2 finished";
+     ya notify "$2 finished"
   fi
 }
 
