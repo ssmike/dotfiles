@@ -437,8 +437,6 @@ alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
 alias mosh="LC_ALL=en_US.UTF-8 mosh"
 alias less="less -r"
 
-source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
 # Allow SSH tab completion for mosh hostnames
 compdef mosh=ssh
 # Allow mercurial completion for arcadia hg
