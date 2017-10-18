@@ -6,7 +6,7 @@ fi
 blacklist=".git . .. make-symlinks.sh"
 for file in `ls -a`; do
     if ! grep $file <<<$blacklist; then
-        if [ -e ~/$file ] && [ ! -h ~/$file ]; then
+        if [ -e ~/$file ] && [ ! -h ~/$file ] && [ $FORCE != "1" ]; then
             rm -rf $file;
             mv ~/$file .;
         else
