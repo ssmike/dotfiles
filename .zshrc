@@ -388,7 +388,7 @@ insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^Z" insert-sudo
 
-alias yvim="ya vim"
+alias yvim="ya nvim"
 alias popd="popd -q"
 alias ls='ls --classify --color --human-readable --group-directories-first'
 alias gateway='ip route | grep default | cut -d" " -f3'
