@@ -314,7 +314,7 @@ notify_blacklist='ygdb mc tmux less nano yvim man htop ssh mosh tail'
 
 function store-command-stats() {
   last_command=$1
-  last_command_name=${1[(wr)^(*=*|sudo|ssh|-*)]}
+  last_command_name=${1[(wr)^(*=*|sudo|-*)]}
   start_time=`date "+%s"`
 }
 
@@ -344,7 +344,7 @@ function notify-success() {
 
 function notify-command-complete() {
   last_status=$?
-  if ! echo $notify_blacklist |  grep `echo $last_command | cut -d' ' -f1` >/dev/null 2>&1; then
+  if ! echo $notify_blacklist |  grep `echo $last_command_name | cut -d' ' -f1` >/dev/null 2>&1; then
     if [[ $last_status -gt "0" ]]; then
       notify-error "$start_time" "$last_command" 2>/dev/null
     elif [[ -n $start_time ]]; then
