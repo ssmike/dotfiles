@@ -297,11 +297,11 @@ extract () {
  fi
 }
 
-blacklist_regexp="^\(bpython|gdb|mc|livestreamer|okular|zathura|tmux|less|nano|vim|vi|mutt|man|qvim|gdb|fbless|htop\).*"
+notify_blacklist="bpython ygdb mc livestreamer okular zathura tmux less nano yvim mutt man qvim fbless htop"
 
 function store-command-stats() {
   last_command=$1
-  last_command_name=${1[(wr)^(*=*|sudo|ssh|-*)]}
+  last_command_name=${1[(wr)^(*=*|sudo|-*)]}
   start_time=`date "+%s"`
 }
 
@@ -331,7 +331,7 @@ function notify-success() {
 
 function notify-command-complete() {
   last_status=$?
-  if ! [[ $last_command =~ $blacklist_regexp ]]; then
+  if ! echo $notify_blacklist |  grep `echo $last_command_name | cut -d' ' -f1` >/dev/null 2>&1; then
     if [[ $last_status -gt "0" ]]; then
       notify-error "$start_time" "$last_command" 2>/dev/null
     elif [[ -n $start_time ]]; then
