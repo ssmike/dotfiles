@@ -346,7 +346,7 @@ nmap <c-x> :YcmCompleter GoToDefinition<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 
-autocmd Filetype c,cpp,python nmap <buffer> <c-]> :YcmCompleter GoToDeclaration<CR>
+autocmd Filetype c,cpp,python nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
