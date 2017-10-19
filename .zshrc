@@ -310,7 +310,7 @@ enum() {
   cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
-blacklist_regexp="^\(gdb|mc|tmux|less|nano|vim|man|gdb|htop|ssh|mosh|yvim|tail\).*"
+notify_blacklist='ygdb mc tmux less nano yvim man htop ssh mosh tail'
 
 function store-command-stats() {
   last_command=$1
@@ -344,7 +344,7 @@ function notify-success() {
 
 function notify-command-complete() {
   last_status=$?
-  if ! [[ $last_command =~ $blacklist_regexp ]]; then
+  if ! echo $notify_blacklist |  grep `echo $last_command | cut -d' ' -f1` >/dev/null 2>&1; then
     if [[ $last_status -gt "0" ]]; then
       notify-error "$start_time" "$last_command" 2>/dev/null
     elif [[ -n $start_time ]]; then
