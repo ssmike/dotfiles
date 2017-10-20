@@ -27,7 +27,6 @@ Bundle "dirkwallenstein/vim-localcomplete"
 Bundle "chriskempson/vim-tomorrow-theme"
 Bundle "mhinz/vim-startify"
 Bundle "ctrlp.vim"
-Bundle "bling/vim-airline"
 Bundle "scrooloose/nerdtree"
 Bundle "gerw/vim-latex-suite"
 Bundle "juneedahamed/vc.vim"
@@ -46,6 +45,10 @@ Bundle "tpope/vim-rhubarb"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
 Bundle 'flazz/vim-colorschemes'
+
+Bundle "vim-airline/vim-airline"
+Bundle "vim-airline/vim-airline-themes"
+let g:airline_theme='raven'
 
 Bundle "l04m33/vlime", {'rtp': 'vim/'}
 let maplocalleader = "\<Space>"
