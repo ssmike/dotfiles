@@ -310,7 +310,7 @@ enum() {
   cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
-notify_blacklist='ygdb mc tmux less nano yvim man htop ssh mosh tail which'
+notify_blacklist='ygdb mc tmux less nano yvim man htop ssh mosh tail watch'
 
 function store-command-stats() {
   last_command=$1
