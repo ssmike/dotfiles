@@ -19,33 +19,36 @@ call vundle#rc()
 filetype plugin indent on
 
 Bundle "Valloric/YouCompleteMe"
-Bundle "ludovicchabant/vim-lawrencium"
 Bundle "gmarik/vundle"
+
 Bundle "tpope/vim-fugitive"
 Bundle "gregsexton/gitv"
-Bundle "dirkwallenstein/vim-localcomplete"
-Bundle "chriskempson/vim-tomorrow-theme"
-Bundle "mhinz/vim-startify"
-Bundle "ctrlp.vim"
-Bundle "scrooloose/nerdtree"
-Bundle "gerw/vim-latex-suite"
 Bundle "juneedahamed/vc.vim"
+Bundle "tpope/vim-rhubarb"
+Bundle "mhinz/vim-signify"
+
 Bundle "eagletmt/neco-ghc"
 Bundle "Shougo/vimproc.vim"
 Bundle "eagletmt/ghcmod-vim"
+
 Bundle "tpope/vim-salve"
 Bundle "clojure-vim/vim-cider"
 Bundle "tpope/vim-fireplace"
+
 Bundle "rking/ag.vim"
 Bundle "Chun-Yang/vim-action-ag"
-Bundle "glsl.vim"
-Bundle "mhinz/vim-signify"
+
+Bundle "dirkwallenstein/vim-localcomplete"
+Bundle "ctrlp.vim"
+Bundle "gerw/vim-latex-suite"
 Bundle "gnupg.vim"
-Bundle "tpope/vim-rhubarb"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
-Bundle 'flazz/vim-colorschemes'
+Bundle "metakirby5/codi.vim"
 
+Bundle "mhinz/vim-startify"
+Bundle "chriskempson/vim-tomorrow-theme"
+Bundle 'flazz/vim-colorschemes'
 Bundle "vim-airline/vim-airline"
 Bundle "vim-airline/vim-airline-themes"
 let g:airline_theme='raven'
