@@ -48,7 +48,9 @@ Bundle "gerw/vim-latex-suite"
 Bundle "gnupg.vim"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
+
 Bundle "metakirby5/codi.vim"
+let g:codi#sync = 0
 
 Bundle "mhinz/vim-startify"
 Bundle "chriskempson/vim-tomorrow-theme"
