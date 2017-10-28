@@ -27,9 +27,9 @@ Bundle "juneedahamed/vc.vim"
 Bundle "tpope/vim-rhubarb"
 Bundle "mhinz/vim-signify"
 
-Bundle "eagletmt/neco-ghc"
-Bundle "Shougo/vimproc.vim"
-Bundle "eagletmt/ghcmod-vim"
+Bundle 'bitc/vim-hdevtools'
+au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
+au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
 Bundle "tpope/vim-salve"
 Bundle "clojure-vim/vim-cider"
