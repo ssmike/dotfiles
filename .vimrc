@@ -31,6 +31,10 @@ Bundle 'bitc/vim-hdevtools'
 au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
 au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
+Bundle 'vim-syntastic/syntastic'
+let g:syntastic_mode_map = {"mode": "active", "passive_filetypes": ["python"]}
+nnoremap <c-s> :SyntasticCheck<CR>
+
 Bundle "tpope/vim-salve"
 Bundle "clojure-vim/vim-cider"
 Bundle "tpope/vim-fireplace"
@@ -229,14 +233,6 @@ autocmd BufRead *.lucius setlocal ft=lucius
 autocmd BufRead *.dhtml setlocal ft=django
 
 let g:ycm_confirm_extra_conf = 0
-let g:syntastic_cpp_compiler='clang++'
-let g:syntastic_cpp_compiler_options=' -std=c++11'
-if !exists("g:syntastic_c_compiler")
-    let g:syntastic_c_compiler="gcc"
-endif
-if !exists("g:syntastic_c_compiler_options")
-    let g:syntastic_c_compiler_options='-ansi -pedantic -Wall'
-endif
 
 "x11 clipboard"
 "vmap . "+
@@ -333,9 +329,9 @@ au BufReadCmd *.class  call s:javap()
 " YouCompleteMe options
 "
 
-let g:ycm_register_as_syntastic_checker = 1 "default 1
+let g:ycm_register_as_syntastic_checker = 0 "default 1
 let g:Show_diagnostics_ui = 1 "default 1
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
 
 "will put icons in Vim's gutter on lines that have a diagnostic set.
 "Turning this off will also turn off the YcmErrorLine and YcmWarningLine
