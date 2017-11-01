@@ -198,11 +198,16 @@ swap() {
             echo "wrong usage";
             exit 1;
         fi
-        binary_path=$1
-        binary_name=`echo $1 | rev | cut -d'/' -f1 | rev`
+        local binary_path=$1
+        local binary_name=`echo $1 | rev | cut -d'/' -f1 | rev`
         target=`readlink /Berkanavt/bin/$binary_name`
         echo -n "cp $binary_path $target.new;"
         echo -n "mv $target.new $target;"
+        typeset -A services
+        services=(agglomerative_clusterd clusterd driver make_3days_news)
+        if [[ $services[$binary_name] != "" ]]; then
+            binary_name=$services[$binary_name]
+        fi
         rc_script="/Berkanavt/bin/news/rc/$binary_name"
         rc_log="/Berkanavt/news/logs/$binary_name"
         if [ -z "$2" ]; then
