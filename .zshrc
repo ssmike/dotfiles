@@ -24,35 +24,22 @@ READNULLCMD=less
 NOTIFY_COMMAND_TIMEOUT=90
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-if [[ $TERM == linux ]]; then
-    setfont cyr-sun16
-else
-  export TERM=xterm-256color
-fi;
-
 alias ls='ls --color=auto'
-
 
 export EDITOR=vim
 
-bindkey "^[OC" forward-word
-bindkey "^[OD" backward-word
-bindkey "^[[0~" beginning-of-line
-bindkey "^[OH" beginning-of-line
-bindkey "^[[H" beginning-of-line
-bindkey "[1~" beginning-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^[[F" end-of-line
-bindkey "^[OF" end-of-line
-bindkey "[3~" delete-char
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey "[5~" up-line-or-history
-bindkey "[6~" down-line-or-history
-bindkey "[2~" quote-line
-bindkey "^R" history-incremental-search-backward
-bindkey "^[[1;3D" backward-delete-word
-bindkey "^[[1;3C" delete-word
+if [ -f "$HOME/.zsh/default-keybinds" ]; then
+    source "$HOME/.zsh/default-keybinds";
+fi
+
+if [ -f "$HOME/.zsh/$TERM-keybinds" ]; then
+    source "$HOME/.zsh/$TERM-keybinds";
+fi
+
+function bind-key() {
+    $EDITOR $HOME/.zsh/$TERM-keybinds
+    exec zsh;
+}
 
 setopt prompt_subst
 autoload -U promptinit
