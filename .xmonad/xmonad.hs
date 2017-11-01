@@ -13,7 +13,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
 import System.IO
 import XMonad.Hooks.ManageHelpers
-import XMonad.Actions.CycleWS
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Cross
 import XMonad.Prompt
@@ -63,8 +62,8 @@ myXPConfig = def {
         bgColor = "#000000"
     ,   fgColor = "#FFFFFF" -- "#5D69B4"
     ,   borderColor = "#3CB424"
-    --,   font = "Ubuntu Mono 17"
-    ,   height = 30
+    ,   height = 24
+    ,   font = "-misc-fixed-*-*-*-*-18-*-*-*-*-*-*-*"
 }
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -80,7 +79,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
       --exit
-    , ((modm .|. shiftMask, xK_r     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_r     ), io exitSuccess)
 
     , ((modm, xK_a), sendMessage ToggleStruts)
     -- launch file manager
@@ -89,14 +88,13 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:doc")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:sci")
-    -- open window selection menu
-    , ((modm, xK_o), goToSelected def)
     -- launch command prompt
     , ((modm, xK_p     ), spawn "dmenu_run")
     -- launch screensaver
     , ((controlMask .|. shiftMask , xK_l), spawn "slock")
     --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
+    --switch layout
     , ((modm,               xK_space ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
@@ -127,10 +125,13 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_Right), moveTo Next (WSIs notSP))
-    , ((modm             , xK_Left), moveTo Prev (WSIs notSP))
+    , ((modm              , xK_Left), moveTo Prev (WSIs notSP))
     , ((modm              , xK_r     ), spawn "xmonad --recompile; xmonad --restart")
     --toggle workstation mode
     , ((modm .|. shiftMask, xK_a), spawn "~/.xmonad/toggle-helper.sh")
+
+    --prompt with windows from current workspace
+    , ((modm, xK_o), windowPrompt myXPConfig Bring wsWindows)
 
     , ((modm .|. shiftMask, xK_h), swapPrevScreen)
     , ((modm .|. shiftMask, xK_l), swapNextScreen)
