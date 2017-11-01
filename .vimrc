@@ -53,7 +53,6 @@ Bundle "metakirby5/codi.vim"
 let g:codi#sync = 0
 
 Bundle "mhinz/vim-startify"
-Bundle "chriskempson/vim-tomorrow-theme"
 Bundle 'flazz/vim-colorschemes'
 Bundle "vim-airline/vim-airline"
 Bundle "vim-airline/vim-airline-themes"
@@ -174,6 +173,7 @@ set laststatus=2
 if exists('g:nyaovim_version') "nyaovim
     colorscheme hornet
 elseif has('gui_running') "gvim
+    Bundle "chriskempson/vim-tomorrow-theme"
     colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 13
 else
