@@ -1,9 +1,8 @@
 source /etc/profile
 source ~/.profile
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 bindkey '^E' autosuggest-accept
 
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -227,8 +226,6 @@ swap() {
     sudo -u ynews bash -c "`swap-impl $@`"
 }
 
-source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
 get-arcadia() {
     local DIR=$1
     "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python - clone $DIR
@@ -394,5 +391,8 @@ alias json="python -m json.tool"
 alias svn="ya tool svn"
 alias -g bn="/Berkanavt/news/"
 
-export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
-export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
+if [ -d ~/.ya ]; then 
+    export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
+    export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
+    source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
+fi
