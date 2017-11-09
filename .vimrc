@@ -222,11 +222,6 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
 let g:ycm_semantic_triggers = {'haskell' : ['.'], 'clojure' : ['/', '.']}
 
-nmap <C-t> :GhcModType<CR>
-imap <C-t> <C-O>:GhcModType<CR>
-" TODO: vmap keybinding
-nmap <C-F9> :GhcModCheck<CR>
-
 autocmd BufRead *.gradle setlocal ft=groovy
 autocmd BufRead *.hamlet setlocal ft=hamlet
 autocmd BufRead *.julius setlocal ft=julius
