@@ -412,6 +412,9 @@ function totp {
 }
 
 #alias hg="ya tool hg"
+if which aws >/dev/null; then
+    complete -C aws_completer aws
+fi
 if which rg >/dev/null; then
     alias ag="rg";
 fi
