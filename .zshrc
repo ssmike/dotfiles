@@ -203,7 +203,7 @@ swap() {
         echo -n "cp $binary_path $target.new;"
         echo -n "mv $target.new $target;"
         typeset -A services
-        services=(agglomerative_clusterd clusterd driver make_3days_news)
+        services=(agglomerative_clusterd clusterd driver make_3days_news news_storage storage)
         if [[ $services[$binary_name] != "" ]]; then
             binary_name=$services[$binary_name]
         fi
