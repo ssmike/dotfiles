@@ -313,7 +313,7 @@ dzenpp status = def {
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
               , ppLayout            =   dzenColor "#A09BA1" newcolor . deleteMinimize
-              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . titleClickable . dzenEscape
+              , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
               , ppExtras            = [withWindowSet $
                                         (\windowset -> do
