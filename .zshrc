@@ -235,6 +235,10 @@ get-arcadia() {
     exec zsh
 }
 
+svn-cleanup() {
+    svn status $1 | grep '^?' | awk '{print $2}' | xargs rm
+}
+
 name() {
     name=$1
     vared -c -p 'rename to: ' name
