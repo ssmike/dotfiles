@@ -236,7 +236,7 @@ get-arcadia() {
 }
 
 svn-cleanup() {
-    svn status $1 | grep '^?' | awk '{print $2}' | xargs rm
+    ya tool svn status $1 | grep '^?' | awk '{print $2}' | xargs rm
 }
 
 name() {
