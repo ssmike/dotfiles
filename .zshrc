@@ -393,15 +393,6 @@ function docker-clean() {
   docker rmi $(docker images -f dangling=true -q)
 }
 
-function get-arcadia() {
-    local DIR=$1
-    "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python - clone $DIR
-    echo 'PATH=$PATH:'$DIR >> ~/.profile
-    $DIR/ya completion --zsh
-    chmod 755 -R ~/.ya.completion
-    exec zsh
-}
-
 function set-title() {
     echo -ne "\033]0;$@\007"
 }
@@ -411,7 +402,6 @@ function totp {
     eval oathtool --totp \$$1 --base32
 }
 
-#alias hg="ya tool hg"
 if which aws >/dev/null; then
     complete -C aws_completer aws
 fi
@@ -429,18 +419,30 @@ else
 fi
 alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias grep="grep --color -i -n "
-alias yvim="ya nvim"
-alias ygdb="ya tool gdb"
-alias yvalgrind="ya tool valgrind"
-alias json="python -m json.tool"
-alias st="svn status -q ~/arc-svn/"
-alias -g yhg="ya tool hg"
-alias hg-patch='yhg diff -r . -r `hg debugancestor . default`'
 
 alias mosh="LC_ALL=en_US.UTF-8 mosh"
 alias less="less -r"
 
 # Allow SSH tab completion for mosh hostnames
 compdef mosh=ssh
+
+function get-arcadia() {
+    local DIR=$1
+    "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python - clone $DIR
+    echo 'PATH=$PATH:'$DIR >> ~/.profile
+    $DIR/ya completion --zsh
+    chmod 755 -R ~/.ya.completion
+    exec zsh
+}
+
+# arcadia-related stuff
+alias -g ya="~/arc/junk/ssmike/ymake/run.sh ya"
+source ~/.ya.completion/zsh/ya 2>/dev/null # YA_COMPLETION NAME='ya'
+alias yvim="ya nvim"
+alias ygdb="ya tool gdb"
+alias yvalgrind="ya tool valgrind"
+alias json="python -m json.tool"
+alias st="svn status -q ~/arc-svn/"
+
 # Allow mercurial completion for arcadia hg
 compdef yhg=hg
