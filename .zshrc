@@ -428,7 +428,7 @@ compdef mosh=ssh
 
 function get-arcadia() {
     local DIR=$1
-    "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python - clone $DIR
+    "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python2 - clone $DIR
     echo 'PATH=$PATH:'$DIR >> ~/.profile
     $DIR/ya completion --zsh
     chmod 755 -R ~/.ya.completion
