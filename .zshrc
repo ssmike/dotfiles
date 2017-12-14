@@ -417,7 +417,6 @@ if which exa >/dev/null; then
 else
     alias ls='ls --classify --color --human-readable --group-directories-first'
 fi
-alias battery="acpi -b | sed -e 's/.* \([0-9]*\)%.*$/\1/g'"
 alias grep="grep --color -i -n "
 
 alias mosh="LC_ALL=en_US.UTF-8 mosh"
@@ -435,14 +434,11 @@ function get-arcadia() {
     exec zsh
 }
 
-# arcadia-related stuff
-alias -g ya="~/arc/junk/ssmike/ymake/run.sh ya"
+alias json="python -m json.tool"
 source ~/.ya.completion/zsh/ya 2>/dev/null # YA_COMPLETION NAME='ya'
 alias yvim="ya nvim"
 alias ygdb="ya tool gdb"
 alias yvalgrind="ya tool valgrind"
-alias json="python -m json.tool"
-alias st="svn status -q ~/arc-svn/"
 
 # Allow mercurial completion for arcadia hg
 compdef yhg=hg
