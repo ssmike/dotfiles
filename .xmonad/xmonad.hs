@@ -182,7 +182,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
                             onWorkspaces ["3:code", "7:sci"] -- make room for coding
                                 (my_mosaic ||| Full ||| Mirror tiled) $
-                            onWorkspaces ["2:web", "4:im"]
+                            onWorkspaces ["2:web", "4:im", "8:low"]
                                 (Full ||| all_equal ||| Mirror tiled) $
                             --["1:main", "5:fm", "6:doc"]
                             all_equal ||| Full ||| (Mirror tiled)
@@ -223,7 +223,7 @@ myManageHook =
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
         aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
-        game = ["Steam", "dota_linux", "XCOM: Enemy Within"]
+        game = ["vlc", "Steam", "dota_linux", "XCOM: Enemy Within"]
         math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         doc = ["Dia", "calibre", "FBReader", "Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Vivaldi-stable", "Vivaldi-snapshot", "orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
