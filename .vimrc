@@ -289,7 +289,7 @@ command Ru :call DualLangMode()
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
 
-autocmd! BufRead,BufNewFile *.tex   set makeprg=make
+autocmd! BufRead,BufNewFile *.tex   setlocal makeprg=make
 
 let g:ycm_filetype_blacklist = {
     \ 'tex' : 1
@@ -345,7 +345,7 @@ nmap <c-x> :YcmCompleter GoToDefinition<CR>
 nmap <c-e> :YcmCompleter GoToInclude<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 
-autocmd Filetype c,cpp,python nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
+autocmd Filetype c,cpp,python,rust nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
@@ -400,3 +400,4 @@ nmap ,s :call SwitchSourceHeader()<CR>
 let g:ag_prg="rg --vimgrep --smart-case"
 
 let g:ycm_rust_src_path = '~/.local/rust/src/'
+autocmd! BufRead,BufNewFile *.rs    setlocal makeprg=cargo
