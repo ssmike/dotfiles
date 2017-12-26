@@ -251,6 +251,10 @@ makeproject() {
     make edit
 }
 
+mypy-venv() {
+    export MYPYPATH=`python -c "import sys; print(sys.path[-1])"`
+}
+
 alias mkproject="makeproject c++ "
 alias mkjproject="makeproject java "
 alias mkpproject="makeproject python "
