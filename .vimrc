@@ -58,6 +58,11 @@ let g:ale_linters = {
 let g:ale_pattern_options = {
 \ 'sandbox-tasks/projects/resource_types.py$': {'ale_linters': [], 'ale_fixers': []},
 \}
+
+Bundle "Tagbar"
+autocmd! BufRead,BufEnter,BufReadPost */sandbox-tasks/projects/resource_types.py let b:tagbar_ignore = 1
+nmap t :TagbarToggle<CR>
+
 Bundle "mhinz/vim-startify"
 Bundle 'flazz/vim-colorschemes'
 Bundle "vim-airline/vim-airline"
