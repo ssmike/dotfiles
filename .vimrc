@@ -345,9 +345,6 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
-nmap <c-c> :YcmCompleter GoToDeclaration<CR>
-nmap <c-x> :YcmCompleter GoToDefinition<CR>
-nmap <c-e> :YcmCompleter GoToInclude<CR>
 nmap <c-k> :YcmCompleter GetDoc<CR>
 
 autocmd Filetype c,cpp,python,rust nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
