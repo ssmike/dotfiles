@@ -31,10 +31,6 @@ Bundle 'bitc/vim-hdevtools'
 au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
 au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
-Bundle 'vim-syntastic/syntastic'
-let g:syntastic_mode_map = {"mode": "active", "passive_filetypes": ["python"]}
-nnoremap <c-s> :SyntasticCheck<CR>
-
 Bundle "tpope/vim-salve"
 Bundle "clojure-vim/vim-cider"
 Bundle "tpope/vim-fireplace"
@@ -52,6 +48,16 @@ Bundle "rust-lang/rust.vim"
 Bundle "metakirby5/codi.vim"
 let g:codi#sync = 0
 
+Bundle "w0rp/ale"
+let g:ale_linters = {
+            \   'cpp': [],
+            \   'python': ['mypy', 'flake8']
+            \}
+
+"this shitty big file
+let g:ale_pattern_options = {
+\ 'sandbox-tasks/projects/resource_types.py$': {'ale_linters': [], 'ale_fixers': []},
+\}
 Bundle "mhinz/vim-startify"
 Bundle 'flazz/vim-colorschemes'
 Bundle "vim-airline/vim-airline"
@@ -201,7 +207,6 @@ set guioptions-=r
 set guioptions-=R
 
 set completeopt=menu,menuone
-let g:syntastic_enable_signs=1
 
 imap <c-f> <c-x><c-f>
 
