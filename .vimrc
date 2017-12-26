@@ -54,13 +54,8 @@ let g:ale_linters = {
             \   'python': ['mypy', 'flake8']
             \}
 
-"this shitty big file
-let g:ale_pattern_options = {
-\ 'sandbox-tasks/projects/resource_types.py$': {'ale_linters': [], 'ale_fixers': []},
-\}
-
 Bundle "Tagbar"
-autocmd! BufRead,BufEnter,BufReadPost */sandbox-tasks/projects/resource_types.py let b:tagbar_ignore = 1
+"is disabled in LargeFile
 nmap t :TagbarToggle<CR>
 
 Bundle "mhinz/vim-startify"
@@ -411,3 +406,16 @@ let g:ag_prg="rg --vimgrep --smart-case"
 
 let g:ycm_rust_src_path = '~/.local/rust/src/'
 autocmd! BufRead,BufNewFile *.rs    setlocal makeprg=cargo
+
+" file is large from 100K
+let g:LargeFile = 1024 * 100
+augroup LargeFile
+ autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+augroup END
+
+function LargeFile()
+ let b:tagbar_ignore = 1
+ let b:ale_linters = []
+ " display message
+ autocmd VimEnter *  echo "The file larger than " . (g:LargeFile / 1024) . " KB, some plugins are disabled."
+endfunction
