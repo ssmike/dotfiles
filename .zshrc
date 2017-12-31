@@ -1,12 +1,10 @@
-source /etc/profile
-source ~/.profile
+source /etc/profile 2>/dev/null
+source ~/.zprofile 2>/dev/null
+source ~/.profile 2>/dev/null
 
-source virtualenvwrapper_lazy.sh
+source virtualenvwrapper_lazy.sh 2>/dev/null
 
 export GOOGLE=8.8.8.8
-
-export A=~/arc/
-export ext=$A/library/http/fetch/exthttpcodes.h
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
