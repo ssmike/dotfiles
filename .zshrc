@@ -395,6 +395,16 @@ alias json="python -m json.tool"
 alias svn="ya tool svn"
 alias -g bn="/Berkanavt/news/"
 
+if which rg >/dev/null; then
+    alias ag="rg";
+fi
+if which exa >/dev/null; then
+    alias ls="exa"
+    # https://github.com/ogham/exa
+else
+    alias ls='ls --classify --color --human-readable --group-directories-first'
+fi
+
 if [ -d ~/.ya ]; then 
     export ASAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
     export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
