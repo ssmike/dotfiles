@@ -1,6 +1,4 @@
-source /etc/profile 2>/dev/null
 source ~/.zprofile 2>/dev/null
-source ~/.profile 2>/dev/null
 
 source virtualenvwrapper_lazy.sh 2>/dev/null
 
