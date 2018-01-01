@@ -21,6 +21,9 @@ filetype plugin indent on
 Bundle "Valloric/YouCompleteMe"
 Bundle "gmarik/vundle"
 
+Bundle "LnL7/vim-nix"
+autocmd! BufRead,BufNewFile *.nix    set filetype=nix
+
 Bundle "tpope/vim-fugitive"
 Bundle "gregsexton/gitv"
 Bundle "juneedahamed/vc.vim"
