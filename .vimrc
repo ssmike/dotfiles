@@ -54,7 +54,7 @@ let g:codi#sync = 0
 Bundle "w0rp/ale"
 let g:ale_linters = {
             \   'cpp': [],
-            \   'python': ['mypy', 'flake8']
+            \   'python': ['pylint', 'flake8']
             \}
 
 Bundle "Tagbar"
