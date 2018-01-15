@@ -48,9 +48,6 @@ Bundle "gnupg.vim"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
 
-Bundle "metakirby5/codi.vim"
-let g:codi#sync = 0
-
 Bundle "w0rp/ale"
 let g:ale_linters = {
             \   'cpp': [],
@@ -366,8 +363,6 @@ highlight SignifySignAdd ctermbg=None ctermfg=green
 highlight SignifySignChange ctermbg=None ctermfg=magenta
 
 au FileType mail let b:delimitMate_autoclose = 0
-
-"match ErrorMsg '\%>80v.\+'
 
 nmap ]] :cn<CR>
 nmap [[ :cp<CR>

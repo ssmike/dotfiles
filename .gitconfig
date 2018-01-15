@@ -7,4 +7,4 @@
   conflictstyle = diff3
 
 [credential]
-	helper = cache --timeout=3600
+	helper = /usr/lib/git-core/git-credential-libsecret

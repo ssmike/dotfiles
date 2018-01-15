@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-for f in ~/Downloads/**/*.{avi,mp4,mkv}; do
-    ln -s $f ~/Videos/
+for ext in avi mp4 mkv mpeg; do
+    find -iname "*.$ext" -exec -s {} ~/Videos/ \;
 done
 
 for f in ~/Videos/*; do
