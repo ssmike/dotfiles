@@ -417,6 +417,11 @@ function set-title() {
     echo -ne "\033]0;$@\007"
 }
 
+function update-term-title() {
+    set-title `print -P %m: %~`
+}
+add-zsh-hook precmd update-term-title
+
 function totp {
     eval `gpg -d ~/.secrets.gpg`
     eval oathtool --totp \$$1 --base32
