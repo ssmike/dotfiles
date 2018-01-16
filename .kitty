@@ -17,7 +17,7 @@ bold_font        Source Code Pro Bold
 bold_italic_font Source Code Pro Bold Italic
 
 # Font size (in pts)
-font_size        12.0
+font_size        11.0
 
 # The amount the font size is changed by (in pts) when increasing/decreasing
 # the font size in a running terminal.
@@ -197,13 +197,13 @@ inactive_border_color #cccccc
 inactive_text_alpha 1.0
 
 # Tab-bar customization
-active_tab_foreground #000
-active_tab_background #eee
+active_tab_foreground #eee
+active_tab_background #000000
 active_tab_font_style bold-italic
 inactive_tab_foreground #eee
-inactive_tab_background #444444
+inactive_tab_background #000000
 inactive_tab_font_style normal
-tab_separator " \"
+tab_separator " \ "
 
 
 # The 16 terminal colors. There are 8 basic colors, each color has a dull and
