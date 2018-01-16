@@ -11,6 +11,7 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 set nocompatible
 filetype off
+set title
 
 set rtp+=~/.vim/bundle/vundle/
 
