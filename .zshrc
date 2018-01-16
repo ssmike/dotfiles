@@ -73,6 +73,26 @@ function zshexit() {
     clear
 }
 
+typeset -A COLOR
+COLOR=(
+    "black"         0
+    "br-black"      8
+    "red"           1
+    "br-red"        9
+    "green"         2
+    "br-green"      10
+    "yellow"        3
+    "br-yellow"     11
+    "blue"          4
+    "br-blue"       12
+    "magenta"       5
+    "br-magenta"    13
+    "cyan"          6
+    "br-cyan"       14
+    "white"         7
+    "br-white"      15
+)
+
 function get_hg_branch() {
     max_depth=${#${PWD//[^\/]}}
     i=1
@@ -96,17 +116,17 @@ function with_cvs() {
     local PWD_STYLE=$1
     svn_url=`svn info . 2>/dev/null | grep Relative | cut -d ':' -f3`
     if [ "x$svn_url" != "x" ]; then
-        echo -n "%F{red}svn%f on%F{yellow}%B$svn_url%b%f";
+        echo -n "%F{$COLOR[red]}svn%f on%F{$COLOR[br-yellow]}$svn_url%f";
         return 0;
     fi
     git_branch=`git symbolic-ref HEAD 2>/dev/null | sed -e "s/refs\/heads\///"`
     if [ "x$git_branch" != "x" ]; then
-        echo -n "%F{red}git%f on %F{green}$git_branch%f : $PWD_STYLE";
+        echo -n "%F{$COLOR[red]}git%f on %F{$COLOR[green]}$git_branch%f : $PWD_STYLE";
         return 0;
     fi
     hg_branch=`get_hg_branch 2>/dev/null`
     if [ "x$hg_branch" != "x" ]; then
-        echo -n "%F{red}hg%f on %F{magenta}$hg_branch%f : $PWD_STYLE";
+        echo -n "%F{$COLOR[red]}hg%f on %F{$COLOR[magenta]}$hg_branch%f : $PWD_STYLE";
         return 0;
     fi
     echo -n "$PWD_STYLE"
@@ -121,16 +141,16 @@ get_visible_length() {
 }
 
 pre-prompt() {
-  local PREPROMPT="%F{yellow}%m%f%F{blue}/%f"
-  local PWD_STYLE="%B%F{blue}%2~%b%f"
-  [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
+  local PREPROMPT="%F{$COLOR[yellow]}%m%f%F{$COLOR[blue]}/%f"
+  local PWD_STYLE="%F{$COLOR[br-blue]}%2~%f"
+  [  "$UID" = "0" ] && PWD_STYLE="%F{$COLOR[br-red]}%2~%f"
   local WITH_CVS=`with_cvs "$PWD_STYLE"`
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%f%b$PREPROMPT$WITH_CVS%B%F{green})%b"
+  local LEFT="%F{$COLORS[br-black]}.%f%F{$COLOR[br-green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[br-green]})%f"
   if [ ! -z $VIRTUAL_ENV ]; then
-    LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
+    LEFT="$LEFT%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
   # -- color
-  LEFT="$LEFT%F{black}%B"
+  LEFT="$LEFT%F{$COLOR[br-black]}"
   local RIGHT="."
   #"%F{green}(%f%F{grey}%n%f%F{green})%f%F{black}%B.%f%b"
   local LEFT_P="$(print -P "$LEFT")"
@@ -139,10 +159,10 @@ pre-prompt() {
   local RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   local RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
-    PWD_STYLE="%B%F{blue}%1~%b%f"
-    [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%1~%b%f"
-    LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$PWD_STYLE%B%F{green})%b"
-    LEFT="$LEFT%F{black}%B"
+    PWD_STYLE="%F{$COLOR[br-blue]}%1~%f"
+    [  "$UID" = "0" ] && PWD_STYLE="%F{$COLOR[br-red]}%1~%f"
+    LEFT="%F{$COLOR[br-black]}.%f%F{$COLOR[br-green]}($PREPROMPT$PWD_STYLE%F{$COLOR[br-green]})%f"
+    LEFT="$LEFT%F{$COLOR[br-black]}"
     LEFT_P="$(print -P "$LEFT")"
     LEFTWIDTH=`get_visible_length "$LEFT_P"`
     RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH+$RIGHT_DELTA))
@@ -152,15 +172,15 @@ pre-prompt() {
   LEFTWIDTH=`get_visible_length "$LEFT_P"`
   RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
-  local GREETER="%F{white}%B>%b%f"
-  [  "$UID" = "0" ] && GREETER="%F{red}%B>%b%f"
+  local GREETER="%F{$COLOR[br-white]}>%f"
+  [  "$UID" = "0" ] && GREETER="%F{$COLOR[br-red]}>%f"
   if [ $RIGHTWIDTH -lt 1 ]; then
     RPROMPT=""
-    PROMPT='%F{black}%B-%b%f'"$GREETER "
+    PROMPT="%F{$COLOR[br-black]}-%f$GREETER "
   else
     PROMPT="$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
-%F{black}%B\`--%b%f'"$GREETER "
-    RPROMPT="%F{grey}%B(%*)%b%f"
+%F{'"$COLOR[br-black]"'}\`--%f'"$GREETER "
+    RPROMPT="%F{$COLOR[br-white]}(%*)%f"
   fi
 }
 
