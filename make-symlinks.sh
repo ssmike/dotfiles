@@ -15,3 +15,8 @@ for file in `ls -a`; do
         ln -s $PWD/$file ~/$file;
     fi
 done
+
+mkdir ~/.config/nvim/
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+mkdir -p ~/.config/kitty/
+ln -s ~/.kitty ~/.config/kitty/kitty.conf

@@ -39,7 +39,7 @@ import Data.Maybe (fromJust)
 import XMonad.Hooks.UrgencyHook
 
 myTerminal :: String
-myTerminal      = "gnome-terminal"
+myTerminal      = "kitty"
 
 myWorkspaces :: [String]
 myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:doc", "7:sci", "8:low", "9:etc"]
@@ -51,11 +51,9 @@ myNormalBorderColor  ="#6A86B2"
 myFocusedBorderColor ="#DB2828"
 
 scratchpads = [
-    NS "terminal" (myTerminal ++ " --role scratchpad")
-      (stringProperty "WM_WINDOW_ROLE" =? "scratchpad")
-      (customFloating $ W.RationalRect (1/12) 0 (5/6) (1/2)),
-    NS "browser" "luakit" (className =? "luakit")
-        (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+    NS "terminal" (myTerminal ++ " --class scratchpad")
+      (className =? "scratchpad")
+      (customFloating $ W.RationalRect (1/12) 0 (5/6) (1/2))
     ]
 
 myXPConfig = def {
