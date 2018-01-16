@@ -136,6 +136,15 @@ chprompt() {
   PROMPT="%B%F{blue}%2~%f%F{blue}%f%b> "
 }
 
+function set-title() {
+    echo -ne "\033]0;$@\007"
+}
+
+function update-term-title() {
+    set-title `print -P %m: %~`
+}
+add-zsh-hook precmd update-term-title
+
 # -[ completion ]-
 autoload -Uz compinit
 compinit
@@ -243,7 +252,6 @@ name() {
     vared -c -p 'rename to: ' name
     command mv $1 $name
 }
-alias composite="compton -cCGf"
 
 edit-cmd() {
     ffile="/tmp/.zsh-temp$RANDOM"
