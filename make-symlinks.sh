@@ -5,7 +5,7 @@ if [ ! -e ".git" ]; then
 fi
 blacklist=".git . .. make-symlinks.sh scripts"
 for file in `ls -a`; do
-    if ! grep $file <<<$blacklist; then
+    if ! grep $file <<<$blacklist >/dev/null; then
         if [ -e ~/$file ] && [ ! -h ~/$file ]; then
             rm -rf $file;
             mv ~/$file .;
@@ -20,3 +20,5 @@ mkdir ~/.config/nvim/
 ln -s ~/.vimrc ~/.config/nvim/init.vim
 mkdir -p ~/.config/kitty/
 ln -s ~/.kitty ~/.config/kitty/kitty.conf
+mkdir ~/.config/
+ln -s ~/.redshift ~/.config/redshift.conf
