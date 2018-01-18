@@ -1,6 +1,5 @@
 [ui]
 username = Mikhail Surin <ssmike@yandex-team.ru>
-editor=vim
 
 [extensions]
 shelve=
@@ -8,6 +7,16 @@ purge=
 mq=
 rebase=
 hgk=
+hgext.bookmarks=
+#hggit=
 
 [web]
 cacerts = /etc/ssl/certs/ca-certificates.crt
+
+[alias]
+show = log -pr
+review = pull-request --open --require REVIEW -d
+patch = !$HG diff -r . -r `$HG debugancestor . default`
+
+[pull-request]
+publish = True
