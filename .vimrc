@@ -52,7 +52,7 @@ Bundle "rust-lang/rust.vim"
 Bundle "w0rp/ale"
 let g:ale_linters = {
             \   'cpp': [],
-            \   'python': ['pylint', 'flake8']
+            \   'python': ['pylint']
             \}
 
 Bundle "Tagbar"
@@ -172,7 +172,6 @@ nmap  GVgg
 "autocmd BufEnter * lcd %:p:h
 
 syn on
-"set mapleader = ",""
 
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
@@ -415,3 +414,5 @@ function LargeFile()
  " display message
  autocmd VimEnter *  echo "The file larger than " . (g:LargeFile / 1024) . " KB, some plugins are disabled."
 endfunction
+
+let g:vc_allow_leader_mappings=1
