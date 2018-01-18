@@ -1,0 +1,15 @@
+[ui]
+username = Mikhail Surin <ssmike@yandex-team.ru>
+
+[extensions]
+shelve=
+purge=
+mq=
+rebase=
+hgk=
+
+[web]
+cacerts = /etc/ssl/certs/ca-certificates.crt
+
+[pull-request]
+publish = True

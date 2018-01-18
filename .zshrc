@@ -400,6 +400,7 @@ alias -g jq="ya tool jq"
 alias -g yvalgrind="ya tool valgrind"
 alias json="python -m json.tool"
 alias svn="ya tool svn"
+alias hg="ya tool hg"
 alias -g bn="/Berkanavt/news/"
 
 if which rg >/dev/null; then
