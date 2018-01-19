@@ -2,17 +2,26 @@
 killall dzen2
 killall nm-applet
 if xrandr  | grep "DP1-1 connected"; then
-    echo multiple
     if [ "$1" = "one" ]; then
-        xrandr --output DP1-1 --off --output eDP1 --auto
+        xrandr --output HDMI2 --off\
+            --output HDMI1 --off\
+            --output DP1 --off\
+            --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal\
+            --output VIRTUAL1 --off
     else
-        xrandr --output eDP1 --auto --output DP1-1 --auto --scale 1.3x1.3 --right-of eDP1 --panning 2496x1404+1920+0
-        cp ~/.config/nitrogen/multiple.cfg ~/.config/nitrogen/bg-saved.cfg
+        echo multiple
+        xrandr --output eDP1 --mode 1920x1080 --pos 2496x0 \
+            --output DP1-2 --primary --mode 1920x1080 --pos 0x0 \
+            --output DP1-1 --mode 1920x1080 --pos 4416x0 \
+            --verbose
     fi
 else
     echo one
-    xrandr --output DP1-1 --off --output eDP1 --auto
-    cp ~/.config/nitrogen/onemonitor.cfg ~/.config/nitrogen/bg-saved.cfg
+    xrandr --output HDMI2 --off\
+        --output HDMI1 --off\
+        --output DP1 --off\
+        --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal\
+        --output VIRTUAL1 --off
 fi
 
 nitrogen --restore
