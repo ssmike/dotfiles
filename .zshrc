@@ -310,7 +310,7 @@ enum() {
   cat $1 | sed = | sed -e 's/.*/    &/;s/.*\(.\{4\}\)$/\1/;N;s/\n/ /g'
 }
 
-notify_blacklist='ygdb mc tmux less nano yvim man htop ssh mosh tail watch cppman'
+notify_blacklist='ygdb mc tmux less nano yvim man htop ssh mosh tail watch cppman sky-tail'
 
 function store-command-stats() {
   last_command=$1
@@ -402,6 +402,7 @@ alias json="python -m json.tool"
 alias svn="ya tool svn"
 alias hg="ya tool hg"
 alias -g bn="/Berkanavt/news/"
+alias sky-tail "sky run --stream"
 
 if which rg >/dev/null; then
     alias ag="rg";
