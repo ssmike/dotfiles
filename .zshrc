@@ -402,7 +402,7 @@ alias json="python -m json.tool"
 alias svn="ya tool svn"
 alias hg="ya tool hg"
 alias -g bn="/Berkanavt/news/"
-alias sky-tail "sky run --stream"
+alias sky-tail="sky run --stream"
 
 if which rg >/dev/null; then
     alias ag="rg";
