@@ -8,6 +8,7 @@ mq=
 rebase=
 hgk=
 hgext.bookmarks=
+histedit=
 #hggit=
 
 [web]
@@ -17,6 +18,9 @@ cacerts = /etc/ssl/certs/ca-certificates.crt
 show = log -pr
 review = pull-request --open --require REVIEW -d
 patch = !$HG diff -r . -r `$HG debugancestor . default`
+to = up users/ssmike/$1
+branch = branch users/ssmike/$1
+bgraft = graft "branch(users/ssmike/test/$1)"
 
 [pull-request]
 publish = True
