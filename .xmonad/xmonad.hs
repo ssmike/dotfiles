@@ -18,7 +18,6 @@ import XMonad.Layout.Cross
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
-import XMonad.Actions.GridSelect
 import XMonad.Util.Scratchpad
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.WorkspaceCompare
@@ -31,12 +30,12 @@ import XMonad.Actions.CopyWindow
 import XMonad.Util.WindowProperties (getProp32s)
 import XMonad.Layout.Named
 import XMonad.Layout.Minimize
-import XMonad.Hooks.Minimize
 import qualified XMonad.Layout.BoringWindows as B
 import Data.List
 import XMonad.Hooks.SetWMName
 import Data.Maybe (fromJust)
 import XMonad.Hooks.UrgencyHook
+import qualified XMonad.Layout.Tabbed as Tab
 
 myTerminal :: String
 myTerminal      = "kitty"
@@ -177,13 +176,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
-myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
+myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| tabbedFull) $
                             onWorkspaces ["3:code", "7:sci"] -- make room for coding
-                                (my_mosaic ||| Full ||| Mirror tiled) $
-                            onWorkspaces ["2:web", "4:im", "8:low"]
-                                (Full ||| all_equal ||| Mirror tiled) $
-                            --["1:main", "5:fm", "6:doc"]
-                            all_equal ||| Full ||| (Mirror tiled)
+                                (my_mosaic ||| tabbedFull ||| Mirror tiled) $
+                            onWorkspaces ["8:low"] (Full ||| all_equal) $
+                            --["1:main", "2:web", "4:im", "5:fm", "6:doc"]
+                            tabbedFull ||| all_equal ||| (Mirror tiled)
                           )
   where
     modifiers = avoidStruts . minimize . B.boringWindows
@@ -195,6 +193,16 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| Full) $
     nmaster = 1
     ratio   = 3/4
     delta   = 5/100
+    tabbedFull = named "Tabbed" $ Tab.tabbed Tab.shrinkText $ def {
+        Tab.activeColor = "#323234",
+        Tab.activeBorderColor = "#323234",
+        Tab.inactiveColor = "#0C0C0D",
+        Tab.inactiveBorderColor = "#0C0C0D",
+        Tab.urgentColor = "#0C0C0D",
+        Tab.urgentBorderColor = "#336DFF",
+        Tab.decoHeight = 24,
+        Tab.fontName = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*"
+    }
 
 myManageHook =
     (composeAll . concat $
@@ -313,14 +321,6 @@ dzenpp status = def {
               , ppLayout            =   dzenColor "#A09BA1" newcolor . deleteMinimize
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
-              , ppExtras            = [withWindowSet $
-                                        (\windowset -> do
-                                            let wincount = length $ W.index windowset
-                                            return $
-                                                if wincount > 1
-                                                    then Just $ (show wincount) ++ " windows"
-                                                    else Nothing
-                                            )]
            }
            where
             deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
