@@ -348,6 +348,7 @@ let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 nmap <c-k> :YcmCompleter GetDoc<CR>
 
 autocmd Filetype c,cpp,python,rust nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
+command YFix YcmCompleter FixIt
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
