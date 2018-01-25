@@ -17,7 +17,7 @@ cacerts = /etc/ssl/certs/ca-certificates.crt
 [alias]
 show = log -pr
 review = pull-request --open --require REVIEW -d
-patch = !$HG diff -r . -r `$HG debugancestor . default`
+patch = !$HG diff -r `$HG debugancestor . default` -r .
 to = up users/ssmike/$1
 branch = branch users/ssmike/$1
 bgraft = graft "branch(users/ssmike/test/$1)"
