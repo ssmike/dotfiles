@@ -16,6 +16,8 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Cross
 import XMonad.Prompt
+import XMonad.Layout.MultiToggle
+import qualified XMonad.Layout.MultiToggle.Instances as Toggles
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Util.Scratchpad
@@ -78,7 +80,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
       --exit
     , ((modm .|. shiftMask, xK_r     ), io exitSuccess)
 
-    , ((modm, xK_a), sendMessage ToggleStruts)
+    , ((modm, xK_a), sendMessage $ Toggle Toggles.NBFULL)
     -- launch file manager
     , ((modm, xK_f), spawn "nautilus")
     -- go to coresponding workspace
@@ -179,12 +181,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| tabbedFull) $
                             onWorkspaces ["3:code", "7:sci"] -- make room for coding
                                 (my_mosaic ||| tabbedFull ||| Mirror tiled) $
-                            onWorkspaces ["8:low"] (Full ||| all_equal) $
-                            --["1:main", "2:web", "4:im", "5:fm", "6:doc"]
+                            --["1:main", "2:web", "4:im", "5:fm", "6:doc", "8:low"]
                             tabbedFull ||| all_equal ||| (Mirror tiled)
                           )
   where
-    modifiers = avoidStruts . minimize . B.boringWindows
+    modifiers = (mkToggle (Toggles.NBFULL ?? EOT)) . avoidStruts . minimize . B.boringWindows
     my_mosaic = mosaic 3 [6, 2, 1]
     all_equal = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
