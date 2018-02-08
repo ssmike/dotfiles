@@ -1,7 +1,6 @@
 import System.Posix.Env (setEnv)
 import qualified System.Environment as E
 import Control.Monad
-import XMonad.Config.Desktop
 import Data.Monoid;
 import XMonad.Config.Kde
 import XMonad.Actions.WindowGo
@@ -29,13 +28,8 @@ import XMonad.Actions.CycleWS
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Actions.CopyWindow
-import XMonad.Util.WindowProperties (getProp32s)
 import XMonad.Layout.Named
-import XMonad.Layout.Minimize
-import qualified XMonad.Layout.BoringWindows as B
 import Data.List
-import XMonad.Hooks.SetWMName
-import Data.Maybe (fromJust)
 import XMonad.Hooks.UrgencyHook
 import qualified XMonad.Layout.Tabbed as Tab
 
@@ -43,14 +37,9 @@ myTerminal :: String
 myTerminal      = "kitty"
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:doc", "7:sci", "8:low", "9:etc"]
+myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:doc", "7:dev", "8:low", "9:etc"]
 
-
--- Border colors for unfocused and focused windows, respectively.
---
-myNormalBorderColor  ="#6A86B2"
-myFocusedBorderColor ="#DB2828"
-
+scratchpads :: [NamedScratchpad]
 scratchpads = [
     NS "terminal" (myTerminal ++ " --class scratchpad")
       (className =? "scratchpad")
@@ -64,29 +53,25 @@ myXPConfig = def {
     ,   height = 24
     ,   font = "-misc-fixed-*-*-*-*-18-*-*-*-*-*-*-*"
 }
-------------------------------------------------------------------------
--- Key bindings. Add, modify or remove key bindings here.
---
+
 myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
-    -- launch a terminal
-    [ --((modm, xK_s), namedScratchpadAction scratchpads "browser")
-    -- minimize current window
-      ((modm,               xK_m     ), withFocused minimizeWindow)
-    -- restore next window
-    , ((modm .|. shiftMask, xK_m     ), sendMessage RestoreNextMinimizedWin)
+    [
     -- open terminal scratchpad
-    , ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
+    ((0, xK_F12), namedScratchpadAction scratchpads "terminal")
+    -- launch a terminal
     , ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
       --exit
     , ((modm .|. shiftMask, xK_r     ), io exitSuccess)
 
+    -- fullscreen
     , ((modm, xK_a), sendMessage $ Toggle Toggles.NBFULL)
-    -- launch file manager
+
     , ((modm, xK_f), spawn "nautilus")
-    -- go to coresponding workspace
+
+    -- go to workspace
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:doc")
-    , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:sci")
+    , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:dev")
     -- launch command prompt
     , ((modm, xK_p     ), spawn "dmenu_run")
     -- launch screensaver
@@ -100,13 +85,13 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
     -- Move focus to the next window
-    , ((modm,              xK_Tab    ), B.focusDown)
+    , ((modm,              xK_Tab    ), windows W.focusDown)
     -- Move focus to the next window
-    , ((modm,               xK_j     ), B.focusDown)
+    , ((modm,               xK_j     ), windows W.focusDown)
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), B.focusUp  )
+    , ((modm,               xK_k     ), windows W.focusUp  )
     -- Move focus to the master window
-    , ((modm .|. shiftMask,   xK_Tab ), B.focusMaster  )
+    , ((modm .|. shiftMask,   xK_Tab ), windows W.focusMaster  )
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
     -- Swap the focused window with the next window
@@ -123,11 +108,11 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+
     , ((modm              , xK_Right), moveTo Next (WSIs notSP))
     , ((modm              , xK_Left), moveTo Prev (WSIs notSP))
+
     , ((modm              , xK_r     ), spawn "xmonad --recompile; xmonad --restart")
-    --toggle workstation mode
-    , ((modm .|. shiftMask, xK_a), spawn "~/.xmonad/toggle-helper.sh")
 
     --prompt with windows from current workspace
     , ((modm, xK_o), windowPrompt myXPConfig Bring wsWindows)
@@ -139,16 +124,12 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_BackSpace), clearUrgents)
     ]
     ++
-    --
-    -- mod-[1..9], Switch to workspace N
+
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
+    -- mod-ctrl-[1..9], Copy client to workspace N
     --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
     -- mod-{q,w,e}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{q,w,e}, Move client to screen 1, 2, or 3
     --
@@ -179,18 +160,18 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
 myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| tabbedFull) $
-                            onWorkspaces ["3:code", "7:sci"] -- make room for coding
-                                (my_mosaic ||| tabbedFull ||| Mirror tiled) $
+                            onWorkspaces ["3:code", "7:dev"] -- make room for coding
+                                (myMosaic ||| tabbedFull ||| horizontal) $
                             --["1:main", "2:web", "4:im", "5:fm", "6:doc", "8:low"]
-                            tabbedFull ||| all_equal ||| (Mirror tiled)
+                            tabbedFull ||| all_equal ||| horizontal
                           )
   where
-    modifiers = (mkToggle (Toggles.NBFULL ?? EOT)) . avoidStruts . minimize . B.boringWindows
-    my_mosaic = mosaic 3 [6, 2, 1]
+    modifiers = smartBorders . (mkToggle (Toggles.NBFULL ?? EOT)) . avoidStruts
+    myMosaic = mosaic 3 [6, 2, 1]
     all_equal = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
     cross_ratio = 6/7
-    tiled   = Tall nmaster delta ratio
+    horizontal  = named "Tall" $ Mirror $ Tall nmaster delta ratio
     nmaster = 1
     ratio   = 3/4
     delta   = 5/100
@@ -221,7 +202,7 @@ myManageHook =
     , [className =? c --> doShift "2:web" | c <- web]
     , [className =? c --> doShift "3:code" | c <- code]
     , [className =? c --> doShift "6:doc" | c <- doc]
-    , [className =? c --> doShift "7:sci" | c <- math]
+    , [className =? c --> doShift "7:dev" | c <- dev]
     , [className =? c --> doShift "8:low" | c <- low]
     , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doIgnore]
     , [className =? c --> doF W.swapDown | c <- aux]
@@ -229,9 +210,9 @@ myManageHook =
     ]
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
-        aux = ["kate", "konsole", "Term", "Xfce4-terminal"]
-        low = ["VirtualBox Manager", "vlc", "Steam", "dota_linux", "XCOM: Enemy Within"]
-        math = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
+        aux = ["kitty", "kate", "konsole", "Term", "Xfce4-terminal"]
+        low = ["VirtualBox Manager", "vlc", "Steam", "dota_linux", "XCOM: Enemy Within", "mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        dev = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         doc = ["Dia", "calibre", "FBReader", "Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Vivaldi-stable", "Vivaldi-snapshot", "orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["jetbrains-pycharm", "NyaoVim", "Code", "jetbrains-pycharm-ce", "jetbrains-clion", "QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
@@ -239,7 +220,6 @@ myManageHook =
         float = ["Shutter", "Pavucontrol", "Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Gnuplot", "Wine", "Gcdemu", "Docky"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
         im = ["VK", "skypeforlinux", "Thunderbird", "Pidgin", "Corebird", "Slack", "Telegram", "TelegramDesktop"]
-        --media = ["mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
         fM = ["Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
 
@@ -251,10 +231,6 @@ myStartupHook = do
     spawn "xsetroot -cursor_name left_ptr"
     return ()
 
-myLogHook dzen = do
-  dynamicLogWithPP $ dzenpp dzen
-  --setWMName "LG3D"
-
 myEventHook =
     ewmhDesktopsEventHook <+>
     ewmhCopyWindow <+>
@@ -263,35 +239,24 @@ myEventHook =
 main = do
     homePath <- E.getEnv "HOME"
     monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
-    dzen <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
+    status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
     let modifiers = (withUrgencyHook NoUrgencyHook) . ewmh
     xmonad $ modifiers $ kde4Config {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
             borderWidth        = 3,
-            -- | modMask lets you specify which modkey you want to use. The default
-            -- is mod1Mask ("left alt").  You may also consider using mod3Mask
-            -- ("right alt"), which does not conflict with emacs keybindings. The
-            -- "windows key" is usually mod4Mask.
             modMask            = mod3Mask,
             workspaces         = myWorkspaces,
-            normalBorderColor  = myNormalBorderColor,
-            focusedBorderColor = myFocusedBorderColor,
+            normalBorderColor  = "#6A86B2",
+            focusedBorderColor = "#DB2828",
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
-            logHook            = myLogHook dzen,
-            layoutHook         = smartBorders $  myLayout,
+            logHook            = dynamicLogWithPP $ dzenpp status,
+            layoutHook         = myLayout,
             manageHook         = myManageHook,
             handleEventHook    = myEventHook,
             startupHook        = myStartupHook
         }
-
---for krunner
-kdeOverride :: Query Bool
-kdeOverride = ask >>= \w -> liftX $ do
-    override <- getAtom "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE"
-    wt <- getProp32s "_NET_WM_WINDOW_TYPE" w
-    return $ maybe False (elem $ fromIntegral override) wt
 
 ewmhCopyWindow :: Event -> X All
 ewmhCopyWindow ClientMessageEvent {
@@ -310,7 +275,6 @@ ewmhCopyWindow ClientMessageEvent {
     return (All True)
 ewmhCopyWindow _ = return (All True)
 
-newcolor = "#000000"
 dzenpp status = def {
                 ppSort = fmap (.scratchpadFilterOutWorkspace) getSortByTag
               , ppCurrent           =   dzenColor "white" newcolor
@@ -319,14 +283,12 @@ dzenpp status = def {
               , ppUrgent            =   dzenColor "#ff0000" newcolor . workspaceClickable
               , ppWsSep             =   " "
               , ppSep               =   "  " ++ (dzenColor "green" newcolor . dzenEscape $ "\\") ++  "  "
-              , ppLayout            =   dzenColor "#A09BA1" newcolor . deleteMinimize
+              , ppLayout            =   dzenColor "#A09BA1" newcolor
               , ppTitle             =   (" " ++) . dzenColor "white" newcolor . dzenEscape
               , ppOutput            =   hPutStrLn status
            }
            where
-            deleteMinimize s = if "Minimize " `isPrefixOf` s then drop (length "Minimize ") s else s
-            layoutClickable s = "^ca(1,xdotool key alt+space)" ++ s ++ " ^ca()"
-            titleClickable s = "^ca(1,wmctrl -c :ACTIVE:)" ++ s ++ " ^ca()"
+            newcolor = "#000000"
             wnum name = (read :: [Char] -> Int) $ take 1 name
             workspaceClickable s = "^ca(1,wmctrl -s " ++ show ((wnum s) - 1) ++ ")" ++ s ++ "^ca()"
 
