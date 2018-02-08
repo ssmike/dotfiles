@@ -31,7 +31,7 @@ fi
 echo -n "${battery BAT0}^fg(\#FFFFFF)"
 
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
-echo -n " Cpu: ^fg(\#A09BA1)${cpu}%^fg(\#FFFFFF)"
+echo -n " Cpu: ^fg(\#A09BA1)^ca(1,gnome-system-monitor)${cpu}%^ca()^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " ^fg(\#A09BA1)${hwmon 1 temp 1}°C^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
