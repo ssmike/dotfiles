@@ -20,7 +20,7 @@ review = pull-request --open --require REVIEW -d
 patch = !$HG diff -r `$HG debugancestor . default` -r .
 to = up users/ssmike/$1
 branch = branch users/ssmike/$1
-bgraft = graft "branch(users/ssmike/test/$1)"
+bgraft = graft "branch(users/ssmike/$1)"
 
 [pull-request]
 publish = True
