@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+cd ~/Downloads/
+
 for ext in avi mp4 mkv mpeg; do
     find -iname "*.$ext" -exec ln -s {} ~/Videos/ \;
 done
