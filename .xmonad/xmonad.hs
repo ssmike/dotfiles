@@ -72,8 +72,11 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:doc")
     , ((modm .|. shiftMask, xK_d), windows $ W.greedyView "7:dev")
+
     -- launch command prompt
     , ((modm, xK_p     ), spawn "dmenu_run")
+    , ((modm, xK_n     ), spawn "networkmanager_dmenu")
+
     -- launch screensaver
     , ((controlMask .|. shiftMask , xK_l), spawn "slock")
     --close current window
@@ -82,8 +85,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm,               xK_space ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
     -- Move focus to the next window
     , ((modm,              xK_Tab    ), windows W.focusDown)
     -- Move focus to the next window

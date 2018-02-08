@@ -41,19 +41,5 @@ echo -n " Time: ^fg(\#A09BA1)${time %k}:${time %M}^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)"
 echo -n " WiFi: ^fg(\#A09BA1)${wireless_essid wlp1s0}^fg(\#FFFFFF)"
 echo -n "(^fg(\#A09BA1)${execi 1 ~/.wifi-quality}^fg(\#FFFFFF))"
-
-echo -n " ";
-if [ `systemctl is-active openvpn-client@yandex.service` = "active" ]; then
-    echo -n "^ca(1, systemctl stop openvpn-client@yandex.service)";
-    echo -n "^ca(3, systemctl restart openvpn-client@yandex.service)";
-    echo -n "^fg(\#FF1717)Y^fg(\#FFFFFF)";
-    echo -n "^ca()"
-else
-    echo -n "^ca(1, systemctl start openvpn-client@yandex.service)";
-    echo -n "^fg(\#2AB900)Y^fg(\#FFFFFF)";
-fi
-echo -n "^ca()"
-
-#echo -n "^fg(\#A09BA1)${execi 1 ~/.vpn-name}^fg(\#FFFFFF)"
 echo
 ]];
