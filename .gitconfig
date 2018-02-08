@@ -7,4 +7,4 @@
   conflictstyle = diff3
 
 [credential]
-	helper = /usr/lib/git-core/git-credential-libsecret
+	helper = /usr/bin/git-credential-libsecret
