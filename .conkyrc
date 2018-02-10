@@ -9,7 +9,9 @@ conky.config = {
 -- https://github.com/nonpop/xkblayout-state
 
 conky.text = [[
-echo -n " ^fg(\#A09BA1)^ca(1,~/.xmonad/xkblayout-state set +1)${execi 1 ~/.xmonad/xkblayout-state print '%s'}^ca()^fg(\#FFFFFF)"
+echo -n " ^fg(\#FFFFFF)^ca(1,xkblayout-state set +1)"
+echo -n "${execi 1  bash -c "xkblayout-state print '%e' | tr '[:lower:]' '[:upper:]'"}"
+echo -n "^ca()^fg(\#FFFFFF)"
 echo -n " ^fg(\#08FF00)\^fg(\#FFFFFF)^ca(1, baobab ~)"
 echo -n " Free:^fg(\#A09BA1) ${fs_free /home/}^fg(\#FFFFFF) ^ca()"
 
