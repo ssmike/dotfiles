@@ -212,7 +212,7 @@ myManageHook =
     )  <+> manageDocks <+> (namedScratchpadManageHook scratchpads)
     where
         aux = ["kitty", "kate", "konsole", "Term", "Xfce4-terminal"]
-        low = ["VirtualBox Manager", "vlc", "Steam", "dota_linux", "XCOM: Enemy Within", "mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube"]
+        low = ["Popcorn-Time", "VirtualBox Manager", "vlc", "Steam", "dota_linux", "XCOM: Enemy Within", "mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube", "PornTime"]
         dev = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
         doc = ["Dia", "calibre", "FBReader", "Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Vivaldi-stable", "Vivaldi-snapshot", "orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
@@ -220,9 +220,9 @@ myManageHook =
         fullfloat = ["trayer", "panel"]
         float = ["Shutter", "Pavucontrol", "Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Gnuplot", "Wine", "Gcdemu", "Docky"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
-        im = ["VK", "skypeforlinux", "Thunderbird", "Pidgin", "Corebird", "Slack", "Telegram", "TelegramDesktop"]
+        im = ["VK", "skypeforlinux", "Thunderbird", "Pidgin", "Corebird", "Slack", "Telegram", "TelegramDesktop", "Kmail", "kmail", "Claws-mail"]
         fM = ["Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Kmail", "kmail", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga", "Claws-mail"]
+        etc = ["nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga"]
 
 myStartupHook = do
     liftIO $ setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
