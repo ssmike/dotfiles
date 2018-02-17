@@ -223,8 +223,10 @@ myManageHook =
         etc = ["nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga"]
 
 myStartupHook = do
-    liftIO $ setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
-    liftIO $ setEnv "XDG_CURRENT_DESKTOP" "GNOME" True
+    liftIO $ do
+        setEnv "_JAVA_AWT_WM_NONREPARENTING" "1" True
+        setEnv "XDG_CURRENT_DESKTOP" "GNOME" True
+    ewmhDesktopsStartup
     spawn "~/.xmonad/dzen-auto.sh"
     spawn "~/.xmonad/autostart.sh"
     spawn "xsetroot -cursor_name left_ptr"
@@ -239,7 +241,7 @@ main = do
     homePath <- E.getEnv "HOME"
     monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
     status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
-    let modifiers = (withUrgencyHook NoUrgencyHook) . ewmh
+    let modifiers = (withUrgencyHook NoUrgencyHook)
     xmonad $ modifiers $ def {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
@@ -250,7 +252,7 @@ main = do
             focusedBorderColor = "#DB2828",
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
-            logHook            = dynamicLogWithPP $ dzenpp status,
+            logHook            = ewmhDesktopsLogHook <+> (dynamicLogWithPP $ dzenpp status),
             layoutHook         = myLayout,
             manageHook         = myManageHook,
             handleEventHook    = myEventHook,
