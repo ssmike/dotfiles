@@ -164,17 +164,15 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| tabbedFull) $
                             onWorkspaces ["3:code", "7:dev"] -- make room for coding
                                 (myMosaic ||| tabbedFull ||| horizontal) $
                             --["1:main", "2:web", "4:im", "5:fm", "6:doc", "8:low"]
-                            tabbedFull ||| all_equal ||| horizontal
+                            tabbedFull ||| allEqual ||| horizontal
                           )
   where
     modifiers = smartBorders . (mkToggle (Toggles.NBFULL ?? EOT)) . avoidStruts
     myMosaic = mosaic 3 [6, 2, 1]
-    all_equal = named "Equal" $  mosaic 2 []
+    allEqual = named "Equal" $  mosaic 2 []
     cross = Cross cross_ratio delta
     cross_ratio = 6/7
-    horizontal  = named "Tall" $ Mirror $ Tall nmaster delta ratio
-    nmaster = 1
-    ratio   = 3/4
+    horizontal  = named "Tall" $ Mirror $ Tall 1 (3/4) delta
     delta   = 5/100
     tabbedFull = named "Tabbed" $ Tab.tabbed Tab.shrinkText $ def {
         Tab.activeColor = "#323234",
@@ -242,7 +240,7 @@ main = do
     monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
     status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
     let modifiers = (withUrgencyHook NoUrgencyHook) . ewmh
-    xmonad $ modifiers $ kde4Config {
+    xmonad $ modifiers $ def {
             terminal           = myTerminal,
             focusFollowsMouse  = False,
             borderWidth        = 3,
