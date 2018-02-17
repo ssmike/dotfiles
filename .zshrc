@@ -450,20 +450,4 @@ alias less="less -r"
 # Allow SSH tab completion for mosh hostnames
 compdef mosh=ssh
 
-function get-arcadia() {
-    local DIR=$1
-    "svn" cat svn+ssh://arcadia.yandex.ru/arc/trunk/arcadia/ya | python2 - clone $DIR
-    echo 'PATH=$PATH:'$DIR >> ~/.zprofile
-    $DIR/ya completion --zsh
-    chmod 755 -R ~/.ya.completion
-    exec zsh
-}
-
 alias json="python -m json.tool"
-source ~/.ya.completion/zsh/ya 2>/dev/null # YA_COMPLETION NAME='ya'
-alias yvim="ya nvim"
-alias ygdb="ya tool gdb"
-alias yvalgrind="ya tool valgrind"
-
-# Allow mercurial completion for arcadia hg
-compdef yhg=hg
