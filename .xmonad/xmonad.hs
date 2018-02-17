@@ -76,6 +76,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- launch command prompt
     , ((modm, xK_p     ), spawn "dmenu_run")
     , ((modm, xK_n     ), spawn "networkmanager_dmenu")
+    , ((modm, xK_d     ), spawn "dmenu-desktop") -- i3-dmenu-desktop
 
     -- launch screensaver
     , ((controlMask .|. shiftMask , xK_l), spawn "slock")
