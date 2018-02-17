@@ -184,7 +184,7 @@ myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| tabbedFull) $
         Tab.urgentColor = "#0C0C0D",
         Tab.urgentBorderColor = "#336DFF",
         Tab.decoHeight = 24,
-        Tab.fontName = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*"
+        Tab.fontName = "xft:Source Code Pro:size=10"
     }
 
 myManageHook =
