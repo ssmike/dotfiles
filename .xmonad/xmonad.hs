@@ -51,7 +51,7 @@ myXPConfig = def {
     ,   fgColor = "#FFFFFF" -- "#5D69B4"
     ,   borderColor = "#3CB424"
     ,   height = 24
-    ,   font = "-misc-fixed-*-*-*-*-18-*-*-*-*-*-*-*"
+    ,   font = "xft:Monospace:size=9"
 }
 
 myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
