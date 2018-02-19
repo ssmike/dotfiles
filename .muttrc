@@ -1,5 +1,6 @@
 mailboxes =INBOX
 source ~/.mutt/$MUTT_ACCOUNT/conf
+set ts_enabled = yes
 set timeout = 15
 set mail_check = 60
 set beep_new = yes
