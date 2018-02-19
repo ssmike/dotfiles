@@ -1,31 +1,23 @@
 mailboxes =INBOX
-set imap_user = "ssmike"
-source "gpg -d ~/.mutt/pass.gpg |"
-set folder=imaps://imap.yandex-team.ru/
-#set smtp_url=smtps://smtp.yandex-team.ru/
-#set sendmail="/usr/bin/msmtp"
+source ~/.mutt/$MUTT_ACCOUNT/conf
 set timeout = 15
 set mail_check = 60
 set beep_new = yes
 set imap_keepalive = 10
 set imap_pipeline_depth=0
-set spoolfile=imaps://imap.yandex-team.ru/
-set record="=Отправленные"
-set postponed="=Черновики"
-set trash="=Удаленные"
 unset imap_passive
 set imap_check_subscribed
 set charset=utf-8
 set folder_format="%2C %t %N %8s %d %f"
-set header_cache="~/.mutt/cache/headers"
-set message_cachedir="~/.mutt/cache/bodies"
 set certificate_file="~/.mutt/certificates"
 source ~/.mutt/gpg.rc
 
+bind index "^" imap-fetch-mail
+
 set mime_forward=yes
 set mime_forward_rest=yes
-macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
-macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && chromium ~/.cache/mutt/mail.html<enter>"
+macro pager 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && firefox ~/.cache/mutt/mail.html<enter>"
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && firefox ~/.cache/mutt/mail.html<enter>"
 set write_bcc=no
 auto_view text/html
 macro pager p  <previous-line>
@@ -34,10 +26,10 @@ macro pager r <reply>
 macro index r <search-opposite>
 macro index  <next-unread>
 macro pager  <next-unread>
+macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
 mime_lookup application/octet-stream
 set realname="Михаил Сурин"
-set from="Михаил Сурин <ssmike@yandex-team.ru>"
-set signature="~/.signature"
+
 #macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m'
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 

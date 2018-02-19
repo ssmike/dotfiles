@@ -1,0 +1,11 @@
+set imap_user = "surinmike@gmail.com"
+set folder=imaps://imap.gmail.com/
+set spoolfile=+INBOX
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+set trash="+[Gmail]/Trash"
+set header_cache="~/.mutt/gmail/cache/headers"
+set message_cachedir="~/.mutt/gmail/cache/bodies"
+source "gpg -d ~/.mutt/gmail/pass.gpg |"
+set from="Mikhail Surin <surinmike@gmail.com>"
+set sendmail="/usr/bin/msmtp -a gmail"
