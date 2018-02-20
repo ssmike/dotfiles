@@ -37,6 +37,9 @@ macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 set sort = threads
 set sort_aux = last-date-received
 
+set pgp_replysign = yes
+set pgp_replyencrypt = yes
+
 ignore *
 unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
@@ -70,6 +73,7 @@ bind index - collapse-thread
 bind index _ collapse-all
 unset collapse_unread
 folder-hook . push "<collapse-all>"
+
 
 # color body brightwhite black '\*+[^*]+\*+'
 # color body brightwhite black '_+[^_]+_+'
