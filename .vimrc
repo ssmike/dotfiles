@@ -311,6 +311,7 @@ function TexMode()
 endfunction
 
 autocmd FileType tex call TexMode()
+autocmd FileType mail call DualLangMode()
 
 nmap <c-a> GVgg
 imap jj <ESC>
