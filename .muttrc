@@ -39,6 +39,8 @@ set sort_aux = last-date-received
 
 set pgp_replysign = yes
 set pgp_replyencrypt = yes
+set pgp_autosign = yes
+set pgp_use_gpg_agent = yes
 
 ignore *
 unignore from date subject to cc
