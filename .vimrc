@@ -49,6 +49,8 @@ Bundle "gnupg.vim"
 Bundle "tpope/vim-dispatch"
 Bundle "rust-lang/rust.vim"
 
+Bundle "tpope/vim-db"
+
 Bundle "w0rp/ale"
 let g:ale_linters = {
             \   'cpp': [],
@@ -418,3 +420,6 @@ function LargeFile()
 endfunction
 
 let g:vc_allow_leader_mappings=1
+
+au FileType mail setl fo+=awq
+au FileType mail setl wm=4
