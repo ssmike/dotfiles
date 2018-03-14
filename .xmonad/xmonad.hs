@@ -161,17 +161,15 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
-myLayout = modifiers $  ( onWorkspaces ["9:etc"] (cross ||| tabbedFull) $
-                            onWorkspaces ["3:code", "7:dev"] -- make room for coding
+myLayout = modifiers $  ( onWorkspaces ["3:code", "7:dev"] -- make room for coding
                                 (myMosaic ||| tabbedFull ||| horizontal) $
-                            --["1:main", "2:web", "4:im", "5:fm", "6:doc", "8:low"]
+                            --["1:main", "2:web", "4:im", "5:fm", "6:doc", "8:low", "9:]
                             tabbedFull ||| allEqual ||| horizontal
                           )
   where
     modifiers = smartBorders . (mkToggle (Toggles.NBFULL ?? EOT)) . avoidStruts
     myMosaic = mosaic 3 [6, 2, 1]
     allEqual = named "Equal" $  mosaic 2 []
-    cross = Cross (6/7) delta
     horizontal  = named "Tall" $ Mirror $ Tall 1 delta (3/4)
     delta   = 5/100
     tabbedFull = named "Tabbed" $ Tab.tabbed Tab.shrinkText $ def {
