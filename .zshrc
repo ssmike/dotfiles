@@ -317,7 +317,7 @@ extract () {
  fi
 }
 
-notify_blacklist="bpython ygdb mc livestreamer okular zathura tmux less nano yvim mutt cppman qvim fbless htop ranger mosh"
+notify_blacklist="bpython ygdb mc livestreamer okular zathura tmux less nano yvim mutt gmail cppman qvim fbless htop ranger mosh"
 
 function store-command-stats() {
   last_command=$1
