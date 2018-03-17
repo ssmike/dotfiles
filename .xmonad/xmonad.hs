@@ -218,7 +218,7 @@ myManageHook =
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
         im = ["VK", "skypeforlinux", "Thunderbird", "Pidgin", "Corebird", "Slack", "Telegram", "TelegramDesktop", "Kmail", "kmail", "Claws-mail"]
         fM = ["Finder", "Tracker-needle", "Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
-        etc = ["Google Play Music Desktop Player", "MellowPlayer", "nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga"]
+        etc = ["eu.tiliado.NuvolaAppDeezer", "Google Play Music Desktop Player", "MellowPlayer", "nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga"]
 
 myStartupHook = do
     liftIO $ do
