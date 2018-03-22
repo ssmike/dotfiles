@@ -173,11 +173,11 @@ myLayout = modifiers $  ( onWorkspaces ["3:code", "7:dev"] -- make room for codi
     horizontal  = named "Tall" $ Mirror $ Tall 1 delta (3/4)
     delta   = 5/100
     tabbedFull = named "Tabbed" $ Tab.tabbed Tab.shrinkText $ def {
-        Tab.activeColor = "#323234",
-        Tab.activeBorderColor = "#323234",
-        Tab.inactiveColor = "#0C0C0D",
-        Tab.inactiveBorderColor = "#0C0C0D",
-        Tab.urgentColor = "#0C0C0D",
+        Tab.activeColor = "#0C0C0D",
+        Tab.activeBorderColor = "#0C0C0D",
+        Tab.inactiveColor = "#323234",
+        Tab.inactiveBorderColor = "#323234",
+        Tab.urgentColor = "#323234",
         Tab.urgentBorderColor = "#336DFF",
         Tab.decoHeight = 24,
         Tab.fontName = "xft:Source Code Pro:size=10"
