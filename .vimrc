@@ -167,9 +167,6 @@ nmap ]] :cn<CR>
 nmap [[ :cp<CR>
 let g:ycm_python_binary_path='python'
 
-"ya vim doesn't see my x session
-imap <c-v> <c-r>=system('xsel -b')<cr>
-
 
 function Extcommand(...)
     normal i<c-r>=system(\'a:000\')<cr>
