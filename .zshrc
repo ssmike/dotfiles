@@ -361,6 +361,7 @@ function notify-command-complete() {
   unset last_command start_time last_status
 }
 
+alias x=xdg-open
 alias op="vblank_mode=0 primusrun "
 
 add-zsh-hook preexec store-command-stats
@@ -373,8 +374,6 @@ alias -s jar=java -jar
 alias -s fb2=fbless
 alias -s cpp="$EDITOR"
 alias -s h="$EDITOR"
-alias -s pdf="zathura"
-alias -s djvu="zathura"
 alias -s hs=runhaskell
 alias -s txt="$EDITOR"
 #alias -s mkv=vlc --fbdev=/dev/fb0
