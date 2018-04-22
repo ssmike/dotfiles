@@ -427,7 +427,7 @@ function totp {
 }
 
 if which aws >/dev/null; then
-    complete -C aws_completer aws
+    source aws_zsh_completer.sh
 fi
 if which rg >/dev/null; then
     alias ag="rg";
