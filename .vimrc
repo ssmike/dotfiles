@@ -65,7 +65,6 @@ Bundle "mhinz/vim-startify"
 Bundle 'flazz/vim-colorschemes'
 Bundle "vim-airline/vim-airline"
 Bundle "vim-airline/vim-airline-themes"
-let g:airline_theme='raven'
 
 Bundle "l04m33/vlime", {'rtp': 'vim/'}
 let maplocalleader = "\<Space>"
@@ -179,13 +178,16 @@ let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
 if exists('g:nyaovim_version') "nyaovim
-    colorscheme hornet
+    colorscheme stackoverflow
+    let g:airline_theme='sol'
 elseif has('gui_running') "gvim
     Bundle "chriskempson/vim-tomorrow-theme"
     colorscheme Tomorrow-Night
-    set guifont=Inconsolata\ 13
+    set guifont=Inconsolata\ 10
+    let g:airline_theme='raven'
 else
     colorscheme pablo "terminal
+    let g:airline_theme='raven'
 endif
 
 if !has("nvim")
