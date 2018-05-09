@@ -443,7 +443,6 @@ else
 fi
 alias grep="grep --color -i -n "
 
-alias mosh="LC_ALL=en_US.UTF-8 mosh"
 alias less="less -r"
 
 # Allow SSH tab completion for mosh hostnames
