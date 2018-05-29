@@ -360,6 +360,10 @@ function url-encode; {
         echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
 }
 
+function arcanum() {
+    curl -k https://rb.yandex-team.ru/arc/r/$1/diff/raw/
+}
+
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
 
