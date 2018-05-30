@@ -66,7 +66,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- fullscreen
     , ((modm, xK_a), sendMessage $ Toggle Toggles.NBFULL)
 
-    , ((modm, xK_f), spawn "nautilus")
+    , ((modm, xK_f), spawn "dolphin")
 
     -- go to workspace
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
@@ -209,7 +209,7 @@ myManageHook =
     where
         aux = ["kitty", "kate", "konsole", "Term", "Xfce4-terminal"]
         low = ["Popcorn-Time", "VirtualBox Manager", "vlc", "Steam", "dota_linux", "XCOM: Enemy Within", "mpv", "google-music-electron", "Tomahawk", "Vlc", "MPlayer", "Umplayer", "Smplayer", "Cheese", "Minitube", "PornTime"]
-        dev = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "XMathematica"]
+        dev = ["TexMaker", "XMaxima", "Wxmaxima", "geogebra-GeoGebra", "org-geogebra-desktop-GeoGebra3D", "XMathematica"]
         doc = ["Dia", "calibre", "FBReader", "Evince", "Blender", "Gimp", "Gimp-2.8", "Gimp-2.9", "okular", "Okular", "Zathura", "libreoffice", "libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "libreoffice-startcenter", "VCLSalFrame.DocumentWindow", "VCLSalFrame"]
         web = ["Vivaldi-stable", "Vivaldi-snapshot", "orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["Code", "Atom", "jetbrains-pycharm", "NyaoVim", "Code", "jetbrains-pycharm-ce", "jetbrains-clion", "QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
@@ -217,7 +217,7 @@ myManageHook =
         float = ["Shutter", "Pavucontrol", "Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Gnuplot", "Wine", "Gcdemu", "Docky"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
         im = ["whatsapp-desktop", "Skype", "VK", "skypeforlinux", "Thunderbird", "Pidgin", "Corebird", "Slack", "Telegram", "TelegramDesktop", "Kmail", "kmail", "Claws-mail"]
-        fM = ["Finder", "Tracker-needle", "Nautilus", "k4dirstat", "krusader", "Pcmanfm", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
+        fM = ["Finder", "Tracker-needle", "Nautilus", "k4dirstat", "krusader", "Pcmanfm", "dolphin", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
         etc = ["eu.tiliado.NuvolaAppDeezer", "Google Play Music Desktop Player", "MellowPlayer", "nuvolaplayer3-deezer", "qBittorrent", "nuvolaplayer3", "Qbittorrent", "Clementine", "Transmission-gtk", "Transmission-qt" ,"Deluge", "Ekiga"]
 
 myStartupHook = do
