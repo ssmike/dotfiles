@@ -3,6 +3,8 @@ pgrep  compton && exit
 #xhost +
 compton -f -D 3 -b
 nitrogen --restore &
+dunst &
+parcellite &
 ~/.xmonad/lightsOn.sh 120 &
 xbindkeys &
 #xscreensaver -no-splash &
