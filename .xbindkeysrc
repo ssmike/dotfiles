@@ -21,3 +21,6 @@
 
 "~/.xmonad/nm.sh"
     control + alt + shift + m
+
+"qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock"
+    control + shift + l

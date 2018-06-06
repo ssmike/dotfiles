@@ -78,8 +78,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     , ((modm, xK_n     ), spawn "networkmanager_dmenu")
     , ((modm, xK_d     ), spawn "dmenu-desktop") -- i3-dmenu-desktop
 
-    -- launch screensaver
-    , ((controlMask .|. shiftMask , xK_l), spawn "slock")
     --close current window
     , ((modm .|. shiftMask, xK_c     ), kill1)
     --switch layout

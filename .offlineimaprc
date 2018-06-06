@@ -22,8 +22,8 @@ localfolders = ~/.mail/Yandex
 [Repository Yandex-Remote]
 type = IMAP
 remotehost = imap.yandex-team.ru
-remoteuser = ssmike
-remotepasseval = get_pass('yandex')
+remoteusereval = get_username('yandex-team-mail')
+remotepasseval = get_password('yandex-team-mail')
 realdelete = yes
 maxconnections = 4
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
@@ -36,7 +36,8 @@ localfolders = ~/.mail/Gmail
 [Repository Gmail-Remote]
 type = Gmail
 remoteuser = surinmike@gmail.com
-remotepasseval = get_pass('gmail')
+remoteusereval = get_username('google-mail')
+remotepasseval = get_password('google-mail')
 realdelete = yes
 maxconnections = 4
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
