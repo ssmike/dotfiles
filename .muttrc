@@ -1,19 +1,49 @@
-mailboxes =INBOX
-source ~/.mutt/$MUTT_ACCOUNT/conf
+macro index S \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<shell-escape>notmuch-mutt -r --prompt search<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+"notmuch: search mail"
+
+macro index J <sidebar-next>
+macro index K <sidebar-prev>
+macro index L <sidebar-open>
+bind index,pager B sidebar-toggle-visible
+set sidebar_delim_chars = '/.[]'
+set sidebar_short_path = yes
+set sidebar_on_right = yes
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_indent_string = '  '
+set sidebar_folder_indent = yes
+set sidebar_width = 30
+
+set sidebar_new_mail_only
+#sidebar_whitelist INBOX
+color sidebar_new blue default
+#color sidebar_ordinary color245 default
+
+set sidebar_visible=no
+
+set mbox_type=Maildir
+set folder=~/.mail
+set header_cache=~/.mutt/cache
+source ~/.mail/mailboxes
+
+macro index <f2> '<change-folder>=Gmail/INBOX<enter>'
+macro index <f1> '<change-folder>=Yandex/INBOX<enter>'
+
+folder-hook Gmail source ~/.mutt/gmail.conf
+folder-hook Yandex source ~/.mutt/yandex.conf
+
 set ts_enabled = yes
 set timeout = 15
-set mail_check = 60
+set mail_check = 0
 set beep_new = yes
-set imap_keepalive = 10
-set imap_pipeline_depth=0
-unset imap_passive
-set imap_check_subscribed
 set charset=utf-8
 set folder_format="%2C %t %N %8s %d %f"
 set certificate_file="~/.mutt/certificates"
 source ~/.mutt/gpg.rc
 
-bind index "^" imap-fetch-mail
 
 set mime_forward=yes
 set mime_forward_rest=yes
@@ -30,9 +60,6 @@ macro pager  <next-unread>
 macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
 mime_lookup application/octet-stream
 set realname="Михаил Сурин"
-
-#macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m'
-macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
 set sort = threads
 set sort_aux = last-date-received
@@ -79,14 +106,3 @@ folder-hook . push "<collapse-all>"
 
 # color body brightwhite black '\*+[^*]+\*+'
 # color body brightwhite black '_+[^_]+_+'
-alias dainiak Alex Dainiak <dainiak@gmail.com>
-alias tolstobrov Александр Толстобров <at@itbrat.ru>
-alias raigor Andrei Raigorodskii <raigorodsky@yandex-team.ru>
-alias self Михаил Сурин <surinmike@gmail.com>
-alias ml ML DIHT <probability.diht@yandex.ru>
-alias cv Святослав Сурин <surincv@gmail.com>
-alias belova Дарья Белова <belova@phystech.edu>
-alias gudkov Константин Гудков <kagudkov@gmail.com>
-alias pershik Николай Першаков <k.pershik@gmail.com>
-alias musatych Даниил Мусатов <musatych@gmail.com>
-alias python shad.python@gmail.com

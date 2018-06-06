@@ -1,0 +1,50 @@
+[general]
+ui = ttyui
+accounts = Yandex, Gmail
+pythonfile = ~/.offlineimap.py
+
+[Account Yandex]
+localrepository = Yandex-Local
+remoterepository = Yandex-Remote
+utf8foldernames = yes
+synclabels = yes
+
+[Account Gmail]
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+utf8foldernames = yes
+synclabels = yes
+
+[Repository Yandex-Local]
+type = Maildir
+localfolders = ~/.mail/Yandex
+
+[Repository Yandex-Remote]
+type = IMAP
+remotehost = imap.yandex-team.ru
+remoteuser = ssmike
+remotepasseval = get_pass('yandex')
+realdelete = yes
+maxconnections = 4
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+createfolders = false
+
+[Repository Gmail-Local]
+type = Maildir
+localfolders = ~/.mail/Gmail
+
+[Repository Gmail-Remote]
+type = Gmail
+remoteuser = surinmike@gmail.com
+remotepasseval = get_pass('gmail')
+realdelete = yes
+maxconnections = 4
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[mbnames]
+enabled = yes
+filename = ~/.mail/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
