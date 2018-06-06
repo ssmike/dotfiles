@@ -30,7 +30,7 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 createfolders = false
 
 [Repository Gmail-Local]
-type = Maildir
+type = GmailMaildir
 localfolders = ~/.mail/Gmail
 
 [Repository Gmail-Remote]
