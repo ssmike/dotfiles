@@ -53,8 +53,8 @@ macro pager p  <previous-line>
 macro pager  <search-opposite>
 macro pager r <reply>
 macro index r <search-opposite>
-macro index  <next-unread>
-macro pager  <next-unread>
+macro index,pager n <next-unread>
+macro index,pager H <next-unread-mailbox>
 macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
 mime_lookup application/octet-stream
 set realname="Михаил Сурин"
