@@ -17,12 +17,10 @@ set sidebar_indent_string = '  '
 set sidebar_folder_indent = yes
 set sidebar_width = 30
 
-set sidebar_new_mail_only
-#sidebar_whitelist INBOX
 color sidebar_new blue default
 #color sidebar_ordinary color245 default
 
-set sidebar_visible=no
+set sidebar_visible=yes
 
 set mbox_type=Maildir
 set folder=~/.mail
