@@ -68,6 +68,8 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
 
     , ((modm, xK_f), spawn "dolphin")
 
+    , ((modm .|. controlMask, xK_l), spawn "slock")
+
     -- go to workspace
     , ((modm .|. shiftMask, xK_f), windows $ W.greedyView "5:fm")
     , ((modm .|. shiftMask, xK_s), windows $ W.greedyView "6:doc")
