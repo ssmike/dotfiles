@@ -1,12 +1,13 @@
 #!/bin/zsh
 
-cd ~/Downloads/
+SCANDIR="$1"
+OUTDIR="$2"
 
 for ext in avi mp4 mkv mpeg; do
-    find -iname "*.$ext" -exec ln -s {} ~/Videos/ \;
+    find "$SCANDIR" | grep ".$ext$" | xargs -I '{}' ln -s '{}' "$OUTDIR"
 done
 
-for f in ~/Videos/*; do
+for f in "$OUTDIR"/*; do
     if [ ! -f $f ]; then
         rm $f
     fi
