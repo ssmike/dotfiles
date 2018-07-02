@@ -5,6 +5,8 @@ macro index S \
 <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
 "notmuch: search mail"
 
+unset mark_old
+
 macro index J <sidebar-next>
 macro index K <sidebar-prev>
 macro index L <sidebar-open>
@@ -53,7 +55,6 @@ macro pager p  <previous-line>
 macro pager  <search-opposite>
 macro pager r <reply>
 macro index r <search-opposite>
-macro index,pager n <next-unread>
 macro index,pager H <next-unread-mailbox>
 macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
 mime_lookup application/octet-stream
