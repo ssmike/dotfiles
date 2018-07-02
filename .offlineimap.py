@@ -29,7 +29,7 @@ def get_password(repo):
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         print(get_password(sys.argv[1]))
-    elif len(sys.argv) != 3:
+    elif len(sys.argv) == 3:
         repo, username = sys.argv[1:]
         password = getpass.getpass("Enter password for user '%s': " % username)
         password_confirmation = getpass.getpass("Confirm password: ")
@@ -38,5 +38,4 @@ if __name__ == '__main__':
             sys.exit(1)
         set_credentials(repo, username, password)
     else:
-        print "Usage: %s <repository> <username>" \
-            % (os.path.basename(sys.argv[0]))
+        print "Usage: %s <repository> <username>" % (os.path.basename(sys.argv[0]))
