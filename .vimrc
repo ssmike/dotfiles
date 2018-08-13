@@ -57,15 +57,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'luochen1990/rainbow'
 
-    if exists('g:nyaovim_version')
-        Plug 'rhysd/nyaovim-popup-tooltip'
-        Plug 'rhysd/nyaovim-markdown-preview'
-        Plug 'rhysd/nyaovim-mini-browser'
-        nnoremap <Leader>o :<C-u>MiniBrowser <C-r><C-p><CR>
-    else
-        Plug 'suan/vim-instant-markdown'
-        let g:instant_markdown_slow = 1
-    endif
+    Plug 'suan/vim-instant-markdown'
+    let g:instant_markdown_slow = 1
 
     Plug 'majutsushi/tagbar'
 
@@ -178,10 +171,9 @@ syn on
 
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
-
-if exists('g:nyaovim_version') "nyaovim
-    colorscheme stackoverflow
-    let g:airline_theme='sol'
+if exists('g:GtkGuiLoaded')
+    colorscheme molokai
+    call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
 elseif has('gui_running') "gvim
     colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 10
@@ -356,7 +348,7 @@ let NERDTreeIgnore = ['\.pyc$']
 
 highlight StatusLine ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight MsgSeparator ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
-highlight Pmenu ctermbg=darkgray ctermfg=white
+highlight Pmenu ctermbg=darkgray ctermfg=white guibg=#6c6c6c guifg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 
