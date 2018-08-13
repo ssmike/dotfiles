@@ -26,9 +26,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'bitc/vim-hdevtools'
 
-    Plug 'rking/ag.vim'
-    Plug 'Chun-Yang/vim-action-ag'
-    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'Shougo/denite.nvim'
     Plug 'itchyny/vim-cursorword'
 
     Plug 'tpope/vim-salve'
@@ -122,8 +120,7 @@ let g:fugitive_git_executable = 'LANG=en git'
 
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
-nmap X :CtrlPBuffer<CR>
-nmap <c-f> :CtrlPMRUFiles<CR>
+
 nmap <F3> :qa<CR>
 nmap <F4> :bd<CR>
 
@@ -416,3 +413,10 @@ let g:vc_allow_leader_mappings=1
 
 au FileType mail setl fo+=awq
 au FileType mail setl wm=4
+
+nmap <SPACE>b :Denite -auto-resize buffer<CR>
+nmap <SPACE>f :Denite -auto-resize file<CR>
+nmap gw :DeniteCursorWord -auto-resize grep<CR>
+command! -nargs=1 Ag :Denite -auto-resize grep -input='<args>'
+nmap <SPACE>r :Denite -auto-resize register<CR>
+call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
