@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'rking/ag.vim'
     Plug 'Chun-Yang/vim-action-ag'
     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'itchyny/vim-cursorword'
 
     Plug 'tpope/vim-salve'
     Plug 'clojure-vim/vim-cider'
