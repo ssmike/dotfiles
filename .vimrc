@@ -435,3 +435,5 @@ else
     nmap <SPACE>f :CtrlPMRUFiles<CR>
     nmap gw gagiw
 endif
+
+nmap <SPACE>] <C-]> 
