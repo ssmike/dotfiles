@@ -26,7 +26,14 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'bitc/vim-hdevtools'
 
-    Plug 'Shougo/denite.nvim'
+    if has('python3')
+        Plug 'Shougo/denite.nvim'
+    else
+        Plug 'rking/ag.vim'
+        Plug 'Chun-Yang/vim-action-ag'
+        Plug 'ctrlpvim/ctrlp.vim'
+    endif
+
     Plug 'itchyny/vim-cursorword'
 
     Plug 'tpope/vim-salve'
@@ -414,9 +421,15 @@ let g:vc_allow_leader_mappings=1
 au FileType mail setl fo+=awq
 au FileType mail setl wm=4
 
-nmap <SPACE>b :Denite -auto-resize buffer<CR>
-nmap <SPACE>f :Denite -auto-resize file<CR>
-nmap gw :DeniteCursorWord -auto-resize grep<CR>
-command! -nargs=1 Ag :Denite -auto-resize grep -input='<args>'
-nmap <SPACE>r :Denite -auto-resize register<CR>
-call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
+if has('python3')
+    nmap <SPACE>b :Denite -auto-resize buffer<CR>
+    nmap <SPACE>f :Denite -auto-resize file<CR>
+    nmap gw :DeniteCursorWord -auto-resize grep<CR>
+    command! -nargs=1 Ag :Denite -auto-resize grep -input='<args>'
+    nmap <SPACE>r :Denite -auto-resize register<CR>
+    call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
+else
+    nmap <SPACE>b :CtrlPBuffer<CR>
+    nmap <SPACE>f :CtrlPMRUFiles<CR>
+    nmap gw gagiw
+endif
