@@ -1,6 +1,6 @@
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" nmap
-" vim -c ":BundleInstall"
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" :PlugInstall
 
 if has('nvim')
     set rtp+=/usr/share/vim/vimfiles
@@ -13,65 +13,84 @@ set nocompatible
 filetype off
 set title
 
-set rtp+=~/.vim/bundle/vundle/
+call plug#begin('~/.vim/plugged')
+    Plug 'Valloric/YouCompleteMe', {'do': 'python ./install.py --clang-completer --gocode-completer --racer-completer'}
+    Plug 'LnL7/vim-nix'
+    Plug 'artur-shaik/vim-javacomplete2'
 
-call vundle#rc()
+    Plug 'tpope/vim-fugitive'
+    Plug 'gregsexton/gitv'
+    Plug 'juneedahamed/vc.vim'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'mhinz/vim-signify'
+
+    Plug 'bitc/vim-hdevtools'
+
+    Plug 'rking/ag.vim'
+    Plug 'Chun-Yang/vim-action-ag'
+    Plug 'ctrlpvim/ctrlp.vim'
+
+    Plug 'tpope/vim-salve'
+    Plug 'clojure-vim/vim-cider'
+    Plug 'tpope/vim-fireplace'
+
+    Plug 'dirkwallenstein/vim-localcomplete'
+
+    Plug 'gerw/vim-latex-suite'
+    Plug 'jamessan/vim-gnupg'
+    Plug 'tpope/vim-dispatch'
+
+    Plug 'rust-lang/rust.vim'
+
+    Plug 'l04m33/vlime', {'rtp': 'vim/'}
+    Plug 'tpope/vim-db'
+    Plug 'mhinz/vim-startify'
+
+    Plug 'flazz/vim-colorschemes'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'luochen1990/rainbow'
+
+    if exists('g:nyaovim_version')
+        Plug 'rhysd/nyaovim-popup-tooltip'
+        Plug 'rhysd/nyaovim-markdown-preview'
+        Plug 'rhysd/nyaovim-mini-browser'
+        nnoremap <Leader>o :<C-u>MiniBrowser <C-r><C-p><CR>
+    else
+        Plug 'suan/vim-instant-markdown'
+        let g:instant_markdown_slow = 1
+    endif
+
+    Plug 'majutsushi/tagbar'
+
+    Plug 'craigemery/vim-autotag'
+
+    if !has("nvim")
+        set guiheadroom=0
+    else
+        Plug 'mklabs/split-term.vim'
+    endif
+    Plug 'chriskempson/vim-tomorrow-theme'
+call plug#end()
 
 filetype plugin indent on
 
-Bundle "Valloric/YouCompleteMe"
-Bundle "gmarik/vundle"
-
-Bundle "LnL7/vim-nix"
 autocmd! BufRead,BufNewFile *.nix    set filetype=nix
 
-Bundle "tpope/vim-fugitive"
-Bundle "gregsexton/gitv"
-Bundle "juneedahamed/vc.vim"
-Bundle "tpope/vim-rhubarb"
-Bundle "mhinz/vim-signify"
-
-Bundle 'bitc/vim-hdevtools'
 au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
 au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
-Bundle "tpope/vim-salve"
-Bundle "clojure-vim/vim-cider"
-Bundle "tpope/vim-fireplace"
-
-Bundle "rking/ag.vim"
-Bundle "Chun-Yang/vim-action-ag"
-
-Bundle "dirkwallenstein/vim-localcomplete"
-Bundle "ctrlp.vim"
-Bundle "gerw/vim-latex-suite"
-Bundle "gnupg.vim"
-Bundle "tpope/vim-dispatch"
-Bundle "rust-lang/rust.vim"
-
-Bundle "tpope/vim-db"
-
-Bundle "w0rp/ale"
 let g:ale_linters = {
             \   'cpp': [],
             \   'python': ['pylint']
             \}
 
-Bundle "Tagbar"
 "is disabled in LargeFile
 nmap t :TagbarToggle<CR>
 
-Bundle "mhinz/vim-startify"
-Bundle 'flazz/vim-colorschemes'
-Bundle "vim-airline/vim-airline"
-Bundle "vim-airline/vim-airline-themes"
-
-Bundle "l04m33/vlime", {'rtp': 'vim/'}
 let maplocalleader = "\<Space>"
 
-Bundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
-
 let g:rainbow_conf = {
     \   'guifgs': ['SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3'],
     \   'ctermfgs': ['Darkblue','darkgray','darkgreen','darkcyan','darkred','darkmagenta','brown','gray','darkmagenta','Darkblue','brown','darkgreen','darkcyan','darkred'],
@@ -83,16 +102,6 @@ let g:rainbow_conf = {
     \       'lisp': {}
     \   }
     \}
-
-if exists('g:nyaovim_version')
-    Bundle "rhysd/nyaovim-popup-tooltip"
-    Bundle "rhysd/nyaovim-markdown-preview"
-    Bundle "rhysd/nyaovim-mini-browser"
-    nnoremap <Leader>o :<C-u>MiniBrowser <C-r><C-p><CR>
-else
-    Bundle "suan/vim-instant-markdown"
-    let g:instant_markdown_slow = 1
-endif
 
 let g:cider_no_maps=1 " Disable built-in mappings
 "just maps from set_up without <F4>-<F5>
@@ -110,16 +119,6 @@ let g:fugitive_github_domains=['github.yandex-team.ru']
 
 let g:fugitive_git_executable = 'LANG=en git'
 
-
-"Bundle sirver/ultisnips"
-"Bundle honza/vim-snippets"
-
-"Bundle tpope/vim-unimpaired"
-"Bundle raimondi/delimitmate"
-
-"let g:UltiSnipsExpandTrigger=<c-w>"
-
-"let g:ctrlp_map='<c-f>'
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
 nmap X :CtrlPBuffer<CR>
@@ -128,8 +127,6 @@ nmap <F3> :qa<CR>
 nmap <F4> :bd<CR>
 
 nmap Q <c-w>
-
-Bundle "craigemery/vim-autotag"
 
 set tabstop=4
 set shiftwidth=4
@@ -181,19 +178,12 @@ if exists('g:nyaovim_version') "nyaovim
     colorscheme stackoverflow
     let g:airline_theme='sol'
 elseif has('gui_running') "gvim
-    Bundle "chriskempson/vim-tomorrow-theme"
     colorscheme Tomorrow-Night
     set guifont=Inconsolata\ 10
     let g:airline_theme='raven'
 else
     colorscheme pablo "terminal
     let g:airline_theme='raven'
-endif
-
-if !has("nvim")
-    set guiheadroom=0
-else
-    Bundle 'mklabs/split-term.vim'
 endif
 
 set nohlsearch
@@ -223,7 +213,7 @@ nmap `m :set fdm=manual<CR>
 set completeopt-=preview
 set splitbelow
 
-Bundle "artur-shaik/vim-javacomplete2"
+
 autocmd Filetype java setlocal completefunc=javacomplete#Complete
 ""autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
