@@ -354,9 +354,11 @@ autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
 let NERDTreeIgnore = ['\.pyc$']
 
+highlight StatusLine ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
+highlight MsgSeparator ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight Pmenu ctermbg=darkgray ctermfg=white
 highlight Todo term=reverse ctermbg=1 guibg=DarkRed
-highlight Search term=bold,reverse ctermfg=11 ctermbg=12 guifg=#6C6C6C guibg=#ffffff
+highlight Search term=bold,reverse ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 
 silent! highlight SignColumn ctermbg=None guibg=None
 highlight SignifySignDelete ctermbg=None ctermfg=red
