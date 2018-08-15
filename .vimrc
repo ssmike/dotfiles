@@ -425,3 +425,4 @@ else
 endif
 
 nmap <SPACE>] <C-]> 
+nmap <SPACE>[ <C-o> 
