@@ -70,6 +70,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'mklabs/split-term.vim'
     endif
     Plug 'chriskempson/vim-tomorrow-theme'
+
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
 call plug#end()
 
 filetype plugin indent on
@@ -132,7 +135,7 @@ set smarttab
 set expandtab
 "set formatoptions+=w
 "set tw=80
-nnoremap Q gqip
+"nnoremap Q gqip
 autocmd FileType make setlocal noexpandtab
 
 set autoread
@@ -307,7 +310,6 @@ autocmd FileType mail call DualLangMode()
 nmap <c-a> GVgg
 imap jj <ESC>
 imap ii <ESC>
-nmap <SPACE> <c-w>
 
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
@@ -427,6 +429,10 @@ else
     nmap <SPACE>f :CtrlPMRUFiles<CR>
     nmap gw gagiw
 endif
+
+let g:UltiSnipsExpandTrigger="kk"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 nmap <SPACE>] <C-]> 
 nmap <SPACE>[ <C-o> 
