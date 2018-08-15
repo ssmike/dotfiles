@@ -3,7 +3,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 if has('nvim')
-    set rtp+=/usr/share/vim/vimfiles
+    set rtp+=/usr/share/vim/vimfiles,~/.vim/
 endif
 
 set nocp
@@ -15,16 +15,16 @@ set title
 
 call plug#begin('~/.vim/plugged')
     Plug 'Valloric/YouCompleteMe', {'do': 'python ./install.py --clang-completer --gocode-completer --racer-completer'}
-    Plug 'LnL7/vim-nix'
-    Plug 'artur-shaik/vim-javacomplete2'
+    Plug 'LnL7/vim-nix', {'for': 'nix'}
+    Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 
     Plug 'tpope/vim-fugitive'
-    Plug 'gregsexton/gitv'
+    Plug 'gregsexton/gitv', {'on': 'Gitv'}
     Plug 'juneedahamed/vc.vim'
     Plug 'tpope/vim-rhubarb'
     Plug 'mhinz/vim-signify'
 
-    Plug 'bitc/vim-hdevtools'
+    Plug 'bitc/vim-hdevtools', {'for': 'haskell'}
 
     if has('python3')
         Plug 'Shougo/denite.nvim'
@@ -36,31 +36,27 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'itchyny/vim-cursorword'
 
-    Plug 'tpope/vim-salve'
-    Plug 'clojure-vim/vim-cider'
-    Plug 'tpope/vim-fireplace'
+    Plug 'tpope/vim-dispatch', {'for': 'clojure'}
+    Plug 'tpope/vim-salve', {'for': 'clojure'}
+    Plug 'clojure-vim/vim-cider', {'for': 'clojure'}
+    Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 
     Plug 'dirkwallenstein/vim-localcomplete'
 
-    Plug 'gerw/vim-latex-suite'
+    Plug 'gerw/vim-latex-suite', {'for': 'tex'}
     Plug 'jamessan/vim-gnupg'
-    Plug 'tpope/vim-dispatch'
 
-    Plug 'rust-lang/rust.vim'
+    Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
-    Plug 'l04m33/vlime', {'rtp': 'vim/'}
-    Plug 'tpope/vim-db'
+    Plug 'l04m33/vlime', {'rtp': 'vim/', 'for': 'lisp'}
     Plug 'mhinz/vim-startify'
 
     Plug 'flazz/vim-colorschemes'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'luochen1990/rainbow'
+    Plug 'luochen1990/rainbow', {'for': ['clojure', 'lisp']}
 
-    Plug 'suan/vim-instant-markdown'
-    let g:instant_markdown_slow = 1
-
-    Plug 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
     Plug 'craigemery/vim-autotag'
 
