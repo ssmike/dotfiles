@@ -27,7 +27,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'bitc/vim-hdevtools', {'for': 'haskell'}
 
     if has('python3')
-        Plug 'Shougo/denite.nvim'
+        if has('nvim')
+            Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
+        else
+            Plug 'Shougo/denite.nvim'
+        endif
     else
         Plug 'rking/ag.vim'
         Plug 'Chun-Yang/vim-action-ag'
