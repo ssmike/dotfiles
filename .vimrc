@@ -420,8 +420,8 @@ au FileType mail setl wm=4
 if has('python3')
     nmap <SPACE>b :Denite -auto-resize buffer<CR>
     nmap <SPACE>f :Denite -auto-resize file<CR>
-    nmap gw :DeniteCursorWord -auto-resize grep<CR>
-    command! -nargs=1 Ag :Denite -auto-resize grep -input='<args>'
+    nmap gw :DeniteCursorWord -mode=normal -auto-resize grep<CR>
+    command! -nargs=1 Ag :Denite -mode=normal -auto-resize grep -input='<args>'
     nmap <SPACE>r :Denite -auto-resize register<CR>
     call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
 else
@@ -434,5 +434,5 @@ let g:UltiSnipsExpandTrigger="kk"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-nmap <SPACE>] <C-]> 
-nmap <SPACE>[ <C-o> 
+nmap <SPACE>] <C-]>
+nmap <SPACE>[ <C-o>
