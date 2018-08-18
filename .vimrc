@@ -309,7 +309,6 @@ autocmd FileType mail call DualLangMode()
 
 nmap <c-a> GVgg
 imap jj <ESC>
-imap ii <ESC>
 
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
