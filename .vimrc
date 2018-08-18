@@ -144,7 +144,7 @@ nmap <BACKSPACE> :bp<CR>
 nmap s :w<CR>
 
 set autoindent
-imap {<CR>  {<CR>}iiO
+imap {<CR>  {<CR>}jjO
 imap {<SPACE>   {}<LEFT>
 
 set number
@@ -430,7 +430,7 @@ else
     nmap gw gagiw
 endif
 
-let g:UltiSnipsExpandTrigger="kk"
+let g:UltiSnipsExpandTrigger="ii"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
