@@ -38,8 +38,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'ctrlpvim/ctrlp.vim'
     endif
 
-    Plug 'itchyny/vim-cursorword'
-
     Plug 'tpope/vim-dispatch', {'for': 'clojure'}
     Plug 'tpope/vim-salve', {'for': 'clojure'}
     Plug 'clojure-vim/vim-cider', {'for': 'clojure'}
