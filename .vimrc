@@ -338,6 +338,11 @@ let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 nmap <c-k> :YcmCompleter GetDoc<CR>
 
+" more convinient tag jump bindings for me
+nnoremap g] g<c-]>
+nnoremap g] g<c-]>
+nnoremap <space>t :pop<CR>
+
 autocmd Filetype c,cpp,python,rust nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
 command YFix YcmCompleter FixIt
 
