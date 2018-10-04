@@ -13,10 +13,23 @@ set nocompatible
 filetype off
 set title
 
+let g:deoplete#enable_at_startup = 1
+
 call plug#begin('~/.vim/plugged')
-    Plug 'Valloric/YouCompleteMe', {'do': 'python ./install.py --clang-completer --gocode-completer --racer-completer'}
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+
+    Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh'
+        \ }
+
     Plug 'LnL7/vim-nix', {'for': 'nix'}
-    Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 
     Plug 'tpope/vim-fugitive'
     Plug 'gregsexton/gitv', {'on': 'Gitv'}
@@ -43,8 +56,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'clojure-vim/vim-cider', {'for': 'clojure'}
     Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 
-    Plug 'dirkwallenstein/vim-localcomplete'
-
     Plug 'gerw/vim-latex-suite', {'for': 'tex'}
     Plug 'jamessan/vim-gnupg'
 
@@ -68,10 +79,26 @@ call plug#begin('~/.vim/plugged')
         Plug 'mklabs/split-term.vim'
     endif
     Plug 'chriskempson/vim-tomorrow-theme'
-
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
 call plug#end()
+
+function SetupLspBindings()
+    noremap <buffer> <c-]> :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
+endfunction
+
+autocmd FileType cpp,c,rust,python :call SetupLspBindings()
+
+let g:LanguageClient_serverCommands = {
+  \ 'rust': ['rls'],
+  \ 'cpp': ['clangd'],
+  \ 'python': ['pyls'],   
+  \ }
+
+let g:LanguageClient_autoStart = 1 
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 filetype plugin indent on
 
@@ -79,11 +106,6 @@ autocmd! BufRead,BufNewFile *.nix    set filetype=nix
 
 au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
 au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
-
-let g:ale_linters = {
-            \   'cpp': [],
-            \   'python': ['pylint']
-            \}
 
 "is disabled in LargeFile
 nmap t :TagbarToggle<CR>
@@ -217,7 +239,6 @@ autocmd Filetype java setlocal completefunc=javacomplete#Complete
 
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
-let g:ycm_semantic_triggers = {'haskell' : ['.'], 'clojure' : ['/', '.']}
 
 autocmd BufRead *.gradle setlocal ft=groovy
 autocmd BufRead *.hamlet setlocal ft=hamlet
@@ -225,8 +246,6 @@ autocmd BufRead *.julius setlocal ft=julius
 autocmd BufRead *.cassius setlocal ft=cassius
 autocmd BufRead *.lucius setlocal ft=lucius
 autocmd BufRead *.dhtml setlocal ft=django
-
-let g:ycm_confirm_extra_conf = 0
 
 "x11 clipboard"
 "vmap . "+
@@ -256,12 +275,6 @@ endfunction
 command! Hide call HideHiddenCharacters()
 command! Show call DisplayHiddenCharacters()
 
-function! YDocFunction()
-    exe ':YcmCompleter GetDoc'
-endfunction
-
-command! YDoc call YDocFunction()
-
 function! Includefunction(param)
     exe 'normal! ggO#include '.a:param
     exe 'normal ``'
@@ -287,10 +300,6 @@ command Ru :call DualLangMode()
 set spelllang=ru_yo,en_us
 
 autocmd! BufRead,BufNewFile *.tex   setlocal makeprg=make
-
-let g:ycm_filetype_blacklist = {
-    \ 'tex' : 1
-    \}
 
 let g:tex_flavor='latex'
 
@@ -322,29 +331,16 @@ au BufReadCmd *.class  call s:javap()
 " YouCompleteMe options
 "
 
-let g:ycm_register_as_syntastic_checker = 0 "default 1
 let g:Show_diagnostics_ui = 1 "default 1
-let g:ycm_show_diagnostics_ui = 1
-
-"will put icons in Vim's gutter on lines that have a diagnostic set.
-"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
-"highlighting
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_enable_diagnostic_highlighting = 1
-let g:ycm_always_populate_location_list = 1 "default 0
-let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
-nmap <c-k> :YcmCompleter GetDoc<CR>
+"nmap <c-k> :YcmCompleter GetDoc<CR>
 
 " more convinient tag jump bindings for me
 nnoremap g] g<c-]>
 nnoremap g] g<c-]>
 nnoremap <space>t :pop<CR>
-
-autocmd Filetype c,cpp,python,rust nmap <buffer> <c-]> :YcmCompleter GoTo<CR>
-command YFix YcmCompleter FixIt
 
 autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
 
@@ -365,7 +361,6 @@ au FileType mail let b:delimitMate_autoclose = 0
 
 nmap ]] :cn<CR>
 nmap [[ :cp<CR>
-let g:ycm_python_binary_path='python'
 
 function Extcommand(...)
     normal i<c-r>=system(\'a:000\')<cr>
@@ -398,7 +393,6 @@ nmap ,s :call SwitchSourceHeader()<CR>
 
 let g:ag_prg="rg --vimgrep --smart-case"
 
-let g:ycm_rust_src_path = '~/.local/rust/src/'
 autocmd! BufRead,BufNewFile *.rs    setlocal makeprg=cargo
 
 " file is large from 100K
@@ -409,7 +403,6 @@ augroup END
 
 function LargeFile()
  let b:tagbar_ignore = 1
- let b:ale_linters = []
  " display message
  autocmd VimEnter *  echo "The file larger than " . (g:LargeFile / 1024) . " KB, some plugins are disabled."
 endfunction
@@ -431,10 +424,6 @@ else
     nmap <SPACE>f :CtrlPMRUFiles<CR>
     nmap gw gagiw
 endif
-
-let g:UltiSnipsExpandTrigger="ii"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 nmap <SPACE>] <C-]>
 nmap <SPACE>[ <C-o>
