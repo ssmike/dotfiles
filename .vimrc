@@ -85,6 +85,7 @@ endfunction
 autocmd FileType cpp,c,rust,python,clojure :call SetupLspBindings()
 
 let maplocalleader = ","
+let mapleader = " "
 
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['rls'],
@@ -109,7 +110,7 @@ au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
 au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
 "is disabled in LargeFile
-nmap <space>t :TagbarToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -136,7 +137,7 @@ nmap dp :diffput<CR>
 nmap <F3> :qa<CR>
 nmap <F4> :bd<CR>
 
-nmap <space>w <c-w>
+nmap <leader>w <c-w>
 
 set tabstop=4
 set shiftwidth=4
@@ -328,8 +329,7 @@ let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 
 " more convinient tag jump bindings for me
 nnoremap g] g<c-]>
-nnoremap g] g<c-]>
-nnoremap <space>p :pop<CR>
+nnoremap <leader>p :pop<CR>
 
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -376,7 +376,7 @@ function! SwitchSourceHeader()
   endif
 endfunction
 
-au FileType c,cpp nmap <buffer> <space>s :call SwitchSourceHeader()<CR>
+au FileType c,cpp nmap <buffer> <leader>s :call SwitchSourceHeader()<CR>
 
 let g:ag_prg="rg --vimgrep --smart-case"
 
