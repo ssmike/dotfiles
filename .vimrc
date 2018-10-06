@@ -51,11 +51,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'ctrlpvim/ctrlp.vim'
     endif
 
-    Plug 'tpope/vim-dispatch', {'for': 'clojure'}
-    Plug 'tpope/vim-salve', {'for': 'clojure'}
-    Plug 'clojure-vim/vim-cider', {'for': 'clojure'}
-    Plug 'tpope/vim-fireplace', {'for': 'clojure'}
-
     Plug 'gerw/vim-latex-suite', {'for': 'tex'}
     Plug 'jamessan/vim-gnupg'
 
@@ -87,15 +82,21 @@ function SetupLspBindings()
     nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
 endfunction
 
-autocmd FileType cpp,c,rust,python :call SetupLspBindings()
+autocmd FileType cpp,c,rust,python,clojure :call SetupLspBindings()
+
+let maplocalleader = ","
 
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['rls'],
   \ 'cpp': ['clangd'],
-  \ 'python': ['pyls'],   
+  \ 'python': ['pyls'],
+  \ 'clojure': ['clojure-lsp'],
   \ }
 
-let g:LanguageClient_autoStart = 1 
+""https://github.com/snoe/clojure-lsp
+""https://github.com/eclipse/eclipse.jdt.ls
+
+let g:LanguageClient_autoStart = 1
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -108,9 +109,7 @@ au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
 au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
 "is disabled in LargeFile
-nmap t :TagbarToggle<CR>
-
-let maplocalleader = "\<Space>"
+nmap <space>t :TagbarToggle<CR>
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -125,16 +124,6 @@ let g:rainbow_conf = {
     \   }
     \}
 
-let g:cider_no_maps=1 " Disable built-in mappings
-"just maps from set_up without <F4>-<F5>
-nmap <buffer> cf <Plug>CiderFormat
-nmap <buffer> cff <Plug>CiderCountFormat
-nmap <buffer> cF ggcfG
-nmap <buffer> cdd <Plug>CiderUndef
-nmap <buffer> cn <Plug>RefactorCleanNs
-nmap <buffer> cRR <Plug>RefactorResolveMissing
-nmap <buffer> cfs <Plug>RefactorFindSymbol
-
 let g:vc_browse_cache_all = 1
 
 let g:fugitive_github_domains=['github.yandex-team.ru']
@@ -147,7 +136,7 @@ nmap dp :diffput<CR>
 nmap <F3> :qa<CR>
 nmap <F4> :bd<CR>
 
-nmap Q <c-w>
+nmap <space>w <c-w>
 
 set tabstop=4
 set shiftwidth=4
@@ -340,9 +329,7 @@ let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
 " more convinient tag jump bindings for me
 nnoremap g] g<c-]>
 nnoremap g] g<c-]>
-nnoremap <space>t :pop<CR>
-
-autocmd FileType clojure nmap <buffer> <c-]> [<c-d>
+nnoremap <space>p :pop<CR>
 
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -389,7 +376,7 @@ function! SwitchSourceHeader()
   endif
 endfunction
 
-nmap ,s :call SwitchSourceHeader()<CR>
+au FileType c,cpp nmap <buffer> <space>s :call SwitchSourceHeader()<CR>
 
 let g:ag_prg="rg --vimgrep --smart-case"
 
