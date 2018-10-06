@@ -64,6 +64,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'luochen1990/rainbow', {'for': ['clojure', 'lisp']}
 
+    Plug 'tpope/vim-dispatch', {'for': 'clojure'}
+    Plug 'tpope/vim-salve', {'for': 'clojure'}
+    Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+
     Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
     Plug 'craigemery/vim-autotag'
@@ -76,13 +80,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'chriskempson/vim-tomorrow-theme'
 call plug#end()
 
+au FileType clojure nmap <buffer> <c-]> ]<c-d>
+
 function SetupLspBindings()
     noremap <buffer> <c-]> :call LanguageClient#textDocument_definition()<CR>
     nnoremap <buffer> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
 endfunction
 
-autocmd FileType cpp,c,rust,python,clojure :call SetupLspBindings()
+autocmd FileType cpp,c,rust,python :call SetupLspBindings()
 
 let maplocalleader = ","
 let mapleader = " "
@@ -91,7 +97,6 @@ let g:LanguageClient_serverCommands = {
   \ 'rust': ['rls'],
   \ 'cpp': ['clangd'],
   \ 'python': ['pyls'],
-  \ 'clojure': ['clojure-lsp'],
   \ }
 
 ""https://github.com/snoe/clojure-lsp
