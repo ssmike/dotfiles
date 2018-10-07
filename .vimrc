@@ -37,8 +37,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-rhubarb'
     Plug 'mhinz/vim-signify'
 
-    Plug 'bitc/vim-hdevtools', {'for': 'haskell'}
-
     if has('python3')
         if has('nvim')
             Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
@@ -88,7 +86,7 @@ function SetupLspBindings()
     nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
 endfunction
 
-autocmd FileType cpp,c,rust,python,java :call SetupLspBindings()
+autocmd FileType cpp,c,rust,python,java,haskell :call SetupLspBindings()
 
 let maplocalleader = ","
 let mapleader = " "
@@ -98,6 +96,7 @@ let g:LanguageClient_serverCommands = {
   \ 'cpp': ['clangd'],
   \ 'python': ['pyls'],
   \ 'java': ['jdt.ls'],
+  \ 'haskell': ['hie-wrapper']
   \ }
 
 ""https://github.com/snoe/clojure-lsp
@@ -112,9 +111,6 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 filetype plugin indent on
 
 autocmd! BufRead,BufNewFile *.nix    set filetype=nix
-
-au Filetype haskell :noremap <buffer> <c-t> :HdevtoolsType<CR>
-au Filetype haskell :noremap <buffer> <c-c> :HdevtoolsClear<CR>
 
 "is disabled in LargeFile
 nmap <leader>t :TagbarToggle<CR>
@@ -233,9 +229,6 @@ set splitbelow
 
 autocmd Filetype java setlocal completefunc=javacomplete#Complete
 ""autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd FileType haskell setlocal completefunc=necoghc#omnifunc
 
 autocmd BufRead *.gradle setlocal ft=groovy
 autocmd BufRead *.hamlet setlocal ft=hamlet
