@@ -88,7 +88,7 @@ function SetupLspBindings()
     nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
 endfunction
 
-autocmd FileType cpp,c,rust,python :call SetupLspBindings()
+autocmd FileType cpp,c,rust,python,java :call SetupLspBindings()
 
 let maplocalleader = ","
 let mapleader = " "
@@ -97,10 +97,12 @@ let g:LanguageClient_serverCommands = {
   \ 'rust': ['rls'],
   \ 'cpp': ['clangd'],
   \ 'python': ['pyls'],
+  \ 'java': ['jdt.ls'],
   \ }
 
 ""https://github.com/snoe/clojure-lsp
 ""https://github.com/eclipse/eclipse.jdt.ls
+""https://github.com/autozimu/LanguageClient-neovim/wiki/Java
 
 let g:LanguageClient_autoStart = 1
 
@@ -353,6 +355,8 @@ au FileType mail let b:delimitMate_autoclose = 0
 
 nmap ]] :cn<CR>
 nmap [[ :cp<CR>
+nmap )) :lnext<CR>
+nmap (( :lprevious<CR>
 
 function Extcommand(...)
     normal i<c-r>=system(\'a:000\')<cr>
@@ -399,21 +403,21 @@ function LargeFile()
  autocmd VimEnter *  echo "The file larger than " . (g:LargeFile / 1024) . " KB, some plugins are disabled."
 endfunction
 
-let g:vc_allow_leader_mappings=1
+let g:vc_allow_leader_mappings=0
 
 au FileType mail setl fo+=awq
 au FileType mail setl wm=4
 
 if has('python3')
-    nmap <SPACE>b :Denite -auto-resize buffer<CR>
-    nmap <SPACE>f :Denite -auto-resize file<CR>
+    nmap <leader>b :Denite -auto-resize buffer<CR>
+    nmap <leader>f :Denite -auto-resize file<CR>
     nmap gw :DeniteCursorWord -mode=normal -auto-resize grep<CR>
     command! -nargs=1 Ag :Denite -mode=normal -auto-resize grep -input='<args>'
-    nmap <SPACE>r :Denite -auto-resize register<CR>
+    nmap <leader>r :Denite -auto-resize register<CR>
     call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
 else
-    nmap <SPACE>b :CtrlPBuffer<CR>
-    nmap <SPACE>f :CtrlPMRUFiles<CR>
+    nmap <leader>b :CtrlPBuffer<CR>
+    nmap <leader>f :CtrlPMRUFiles<CR>
     nmap gw gagiw
 endif
 
