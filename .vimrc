@@ -66,7 +66,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-salve', {'for': 'clojure'}
     Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 
-    Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+    Plug 'majutsushi/tagbar'
 
     Plug 'craigemery/vim-autotag'
 
@@ -406,6 +406,7 @@ if has('python3')
     nmap <leader>f :Denite -auto-resize file<CR>
     nmap gw :DeniteCursorWord -mode=normal -auto-resize grep<CR>
     command! -nargs=1 Ag :Denite -mode=normal -auto-resize grep -input='<args>'
+    command! Fix :Denite -mode=normal -auto-resize codeAction
     nmap <leader>r :Denite -auto-resize register<CR>
     call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
 else
