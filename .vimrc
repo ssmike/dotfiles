@@ -57,7 +57,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'l04m33/vlime', {'rtp': 'vim/', 'for': 'lisp'}
     Plug 'mhinz/vim-startify'
 
-    Plug 'flazz/vim-colorschemes'
+    Plug 'ErichDonGubler/vim-sublime-monokai'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'luochen1990/rainbow', {'for': ['clojure', 'lisp']}
@@ -75,7 +75,6 @@ call plug#begin('~/.vim/plugged')
     else
         Plug 'mklabs/split-term.vim'
     endif
-    Plug 'chriskempson/vim-tomorrow-theme'
 call plug#end()
 
 au FileType clojure nmap <buffer> <c-]> ]<c-d>
@@ -188,10 +187,10 @@ syn on
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 if exists('g:GtkGuiLoaded')
-    colorscheme molokai
+    colorscheme sublimemonokai
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
 elseif has('gui_running') "gvim
-    colorscheme Tomorrow-Night
+    colorscheme sublimemonokai
     set guifont=Inconsolata\ 10
     let g:airline_theme='raven'
 else
@@ -414,6 +413,8 @@ else
     nmap <leader>f :CtrlPMRUFiles<CR>
     nmap gw gagiw
 endif
+
+set cinoptions=g0,(4
 
 nmap <SPACE>] <C-]>
 nmap <SPACE>[ <C-o>
