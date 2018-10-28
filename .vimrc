@@ -339,6 +339,8 @@ highlight Todo term=reverse ctermbg=1 guibg=DarkRed
 highlight Search term=bold,reverse ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 
 silent! highlight SignColumn ctermbg=None guibg=None
+silent! highlight FoldColumn ctermbg=None guibg=None
+silent! highlight Folded ctermbg=None guibg=None
 highlight SignifySignDelete ctermbg=None ctermfg=red
 highlight SignifySignAdd ctermbg=None ctermfg=green
 highlight SignifySignChange ctermbg=None ctermfg=magenta
