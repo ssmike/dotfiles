@@ -17,6 +17,16 @@ ZSH_HIGHLIGHT_STYLES=(
         'globbing'        'fg=166'
 )
 
+TIMEFMT='%U user %S system %P cpu %*E total'$'\n'\
+'avg shared (text):         %X KB'$'\n'\
+'avg unshared (data/stack): %D KB'$'\n'\
+'avg total (sum):           %K KB'$'\n'\
+'max resident memory:       %M MB'$'\n'\
+'involountary switches:     %c'$'\n'\
+'volountary switches:       %w'$'\n'\
+'major page faults:         %F'$'\n'\
+'minor page faults:         %R'
+
 #export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 READNULLCMD=less
 NOTIFY_COMMAND_TIMEOUT=90
