@@ -23,9 +23,6 @@ ZSH_HIGHLIGHT_STYLES=(
 )
 
 TIMEFMT='%U user %S system %P cpu %*E total'$'\n'\
-'avg shared (text):         %X KB'$'\n'\
-'avg unshared (data/stack): %D KB'$'\n'\
-'avg total (sum):           %K KB'$'\n'\
 'max resident memory:       %M MB'$'\n'\
 'involountary switches:     %c'$'\n'\
 'volountary switches:       %w'$'\n'\
