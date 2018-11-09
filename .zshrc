@@ -18,19 +18,14 @@ ZSH_HIGHLIGHT_STYLES=(
 )
 
 TIMEFMT='%U user %S system %P cpu %*E total'$'\n'\
-'avg shared (text):         %X KB'$'\n'\
-'avg unshared (data/stack): %D KB'$'\n'\
-'avg total (sum):           %K KB'$'\n'\
 'max resident memory:       %M MB'$'\n'\
 'involountary switches:     %c'$'\n'\
 'volountary switches:       %w'$'\n'\
 'major page faults:         %F'$'\n'\
 'minor page faults:         %R'
 
-#export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 READNULLCMD=less
 NOTIFY_COMMAND_TIMEOUT=90
-export _JAVA_AWT_WM_NONREPARENTING=1
 
 alias ls='ls --color=auto'
 
@@ -94,6 +89,7 @@ get_visible_length() {
 }
 
 pre-prompt() {
+  local exit_code=$?
   local PREPROMPT="%F{yellow}%m%f%F{blue}/%f"
   local PWD_STYLE="%B%F{blue}%2~%b%f"
   [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%2~%b%f"
@@ -104,6 +100,9 @@ pre-prompt() {
   local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
+  fi
+  if [[ $exit_code != 0 ]]; then
+    LEFT="$LEFT%F{$COLOR[br-black]}-%f%F{$COLOR[red]}$exit_code%f"
   fi
   # -- color
   LEFT="$LEFT%F{black}%B"
