@@ -158,7 +158,7 @@ pre-prompt() {
     LEFT="$LEFT%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
   if [[ $exit_code != 0 ]]; then
-    LEFT="$LEFT%F{$COLOR[br-black]}-%f%F{$COLOR[red]}$exit_code%f"
+    LEFT="$LEFT%F{$COLOR[br-black]}[%f%F{$COLOR[br-black]}$exit_code%f%F{$COLOR[br-black]}]%f"
   fi
   # -- color
   LEFT="$LEFT%F{$COLOR[br-black]}"
