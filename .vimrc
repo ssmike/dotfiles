@@ -177,8 +177,6 @@ set splitright
 set splitbelow
 "nmap < :vertical resize -6<CR>
 "nmap > :vertical resize +6<CR>
-nmap <F2> :NERDTree<CR>
-nmap  GVgg
 
 " for pwd following
 "autocmd BufEnter * lcd %:p:h
@@ -304,8 +302,9 @@ endfunction
 autocmd FileType tex call TexMode()
 autocmd FileType mail call DualLangMode()
 
-nmap <c-a> GVgg
+"nmap <c-a> GVgg
 imap jj <ESC>
+tnoremap jj <C-\><C-n>
 
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
