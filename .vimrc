@@ -427,4 +427,6 @@ if !has("nvim")
     let &t_EI = "\<Esc>[2 q"
 endif
 
+let g:startify_session_persistence = 1
+
 set clipboard=unnamedplus
