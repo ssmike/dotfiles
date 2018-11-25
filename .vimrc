@@ -426,3 +426,5 @@ if !has("nvim")
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 endif
+
+set clipboard=unnamedplus
