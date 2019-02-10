@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /usr/src/linux
-if [ ! -f /usr/src/linux/.config.old2 ]; then
+if [ ! -f /usr/src/linux/.config ]; then
     zcat /proc/config.gz > ./.config
     make oldconfig
 fi
