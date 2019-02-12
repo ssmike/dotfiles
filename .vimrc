@@ -335,7 +335,7 @@ let NERDTreeIgnore = ['\.pyc$']
 highlight StatusLine ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight MsgSeparator ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight Pmenu ctermbg=darkgray ctermfg=white guibg=#6c6c6c guifg=white
-highlight Todo term=reverse ctermbg=1 guibg=DarkRed
+highlight Todo ctermfg=231 ctermbg=232 cterm=bold guifg=#FFFFFF guibg=bg gui=bold
 highlight Search term=bold,reverse ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 
 silent! highlight SignColumn ctermbg=None guibg=None
