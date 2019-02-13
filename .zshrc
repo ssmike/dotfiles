@@ -437,9 +437,6 @@ function totp {
     eval oathtool --totp \$$1 --base32
 }
 
-if which aws >/dev/null; then
-    source aws_zsh_completer.sh
-fi
 if which rg >/dev/null; then
     alias ag="rg";
 fi
