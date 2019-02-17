@@ -85,7 +85,7 @@ function SetupLspBindings()
     nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
 endfunction
 
-autocmd FileType cpp,c,rust,python,java,haskell :call SetupLspBindings()
+autocmd FileType cpp,c,rust,python,java,haskell,go :call SetupLspBindings()
 
 let maplocalleader = ","
 let mapleader = " "
@@ -96,7 +96,8 @@ let g:LanguageClient_serverCommands = {
   \ 'c': ['clangd'],
   \ 'python': ['pyls'],
   \ 'java': ['jdt.ls'],
-  \ 'haskell': ['hie-wrapper']
+  \ 'haskell': ['hie-wrapper'],
+  \ 'go': ['bingo']
   \ }
 
 ""https://github.com/snoe/clojure-lsp
