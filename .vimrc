@@ -188,7 +188,7 @@ let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 if exists('g:GtkGuiLoaded')
     colorscheme sublimemonokai
-    call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
+    "call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
 elseif has('gui_running') "gvim
     colorscheme sublimemonokai
     set guifont=Inconsolata\ 10
