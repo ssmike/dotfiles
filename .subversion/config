@@ -43,7 +43,7 @@
 
 ### Section for configuring external helper applications.
 [helpers]
-diff-cmd = /home/ssmike/diffwrap.sh
+#diff-cmd = /home/ssmike/diffwrap.sh
 ### Set editor-cmd to the command used to invoke your text editor.
 ###   This will override the environment variables that Subversion
 ###   examines by default to find this information ($EDITOR, 
@@ -67,7 +67,7 @@ diff-cmd = /home/ssmike/diffwrap.sh
 ### Set merge-tool-cmd to the command used to invoke your external
 ### merging tool of choice. Subversion will pass 5 arguments to
 ### the specified command: base theirs mine merged wcfile
-# merge-tool-cmd = merge_command
+merge-tool-cmd = /home/ssmike/.mergewrap.py
 
 ### Section for configuring tunnel agents.
 [tunnels]
