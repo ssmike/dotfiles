@@ -242,7 +242,7 @@ main = do
     let modifiers = (withUrgencyHook NoUrgencyHook)
     xmonad $ modifiers $ def {
             terminal           = myTerminal,
-            focusFollowsMouse  = False,
+            focusFollowsMouse  = True,
             borderWidth        = 3,
             modMask            = mod3Mask,
             workspaces         = myWorkspaces,
