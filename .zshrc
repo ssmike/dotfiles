@@ -416,6 +416,7 @@ alias svn="ya tool svn"
 alias hg="ya tool hg"
 alias -g bn="/Berkanavt/news/"
 alias sky-tail="sky run --stream"
+alias pprof="$(ya tool gpt_perf --print-path)/gpt/bin/pprof"
 
 if which rg >/dev/null; then
     alias ag="rg";
