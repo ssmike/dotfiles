@@ -373,6 +373,10 @@ function arcanum() {
     curl -k https://rb.yandex-team.ru/arc/r/$1/diff/raw/
 }
 
+function pprof() {
+    "$(ya tool gpt_perf --print-path)/gpt/bin/pprof" "$@"
+}
+
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
 
@@ -416,7 +420,6 @@ alias svn="ya tool svn"
 alias hg="ya tool hg"
 alias -g bn="/Berkanavt/news/"
 alias sky-tail="sky run --stream"
-alias pprof="$(ya tool gpt_perf --print-path)/gpt/bin/pprof"
 
 if which rg >/dev/null; then
     alias ag="rg";
