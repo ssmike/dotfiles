@@ -58,6 +58,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'mhinz/vim-startify'
 
     Plug 'ErichDonGubler/vim-sublime-monokai'
+    Plug 'aonemd/kuroi.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'luochen1990/rainbow', {'for': ['clojure', 'lisp']}
@@ -133,7 +134,7 @@ let g:vc_browse_cache_all = 1
 
 let g:fugitive_github_domains=['github.yandex-team.ru']
 
-let g:fugitive_git_executable = 'LANG=en git'
+let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
 
 nmap do :diffget<CR>
 nmap dp :diffput<CR>
@@ -404,12 +405,28 @@ au FileType mail setl fo+=awq
 au FileType mail setl wm=4
 
 if has('python3')
+    function! s:denite_my_settings() abort
+        nnoremap <silent><buffer><expr> <CR>
+        \ denite#do_map('do_action')
+        nnoremap <silent><buffer><expr> d
+        \ denite#do_map('do_action', 'delete')
+        nnoremap <silent><buffer><expr> p
+        \ denite#do_map('do_action', 'preview')
+        nnoremap <silent><buffer><expr> q
+        \ denite#do_map('quit')
+        nnoremap <silent><buffer><expr> i
+        \ denite#do_map('open_filter_buffer')
+        nnoremap <silent><buffer><expr> <Space>
+        \ denite#do_map('toggle_select').'j'
+    endfunction
+    autocmd FileType denite call s:denite_my_settings()
+
     nmap <leader>b :Denite -auto-resize buffer<CR>
     nmap <leader>f :Denite -auto-resize file<CR>
-    nmap gw :DeniteCursorWord -mode=normal -auto-resize grep<CR>
-    command! -nargs=1 Ag :Denite -mode=normal -auto-resize grep -input='<args>'
-    command! Fix :Denite -mode=normal -auto-resize codeAction
-    nmap <leader>r :Denite -auto-resize register<CR>
+    nmap gw :DeniteCursorWord grep -auto-resize<CR>
+    command! -nargs=1 Ag :Denite grep -auto-resize -input='<args>'
+    command! Fix :Denite codeAction -auto-resize
+    nmap <leader>r :Denite register -auto-resize <CR>
     call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
 else
     nmap <leader>b :CtrlPBuffer<CR>
