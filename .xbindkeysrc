@@ -10,13 +10,13 @@
 "amixer -q sset Master toggle"
     XF86AudioMute
 
-"shutter --full"
+"spectacle -f"
     Print
-"shutter --select"
+"spectacle -r"
     control + Print
-"shutter --window"
+"spectacle -uw"
     shift + Print
-"shutter --active"
+"shutter -a"
     alt + Print
 
 "~/.xmonad/nm.sh"
