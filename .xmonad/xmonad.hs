@@ -1,37 +1,38 @@
-import System.Posix.Env (setEnv)
-import qualified System.Environment as E
 import Control.Monad
+import Data.List
 import Data.Monoid;
-import XMonad.Config.Kde
-import XMonad.Actions.WindowGo
-import XMonad
 import System.Exit
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.DynamicLog
-import XMonad.Util.Run(spawnPipe)
 import System.IO
+import System.Posix.Env (setEnv)
+import XMonad
+import XMonad.Actions.CopyWindow
+import XMonad.Actions.CycleWS
+import XMonad.Actions.WindowGo
+import XMonad.Config.Kde
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Layout.NoBorders
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Cross
-import XMonad.Prompt
+import XMonad.Layout.Mosaic
 import XMonad.Layout.MultiToggle
-import qualified XMonad.Layout.MultiToggle.Instances as Toggles
+import XMonad.Layout.Named
+import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace
+import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
-import XMonad.Util.Scratchpad
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Scratchpad
 import XMonad.Util.WorkspaceCompare
-import XMonad.Layout.PerWorkspace
-import XMonad.Layout.Mosaic
-import XMonad.Actions.CycleWS
-import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
-import XMonad.Actions.CopyWindow
-import XMonad.Layout.Named
-import Data.List
-import XMonad.Hooks.UrgencyHook
+import qualified System.Environment as E
+import qualified XMonad.Layout.MultiToggle.Instances as Toggles
 import qualified XMonad.Layout.Tabbed as Tab
+import qualified XMonad.StackSet as W
 
 myTerminal :: String
 myTerminal      = "kitty"
@@ -228,6 +229,7 @@ myStartupHook = do
     spawn "~/.xmonad/dzen-auto.sh"
     spawn "~/.xmonad/autostart.sh"
     spawn "xsetroot -cursor_name left_ptr"
+    setWMName "LG3D"
     return ()
 
 myEventHook =
