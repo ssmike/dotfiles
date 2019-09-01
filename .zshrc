@@ -408,6 +408,9 @@ function url-encode; {
         setopt extendedglob
         echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
 }
+function urldecode(){
+  echo -e "$(sed 's/+/ /g;s/%\(..\)/\\x\1/g;')"
+}
 
 # Search google for the given keywords.
 function google; {
