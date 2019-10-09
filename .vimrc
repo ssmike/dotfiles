@@ -16,6 +16,9 @@ set title
 let g:deoplete#enable_at_startup = 1
 
 call plug#begin('~/.vim/plugged')
+    "Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+
     if has('nvim')
       Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     else
