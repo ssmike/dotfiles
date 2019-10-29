@@ -96,8 +96,8 @@ let mapleader = " "
 
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['rls'],
-  \ 'cpp': ['clangd', '--header-insertion=never'],
-  \ 'c': ['clangd'],
+  \ 'cpp': ['clangd', '--header-insertion=never', '--background-index', '--suggest-missing-includes'],
+  \ 'c': ['clangd', '--header-insertion=never', '--background-index', '--suggest-missing-includes'],
   \ 'python': ['pyls'],
   \ 'java': ['jdt.ls'],
   \ 'haskell': ['hie-wrapper'],
