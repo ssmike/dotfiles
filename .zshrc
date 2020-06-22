@@ -100,7 +100,7 @@ COLOR=(
     "br-white"      15
 )
 
-function get_hg_branch() {
+function ascending_find_file() {
     max_depth=${#${PWD//[^\/]}}
     i=1
     cur_dir=$PWD
@@ -108,7 +108,7 @@ function get_hg_branch() {
         if [ ! -w $cur_dir ]; then
             return 1;
         fi
-        branch_file="$cur_dir/.hg/branch"
+        branch_file="$cur_dir/$1"
         if [ -f $branch_file ]; then
             cat $branch_file;
             return 0;
@@ -131,9 +131,14 @@ function with_cvs() {
         echo -n "%F{$COLOR[red]}git%f on %F{$COLOR[green]}$git_branch%f : $PWD_STYLE";
         return 0;
     fi
-    hg_branch=`get_hg_branch 2>/dev/null`
+    hg_branch=`ascending_find_file .hg/branch 2>/dev/null`
     if [ "x$hg_branch" != "x" ]; then
         echo -n "%F{$COLOR[red]}hg%f on %F{$COLOR[magenta]}$hg_branch%f : $PWD_STYLE";
+        return 0;
+    fi
+    arc_branch=`ascending_find_file .arc/HEAD 2>/dev/null | sed -e 's/^.*\"\(.*\)\"/\1/'`
+    if [ "x$arc_branch" != "x" ]; then
+        echo -n "%F{$COLOR[red]}arc%f on %F{$COLOR[cyan]}$arc_branch%f : $PWD_STYLE";
         return 0;
     fi
     echo -n "$PWD_STYLE"
@@ -207,6 +212,7 @@ chprompt() {
 autoload -Uz compinit
 compinit
 
+fpath+=~/.zfunc
 
 function _pip_completion {
   local words cword
@@ -344,7 +350,7 @@ function notify-error {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -u critical -i $NOTIFY_ICON "$2 failed";
+    notify-send -u critical -i $NOTIFY_ICON "$2 failed" -t 30000;
   fi
 }
 
@@ -356,7 +362,7 @@ function notify-success() {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -u normal -i $NOTIFY_ICON "$2 finished";
+    notify-send -u normal -i $NOTIFY_ICON "$2 finished" -t 30000;
   fi
 }
 
@@ -373,7 +379,7 @@ function notify-command-complete() {
 }
 
 alias x=xdg-open
-alias op="vblank_mode=0 primusrun "
+alias op="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only"
 
 add-zsh-hook preexec store-command-stats
 add-zsh-hook precmd notify-command-complete
@@ -407,9 +413,6 @@ bindkey "^Z" insert-sudo
 function url-encode; {
         setopt extendedglob
         echo "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
-}
-function urldecode(){
-  echo -e "$(sed 's/+/ /g;s/%\(..\)/\\x\1/g;')"
 }
 
 # Search google for the given keywords.
