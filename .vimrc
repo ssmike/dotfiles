@@ -17,7 +17,7 @@ let g:deoplete#enable_at_startup = 1
 
 call plug#begin('~/.vim/plugged')
     "Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+    "Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
     if has('nvim')
       Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -38,7 +38,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'gregsexton/gitv', {'on': 'Gitv'}
     Plug 'juneedahamed/vc.vim'
     Plug 'tpope/vim-rhubarb'
-    Plug 'mhinz/vim-signify'
+    Plug 'ssmike/vim-signify'
 
     if has('python3')
         if has('nvim')
@@ -96,8 +96,8 @@ let mapleader = " "
 
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['rls'],
-  \ 'cpp': ['clangd', '--header-insertion=never', '--background-index=0'],
-  \ 'c': ['clangd', '--header-insertion=never', '--background-index=0'],
+  \ 'cpp': ['clangd', '--background-index=0', '--suggest-missing-includes', '--header-insertion=never'],
+  \ 'c': ['clangd', '--background-index=0', '--suggest-missing-includes', '--header-insertion=never'],
   \ 'python': ['pyls'],
   \ 'java': ['jdt.ls'],
   \ 'haskell': ['hie-wrapper'],
@@ -424,12 +424,12 @@ if has('python3')
     endfunction
     autocmd FileType denite call s:denite_my_settings()
 
-    nmap <leader>b :Denite -start-filter -auto-resize buffer<CR>
-    nmap <leader>f :Denite -start-filter -auto-resize file<CR>
-    nmap gw :DeniteCursorWord grep -start-filter -auto-resize<CR>
-    command! -nargs=1 Ag :Denite grep -start-filter -auto-resize -input='<args>'
-    command! Fix :Denite codeAction -start-filter -auto-resize
-    nmap <leader>r :Denite register -start-filter -auto-resize <CR>
+    nmap <leader>b :Denite -auto-resize buffer<CR>
+    nmap <leader>f :Denite -auto-resize file<CR>
+    nmap gw :DeniteCursorWord grep -auto-resize<CR>
+    command! -nargs=1 Ag :Denite grep -auto-resize -input='<args>'
+    command! Fix :Denite codeAction -auto-resize
+    nmap <leader>r :Denite register -auto-resize <CR>
     call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
 else
     nmap <leader>b :CtrlPBuffer<CR>
