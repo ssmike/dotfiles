@@ -1,7 +1,7 @@
 #!/bin/bash
 pgrep  compton && exit
 #xhost +
-compton -f -D 3 -b
+#compton -f -D 3 -b
 nitrogen --restore &
 dunst &
 parcellite &
@@ -11,6 +11,8 @@ xbindkeys &
 #xautolock -locker "slock" -time 10 -detectsleep &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 #xinput set-prop 13 "Device Enabled" 0
+xmodmap ~/.Xmodmap.1
+blueman-tray &
 
 function launch(){
 python - "$@" <<EOF

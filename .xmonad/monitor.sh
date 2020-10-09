@@ -2,6 +2,8 @@
 if [ "x$1" != "xstart" ]; then
     killall dzen2
     killall nm-applet
+    killall redshift
+    killall update-notifier-tray
 fi
 
 if xrandr  | grep "DP1-1 connected"; then
