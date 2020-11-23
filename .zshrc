@@ -152,19 +152,24 @@ get_visible_length() {
     echo `echo $1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | wc -m`
 }
 
+prompt-modules() {
+  RESULT=""
+  if [ ! -z $VIRTUAL_ENV ]; then
+    echo -n "%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
+  fi
+  if [[ $exit_code != 0 ]]; then
+    echo -n "%F{$COLOR[br-black]}[%f%F{$COLOR[br-black]}$exit_code%f%F{$COLOR[br-black]}]%f"
+  fi
+}
+
 pre-prompt() {
   local exit_code=$?
   local PREPROMPT="%F{$COLOR[yellow]}%m%f%F{$COLOR[blue]}/%f"
   local PWD_STYLE="%F{$COLOR[br-blue]}%2~%f"
   [  "$UID" = "0" ] && PWD_STYLE="%F{$COLOR[br-red]}%2~%f"
   local WITH_CVS=`with_cvs "$PWD_STYLE"`
-  local LEFT="%F{$COLORS[br-black]}.%f%F{$COLOR[br-green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[br-green]})%f"
-  if [ ! -z $VIRTUAL_ENV ]; then
-    LEFT="$LEFT%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
-  fi
-  if [[ $exit_code != 0 ]]; then
-    LEFT="$LEFT%F{$COLOR[br-black]}[%f%F{$COLOR[br-black]}$exit_code%f%F{$COLOR[br-black]}]%f"
-  fi
+  local LEFT="%F{$COLOR[br-black]}.%f%F{$COLOR[br-green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[br-green]})%f"
+  LEFT="$LEFT`prompt-modules`"
   # -- color
   LEFT="$LEFT%F{$COLOR[br-black]}"
   local RIGHT="."
