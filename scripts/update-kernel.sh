@@ -16,5 +16,7 @@ if which grub-mkconfig; then
 else
     mv /boot/vmlinuz-* /boot/EFI/gentoo
     mv /boot/initramfs-* /boot/EFI/gentoo
+    mv /boot/config-* /boot/EFI/gentoo
+    mv /boot/System.map-* /boot/EFI/gentoo
 fi
 umount /boot
