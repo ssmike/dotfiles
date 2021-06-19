@@ -1,0 +1,114 @@
+<touchégg>
+  <settings>
+    <property name="animation_delay">150</property>
+    <property name="action_execute_threshold">25</property>
+    <property name="color">auto</property>
+    <property name="borderColor">auto</property>
+  </settings>
+  <application name="All">
+    <gesture type="SWIPE" fingers="4" direction="UP">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>F8</keys>
+        <decreaseKeys>F8</decreaseKeys>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+    <gesture type="SWIPE" fingers="4" direction="DOWN">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>F8</keys>
+        <decreaseKeys>F8</decreaseKeys>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+
+    <gesture type="SWIPE" fingers="3" direction="LEFT">
+      <action type="CHANGE_DESKTOP">
+        <direction>previous</direction>
+        <animate>true</animate>
+        <animationPosition>left</animationPosition>
+        <color>000000</color>
+        <borderColor>000000</borderColor>
+      </action>
+    </gesture>
+
+    <gesture type="SWIPE" fingers="3" direction="RIGHT">
+        <action type="CHANGE_DESKTOP">
+            <direction>next</direction>
+            <animate>true</animate>
+            <animationPosition>right</animationPosition>
+            <color>000000</color>
+            <borderColor>000000</borderColor>
+        </action>
+    </gesture>
+
+    <gesture type="SWIPE" fingers="3" direction="UP">
+      <action type="RUN_COMMAND">
+        <command>qdbus org.kde.kglobalaccel /component/kwin invokeShortcut 'ExposeAll'</command>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+    <gesture type="SWIPE" fingers="3" direction="DOWN">
+      <action type="RUN_COMMAND">
+        <command>qdbus org.kde.kglobalaccel /component/kwin invokeShortcut 'Expose'</command>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+  </application>
+
+  <application name="firefox">
+    <gesture type="SWIPE" fingers="4" direction="DOWN">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>Shift_L+F</keys>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+  </application>
+
+  <application name="firefox,dolphin">
+    <gesture type="SWIPE" fingers="4" direction="LEFT">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>Shift_L+Tab</keys>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+    <gesture type="SWIPE" fingers="4" direction="RIGHT">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>Tab</keys>
+        <repeat>false</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+  </application>
+
+  <application name="gwenview,okular,firefox">
+    <gesture type="PINCH" fingers="2" direction="IN">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>KP_Subtract</keys>
+        <decreaseKeys>KP_Add</decreaseKeys>
+        <repeat>true</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+    <gesture type="PINCH" fingers="2" direction="OUT">
+      <action type="SEND_KEYS">
+        <modifiers>Control_L</modifiers>
+        <keys>KP_Add</keys>
+        <decreaseKeys>KP_Subtract</decreaseKeys>
+        <repeat>true</repeat>
+        <on>begin</on>
+      </action>
+    </gesture>
+  </application>
+</touchégg>
