@@ -13,23 +13,25 @@ set nocompatible
 filetype off
 set title
 
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 call plug#begin('~/.vim/plugged')
     "Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
     "Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
-    if has('nvim')
-      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-      Plug 'Shougo/deoplete.nvim'
-      Plug 'roxma/nvim-yarp'
-      Plug 'roxma/vim-hug-neovim-rpc'
-    endif
+    "if has('nvim')
+    "  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "else
+    "  Plug 'Shougo/deoplete.nvim'
+    "  Plug 'roxma/nvim-yarp'
+    "  Plug 'roxma/vim-hug-neovim-rpc'
+    "endif
 
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'lighttiger2505/deoplete-vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
+    "Plug 'prabirshrestha/vim-lsp'
+    "Plug 'lighttiger2505/deoplete-vim-lsp'
+    "Plug 'mattn/vim-lsp-settings'
+
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'LnL7/vim-nix', {'for': 'nix'}
 
@@ -82,10 +84,27 @@ call plug#end()
 
 au FileType clojure nmap <buffer> <c-]> ]<c-d>
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 function SetupLspBindings()
-    nmap <buffer> <c-]> <plug>(lsp-definition)
-    nmap <buffer> K  <plug>(lsp-hover)
-    nmap <buffer> <F2> <plug>(lsp-rename)
+    "nmap <buffer> <c-]> <plug>(lsp-definition)
+    "nmap <buffer> K  <plug>(lsp-hover)
+    "nmap <buffer> <F2> <plug>(lsp-rename)
+
+    nmap <buffer> <c-]> <plug>(coc-definition)
+    nmap <buffer> K  :call <SID>show_documentation()<CR>
+    nmap <buffer> <F2> <plug>(coc-rename)
 endfunction
 
 autocmd FileType cpp,c,rust,python,java,haskell,go :call SetupLspBindings()
@@ -93,29 +112,15 @@ autocmd FileType cpp,c,rust,python,java,haskell,go :call SetupLspBindings()
 let maplocalleader = ","
 let mapleader = " "
 
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'pyls',
-    \ 'cmd': {server_info->['pyls']},
-    \ 'allowlist': ['python'],
-    \ })
-
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'clangd',
-    \ 'cmd': ['clangd', '-j=2', '--suggest-missing-includes', '--header-insertion=never'],
-    \ 'allowlist': ['c', 'cpp'],
-    \ })
-
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'rls',
-    \ 'cmd': {server_info->['rls']},
-    \ 'allowlist': ['rust'],
-    \ })
-
+"au User lsp_setup call lsp#register_server({
+"    \ 'name': 'clangd',
+"    \ 'cmd': ['clangd', '-j=2', '--suggest-missing-includes', '--header-insertion=never'],
+"    \ 'allowlist': ['c', 'cpp'],
+"    \ })
 
 "let g:LanguageClient_serverCommands = {
 "  \ 'java': ['jdt.ls'],
 "  \ 'haskell': ['hie-wrapper'],
-"  \ 'go': ['bingo']
 "  \ }
 
 ""https://github.com/snoe/clojure-lsp
@@ -123,7 +128,12 @@ au User lsp_setup call lsp#register_server({
 ""https://github.com/autozimu/LanguageClient-neovim/wiki/Java
 
 " deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 filetype plugin indent on
 
