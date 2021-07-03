@@ -27,10 +27,9 @@ call plug#begin('~/.vim/plugged')
       Plug 'roxma/vim-hug-neovim-rpc'
     endif
 
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh'
-        \ }
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'lighttiger2505/deoplete-vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
 
     Plug 'LnL7/vim-nix', {'for': 'nix'}
 
@@ -84,9 +83,9 @@ call plug#end()
 au FileType clojure nmap <buffer> <c-]> ]<c-d>
 
 function SetupLspBindings()
-    noremap <buffer> <c-]> :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <buffer> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <buffer> <F2> :call LanguageClient#textDocument_rename()<CR>
+    nmap <buffer> <c-]> <plug>(lsp-definition)
+    nmap <buffer> K  <plug>(lsp-hover)
+    nmap <buffer> <F2> <plug>(lsp-rename)
 endfunction
 
 autocmd FileType cpp,c,rust,python,java,haskell,go :call SetupLspBindings()
@@ -94,21 +93,34 @@ autocmd FileType cpp,c,rust,python,java,haskell,go :call SetupLspBindings()
 let maplocalleader = ","
 let mapleader = " "
 
-let g:LanguageClient_serverCommands = {
-  \ 'rust': ['rls'],
-  \ 'cpp': ['clangd', '-j=2', '--suggest-missing-includes', '--header-insertion=never'],
-  \ 'c': ['clangd', '-j=2', '--suggest-missing-includes', '--header-insertion=never'],
-  \ 'python': ['pyls'],
-  \ 'java': ['jdt.ls'],
-  \ 'haskell': ['hie-wrapper'],
-  \ 'go': ['bingo']
-  \ }
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'pyls',
+    \ 'cmd': {server_info->['pyls']},
+    \ 'allowlist': ['python'],
+    \ })
+
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'clangd',
+    \ 'cmd': ['clangd', '-j=2', '--suggest-missing-includes', '--header-insertion=never'],
+    \ 'allowlist': ['c', 'cpp'],
+    \ })
+
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'rls',
+    \ 'cmd': {server_info->['rls']},
+    \ 'allowlist': ['rust'],
+    \ })
+
+
+"let g:LanguageClient_serverCommands = {
+"  \ 'java': ['jdt.ls'],
+"  \ 'haskell': ['hie-wrapper'],
+"  \ 'go': ['bingo']
+"  \ }
 
 ""https://github.com/snoe/clojure-lsp
 ""https://github.com/eclipse/eclipse.jdt.ls
 ""https://github.com/autozimu/LanguageClient-neovim/wiki/Java
-
-let g:LanguageClient_autoStart = 1
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -321,10 +333,6 @@ endfunction
 
 au BufReadCmd *.class  call s:javap()
 
-"
-" YouCompleteMe options
-"
-
 let g:Show_diagnostics_ui = 1 "default 1
 
 let g:ghcmod_ghc_options = ['-fno-warn-missing-signatures']
@@ -428,7 +436,6 @@ if has('python3')
     nmap <leader>f :Denite -auto-resize file<CR>
     nmap gw :DeniteCursorWord grep -auto-resize<CR>
     command! -nargs=1 Ag :Denite grep -auto-resize -input='<args>'
-    command! Fix :Denite codeAction -auto-resize
     nmap <leader>r :Denite register -auto-resize <CR>
     call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
 else
