@@ -1,9 +1,9 @@
 #!/bin/bash
-if [ ! -e ".git" ]; then
+if [ ! -e "./make-symlinks.sh" ]; then
     echo "Should be run from repo's root";
     exit 1;
 fi
-blacklist=".git . .. make-symlinks.sh scripts"
+blacklist=".git . .. make-symlinks.sh scripts coc-settings.json"
 for file in `ls -a`; do
     if ! grep $file <<<$blacklist >/dev/null; then
         if [ -e ~/$file ] && [ ! -h ~/$file ]; then
@@ -18,9 +18,14 @@ done
 
 mkdir ~/.config/nvim/
 ln -s ~/.vimrc ~/.config/nvim/init.vim
+ln -s $PWD/coc-settings.json ~/.config/nvim/coc-settings.json
+
 mkdir -p ~/.config/kitty/
 ln -s ~/.kitty ~/.config/kitty/kitty.conf
-mkdir ~/.config/
-ln -s ~/.redshift ~/.config/redshift.conf
-mkdir ~/.config/touchegg
-ln -s ~/.touchegg ~/.config/touchegg/touchegg.conf
+
+mkdir -p ~/.config/
+ln -s $PWD/.redshift ~/.config/redshift.conf
+
+mkdir -p ~/.config/touchegg
+ln -s $PWD/.touchegg ~/.config/touchegg/touchegg.conf
+

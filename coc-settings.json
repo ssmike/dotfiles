@@ -1,0 +1,26 @@
+{
+    "languageserver": {
+        "clangd": {
+            "command": "clangd",
+            "args": ["-j=2", "--suggest-missing-includes", "--header-insertion=never"],
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".arcadia.root"],
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+        },
+        "pyls": {
+            "command": "pyls",
+            "rootPatterns": [".git", ".arcadia.root", "requirements.txt"],
+            "filetypes": ["python"]
+        },
+        "rls": {
+            "command": "rls",
+            "rootPatterns": ["Cargo.toml", "rust-toolchain", ".git"],
+            "filetypes": ["rust"]
+        },
+        "go": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod"],
+            "trace.server": "verbose",
+            "filetypes": ["go"]
+        }
+    }
+}
