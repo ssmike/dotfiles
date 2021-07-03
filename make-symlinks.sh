@@ -22,3 +22,5 @@ mkdir -p ~/.config/kitty/
 ln -s ~/.kitty ~/.config/kitty/kitty.conf
 mkdir ~/.config/
 ln -s ~/.redshift ~/.config/redshift.conf
+mkdir ~/.config/touchegg
+ln -s ~/.touchegg ~/.config/touchegg/touchegg.conf
