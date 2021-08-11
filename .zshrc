@@ -213,6 +213,9 @@ chprompt() {
   PROMPT="%B%F{blue}%2~%f%F{blue}%f%b> "
 }
 
+source ~/.zsh/nix-zsh-completions/nix.plugin.zsh
+fpath+=~/.zsh/nix-zsh-completions 
+
 # -[ completion ]-
 autoload -Uz compinit
 compinit
