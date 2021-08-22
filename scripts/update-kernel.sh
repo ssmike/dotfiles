@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 cd /usr/src/linux
 if [ ! -f /usr/src/linux/.config ]; then
     zcat /proc/config.gz > ./.config
@@ -10,7 +12,13 @@ mount /boot
 make install
 ver=`readlink /usr/src/linux | sed -e 's/linux-//'`
 dracut -H -f --kver $ver
-emerge @module-rebuild
+
+if [[ "$ver" != "`uname -r`" ]]; then
+    emerge @module-rebuild
+else
+    echo "kernel version didn't changed; don't rebuild modules"
+fi
+
 if which grub-mkconfig; then
     grub-mkconfig > /boot/grub/grub.cfg;
 else
