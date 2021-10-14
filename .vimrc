@@ -67,9 +67,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'luochen1990/rainbow', {'for': ['clojure', 'lisp']}
 
-    Plug 'tpope/vim-dispatch', {'for': 'clojure'}
-    Plug 'tpope/vim-salve', {'for': 'clojure'}
-    Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+    if has('nvim')
+        Plug 'Olical/conjure', {'tag': 'v4.25.0'}
+    else
+        Plug 'tpope/vim-dispatch', {'for': 'clojure'}
+        Plug 'tpope/vim-salve', {'for': 'clojure'}
+        Plug 'tpope/vim-fireplace', {'for': 'clojure'}endif
+    endif
 
     Plug 'majutsushi/tagbar'
 
@@ -82,7 +86,11 @@ call plug#begin('~/.vim/plugged')
     endif
 call plug#end()
 
-au FileType clojure nmap <buffer> <c-]> ]<c-d>
+if has('nvim')
+    au FileType clojure nmap <buffer> <c-]> ,gd]
+else
+    au FileType clojure nmap <buffer> <c-]> ]<c-d>
+endif
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -361,6 +369,8 @@ nnoremap <leader>p :pop<CR>
 
 let NERDTreeIgnore = ['\.pyc$']
 
+highlight Comment ctermfg=248 guifg=#999999
+highlight NormalFloat ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight StatusLine ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight MsgSeparator ctermfg=188 ctermbg=235 guifg=#c8c8c8 guibg=#2e2e2e
 highlight Pmenu ctermbg=darkgray ctermfg=white guibg=#6c6c6c guifg=white
