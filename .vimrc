@@ -69,6 +69,7 @@ call plug#begin('~/.vim/plugged')
 
     if has('nvim')
         Plug 'Olical/conjure', {'tag': 'v4.25.0'}
+        au FileType clojure setlocal timeoutlen=500
     else
         Plug 'tpope/vim-dispatch', {'for': 'clojure'}
         Plug 'tpope/vim-salve', {'for': 'clojure'}
