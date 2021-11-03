@@ -47,6 +47,9 @@
 
     <gesture type="SWIPE" fingers="3" direction="UP">
       <action type="RUN_COMMAND">
+        <modifiers>Control_L</modifiers>
+        <keys>F9</keys>
+        <decreaseKeys>F9</decreaseKeys>
         <command>qdbus org.kde.kglobalaccel /component/kwin invokeShortcut 'ExposeAll'</command>
         <repeat>false</repeat>
         <on>begin</on>
@@ -54,6 +57,9 @@
     </gesture>
     <gesture type="SWIPE" fingers="3" direction="DOWN">
       <action type="RUN_COMMAND">
+        <modifiers>Control_L</modifiers>
+        <keys>F10</keys>
+        <decreaseKeys>F10</decreaseKeys>
         <command>qdbus org.kde.kglobalaccel /component/kwin invokeShortcut 'Expose'</command>
         <repeat>false</repeat>
         <on>begin</on>
