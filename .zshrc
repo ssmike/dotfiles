@@ -358,7 +358,7 @@ function notify-error {
   now=$(date "+%s")
   (( diff = $now - $start_time ))
   if (( $diff > $NOTIFY_COMMAND_TIMEOUT )); then
-    notify-send -u critical -i $NOTIFY_ICON "$2 failed" -t 30000;
+    notify-send -u normal -i $NOTIFY_ICON "$2 failed" -t 30000;
   fi
 }
 
