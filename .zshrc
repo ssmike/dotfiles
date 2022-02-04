@@ -441,10 +441,15 @@ function set-title() {
     echo -ne "\033]0;$@\007"
 }
 
-function update-term-title() {
+function _update-term-title() {
     set-title `print -P %m: %~`
 }
-add-zsh-hook precmd update-term-title
+add-zsh-hook precmd _update-term-title
+
+function _fix_cursor() {
+   echo -ne '\e[5 q'
+}
+add-zsh-hook precmd _fix_cursor
 
 function totp {
     eval `gpg -d ~/.secrets.gpg`
