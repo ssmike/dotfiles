@@ -73,7 +73,7 @@ call plug#begin('~/.vim/plugged')
     else
         Plug 'tpope/vim-dispatch', {'for': 'clojure'}
         Plug 'tpope/vim-salve', {'for': 'clojure'}
-        Plug 'tpope/vim-fireplace', {'for': 'clojure'}endif
+        Plug 'tpope/vim-fireplace', {'for': 'clojure'}
     endif
 
     Plug 'majutsushi/tagbar'
