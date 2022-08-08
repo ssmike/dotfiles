@@ -382,3 +382,5 @@ macos_hide_titlebar no
 # break any Alt+key keyboard shortcuts in your terminal programs, but you
 # can use the macOS unicode input technique.
 macos_option_as_alt yes
+
+confirm_os_window_close 0
