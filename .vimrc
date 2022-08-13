@@ -106,7 +106,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-function SetupLspBindings()
+function! SetupLspBindings()
     "nmap <buffer> <c-]> <plug>(lsp-definition)
     "nmap <buffer> K  <plug>(lsp-hover)
     "nmap <buffer> <F2> <plug>(lsp-rename)
@@ -140,15 +140,15 @@ let mapleader = " "
 "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " new coc.nvim settings
-inoremap <silent><expr> <CR>
-      \ coc#pum#visible() ? coc#pum#next(1):
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#confirm():
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+inoremap <silent><expr> <c-n> coc#pum#visible() ? coc#pum#next(1)
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
@@ -304,7 +304,7 @@ nnoremap <A-w> 6gt
 nnoremap <A-e> 7gt
 nnoremap <A-r> 8gt
 
-command Print !gtklp %
+command! Print !gtklp %
 
 function! DisplayHiddenCharacters()
     set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣,nbsp:+
@@ -337,7 +337,7 @@ function! DualLangMode()
     map! <buffer> <c-a> 
 endfunction
 
-command Ru :call DualLangMode()
+command! Ru :call DualLangMode()
 
 ""highlight lCursor guifg=NONE guibg=Cyan
 set spelllang=ru_yo,en_us
@@ -346,7 +346,7 @@ autocmd! BufRead,BufNewFile *.tex   setlocal makeprg=make
 
 let g:tex_flavor='latex'
 
-function TexMode()
+function! TexMode()
     let g:tex_conceal = ""
     setlocal iminsert=0
     setlocal imsearch=0
@@ -405,7 +405,7 @@ nmap [[ :cp<CR>
 nmap )) :lnext<CR>
 nmap (( :lprevious<CR>
 
-function Extcommand(...)
+function! Extcommand(...)
     normal i<c-r>=system(\'a:000\')<cr>
 endfunction
 
@@ -444,7 +444,7 @@ augroup LargeFile
  autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
 augroup END
 
-function LargeFile()
+function! LargeFile()
  let b:tagbar_ignore = 1
  " display message
  autocmd VimEnter *  echo "The file larger than " . (g:LargeFile / 1024) . " KB, some plugins are disabled."
