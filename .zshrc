@@ -141,6 +141,10 @@ function with_cvs() {
         echo -n "%F{$COLOR[red]}arc%f on %F{$COLOR[cyan]}$arc_branch%f : $PWD_STYLE";
         return 0;
     fi
+    fossil_branch=`fossil branch 2>/dev/null | cut -d' ' -f2`
+    if [ "x$fossil_branch" != "x" ]; then
+        echo -n "%F{$COLOR[red]}fossil%f on %F{$COLOR[br-magenta]}$fossil_branch%f : $PWD_STYLE";
+    fi
     echo -n "$PWD_STYLE"
 }
 
