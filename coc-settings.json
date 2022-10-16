@@ -24,8 +24,9 @@
         },
         "haskell": {
             "command": "haskell-language-server-wrapper",
+            "args": ["lsp"],
             "rootPatterns": [".git", "*.cabal"],
-            "filetypes": ["hs"]
+            "filetypes": ["haskell"]
         }
     }
 }
