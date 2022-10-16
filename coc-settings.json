@@ -21,6 +21,11 @@
             "rootPatterns": ["go.mod"],
             "trace.server": "verbose",
             "filetypes": ["go"]
+        },
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "rootPatterns": [".git", "*.cabal"],
+            "filetypes": ["hs"]
         }
     }
 }
