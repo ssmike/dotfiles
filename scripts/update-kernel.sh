@@ -19,6 +19,8 @@ else
     echo "kernel version didn't changed; don't rebuild modules"
 fi
 
+echo "free space in /boot"
+df -h /boot/
 if which grub-mkconfig; then
     grub-mkconfig > /boot/grub/grub.cfg;
 else
