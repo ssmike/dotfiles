@@ -69,8 +69,8 @@ allowed_prefixes = [
 collected = []
 for fname, fullname in files:
     for prefix in allowed_prefixes:
-        if '-gentoo' not in fname:
-            continue
+        # if '-gentoo' not in fname:
+        #     continue
         if not fname.startswith(prefix):
             continue
         ver, stream = parse_version(fname[len(prefix):])
