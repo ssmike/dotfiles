@@ -21,16 +21,18 @@ def shell(cmd, utf8=False, ensure_success=True):
 def parse_version(s):
     result = []
     segment = ''
+    digits_finished = False
     for c in s:
-        if not c.isdigit():
+        if not c.isdigit() and not digits_finished:
             result.append(int(segment))
             segment = ''
             if c != '.':
-                break
+                digits_finished = True
         else:
+            if digits_finished and c == '.':
+                break
             segment += c
-
-    return result
+    return (result, segment)
 
 
 parser = argparse.ArgumentParser()
@@ -38,8 +40,8 @@ parser.add_argument('--dry-run', action='store_true')
 parser.add_argument('--no-mount', action='store_true')
 args = parser.parse_args()
 
-base_version = parse_version(shell(['uname', '-r'], utf8=True))
-_log.info('base version %s', base_version)
+base_version, base_stream = parse_version(shell(['uname', '-r'], utf8=True))
+_log.info('base version %s, %s', base_version, base_stream)
 
 mounted_boot = False
 
@@ -71,12 +73,12 @@ for fname, fullname in files:
             continue
         if not fname.startswith(prefix):
             continue
-        ver = parse_version(fname[len(prefix):])
-        if ver < base_version:
-            _log.info('delete %s', fullname)
+        ver, stream = parse_version(fname[len(prefix):])
+        if ver < base_version and stream == base_stream:
+            _log.info('delete %s version %s %s', fullname, ver, stream)
             collected.append(fullname)
         else:
-            _log.info('reject %s', fullname)
+            _log.info('reject %s version %s %s', fullname, ver, stream)
 
 if not args.dry_run:
     for file in collected:
