@@ -35,6 +35,21 @@ def parse_version(s):
     return (result, segment)
 
 
+class MountedBoot:
+    def __init__(self, enabled):
+        self.enabled = enabled
+
+    def __enter__(self):
+        if self.enabled:
+            shell(['mount', '/boot'], ensure_success=False)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.enabled:
+            shell(['umount', '/boot'], ensure_success=False)
+        if exc_val:
+            raise
+
+
 parser = argparse.ArgumentParser()
 # parser.add_argument('--dry-run', action='store_true')
 parser.add_argument('--no-mount', action='store_true')
@@ -43,47 +58,39 @@ args = parser.parse_args()
 base_version, base_stream = parse_version(shell(['uname', '-r'], utf8=True))
 _log.info('base version %s, %s', base_version, base_stream)
 
-mounted_boot = False
+with MountedBoot(not args.no_mount):
+    dirs = ['/boot', '/boot/EFI/gentoo']
+    files = []
 
-if not args.no_mount:
-    shell(['mount', '/boot'], ensure_success=False)
-    mounted_boot = True
+    for directory in dirs:
+        if os.path.exists(directory):
+            for file in os.listdir(directory):
+                fullname = os.path.join(directory, file)
+                if os.path.isfile(fullname):
+                    files.append((file, fullname))
 
-dirs = ['/boot', '/boot/EFI/gentoo']
-files = []
+    allowed_prefixes = [
+        'vmlinuz-',
+        'config-',
+        'initramfs-',
+        'System.map-',
+    ]
 
-for directory in dirs:
-    if os.path.exists(directory):
-        for file in os.listdir(directory):
-            fullname = os.path.join(directory, file)
-            if os.path.isfile(fullname):
-                files.append((file, fullname))
+    collected = []
+    for fname, fullname in files:
+        for prefix in allowed_prefixes:
+            # if '-gentoo' not in fname:
+            #     continue
+            if not fname.startswith(prefix):
+                continue
+            ver, stream = parse_version(fname[len(prefix):])
+            if ver < base_version and stream == base_stream:
+                _log.info('delete %s version %s %s', fullname, ver, stream)
+                collected.append(fullname)
+            else:
+                _log.info('reject %s version %s %s', fullname, ver, stream)
 
-allowed_prefixes = [
-    'vmlinuz-',
-    'config-',
-    'initramfs-',
-    'System.map-',
-]
-
-collected = []
-for fname, fullname in files:
-    for prefix in allowed_prefixes:
-        # if '-gentoo' not in fname:
-        #     continue
-        if not fname.startswith(prefix):
-            continue
-        ver, stream = parse_version(fname[len(prefix):])
-        if ver < base_version and stream == base_stream:
-            _log.info('delete %s version %s %s', fullname, ver, stream)
-            collected.append(fullname)
-        else:
-            _log.info('reject %s version %s %s', fullname, ver, stream)
-
-confirm = input('delete files [y/n] ')
-if confirm == 'y':
-    for file in collected:
-        os.unlink(file)
-
-if not args.no_mount and mounted_boot:
-    shell(['umount', '/boot'], ensure_success=False)
+    confirm = input('delete files [y/n] ')
+    if confirm == 'y':
+        for file in collected:
+            os.unlink(file)
