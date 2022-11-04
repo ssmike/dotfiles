@@ -5,12 +5,12 @@ import argparse
 import subprocess
 import logging
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.DEBUG)
 _log = logging.getLogger(__name__)
 
 
 def shell(cmd, utf8=False, ensure_success=True):
-    _log.info('call %s check=%o', cmd, ensure_success)
+    _log.debug('call %s check=%o', cmd, ensure_success)
     completed = subprocess.run(cmd, capture_output=True, check=ensure_success)
     if utf8:
         return completed.stdout.decode('utf-8')
