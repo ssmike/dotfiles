@@ -36,7 +36,7 @@ def parse_version(s):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dry-run', action='store_true')
+# parser.add_argument('--dry-run', action='store_true')
 parser.add_argument('--no-mount', action='store_true')
 args = parser.parse_args()
 
@@ -80,7 +80,8 @@ for fname, fullname in files:
         else:
             _log.info('reject %s version %s %s', fullname, ver, stream)
 
-if not args.dry_run:
+confirm = input('delete files [y/n] ')
+if confirm == 'y':
     for file in collected:
         os.unlink(file)
 
