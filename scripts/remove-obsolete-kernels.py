@@ -32,7 +32,7 @@ def parse_version(s):
             if digits_finished and c == '.':
                 break
             segment += c
-    return (result, segment)
+    return (result, segment.strip())
 
 
 class MountedBoot:
