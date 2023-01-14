@@ -31,7 +31,16 @@ call plug#begin('~/.vim/plugged')
     "Plug 'lighttiger2505/deoplete-vim-lsp'
     "Plug 'mattn/vim-lsp-settings'
 
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    if !has('nvim')
+       Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    else
+       Plug 'neovim/nvim-lspconfig'
+       Plug 'hrsh7th/nvim-cmp'
+       Plug 'hrsh7th/cmp-nvim-lsp'
+       Plug 'hrsh7th/cmp-buffer'
+       Plug 'L3MON4D3/LuaSnip'
+       Plug 'hrsh7th/cmp-path'
+    endif
 
     Plug 'LnL7/vim-nix', {'for': 'nix'}
 
@@ -93,74 +102,13 @@ else
     au FileType clojure nmap <buffer> <c-]> ]<c-d>
 endif
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-function! SetupLspBindings()
-    "nmap <buffer> <c-]> <plug>(lsp-definition)
-    "nmap <buffer> K  <plug>(lsp-hover)
-    "nmap <buffer> <F2> <plug>(lsp-rename)
-
-    nmap <buffer> <c-]> <plug>(coc-definition)
-    nmap <buffer> K  :call <SID>show_documentation()<CR>
-    nmap <buffer> <F2> <plug>(coc-rename)
-endfunction
-
-autocmd FileType cpp,c,rust,python,java,haskell,go :call SetupLspBindings()
-
 let maplocalleader = ","
 let mapleader = " "
 
-"au User lsp_setup call lsp#register_server({
-"    \ 'name': 'clangd',
-"    \ 'cmd': ['clangd', '-j=2', '--suggest-missing-includes', '--header-insertion=never'],
-"    \ 'allowlist': ['c', 'cpp'],
-"    \ })
-
-"let g:LanguageClient_serverCommands = {
-"  \ 'java': ['jdt.ls'],
-"  \ 'haskell': ['hie-wrapper'],
-"  \ }
-
-""https://github.com/snoe/clojure-lsp
-""https://github.com/eclipse/eclipse.jdt.ls
-""https://github.com/autozimu/LanguageClient-neovim/wiki/Java
-
-" deoplete tab-complete
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" new coc.nvim settings
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#confirm():
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <c-n> coc#pum#visible() ? coc#pum#next(1)
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+    luafile ~/.vim.conf.modules/start.lua
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+    source ~/.vim.conf.modules/start.vim
 endif
 
 filetype plugin indent on
