@@ -40,6 +40,7 @@ call plug#begin('~/.vim/plugged')
        Plug 'hrsh7th/cmp-buffer'
        Plug 'L3MON4D3/LuaSnip'
        Plug 'hrsh7th/cmp-path'
+       Plug 'nvim-lua/lsp-status.nvim'
     endif
 
     Plug 'LnL7/vim-nix', {'for': 'nix'}
@@ -106,9 +107,16 @@ let maplocalleader = ","
 let mapleader = " "
 
 if has('nvim')
-    let g:airline#extensions#nvimlsp#enabled = 1
-    let g:airline#extensions#nvimlsp#error_symbol = 'E'
-    let g:airline#extensions#nvimlsp#warning_symbol = 'W'
+    let g:airline#extensions#nvimlsp#enabled = 0
+
+    function! LspStatus() abort
+      let status = luaeval('require("lsp-status").status()')
+      return trim(status)
+    endfunction
+    call airline#parts#define_function('lsp_status', 'LspStatus')
+    call airline#parts#define_condition('lsp_status', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
+    let g:airline_section_warning = airline#section#create_right(['lsp_status'])
+
     luafile ~/.vim.conf.modules/start.lua
 else
     source ~/.vim.conf.modules/start.vim
