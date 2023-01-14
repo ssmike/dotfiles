@@ -52,7 +52,7 @@ root_dir_overrides = {
         'Pipfile',
         '.arcadia.root'
       }
-      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+      return lsputil.root_pattern(unpack(root_files))(fname) or lsputil.find_git_ancestor(fname)
     end,
 }
 
@@ -108,8 +108,8 @@ cmp.setup({
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
-    ['<C-e>'] = cmp.mapping.abort(),
-    --['<CR>'] = cmp.mapping.confirm({select = true}),
+    --['<C-e>'] = cmp.mapping.abort(),
+    ['<C-e>'] = cmp.mapping.confirm({select = true}),
 
     ['<C-d>'] = cmp.mapping(function(fallback)
       if luasnip.jumpable(1) then

@@ -106,6 +106,9 @@ let maplocalleader = ","
 let mapleader = " "
 
 if has('nvim')
+    let g:airline#extensions#nvimlsp#enabled = 1
+    let g:airline#extensions#nvimlsp#error_symbol = 'E'
+    let g:airline#extensions#nvimlsp#warning_symbol = 'W'
     luafile ~/.vim.conf.modules/start.lua
 else
     source ~/.vim.conf.modules/start.vim
