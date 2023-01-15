@@ -19,6 +19,8 @@ done
 mkdir ~/.config/nvim/
 ln -s ~/.vimrc ~/.config/nvim/init.vim
 ln -s $PWD/coc-settings.json ~/.config/nvim/coc-settings.json
+mkdir -p ~/.vim
+ln -s $PWD/coc-settings.json ~/.vim/coc-settings.json
 
 mkdir -p ~/.config/kitty/
 ln -s ~/.kitty ~/.config/kitty/kitty.conf
