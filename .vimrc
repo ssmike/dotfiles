@@ -300,12 +300,12 @@ highlight Pmenu ctermbg=darkgray ctermfg=white guibg=#6c6c6c guifg=white
 highlight Todo ctermfg=231 ctermbg=232 cterm=bold guifg=#FFFFFF guibg=bg gui=bold
 highlight Search term=bold,reverse ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 
-silent! highlight SignColumn ctermbg=None guibg=None
-silent! highlight FoldColumn ctermbg=None guibg=None
-silent! highlight Folded ctermbg=None guibg=None
-highlight SignifySignDelete ctermbg=None ctermfg=red
-highlight SignifySignAdd ctermbg=None ctermfg=green
-highlight SignifySignChange ctermbg=None ctermfg=magenta
+silent! highlight SignColumn ctermbg=NONE guibg=NONE
+silent! highlight FoldColumn ctermbg=NONE guibg=NONE
+silent! highlight Folded ctermbg=NONE guibg=NONE
+highlight SignifySignDelete ctermbg=NONE ctermfg=red
+highlight SignifySignAdd ctermbg=NONE ctermfg=green
+highlight SignifySignChange ctermbg=NONE ctermfg=magenta
 
 au FileType mail let b:delimitMate_autoclose = 0
 
