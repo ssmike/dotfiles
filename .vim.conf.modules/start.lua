@@ -128,7 +128,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({select = true}),
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
 
     ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
