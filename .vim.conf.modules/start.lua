@@ -167,3 +167,17 @@ cmp.setup({
     end, {'i', 's'}),
   },
 })
+
+g = vim.g
+opt = vim.opt
+cmd = vim.cmd
+
+function get_lsp_status()
+    return vim.fn.trim(lsp_status.status())
+end
+
+vim.call('airline#parts#define_function', 'lsp_status', 'v:lua.get_lsp_status')
+vim.call('airline#parts#define_condition', 'lsp_status', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
+
+g['airline#extensions#nvimlsp#enabled'] = 0
+g.airline_section_warning = vim.call('airline#section#create_right', {'lsp_status'})
