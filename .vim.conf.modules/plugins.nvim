@@ -6,7 +6,4 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'nvim-lua/lsp-status.nvim'
 
-
-Plug 'Olical/conjure', {'tag': 'v4.25.0'}
-au FileType clojure setlocal timeoutlen=500
-au FileType clojure nmap <buffer> <c-]> ,gd]
+Plug 'Olical/conjure'

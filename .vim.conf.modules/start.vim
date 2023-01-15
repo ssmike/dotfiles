@@ -54,7 +54,7 @@ endif
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-
+au FileType clojure nmap <buffer> <c-]> ]<c-d>
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"

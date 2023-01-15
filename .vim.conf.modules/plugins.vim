@@ -3,7 +3,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-dispatch', {'for': 'clojure'}
 Plug 'tpope/vim-salve', {'for': 'clojure'}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
-au FileType clojure nmap <buffer> <c-]> ]<c-d>
 
 "let g:deoplete#enable_at_startup = 1
 "if has('nvim')
