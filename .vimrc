@@ -13,41 +13,20 @@ set nocompatible
 filetype off
 set title
 
-"let g:deoplete#enable_at_startup = 1
-
 call plug#begin('~/.vim/plugged')
+    if has('nvim')
+       source ~/.vim.conf.modules/plugins.nvim
+    else
+       source ~/.vim.conf.modules/plugins.vim
+    endif
+
     "Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
     "Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-
-    "if has('nvim')
-    "  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    "else
-    "  Plug 'Shougo/deoplete.nvim'
-    "  Plug 'roxma/nvim-yarp'
-    "  Plug 'roxma/vim-hug-neovim-rpc'
-    "endif
-
-    "Plug 'prabirshrestha/vim-lsp'
-    "Plug 'lighttiger2505/deoplete-vim-lsp'
-    "Plug 'mattn/vim-lsp-settings'
-
-    if !has('nvim')
-       Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    else
-       Plug 'neovim/nvim-lspconfig'
-       Plug 'hrsh7th/nvim-cmp'
-       Plug 'hrsh7th/cmp-nvim-lsp'
-       Plug 'hrsh7th/cmp-buffer'
-       Plug 'L3MON4D3/LuaSnip'
-       Plug 'hrsh7th/cmp-path'
-       Plug 'nvim-lua/lsp-status.nvim'
-    endif
 
     Plug 'LnL7/vim-nix', {'for': 'nix'}
 
     Plug 'tpope/vim-fugitive'
     Plug 'gregsexton/gitv', {'on': 'Gitv'}
-    Plug 'juneedahamed/vc.vim'
     Plug 'tpope/vim-rhubarb'
     Plug 'ssmike/vim-signify'
 
@@ -77,15 +56,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'luochen1990/rainbow', {'for': ['clojure', 'lisp']}
 
-    if has('nvim')
-        Plug 'Olical/conjure', {'tag': 'v4.25.0'}
-        au FileType clojure setlocal timeoutlen=500
-    else
-        Plug 'tpope/vim-dispatch', {'for': 'clojure'}
-        Plug 'tpope/vim-salve', {'for': 'clojure'}
-        Plug 'tpope/vim-fireplace', {'for': 'clojure'}
-    endif
-
     Plug 'majutsushi/tagbar'
 
     Plug 'craigemery/vim-autotag'
@@ -96,12 +66,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'mklabs/split-term.vim'
     endif
 call plug#end()
-
-if has('nvim')
-    au FileType clojure nmap <buffer> <c-]> ,gd]
-else
-    au FileType clojure nmap <buffer> <c-]> ]<c-d>
-endif
 
 let maplocalleader = ","
 let mapleader = " "
@@ -131,10 +95,6 @@ let g:rainbow_conf = {
     \       'lisp': {}
     \   }
     \}
-
-let g:vc_browse_cache_all = 1
-
-let g:fugitive_github_domains=['github.yandex-team.ru']
 
 let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
 
@@ -437,12 +397,6 @@ set cinoptions=g0,(4
 
 nmap <SPACE>] <C-]>
 nmap <SPACE>[ <C-o>
-
-if !has("nvim")
-    let &t_SI = "\<Esc>[6 q"
-    let &t_SR = "\<Esc>[4 q"
-    let &t_EI = "\<Esc>[2 q"
-endif
 
 let g:startify_session_persistence = 1
 
