@@ -221,10 +221,9 @@ source ~/.zsh/nix-zsh-completions/nix.plugin.zsh
 fpath+=~/.zsh/nix-zsh-completions 
 
 # -[ completion ]-
+fpath+=~/.zfunc
 autoload -Uz compinit
 compinit
-
-fpath+=~/.zfunc
 
 function _pip_completion {
   local words cword
