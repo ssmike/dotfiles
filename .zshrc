@@ -4,7 +4,6 @@ source virtualenvwrapper_lazy.sh 2>/dev/null
 
 export GOOGLE=8.8.8.8
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 if [ "$TTY" = "linux" ]; then
@@ -255,7 +254,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 bindkey '^E' autosuggest-accept
 
 zstyle ':completion:*:processes' menu yes select
@@ -479,3 +478,6 @@ alias less="less -r"
 compdef mosh=ssh
 
 alias json="python -m json.tool"
+
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
