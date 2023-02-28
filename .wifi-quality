@@ -1,2 +1,0 @@
-#!/bin/sh
-/sbin/iwconfig wlp1s0 | grep "Link Quality" | sed -e "s/  Signal.*$//" | sed -e "s/^.*=//"
