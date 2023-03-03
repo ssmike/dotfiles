@@ -458,6 +458,10 @@ function totp {
     eval oathtool --totp \$$1 --base32
 }
 
+function flake-shell() {
+    nix develop "$@" --command zsh
+}
+
 if which rg >/dev/null; then
     alias ag="rg";
 fi
