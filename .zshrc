@@ -147,16 +147,12 @@ function with_cvs() {
     echo -n "$PWD_STYLE"
 }
 
-[ ! "$UID" = "0" ] && PROMPT='($(cvs_prompt))%B%F{blue}%2~%f%F{blue}%f%b> '
-[  "$UID" = "0" ] && PROMPT='($(cvs_prompt))%B%F{red}%2~%f%F{blue}%f%b> '
-RPROMPT="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
-
 get_visible_length() {
     echo `echo $1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | wc -m`
 }
 
 prompt-modules() {
-  RESULT=""
+  echo -n "%F{$COLOR[br-white]}[%*]%f"
   if [ ! -z $VIRTUAL_ENV ]; then
     echo -n "%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
@@ -165,7 +161,8 @@ prompt-modules() {
   fi
 }
 
-pre-prompt() {
+PROMPT='$(calc-prompt)'
+calc-prompt() {
   local exit_code=$?
   local PREPROMPT="%F{$COLOR[yellow]}%m%f%F{$COLOR[blue]}/%f"
   local PWD_STYLE="%F{$COLOR[br-blue]}%2~%f"
@@ -198,23 +195,58 @@ pre-prompt() {
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   local GREETER="%F{$COLOR[br-white]}>%f"
   [  "$UID" = "0" ] && GREETER="%F{$COLOR[br-red]}>%f"
-  if [ $RIGHTWIDTH -lt 1 ]; then
-    RPROMPT=""
-    PROMPT="%F{$COLOR[br-black]}-%f$GREETER "
+  if (( _command_history )); then
+    echo -n "%*"
+    if [[ $exit_code == 0 ]]; then
+        echo -n "%F{$COLOR[br-black]} : %f"
+    else
+        echo -n "%F{$COLOR[br-red]} : %f"
+    fi
+  elif [ $RIGHTWIDTH -lt 1 ]; then
+    echo "%F{$COLOR[br-black]}-%f$GREETER "
   else
-    PROMPT="$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
-%F{'"$COLOR[br-black]"'}\`--%f'"$GREETER "
-    RPROMPT="%F{$COLOR[br-white]}(%*)%f"
+    echo "$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
+%F{'"$COLOR[br-black]"'}`--%f'"$GREETER "
   fi
 }
 
+#pre-prompt() {
+#    PROMPT=$(calc-prompt)
+#}
+#add-zsh-hook precmd pre-prompt
 
-add-zsh-hook precmd pre-prompt
+_line-init-hook() {
+    [[ $CONTEXT == start ]] || return 0
 
-chprompt() {
-  RPROMPT=""
-  PROMPT="%B%F{blue}%2~%f%F{blue}%f%b> "
+    # Start regular line editor
+    (( $+zle_bracketed_paste )) && print -r -n - $zle_bracketed_paste[1]
+    zle .recursive-edit
+    local -i ret=$?
+    (( $+zle_bracketed_paste )) && print -r -n - $zle_bracketed_paste[2]
+
+    # If we received EOT, we exit the shell
+    if [[ $ret == 0 && $KEYS == $'\4' ]]; then
+        _command_history=1
+        zle .reset-prompt
+        zle .reset-rprompt
+        exit
+    fi
+
+    # Line edition is over. Shorten the current prompt.
+    _command_history=1
+    zle .reset-prompt
+    unset _command_history
+
+    if (( ret )); then
+        # Ctrl-C
+        zle .send-break
+    else
+        # Enter
+        zle .accept-line
+    fi
+    return ret
 }
+zle -N zle-line-init _line-init-hook
 
 source ~/.zsh/nix-zsh-completions/nix.plugin.zsh
 fpath+=~/.zsh/nix-zsh-completions 
