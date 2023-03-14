@@ -196,11 +196,11 @@ calc-prompt() {
   local GREETER="%F{$COLOR[br-white]}>%f"
   [  "$UID" = "0" ] && GREETER="%F{$COLOR[br-red]}>%f"
   if (( _command_history )); then
-    echo -n "%*"
+    echo -n "[%*] "
     if [[ $exit_code == 0 ]]; then
-        echo -n "%F{$COLOR[br-black]} : %f"
+        echo -n "%F{$COLOR[br-black]}> %f"
     else
-        echo -n "%F{$COLOR[br-red]} : %f"
+        echo -n "%F{$COLOR[br-red]}> %f"
     fi
   elif [ $RIGHTWIDTH -lt 1 ]; then
     echo "%F{$COLOR[br-black]}-%f$GREETER "
