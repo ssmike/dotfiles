@@ -152,7 +152,7 @@ get_visible_length() {
 }
 
 prompt-modules() {
-  echo -n "%F{$COLOR[br-white]}[%*]%f"
+  #echo -n "%F{$COLOR[br-white]}[%*]%f"
   if [ ! -z $VIRTUAL_ENV ]; then
     echo -n "%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
@@ -160,6 +160,9 @@ prompt-modules() {
     echo -n "%F{$COLOR[br-black]}[%f%F{$COLOR[br-black]}$exit_code%f%F{$COLOR[br-black]}]%f"
   fi
 }
+
+RPROMPT_V="%{$fg_bold[grey]%}(%*)%{$reset_color%}%"
+RPROMPT=$RPROMPT_V
 
 PROMPT='$(calc-prompt)'
 calc-prompt() {
@@ -234,7 +237,9 @@ _line-init-hook() {
 
     # Line edition is over. Shorten the current prompt.
     _command_history=1
+    RPROMPT=""
     zle .reset-prompt
+    RPROMPT=$RPROMPT_V
     unset _command_history
 
     if (( ret )); then
