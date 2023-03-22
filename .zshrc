@@ -213,10 +213,10 @@ calc-prompt() {
   fi
 }
 
-#pre-prompt() {
-#    PROMPT=$(calc-prompt)
-#}
-#add-zsh-hook precmd pre-prompt
+pre-prompt() {
+    PROMPT='$(calc-prompt)'
+}
+add-zsh-hook precmd pre-prompt
 
 _line-init-hook() {
     [[ $CONTEXT == start ]] || return 0
