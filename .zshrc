@@ -171,7 +171,7 @@ calc-prompt() {
   local PWD_STYLE="%F{$COLOR[br-blue]}%2~%f"
   [  "$UID" = "0" ] && PWD_STYLE="%F{$COLOR[br-red]}%2~%f"
   local WITH_CVS=`with_cvs "$PWD_STYLE"`
-  local LEFT="%F{$COLOR[br-black]}.%f%F{$COLOR[green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[br-green]})%f"
+  local LEFT="%F{$COLOR[br-black]}.%f%F{$COLOR[green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[green]})%f"
   LEFT="$LEFT`prompt-modules`"
   # -- color
   LEFT="$LEFT%F{$COLOR[br-black]}"
