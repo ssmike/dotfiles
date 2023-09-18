@@ -50,7 +50,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'l04m33/vlime', {'rtp': 'vim/', 'for': 'lisp'}
     Plug 'mhinz/vim-startify'
 
-    Plug 'ErichDonGubler/vim-sublime-monokai'
+    Plug 'polirritmico/monokai-nightasty.nvim'
+
     Plug 'aonemd/kuroi.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -149,17 +150,12 @@ syn on
 
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
-if exists('g:GtkGuiLoaded')
-    colorscheme sublimemonokai
-    "call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-elseif has('gui_running') "gvim
-    colorscheme sublimemonokai
-    set guifont=Inconsolata\ 10
-    let g:airline_theme='raven'
-else
-    colorscheme pablo "terminal
-    let g:airline_theme='raven'
-endif
+
+"let g:airline_theme='raven'
+let g:airline_theme='monokai-nightasty'
+
+set termguicolors
+colorscheme monokai-nightasty
 
 set nohlsearch
 
