@@ -461,3 +461,6 @@ if [ -d ~/.ya ]; then
     export MSAN_SYMBOLIZER_PATH=`find ~/.ya/tools -name "*symbolizer*" | head -1`
     source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 fi
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[command]='bold'
