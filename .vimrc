@@ -152,7 +152,7 @@ let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
 "let g:airline_theme='raven'
-let g:airline_theme='monokai-nightasty'
+let g:airline_theme='dark'
 
 set termguicolors
 colorscheme monokai-nightasty
