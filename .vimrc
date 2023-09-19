@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'l04m33/vlime', {'rtp': 'vim/', 'for': 'lisp'}
     Plug 'mhinz/vim-startify'
 
+    "Plug 'ayu-theme/ayu-vim'
     Plug 'polirritmico/monokai-nightasty.nvim'
 
     Plug 'aonemd/kuroi.vim'
@@ -155,7 +156,11 @@ let g:airline_theme='raven'
 "let g:airline_theme='dark'
 
 set termguicolors
-colorscheme monokai-nightasty
+if has('nvim')
+    colorscheme monokai-nightasty
+else
+    colorscheme pablo
+endif
 
 set nohlsearch
 
