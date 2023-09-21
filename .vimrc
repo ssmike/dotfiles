@@ -152,8 +152,9 @@ syn on
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
-let g:airline_theme='raven'
+let g:airline_theme='bubblegum'
 "let g:airline_theme='dark'
+"let g:airline_statusline_ontop = 1
 
 set termguicolors
 if has('nvim')
