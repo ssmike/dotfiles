@@ -122,15 +122,15 @@ pre-prompt() {
   if [ ! -z "$ZSH_CVS" ]; then
     ZSH_CVS="$ZSH_CVS : "
   fi
-  local LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
+  local LEFT="%B.%b%B%F{green}(%b$PREPROMPT$ZSH_CVS$PWD_STYLE%B%F{green})%b"
   if [ ! -z $VIRTUAL_ENV ]; then
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
   if [[ $exit_code != 0 ]]; then
-    LEFT="$LEFT%F{$COLOR[br-black]}-%f%F{$COLOR[red]}$exit_code%f"
+    LEFT="$LEFT%f-%F{red}$exit_code%f"
   fi
   # -- color
-  LEFT="$LEFT%F{black}%B"
+  LEFT="$LEFT%B%f"
   local RIGHT="."
   #"%F{green}(%f%F{grey}%n%f%F{green})%f%F{black}%B.%f%b"
   LEFT_P="$(print -P "$LEFT")"
@@ -142,7 +142,7 @@ pre-prompt() {
     PWD_STYLE="%B%F{blue}%1~%b%f"
     [  "$UID" = "0" ] && PWD_STYLE="%B%F{red}%1~%b%f"
     LEFT="%F{black}%B.%b%f%B%F{green}(%b$PREPROMPT$PWD_STYLE%B%F{green})%b"
-    LEFT="$LEFT%F{black}%B"
+    LEFT="$LEFT%B"
     LEFT_P="$(print -P "$LEFT")"
     LEFTWIDTH=`get_visible_length "$LEFT_P"`
     RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH+$RIGHT_DELTA))
@@ -154,10 +154,10 @@ pre-prompt() {
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
   if [ $RIGHTWIDTH -lt 1 ]; then
     RPROMPT=""
-    PROMPT='%F{black}%B-%f%F{white}>%b%f '
+    PROMPT='%B-%f%F{white}>%b%f '
   else
     PROMPT="$LEFT${(l:$RIGHTWIDTH::-:)RIGHT}"'
-%F{black}%B\`--%f%F{white}>%b%f '
+%B\`--%f%F{white}>%b%f '
     RPROMPT="%F{grey}%B(%*)%b%f"
   fi
 }
