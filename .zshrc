@@ -4,7 +4,6 @@ source virtualenvwrapper_lazy.sh 2>/dev/null
 
 export GOOGLE=8.8.8.8
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 if [ "$TTY" = "linux" ]; then
@@ -172,7 +171,7 @@ calc-prompt() {
   local PWD_STYLE="%F{$COLOR[br-blue]}%2~%f"
   [  "$UID" = "0" ] && PWD_STYLE="%F{$COLOR[br-red]}%2~%f"
   local WITH_CVS=`with_cvs "$PWD_STYLE"`
-  local LEFT="%F{$COLOR[br-black]}.%f%F{$COLOR[br-green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[br-green]})%f"
+  local LEFT="%F{$COLOR[br-black]}.%f%F{$COLOR[green]}(%f$PREPROMPT$WITH_CVS%F{$COLOR[green]})%f"
   LEFT="$LEFT`prompt-modules`"
   # -- color
   LEFT="$LEFT%F{$COLOR[br-black]}"
@@ -197,7 +196,7 @@ calc-prompt() {
   LEFTWIDTH=`get_visible_length "$LEFT_P"`
   RIGHT_DELTA=$(($#RIGHT_P-`get_visible_length $RIGHT_P`))
   RIGHTWIDTH=$(($COLUMNS-$LEFTWIDTH))
-  local GREETER="%F{$COLOR[br-white]}>%f"
+  local GREETER=">"
   [  "$UID" = "0" ] && GREETER="%F{$COLOR[br-red]}>%f"
   if (( _command_history )); then
     echo -n "[%*] "
@@ -214,10 +213,10 @@ calc-prompt() {
   fi
 }
 
-#pre-prompt() {
-#    PROMPT=$(calc-prompt)
-#}
-#add-zsh-hook precmd pre-prompt
+pre-prompt() {
+    PROMPT='$(calc-prompt)'
+}
+add-zsh-hook precmd pre-prompt
 
 _line-init-hook() {
     [[ $CONTEXT == start ]] || return 0
@@ -292,7 +291,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 bindkey '^E' autosuggest-accept
 
 zstyle ':completion:*:processes' menu yes select
@@ -496,6 +495,10 @@ function totp {
     eval oathtool --totp \$$1 --base32
 }
 
+function flake-shell() {
+    nix develop "$@" --command zsh
+}
+
 if which rg >/dev/null; then
     alias ag="rg";
 fi
@@ -516,3 +519,8 @@ alias less="less -r"
 compdef mosh=ssh
 
 alias json="python -m json.tool"
+
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[command]='bold'
