@@ -19,6 +19,7 @@
  
   :deps {
     org.clojure/clojure {:mvn/version "1.10.3"}
+    org.apache.logging.log4j/log4j-core {:mvn/version "2.15.0"}
   }
 
   ;; Aliases
@@ -75,6 +76,8 @@
 
   :repl {:main-opts ["-e" "(require '[clojure.repl :refer :all])" "-r"]}
 
+  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+             :main-opts ["-m" "antq.core"]}
   ;; project creation from templates:
   ;; - see https://github.com/seancorfield/clj-new
   ;; - create an application project:

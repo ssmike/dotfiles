@@ -33,6 +33,7 @@ import qualified System.Environment as E
 import qualified XMonad.Layout.MultiToggle.Instances as Toggles
 import qualified XMonad.Layout.Tabbed as Tab
 import qualified XMonad.StackSet as W
+import XMonad.Config.Kde
 
 myTerminal :: String
 myTerminal      = "kitty"
@@ -137,7 +138,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     -- mod-shift-{q,w,e}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_q, xK_w, xK_e] [0..]
+        | (key, sc) <- zip [xK_w, xK_q, xK_e] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
 
@@ -195,14 +196,14 @@ myManageHook =
     , [stringProperty "WM_WINDOW_ROLE" =? "browser" --> doShift "2:web"]
     , [className =? c --> doShift "5:fm" | c <- fM]
     , [className =? c --> doShift "9:etc" | c <- etc]
-    , [resource  =? "desktop_window" --> doIgnore ]
-    , [resource  =? "kdesktop"       --> doIgnore ]
+    , [resource  =? "desktop_window" --> doFloat ]
+    , [resource  =? "kdesktop"       --> doFloat ]
     , [className =? c --> doShift "2:web" | c <- web]
     , [className =? c --> doShift "3:code" | c <- code]
     , [className =? c --> doShift "6:doc" | c <- doc]
     , [className =? c --> doShift "7:dev" | c <- dev]
     , [className =? c --> doShift "8:low" | c <- low]
-    , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doIgnore]
+    , [stringProperty "WM_WINDOW_ROLE" =? "bubble" --> doFloat]
     , [className =? c --> doF W.swapDown | c <- aux]
     , [isDialog --> doFloat]
     ]
@@ -215,7 +216,7 @@ myManageHook =
         web = ["Vivaldi-stable", "Vivaldi-snapshot", "orion", "yandex-browser-beta", "Opera", "Chromium-browser-chromium", "Chromium", "chromium-browser-chromium", "Chromium-browser", "Firefox"]
         code = ["Code", "Atom", "jetbrains-pycharm", "NyaoVim", "Code", "jetbrains-pycharm-ce", "jetbrains-clion", "QtCreator", "Pycrust-3.0", "jetbrains-idea", "Qvim", "Emacs", "Gvim", "jetbrains-idea-ce", "Codelite", "NetBeans IDE 8.0", "Subl3", "Leksah"]
         fullfloat = ["trayer", "panel"]
-        float = ["Shutter", "Pavucontrol", "Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Gnuplot", "Wine", "Gcdemu", "Docky"]
+        float = ["Shutter", "Pavucontrol", "Kmix", "org.kde.gwenview", "kmix", "Klipper", "ksplashx", "ksplashqml", "ksplashsimple", "Yakuake", "Plasma-desktop", "XTerm", "Tilda", "Blueman-services", "Nm-connection-editor", "Blueman-manager", "mpv", "MPlayer", "Umplayer", "Smplayer", "Gnuplot", "Wine", "Gcdemu", "Docky", "plasmashell"]
         ignore = ["Snapfly", "trayer", "Zenity", "Oblogout"]
         im = ["whatsapp-desktop", "Skype", "VK", "skypeforlinux", "Thunderbird", "Pidgin", "Corebird", "Slack", "Telegram", "TelegramDesktop", "Kmail", "kmail", "Claws-mail"]
         fM = ["Finder", "Tracker-needle", "Nautilus", "k4dirstat", "krusader", "Pcmanfm", "dolphin", "Dolphin", "Gnome-commander", "Thunar", "Baobab", "Catfish"]
@@ -238,25 +239,25 @@ myEventHook =
     (handleEventHook kde4Config)
 
 main = do
-    homePath <- E.getEnv "HOME"
-    monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
-    status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
+    --homePath <- E.getEnv "HOME"
+    --monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
+    --status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
     let modifiers = (withUrgencyHook NoUrgencyHook)
-    xmonad $ modifiers $ def {
+    xmonad $ modifiers $ kdeConfig {
             terminal           = myTerminal,
             focusFollowsMouse  = True,
             borderWidth        = 3,
-            modMask            = mod3Mask,
+            modMask            = mod4Mask,
             workspaces         = myWorkspaces,
             normalBorderColor  = "#6A86B2",
             focusedBorderColor = "#DB2828",
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
-            logHook            = ewmhDesktopsLogHook <+> (dynamicLogWithPP $ dzenpp status),
+            logHook            = ewmhDesktopsLogHook,
             layoutHook         = myLayout,
-            manageHook         = myManageHook,
-            handleEventHook    = myEventHook,
-            startupHook        = myStartupHook
+            manageHook         = (manageHook kdeConfig) <+> myManageHook,
+            handleEventHook    = myEventHook
+            --startupHook        = myStartupHook
         }
 
 ewmhCopyWindow :: Event -> X All
