@@ -253,14 +253,7 @@ _line-init-hook() {
 }
 zle -N zle-line-init _line-init-hook
 
-source ~/.zsh/nix-zsh-completions/nix.plugin.zsh
-fpath+=~/.zsh/nix-zsh-completions 
-
 # -[ completion ]-
-fpath+=~/.zfunc
-autoload -Uz compinit
-compinit
-
 function _pip_completion {
   local words cword
   read -Ac words
@@ -273,6 +266,9 @@ compctl -K _pip_completion pip
 
 #autoload predict-on
 #predict-on
+
+fpath+=~/.zfunc
+autoload -Uz compinit
 
 #zstyle ':completion:*' menu yes select
 #zstyle ':completion:*' use-compctl false
@@ -291,9 +287,6 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-bindkey '^E' autosuggest-accept
-
 zstyle ':completion:*:processes' menu yes select
 zstyle ':completion:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -xuf'
@@ -302,6 +295,11 @@ zstyle ':completion:*:processes-names' command 'ps xho command'
 
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+bindkey '^E' autosuggest-accept
+
+compinit
 
 # -[ history ]-
 HISTFILE=~/.zsh_history
