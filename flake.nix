@@ -43,7 +43,7 @@
           mkdir -p ~/.vim
           ln -sTf ${./coc-settings.json} ~/.vim/coc-settings.json
           mkdir -p ~/.vim/after/syntax
-          ln -sTf ${./.vim/after/syntax/bytecode.vim}
+          ln -sTf ${./.vim/after/syntax/bytecode.vim} ~/.vim/after/syntax/bytecode.vim
 
           ln -sTf ${./.zshrc} ~/.zshrc
           mkdir -p ~/.zsh
