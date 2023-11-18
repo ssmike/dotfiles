@@ -61,6 +61,9 @@
           mkdir -p ~/.clojure
           ln -sTf ${./.clojure/deps.edn} ~/.clojure/deps.edn
 
+          # protect dotfiles from gc
+          nix-store --add-root ~/.keep-dotfiles -r $out
+
           EOF
 
           cp ${./scripts}/* $out/bin
