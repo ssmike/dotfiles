@@ -309,6 +309,10 @@ highlight SignifySignDelete ctermbg=NONE ctermfg=red
 highlight SignifySignAdd ctermbg=NONE ctermfg=green
 highlight SignifySignChange ctermbg=NONE ctermfg=magenta
 
+highlight LineNr ctermfg=NONE guifg=NONE
+highlight LineNrAbove ctermfg=NONE guifg=NONE
+highlight LineNrBelow ctermfg=NONE guifg=NONE
+
 au FileType mail let b:delimitMate_autoclose = 0
 
 nmap ]] :cn<CR>
