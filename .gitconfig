@@ -1,3 +1,5 @@
 [user]
 	name = Mikhail Surin
 	email = surinmike@gmail.com
+[init]
+	defaultBranch = master
