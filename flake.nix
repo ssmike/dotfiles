@@ -24,6 +24,16 @@
   let
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) stdenv lib;
+
+    scripts = stdenv.mkDerivation {
+      name = "dotfiles-scripts";
+      dontUnpack = true;
+      installPhase =  ''
+          mkdir -p $out/bin
+          cp ${./scripts}/* $out/bin
+      '';
+    };
+
     actualize = stdenv.mkDerivation {
         name = "actualize-dotfiles";
         dontUnpack = true;
@@ -66,8 +76,6 @@
 
           EOF
 
-          cp ${./scripts}/* $out/bin
-
           chmod +x $out/bin/actualize-dotfiles
           '';
       };
@@ -75,5 +83,6 @@
    {
       packages.default = actualize;
       packages.actualize-dotfiles = actualize;
+      packages.dotfiles-scripts = scripts;
    });
 }
