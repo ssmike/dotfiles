@@ -153,6 +153,9 @@ get_visible_length() {
 
 prompt-modules() {
   #echo -n "%F{$COLOR[br-white]}[%*]%f"
+  if [ ! -z $ENV_NAME ]; then
+    echo -n "%F{$COLOR[blue]}[`echo $ENV_NAME `]%f"
+  fi
   if [ ! -z $VIRTUAL_ENV ]; then
     echo -n "%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
