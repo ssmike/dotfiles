@@ -60,7 +60,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-local servers = {'clangd', 'gopls', 'rls', 'hls', 'pylsp'}
+local servers = {'clangd', 'gopls', 'rls', 'hls', 'pylsp', 'nil_ls'}
 root_dir_overrides = {
     pylsp = function(fname)
       local root_files = {
