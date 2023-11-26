@@ -27,10 +27,10 @@
 
     actualize = stdenv.mkDerivation {
         name = "actualize-dotfiles";
-        dontUnpack = true;
-        sourceRoot = ".";
+
         installPhase = ''
           mkdir -p $out/bin
+          cp -R ${./files} $out/files
 
           cat >$out/bin/actualize-dotfiles <<EOF
           #!${pkgs.bash}/bin/bash
@@ -53,14 +53,12 @@
           ln -sTf ${zsh-syntax-highlighting} ~/.zsh/zsh-syntax-highlighting
           ln -sTf ${nix-zsh-completions} ~/.zsh/nix-zsh-completions
 
-          ln -sTf ${./.alacritty.yml} ~/.alacritty.yml
-          ln -sTf ${./.tmux.conf} ~/.tmux.conf
-          ln -sTf ${./.gdbinit} ~/.gdbinit
-          ln -sTf ${./.gitconfig} ~/.gitconfig
-          ln -sTf ${./.ideavimrc} ~/.ideavimrc
-
           mkdir -p ~/.clojure
           ln -sTf ${./.clojure/deps.edn} ~/.clojure/deps.edn
+
+          for file in \$(ls $out/files -A); do
+            ln -sTf $out/files/\$file ~/\$file
+          done
 
           # protect dotfiles from gc
           nix-store --add-root ~/.keep-dotfiles -r $out
@@ -69,6 +67,8 @@
 
           chmod +x $out/bin/actualize-dotfiles
           '';
+
+          phases = ["installPhase"];
       };
 
     scripts = stdenv.mkDerivation {
