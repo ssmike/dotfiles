@@ -55,6 +55,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 export EDITOR=vi
 
+if which direnv >/dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
 if [ -f "$HOME/.zsh/default-keybinds" ]; then
     source "$HOME/.zsh/default-keybinds";
 fi
@@ -153,6 +157,9 @@ get_visible_length() {
 
 prompt-modules() {
   #echo -n "%F{$COLOR[br-white]}[%*]%f"
+  if [ ! -z $ENV_NAME ]; then
+    echo -n "%F{$COLOR[blue]}[`echo $ENV_NAME `]%f"
+  fi
   if [ ! -z $VIRTUAL_ENV ]; then
     echo -n "%F{$COLOR[red]}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
@@ -296,6 +303,7 @@ zstyle ':completion:*:processes-names' command 'ps xho command'
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
+#zstyle :completion::complete:arc use-cache on
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 bindkey '^E' autosuggest-accept
 
