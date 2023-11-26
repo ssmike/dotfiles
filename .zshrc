@@ -55,6 +55,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 export EDITOR=vi
 
+if which direnv >/dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
 if [ -f "$HOME/.zsh/default-keybinds" ]; then
     source "$HOME/.zsh/default-keybinds";
 fi
