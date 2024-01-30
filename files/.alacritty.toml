@@ -1,0 +1,46 @@
+import = [
+    "~/.alacritty.dark"
+]
+
+[debug]
+log_level = "Off"
+print_events = false
+
+[font]
+size = 11.0
+
+[font.bold]
+style = "Bold"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+[font.italic]
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "S"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[scrolling]
+history = 1000
+
+[window]
+dynamic_title = true
+opacity = 0.93
+title = "Terminal"

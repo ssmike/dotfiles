@@ -966,7 +966,7 @@ key_bindings:
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
-#debug:
+debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
 
@@ -982,10 +982,10 @@ key_bindings:
   #   - Info
   #   - Debug
   #   - Trace
-  #log_level: Warn
+  log_level: Off
 
   # Print all received window events.
-  #print_events: false
+  print_events: false
 
   # Highlight window damage information.
   #highlight_damage: false
