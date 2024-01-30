@@ -1,5 +1,6 @@
 import = [
-    "~/.alacritty.dark"
+    "~/.alacritty.dark",
+    "~/.alacritty.override"
 ]
 
 [debug]
