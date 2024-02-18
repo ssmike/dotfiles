@@ -11,7 +11,12 @@ make modules_install
 mount /boot
 make install
 ver=`readlink /usr/src/linux | sed -e 's/linux-//'`
-dracut -H -f --kver $ver
+
+if which grub-mkconfig; then
+    dracut -H -f --kver $ver
+else
+    dracut -H -f --kver $ver /boot/initramfs-$ver.img
+fi
 
 if [[ "$ver" != "`uname -r`" ]]; then
     emerge @module-rebuild
