@@ -98,6 +98,7 @@ def remove_bootable_kernels(args):
                         files.append((file, fullname))
 
         allowed_prefixes = [
+            'kernel-',
             'vmlinuz-',
             'config-',
             'initramfs-',

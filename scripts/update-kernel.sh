@@ -30,6 +30,7 @@ if which grub-mkconfig; then
     grub-mkconfig > /boot/grub/grub.cfg;
 else
     mv /boot/vmlinuz-* /boot/EFI/gentoo
+    mv /boot/kernel-* /boot/EFI/gentoo
     mv /boot/initramfs-* /boot/EFI/gentoo
     mv /boot/config-* /boot/EFI/gentoo
     mv /boot/System.map-* /boot/EFI/gentoo
