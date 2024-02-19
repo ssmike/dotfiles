@@ -8,3 +8,6 @@
 
 [credential]
 	helper = /usr/bin/git-credential-libsecret
+
+[core]
+    editor = nvim
