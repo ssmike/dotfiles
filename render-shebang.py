@@ -18,8 +18,8 @@ for fname in args.input:
         with open(fname) as f:
             first = True
             for line in f:
-                line = line.rstrip()
-                if line.startswith('#!'):
+                if first and line.startswith('#!'):
+                    line = line.rstrip()
                     line = line[2:]
                     args = line.split()
                     base = os.path.basename(args[0])
@@ -28,7 +28,7 @@ for fname in args.input:
                         args = [subsitutes[args[1]]] + args[2:]
                     else:
                         args[0] = subsitutes[base]
-                    line = '#!' + ' '.join(args)
-                print(line, file=fout)
+                    line = '#!' + ' '.join(args) + '\n'
+                print(line, end='', file=fout)
                 first = False
     os.replace(tmpname, fname)
