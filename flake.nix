@@ -87,6 +87,8 @@
             --interpreter ${pkgs.zsh}/bin/zsh \
             $out/bin/*
 
+          chmod +x $out/bin/*
+
           ln -s ${actualize}/bin/actualize-dotfiles $out/bin
       '';
     };
