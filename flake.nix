@@ -18,8 +18,8 @@
   };
 
   outputs = {
-    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting,
-    nixpkgs, flake-utils, ...}:
+    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting, nixpkgs, flake-utils, ...}:
+
   flake-utils.lib.eachDefaultSystem (system: 
   let
     pkgs = nixpkgs.legacyPackages.${system};
@@ -74,9 +74,19 @@
     scripts = stdenv.mkDerivation {
       name = "dotfiles-scripts";
       dontUnpack = true;
+      buildInputs = [ pkgs.python3 ];
       installPhase =  ''
           mkdir -p $out/bin
           cp ${./scripts}/* $out/bin
+
+          python ${./render-shebang.py} \
+            --interpreter ${pkgs.bash}/bin/bash \
+            --interpreter ${pkgs.bash}/bin/sh \
+            --interpreter ${pkgs.python3}/bin/python \
+            --interpreter ${pkgs.python3}/bin/python3 \
+            --interpreter ${pkgs.zsh}/bin/zsh \
+            $out/bin/*
+
           ln -s ${actualize}/bin/actualize-dotfiles $out/bin
       '';
     };
