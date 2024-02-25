@@ -29,10 +29,10 @@ df -h /boot/
 if which grub-mkconfig; then
     grub-mkconfig > /boot/grub/grub.cfg;
 else
-    mv /boot/vmlinuz-* /boot/EFI/gentoo
-    mv /boot/kernel-* /boot/EFI/gentoo
-    mv /boot/initramfs-* /boot/EFI/gentoo
-    mv /boot/config-* /boot/EFI/gentoo
-    mv /boot/System.map-* /boot/EFI/gentoo
+    mv /boot/vmlinuz-* /boot/EFI/gentoo || echo 'vmlinuz- not found'
+    mv /boot/kernel-* /boot/EFI/gentoo || echo 'kernel- not found'
+    mv /boot/initramfs-* /boot/EFI/gentoo || echo 'initramfs- not found'
+    mv /boot/config-* /boot/EFI/gentoo || echo 'config- not found'
+    mv /boot/System.map-* /boot/EFI/gentoo || echo 'system- not found'
 fi
 umount /boot
