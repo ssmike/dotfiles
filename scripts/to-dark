@@ -1,0 +1,3 @@
+#!/bin/bash
+plasma-apply-colorscheme BreezeDark
+sed -i 's/alacritty.light/alacritty.litgh/g' ~/.alacritty.override
