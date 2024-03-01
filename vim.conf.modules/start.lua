@@ -170,3 +170,9 @@ cmd [[
     au FileType clojure setlocal timeoutlen=500
     au FileType clojure nmap <buffer> <c-]> ,gd]
 ]]
+
+require("monokai-nightasty").setup({
+    on_highlights = function(highlights, colors)
+        highlights.LineNr = highlights.Normal
+    end,
+})
