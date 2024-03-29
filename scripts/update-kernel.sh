@@ -34,5 +34,6 @@ else
     mv /boot/initramfs-* /boot/EFI/gentoo || echo 'initramfs- not found'
     mv /boot/config-* /boot/EFI/gentoo || echo 'config- not found'
     mv /boot/System.map-* /boot/EFI/gentoo || echo 'system- not found'
+    mv /boot/vmlinuz /boot/EFI/gentoo/kernel-$ver || echo '/boot/vmlinuz not found'
 fi
 umount /boot
