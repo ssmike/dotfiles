@@ -1,0 +1,2 @@
+#!/bin/bash
+exec env QTWEBENGINE_CHROMIUM_FLAGS=--blink-settings=forceDarkModeEnabled=true akregator "$@"
