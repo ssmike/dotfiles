@@ -41,10 +41,11 @@ def parse_version(s):
         result.append(int(match[2]))
         _log.debug('found -r patch number %s', match[2])
         segment = match[1]
-    return (result, segment)
+    return (tuple(result), segment)
 
 
 base_version, base_stream = None, None
+keep_versions = set()
 
 
 def ensure_actual_version(args):
@@ -57,13 +58,18 @@ def ensure_actual_version(args):
     if kernel_ver is None:
         kernel_ver = shell(['uname', '-r'], utf8=True)
 
+    for version in args.keep_versions:
+        print(parse_version(version))
+        keep_versions.add(parse_version(version))
+
     base_version, base_stream = parse_version(kernel_ver)
     _log.info('base version %s, %s', base_version, base_stream)
 
 
-def version_to_delete(args, version, fname):
+def version_to_delete(version, fname):
+    global keep_versions, base_version, base_stream
     ver, stream = parse_version(version)
-    if ver < base_version and stream == base_stream and version not in args.keep_versions:
+    if ver < base_version and stream == base_stream and (ver, stream) not in keep_versions:
         _log.info('delete %s version %s %s', fname, ver, stream)
         return True
     else:
@@ -88,7 +94,7 @@ def remove_kernel_modules(args):
     for dr in args.kernel_modules_base:
         for name in os.listdir(dr):
             fname = os.path.join(dr, name)
-            if version_to_delete(args, name, fname):
+            if version_to_delete(name, fname):
                 collected.append(fname)
     confirm_deletion(collected)
 
@@ -157,7 +163,7 @@ def remove_bootable_kernels(args):
                 #     continue
                 if not fname.startswith(prefix):
                     continue
-                if version_to_delete(args, fname[len(prefix):], fname):
+                if version_to_delete(fname[len(prefix):], fname):
                     collected.append(fullname)
 
         confirm_deletion(collected, rmtree=False)
