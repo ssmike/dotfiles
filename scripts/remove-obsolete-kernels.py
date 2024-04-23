@@ -71,6 +71,17 @@ def version_to_delete(version, fname):
         return False
 
 
+def confirm_deletion(collected, rmtree=True):
+    if collected:
+        confirm = input('delete files [y/n] ')
+        if confirm == 'y':
+            for file in collected:
+                if rmtree:
+                    shutil.rmtree(file)
+                else:
+                    os.unlink(file)
+
+
 def remove_kernel_modules(args):
     ensure_actual_version(args)
     collected = []
@@ -79,11 +90,7 @@ def remove_kernel_modules(args):
             fname = os.path.join(dr, name)
             if version_to_delete(name, fname):
                 collected.append(fname)
-    if collected:
-        confirm = input('delete files [y/n] ')
-        if confirm == 'y':
-            for file in collected:
-                shutil.rmtree(file)
+    confirm_deletion(collected)
 
 
 class MountedBoot:
@@ -118,13 +125,7 @@ def delete_kernel_srcs(args):
             _log.info('going to delete %s', joined)
             collected_srcs.append(joined)
 
-    if not collected_srcs:
-        return
-
-    confirm = input('delete files [y/n] ')
-    if confirm == 'y':
-        for file in collected_srcs:
-            shutil.rmtree(file)
+    confirm_deletion(collected_srcs)
 
 
 def remove_bootable_kernels(args):
@@ -159,11 +160,7 @@ def remove_bootable_kernels(args):
                 if version_to_delete(fname[len(prefix):], fname):
                     collected.append(fullname)
 
-        if collected:
-            confirm = input('delete files [y/n] ')
-            if confirm == 'y':
-                for file in collected:
-                    os.unlink(file)
+        confirm_deletion(collected, rmtree=False)
 
 
 parser = argparse.ArgumentParser()
