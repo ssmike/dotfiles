@@ -61,13 +61,13 @@ def ensure_actual_version(args):
     _log.info('base version %s, %s', base_version, base_stream)
 
 
-def version_to_delete(version, fname):
+def version_to_delete(args, version, fname):
     ver, stream = parse_version(version)
-    if ver < base_version and stream == base_stream:
+    if ver < base_version and stream == base_stream and version not in args.keep_versions:
         _log.info('delete %s version %s %s', fname, ver, stream)
         return True
     else:
-        _log.info('reject %s version %s %s', fname, ver, stream)
+        _log.info('keep %s version %s %s', fname, ver, stream)
         return False
 
 
@@ -88,7 +88,7 @@ def remove_kernel_modules(args):
     for dr in args.kernel_modules_base:
         for name in os.listdir(dr):
             fname = os.path.join(dr, name)
-            if version_to_delete(name, fname):
+            if version_to_delete(args, name, fname):
                 collected.append(fname)
     confirm_deletion(collected)
 
@@ -157,7 +157,7 @@ def remove_bootable_kernels(args):
                 #     continue
                 if not fname.startswith(prefix):
                     continue
-                if version_to_delete(fname[len(prefix):], fname):
+                if version_to_delete(args, fname[len(prefix):], fname):
                     collected.append(fullname)
 
         confirm_deletion(collected, rmtree=False)
@@ -174,6 +174,8 @@ parser.add_argument('--kernel-modules-base', action='append', default=['/lib/mod
 parser.add_argument('--no-remove-kernel-srcs', default=False, action='store_true')
 parser.add_argument('--no-remove-kernels', default=False, action='store_true')
 parser.add_argument('--no-remove-modules', default=False, action='store_true')
+
+parser.add_argument('--keep-versions', action='append', default=[])
 args = parser.parse_args()
 
 if not args.no_remove_kernel_srcs:
