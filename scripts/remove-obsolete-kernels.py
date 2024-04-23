@@ -5,6 +5,8 @@ import argparse
 import subprocess
 import logging
 import shutil
+import re
+
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.DEBUG)
 _log = logging.getLogger(__name__)
@@ -33,7 +35,55 @@ def parse_version(s):
             if digits_finished and c == '.':
                 break
             segment += c
-    return (result, segment.strip())
+    segment = segment.strip()
+    match = re.match('^(.*)-r([0-9]*)$', segment)
+    if match:
+        result.append(int(match[2]))
+        _log.debug('found -r patch number %s', match[2])
+        segment = match[1]
+    return (result, segment)
+
+
+base_version, base_stream = None, None
+
+
+def ensure_actual_version(args):
+    global base_version, base_stream
+
+    if base_version is not None:
+        return
+
+    kernel_ver = args.base_bootable_kernel
+    if kernel_ver is None:
+        kernel_ver = shell(['uname', '-r'], utf8=True)
+
+    base_version, base_stream = parse_version(kernel_ver)
+    _log.info('base version %s, %s', base_version, base_stream)
+
+
+def version_to_delete(version, fname):
+    ver, stream = parse_version(version)
+    if ver < base_version and stream == base_stream:
+        _log.info('delete %s version %s %s', fname, ver, stream)
+        return True
+    else:
+        _log.info('reject %s version %s %s', fname, ver, stream)
+        return False
+
+
+def remove_kernel_modules(args):
+    ensure_actual_version(args)
+    collected = []
+    for dr in args.kernel_modules_base:
+        for name in os.listdir(dr):
+            fname = os.path.join(dr, name)
+            if version_to_delete(name, fname):
+                collected.append(fname)
+    if collected:
+        confirm = input('delete files [y/n] ')
+        if confirm == 'y':
+            for file in collected:
+                shutil.rmtree(file)
 
 
 class MountedBoot:
@@ -78,13 +128,7 @@ def delete_kernel_srcs(args):
 
 
 def remove_bootable_kernels(args):
-    kernel_ver = args.base_bootable_kernel
-    if kernel_ver is None:
-        kernel_ver = shell(['uname', '-r'], utf8=True)
-
-    base_version, base_stream = parse_version(kernel_ver)
-    _log.info('base version %s, %s', base_version, base_stream)
-
+    ensure_actual_version(args)
     with MountedBoot(not args.no_mount):
         dirs = args.bootable_dirs
         _log.debug('assume kernel dirs %s', dirs)
@@ -112,12 +156,8 @@ def remove_bootable_kernels(args):
                 #     continue
                 if not fname.startswith(prefix):
                     continue
-                ver, stream = parse_version(fname[len(prefix):])
-                if ver < base_version and stream == base_stream:
-                    _log.info('delete %s version %s %s', fullname, ver, stream)
+                if version_to_delete(fname[len(prefix):], fname):
                     collected.append(fullname)
-                else:
-                    _log.info('reject %s version %s %s', fullname, ver, stream)
 
         if collected:
             confirm = input('delete files [y/n] ')
@@ -132,9 +172,11 @@ parser.add_argument('--no-mount', action='store_true')
 parser.add_argument('--base-src-path', default='/usr/src/')
 parser.add_argument('--base-bootable-kernel', default=None)
 parser.add_argument('--bootable-dirs', action='append', default=['/boot', '/boot/EFI/gentoo'])
+parser.add_argument('--kernel-modules-base', action='append', default=['/lib/modules'])
 
 parser.add_argument('--no-remove-kernel-srcs', default=False, action='store_true')
 parser.add_argument('--no-remove-kernels', default=False, action='store_true')
+parser.add_argument('--no-remove-modules', default=False, action='store_true')
 args = parser.parse_args()
 
 if not args.no_remove_kernel_srcs:
@@ -142,3 +184,6 @@ if not args.no_remove_kernel_srcs:
 
 if not args.no_remove_kernels:
     remove_bootable_kernels(args)
+
+if not args.no_remove_modules:
+    remove_kernel_modules(args)
