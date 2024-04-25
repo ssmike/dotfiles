@@ -58,7 +58,7 @@ def ensure_actual_version(args):
     if kernel_ver is None:
         kernel_ver = shell(['uname', '-r'], utf8=True)
 
-    for version in args.keep_versions:
+    for version in args.keep:
         print(parse_version(version))
         keep_versions.add(parse_version(version))
 
@@ -179,9 +179,9 @@ parser.add_argument('--kernel-modules-base', action='append', default=['/lib/mod
 
 parser.add_argument('--no-remove-kernel-srcs', default=False, action='store_true')
 parser.add_argument('--no-remove-kernels', default=False, action='store_true')
-parser.add_argument('--no-remove-modules', default=False, action='store_true')
+parser.add_argument('--no-remove-kernel-modules', default=False, action='store_true')
 
-parser.add_argument('--keep-versions', action='append', default=[])
+parser.add_argument('--keep', action='append', default=[])
 args = parser.parse_args()
 
 if not args.no_remove_kernel_srcs:
