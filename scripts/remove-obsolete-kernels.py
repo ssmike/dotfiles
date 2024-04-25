@@ -7,11 +7,6 @@ import logging
 import shutil
 import re
 
-
-logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.DEBUG)
-_log = logging.getLogger(__name__)
-
-
 def shell(cmd, utf8=False, ensure_success=True):
     _log.debug('call %s check=%o', cmd, ensure_success)
     completed = subprocess.run(cmd, capture_output=True, check=ensure_success)
@@ -182,7 +177,11 @@ parser.add_argument('--no-remove-kernels', default=False, action='store_true')
 parser.add_argument('--no-remove-kernel-modules', default=False, action='store_true')
 
 parser.add_argument('--keep', action='append', default=[])
+parser.add_argument('--debug', default=False, action='store_true')
 args = parser.parse_args()
+
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.DEBUG if args.debug else logging.INFO)
+_log = logging.getLogger(__name__)
 
 if not args.no_remove_kernel_srcs:
     delete_kernel_srcs(args)
@@ -190,5 +189,5 @@ if not args.no_remove_kernel_srcs:
 if not args.no_remove_kernels:
     remove_bootable_kernels(args)
 
-if not args.no_remove_modules:
+if not args.no_remove_kernel_modules:
     remove_kernel_modules(args)
