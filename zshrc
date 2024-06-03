@@ -134,6 +134,11 @@ function with_cvs() {
         echo -n "%F{$COLOR[red]}git%f on %F{$COLOR[green]}$git_branch%f : $PWD_STYLE";
         return 0;
     fi
+    darcs_marker=`ascending_find_file _darcs/format 2>/dev/null`
+    if [ "x$darcs_marker" != "x" ]; then
+        echo -n "%F{$COLOR[green]}darcs%f : $PWD_STYLE";
+        return 0;
+    fi
     hg_branch=`ascending_find_file .hg/branch 2>/dev/null`
     if [ "x$hg_branch" != "x" ]; then
         echo -n "%F{$COLOR[red]}hg%f on %F{$COLOR[magenta]}$hg_branch%f : $PWD_STYLE";
