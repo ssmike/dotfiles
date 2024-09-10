@@ -403,3 +403,6 @@ nmap <SPACE>[ <C-o>
 let g:startify_session_persistence = 1
 
 set clipboard=unnamedplus
+
+"let g:netrw_banner = 0
+let g:netrw_liststyle = 3
