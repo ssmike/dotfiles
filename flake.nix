@@ -17,8 +17,14 @@
     flake = false;
   };
 
+  inputs.zsh-tipz = {
+    url = github:molovo/tipz;
+    flake = false;
+  };
+
   outputs = {
-    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting, nixpkgs, flake-utils, ...}:
+    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting, zsh-tipz,
+    nixpkgs, flake-utils, ...}:
 
   flake-utils.lib.eachDefaultSystem (system: 
   let
@@ -52,6 +58,7 @@
           ln -sTf ${zsh-autosuggestions} ~/.zsh/zsh-autosuggestions
           ln -sTf ${zsh-syntax-highlighting} ~/.zsh/zsh-syntax-highlighting
           ln -sTf ${nix-zsh-completions} ~/.zsh/nix-zsh-completions
+          ln -sTf ${zsh-tipz} ~/.zsh/zsh-tipz
 
           mkdir -p ~/.clojure
           ln -sTf ${./.clojure/deps.edn} ~/.clojure/deps.edn

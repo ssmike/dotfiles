@@ -543,3 +543,6 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[command]='bold'
+
+TIPZ_TEXT='💡 '
+source ~/.zsh/zsh-tipz/tipz.zsh

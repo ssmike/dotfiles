@@ -55,7 +55,8 @@
         "nix-zsh-completions": "nix-zsh-completions",
         "nixpkgs": "nixpkgs",
         "zsh-autosuggestions": "zsh-autosuggestions",
-        "zsh-syntax-highlighting": "zsh-syntax-highlighting"
+        "zsh-syntax-highlighting": "zsh-syntax-highlighting",
+        "zsh-tipz": "zsh-tipz"
       }
     },
     "systems": {
@@ -102,6 +103,22 @@
       "original": {
         "owner": "zsh-users",
         "repo": "zsh-syntax-highlighting",
+        "type": "github"
+      }
+    },
+    "zsh-tipz": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1525349907,
+        "narHash": "sha256-oFZJwHYDfK4f53lhcZg6PCw2AgHxFC0CRiqiinKZz8k=",
+        "owner": "molovo",
+        "repo": "tipz",
+        "rev": "594eab4642cc6dcfe063ecd51d76478bd84e2878",
+        "type": "github"
+      },
+      "original": {
+        "owner": "molovo",
+        "repo": "tipz",
         "type": "github"
       }
     }
