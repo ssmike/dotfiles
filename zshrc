@@ -392,7 +392,11 @@ extract () {
  fi
 }
 
-notify_blacklist="bpython ygdb mc livestreamer okular zathura tmux less nano yvim mutt gmail cppman qvim fbless htop ranger mosh"
+notify_blacklist=(bpython mc livestreamer tmux nano mutt cppman htop ranger mosh)
+notify_blacklist+=(okular zathura)
+notify_blacklist+=(ygdb gdb)
+notify_blacklist+=(yvim vi vim nvim)
+notify_blacklist+=(less fbless)
 
 function store-command-stats() {
   last_command=$1
@@ -426,12 +430,16 @@ function notify-success() {
 
 function notify-command-complete() {
   last_status=$?
-  if ! echo $notify_blacklist |  grep `echo $last_command_name | cut -d' ' -f1` >/dev/null 2>&1; then
-    if [[ $last_status -gt "0" ]]; then
+  for command in $notify_blacklist; do
+      if [ "$command" = "$last_command_name" ]; then
+          exit
+      fi
+  done
+
+  if [[ $last_status -gt "0" ]]; then
       notify-error "$start_time" "$last_command" 2>/dev/null
-    elif [[ -n $start_time ]]; then
+  elif [[ -n $start_time ]]; then
       notify-success "$start_time" "$last_command" 2>/dev/null
-    fi
   fi
   unset last_command start_time last_status
 }
