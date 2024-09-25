@@ -2,20 +2,20 @@
   inputs.nixpkgs.url = github:NixOs/nixpkgs;
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  inputs.zsh-autosuggestions = {
-    url = github:zsh-users/zsh-autosuggestions;
-    flake = false;
-  };
-
-  inputs.nix-zsh-completions = {
-    url = github:spwhitt/nix-zsh-completions;
-    flake = false;
-  };
-
-  inputs.zsh-syntax-highlighting = {
-    url = github:zsh-users/zsh-syntax-highlighting;
-    flake = false;
-  };
+  #inputs.zsh-autosuggestions = {
+  #  url = github:zsh-users/zsh-autosuggestions;
+  #  flake = false;
+  #};
+  #
+  #inputs.zsh-syntax-highlighting = {
+  #  url = github:zsh-users/zsh-syntax-highlighting;
+  #  flake = false;
+  #};
+  #
+  #inputs.nix-zsh-completions = {
+  #  url = github:spwhitt/nix-zsh-completions;
+  #  flake = false;
+  #};
 
   inputs.zsh-tipz = {
     url = github:molovo/tipz;
@@ -28,7 +28,7 @@
   };
 
   outputs = {
-    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting, zsh-tipz, zsh-abbr,
+    zsh-tipz, zsh-abbr,
     nixpkgs, flake-utils, ...}:
 
   flake-utils.lib.eachDefaultSystem (system: 
@@ -60,9 +60,9 @@
           ln -sTf ${./zshrc} ~/.zshrc
           mkdir -p ~/.zsh
           ln -sTf ${./default-keybinds.zsh} ~/.zsh/default-keybinds
-          ln -sTf ${zsh-autosuggestions} ~/.zsh/zsh-autosuggestions
-          ln -sTf ${zsh-syntax-highlighting} ~/.zsh/zsh-syntax-highlighting
-          ln -sTf ${nix-zsh-completions} ~/.zsh/nix-zsh-completions
+          ln -sTf ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+          ln -sTf ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
+          ln -sTf ${pkgs.nix-zsh-completions} ~/.zsh/nix-zsh-completions
           ln -sTf ${zsh-tipz} ~/.zsh/zsh-tipz
           ln -sTf ${zsh-abbr} ~/.zsh/zsh-abbr
 

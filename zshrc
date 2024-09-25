@@ -309,7 +309,7 @@ zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
 #zstyle :completion::complete:arc use-cache on
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^E' autosuggest-accept
 
 compinit
@@ -539,7 +539,7 @@ compdef mosh=ssh
 
 alias json="python -m json.tool"
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[command]='bold'

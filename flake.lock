@@ -55,8 +55,6 @@
         "nix-zsh-completions": "nix-zsh-completions",
         "nixpkgs": "nixpkgs",
         "zsh-abbr": "zsh-abbr",
-        "zsh-autosuggestions": "zsh-autosuggestions",
-        "zsh-syntax-highlighting": "zsh-syntax-highlighting",
         "zsh-tipz": "zsh-tipz"
       }
     },
@@ -88,38 +86,6 @@
       "original": {
         "owner": "olets",
         "repo": "zsh-abbr",
-        "type": "github"
-      }
-    },
-    "zsh-autosuggestions": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1694098728,
-        "narHash": "sha256-B+Kz3B7d97CM/3ztpQyVkE6EfMipVF8Y4HJNfSRXHtU=",
-        "owner": "zsh-users",
-        "repo": "zsh-autosuggestions",
-        "rev": "c3d4e576c9c86eac62884bd47c01f6faed043fc5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zsh-users",
-        "repo": "zsh-autosuggestions",
-        "type": "github"
-      }
-    },
-    "zsh-syntax-highlighting": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704566212,
-        "narHash": "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=",
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
-        "rev": "e0165eaa730dd0fa321a6a6de74f092fe87630b0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
         "type": "github"
       }
     },
