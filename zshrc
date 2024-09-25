@@ -432,7 +432,7 @@ function notify-command-complete() {
   last_status=$?
   for command in $notify_blacklist; do
       if [ "$command" = "$last_command_name" ]; then
-          exit
+          return
       fi
   done
 
