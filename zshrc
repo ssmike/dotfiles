@@ -546,3 +546,5 @@ ZSH_HIGHLIGHT_STYLES[command]='bold'
 
 TIPZ_TEXT='💡 '
 source ~/.zsh/zsh-tipz/tipz.zsh
+
+source ~/.zsh/zsh-abbr/zsh-abbr.plugin.zsh

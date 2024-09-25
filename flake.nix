@@ -22,8 +22,13 @@
     flake = false;
   };
 
+  inputs.zsh-abbr = {
+    url = github:olets/zsh-abbr;
+    flake = false;
+  };
+
   outputs = {
-    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting, zsh-tipz,
+    zsh-autosuggestions, nix-zsh-completions, zsh-syntax-highlighting, zsh-tipz, zsh-abbr,
     nixpkgs, flake-utils, ...}:
 
   flake-utils.lib.eachDefaultSystem (system: 
@@ -59,6 +64,7 @@
           ln -sTf ${zsh-syntax-highlighting} ~/.zsh/zsh-syntax-highlighting
           ln -sTf ${nix-zsh-completions} ~/.zsh/nix-zsh-completions
           ln -sTf ${zsh-tipz} ~/.zsh/zsh-tipz
+          ln -sTf ${zsh-abbr} ~/.zsh/zsh-abbr
 
           mkdir -p ~/.clojure
           ln -sTf ${./.clojure/deps.edn} ~/.clojure/deps.edn
