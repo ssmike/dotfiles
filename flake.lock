@@ -18,29 +18,13 @@
         "type": "github"
       }
     },
-    "nix-zsh-completions": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1696846724,
-        "narHash": "sha256-JStpIKU+jU6TkXToTONfdEhLjaASGzC+tRmSJRiqKWU=",
-        "owner": "spwhitt",
-        "repo": "nix-zsh-completions",
-        "rev": "a7c8781b5a18026fbc3edb36397931526f243590",
-        "type": "github"
-      },
-      "original": {
-        "owner": "spwhitt",
-        "repo": "nix-zsh-completions",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1706973103,
-        "narHash": "sha256-CO3a8BnKpot3gzka7A7mSBkJLjRCX2vPScSjt7EKN3Q=",
+        "lastModified": 1727255790,
+        "narHash": "sha256-CeLMpskFpTTjOW55NAJUY2ruARzwegTV8t3K0QgjhZE=",
         "owner": "NixOs",
         "repo": "nixpkgs",
-        "rev": "3416a119e9e83738625d05bf1ed8f685f502f87b",
+        "rev": "87ce0d469beafa0955df502debccac11d51006b9",
         "type": "github"
       },
       "original": {
@@ -52,7 +36,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nix-zsh-completions": "nix-zsh-completions",
         "nixpkgs": "nixpkgs",
         "zsh-abbr": "zsh-abbr",
         "zsh-tipz": "zsh-tipz"
