@@ -29,6 +29,15 @@ else
     fixssh
 fi
 
+function fix-ssh-hook() {
+    if [ ! -S "$SSH_AUTH_SOCK" ]; then
+        agent=`find-agent 2>/dev/null`
+        export SSH_AUTH_SOCK=$agent;
+    fi
+}
+
+add-zsh-hook preexec fix-ssh-hook
+
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 ZSH_HIGHLIGHT_STYLES=(
