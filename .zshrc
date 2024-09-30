@@ -160,7 +160,7 @@ pre-prompt() {
     LEFT="$LEFT%F{red}[`echo $VIRTUAL_ENV | rev | cut -d'/' -f1 | rev`]%f"
   fi
   if [ -S "$SSH_AUTH_SOCK" ]; then
-      LEFT="$LEFT%F{yellow}[ssh]%f"
+      LEFT="$LEFT%F{green}[ssh]%f"
   fi
   if [[ $exit_code != 0 ]]; then
     LEFT="$LEFT%f-%F{red}$exit_code%f"
