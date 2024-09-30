@@ -116,7 +116,7 @@ function cvs_prompt() {
     fi
     arc_branch=`ascending_find_file .arc/HEAD 2>/dev/null | sed -e 's/^.*\"\(.*\)\"/\1/'`
     if [ "x$arc_branch" != "x" ]; then
-        echo -n "%F{$COLOR[red]}arc%f on %F{$COLOR[cyan]}$arc_branch%f";
+        echo -n "%F{red}arc%f on %F{cyan}$arc_branch%f";
         return 0;
     fi
     echo -n ""
