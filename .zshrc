@@ -89,13 +89,37 @@ function zshexit() {
     clear
 }
 
+function ascending_find_file() {
+    max_depth=${#${PWD//[^\/]}}
+    i=1
+    cur_dir=$PWD
+    while (( $i <= $max_depth )); do
+        if [ ! -w $cur_dir ]; then
+            return 1;
+        fi
+        branch_file="$cur_dir/$1"
+        if [ -f $branch_file ]; then
+            cat $branch_file;
+            return 0;
+        fi
+        cur_dir="$cur_dir/.."
+        ((i++))
+    done
+    return 1;
+}
+
 function cvs_prompt() {
     if git branch >/dev/null 2>/dev/null; then
         ref=$(git symbolic-ref HEAD | sed -e "s/refs\/heads\///")
         echo -n "%F{red}git%f on %F{green}$ref%f"
-    else
-        echo -n ""
+        return 0
     fi
+    arc_branch=`ascending_find_file .arc/HEAD 2>/dev/null | sed -e 's/^.*\"\(.*\)\"/\1/'`
+    if [ "x$arc_branch" != "x" ]; then
+        echo -n "%F{$COLOR[red]}arc%f on %F{$COLOR[cyan]}$arc_branch%f : $PWD_STYLE";
+        return 0;
+    fi
+    echo -n ""
 }
 
 function root_shell() {
