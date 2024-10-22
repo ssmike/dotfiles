@@ -159,6 +159,7 @@ let g:airline_theme='bubblegum'
 set termguicolors
 if has('nvim')
     colorscheme monokai-nightasty
+    command! ToggleDarkMode MonokaiToggleLight
 else
     colorscheme pablo
 endif
