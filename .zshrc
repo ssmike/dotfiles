@@ -4,6 +4,18 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 bindkey '^E' autosuggest-accept
 
+function kgdb() {
+  host=$(k get pod $1 -o=jsonpath='{.spec.nodeName}')
+  container_id=$(k get pod $1 -o=jsonpath='{.status.containerStatuses[*].containerID}')
+  container_id=${container_id#containerd://}
+
+  ssh -t $host "
+    container_pid=\$(sudo crictl inspect --output go-template --template '{{.info.pid}}' "$container_id")
+    sudo nsenter --mount --net --pid --target \$container_pid gdb -p 1
+  "
+}
+
+
 function find-agent() {
     for f in /tmp/ssh-*/agent* ; do
         if [ -r "$f" ]; then
