@@ -36,7 +36,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Config.Kde
 
 myTerminal :: String
-myTerminal      = "kitty"
+myTerminal      = "alacritty"
 
 myWorkspaces :: [String]
 myWorkspaces = ["1:main","2:web","3:code","4:im","5:fm", "6:doc", "7:dev", "8:low", "9:etc"]
@@ -239,9 +239,9 @@ myEventHook =
     (handleEventHook kde4Config)
 
 main = do
-    --homePath <- E.getEnv "HOME"
-    --monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
-    --status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
+    homePath <- E.getEnv "HOME"
+    monitor <- readFile $ homePath ++ "/.xmonad/primary_monitor"
+    status <- spawnPipe $ "/usr/bin/dzen2 -ta l -dock -x 0 -y 0 -e - -xs " ++ monitor
     let modifiers = (withUrgencyHook NoUrgencyHook)
     xmonad $ modifiers $ kdeConfig {
             terminal           = myTerminal,
@@ -253,11 +253,11 @@ main = do
             focusedBorderColor = "#DB2828",
             keys               = myKeys,
             mouseBindings      = myMouseBindings,
-            logHook            = ewmhDesktopsLogHook,
+            logHook            = ewmhDesktopsLogHook <+> (dynamicLogWithPP $ dzenpp status),
             layoutHook         = myLayout,
             manageHook         = (manageHook kdeConfig) <+> myManageHook,
-            handleEventHook    = myEventHook
-            --startupHook        = myStartupHook
+            handleEventHook    = myEventHook,
+            startupHook        = myStartupHook
         }
 
 ewmhCopyWindow :: Event -> X All

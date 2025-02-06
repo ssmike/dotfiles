@@ -1,0 +1,14 @@
+DEPS:
+- slock
+- dzen
+- conky
+- trayer-srg
+- parcellite
+- dunst
+- nitrogen
+- xbindkeys
+- blueman-tray
+- xmodmap
+- compton
+- dmenu 
+- networkmanager-dmenu
