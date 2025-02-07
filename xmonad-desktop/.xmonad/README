@@ -1,4 +1,5 @@
 DEPS:
+- xkblayout-state
 - slock
 - dzen
 - conky
@@ -12,3 +13,4 @@ DEPS:
 - compton
 - dmenu 
 - networkmanager-dmenu
+- nm-applet
