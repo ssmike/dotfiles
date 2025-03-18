@@ -1,4 +1,5 @@
 DEPS:
+- wmctrl
 - xkblayout-state
 - slock
 - dzen

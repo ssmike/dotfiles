@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 function volume_level() {
     volume=`amixer -c 0 get Master | grep Mono: | cut -d " " -f6`
     state=`amixer -c 0 get Master | grep Mono: | cut -d " " -f8`
