@@ -73,6 +73,6 @@ nvim_lsp['rust_analyzer'].setup {
 }
 
 
-print("local config")
+print("solana rust config")
 
 --EOF
