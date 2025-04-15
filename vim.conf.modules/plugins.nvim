@@ -6,4 +6,4 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'nvim-lua/lsp-status.nvim'
 
-Plug 'Olical/conjure'
+"Plug 'Olical/conjure'
