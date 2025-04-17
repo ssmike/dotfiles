@@ -72,6 +72,9 @@ nvim_lsp['rust_analyzer'].setup {
     }
 }
 
+vim.diagnostic.config({
+    virtual_text=true
+})
 
 print("solana rust config")
 
