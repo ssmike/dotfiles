@@ -171,6 +171,10 @@ cmd [[
     se exrc
 ]]
 
+vim.diagnostic.config({
+    virtual_text=true
+})
+
 require("monokai-nightasty").setup({
     on_highlights = function(highlights, colors)
         highlights.LineNr = highlights.Normal
