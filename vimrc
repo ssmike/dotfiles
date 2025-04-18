@@ -306,9 +306,9 @@ highlight Search term=bold,reverse ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 silent! highlight SignColumn ctermbg=NONE guibg=NONE
 silent! highlight FoldColumn ctermbg=NONE guibg=NONE
 silent! highlight Folded ctermbg=NONE guibg=NONE
-highlight SignifySignDelete ctermbg=NONE ctermfg=red
-highlight SignifySignAdd ctermbg=NONE ctermfg=green
-highlight SignifySignChange ctermbg=NONE ctermfg=magenta
+highlight SignifySignDelete ctermbg=NONE ctermfg=red guifg=red
+highlight SignifySignAdd ctermbg=NONE ctermfg=green guifg=green
+highlight SignifySignChange ctermbg=NONE ctermfg=magenta guifg=magenta
 
 au FileType mail let b:delimitMate_autoclose = 0
 
