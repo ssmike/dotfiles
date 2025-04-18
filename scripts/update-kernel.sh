@@ -12,16 +12,12 @@ mount /boot
 make install
 ver=`readlink /usr/src/linux | sed -e 's/linux-//'`
 
+emerge @module-rebuild
+
 if which grub-mkconfig; then
     dracut -H -f --kver $ver
 else
     dracut -H -f --kver $ver /boot/initramfs-$ver.img
-fi
-
-if [[ "$ver" != "`uname -r`" ]]; then
-    emerge @module-rebuild
-else
-    echo "kernel version didn't changed; don't rebuild modules"
 fi
 
 echo "free space in /boot"
