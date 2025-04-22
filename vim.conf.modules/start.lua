@@ -169,6 +169,7 @@ g.airline_section_warning = vim.call('airline#section#create_right', {'lsp_statu
 cmd [[
     au FileType clojure setlocal timeoutlen=500
     au FileType clojure nmap <buffer> <c-]> ,gd]
+    se exrc
 ]]
 
 require("monokai-nightasty").setup({
