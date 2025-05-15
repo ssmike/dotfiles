@@ -5,6 +5,7 @@
 	default = simple
 [merge]
   conflictstyle = diff3
-
+[core]
+  excludesfile = ~/.config/git/ignore
 [credential]
 	helper = /usr/bin/git-credential-libsecret
