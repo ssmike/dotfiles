@@ -239,7 +239,7 @@ command! -nargs=1 Include call Includefunction('<args>')
 
 set tags=./tags;/
 
-set timeoutlen=300
+set timeoutlen=500
 set mouse=a
 
 """ for tex
