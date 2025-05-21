@@ -216,6 +216,8 @@ cmd [[
     se exrc
 ]]
 
+g['conjure#filetype'] = { "clojure", "fennel", "janet", "hy", "julia", "racket", "scheme", "lua", "lisp", "python", "sql" }
+
 vim.diagnostic.config({
     virtual_text=true
 })
