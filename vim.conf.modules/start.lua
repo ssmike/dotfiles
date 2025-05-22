@@ -171,6 +171,8 @@ cmd [[
     se exrc
 ]]
 
+g['conjure#filetype'] = { "clojure", "fennel", "janet", "hy", "julia", "racket", "scheme", "lua", "lisp", "python", "sql" }
+
 require("monokai-nightasty").setup({
     on_highlights = function(highlights, colors)
         highlights.LineNr = highlights.Normal
