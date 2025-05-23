@@ -3,6 +3,7 @@
 	email = surinmike@gmail.com
 [push]
 	default = simple
+    autoSetupRemote = true
 [merge]
   conflictstyle = diff3
 [core]
