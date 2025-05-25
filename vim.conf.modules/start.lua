@@ -216,6 +216,7 @@ cmd [[
 ]]
 
 g['conjure#filetype'] = { "clojure", "fennel", "janet", "hy", "julia", "racket", "scheme", "lua", "lisp", "python", "sql" }
+vim.g["conjure#mapping#doc_word"] = "gk"
 
 vim.diagnostic.config({
     virtual_text=true
