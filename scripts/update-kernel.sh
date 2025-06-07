@@ -6,13 +6,14 @@ if [ ! -f /usr/src/linux/.config ]; then
     zcat /proc/config.gz > ./.config
     make oldconfig
 fi
+
+emerge @module-rebuild
+
 make -j30
 make modules_install
 mount /boot
 make install
 ver=`readlink /usr/src/linux | sed -e 's/linux-//'`
-
-emerge @module-rebuild
 
 if which grub-mkconfig; then
     dracut -H -f --kver $ver
