@@ -7,10 +7,11 @@ if [ ! -f /usr/src/linux/.config ]; then
     make oldconfig
 fi
 
-emerge @module-rebuild
-
 make -j30
 make modules_install
+emerge @module-rebuild
+
+
 mount /boot
 make install
 ver=`readlink /usr/src/linux | sed -e 's/linux-//'`
