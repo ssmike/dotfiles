@@ -8,8 +8,9 @@ if [ ! -f /usr/src/linux/.config ]; then
 fi
 
 make -j30
-make modules_install
+
 emerge @module-rebuild
+make modules_install
 
 
 mount /boot
