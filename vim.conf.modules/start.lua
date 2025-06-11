@@ -11,7 +11,6 @@ local kind_labels_mt = {__index = function(_, k) return k end}
 local kind_labels = {}
 setmetatable(kind_labels, kind_labels_mt)
 
-lsp_status.register_progress()
 lsp_status.config({
   kind_labels = kind_labels,
   indicator_errors = "×",
@@ -159,6 +158,10 @@ function get_lsp_status()
     return vim.fn.trim(lsp_status.status())
 end
 
+function check_lsp_clients()
+    return #vim.lsp.get_clients({buffer=0}) > 0
+end
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
   --ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
@@ -205,7 +208,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 vim.call('airline#parts#define_function', 'lsp_status', 'v:lua.get_lsp_status')
-vim.call('airline#parts#define_condition', 'lsp_status', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
+vim.call('airline#parts#define_condition', 'lsp_status', 'v:lua.check_lsp_clients()')
 
 g['airline#extensions#nvimlsp#enabled'] = 0
 g.airline_section_warning = vim.call('airline#section#create_right', {'lsp_status'})
