@@ -399,7 +399,9 @@ endif
 set cinoptions=g0,(4
 
 nmap <SPACE>] <C-]>
-nmap <SPACE>[ <C-o>
+nmap <leader>[ <C-o>
+nmap <leader>o <C-]>
+nmap <leader>p <C-o>
 
 let g:startify_session_persistence = 1
 
