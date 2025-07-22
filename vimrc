@@ -400,8 +400,8 @@ set cinoptions=g0,(4
 
 nmap <SPACE>] <C-]>
 nmap <leader>[ <C-o>
-nmap <leader>o <C-]>
-nmap <leader>p <C-o>
+nmap <leader>p <C-]>
+nmap <leader>o <C-o>
 
 let g:startify_session_persistence = 1
 
