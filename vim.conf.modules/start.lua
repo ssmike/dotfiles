@@ -19,8 +19,6 @@ lsp_status.config({
   status_symbol = "",
 })
 
-require'lsp-lens'.setup({})
-
 local function enable_codelens(bufnr)
   pcall(vim.lsp.codelens.refresh)
 
