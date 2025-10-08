@@ -19,13 +19,28 @@ lsp_status.config({
   status_symbol = "",
 })
 
-local on_attach = function(client, bufnr)
+require'lsp-lens'.setup({})
 
+local function enable_codelens(bufnr)
+  pcall(vim.lsp.codelens.refresh)
+
+  vim.api.nvim_create_autocmd({'BufWritePost', 'BufEnter', 'CursorHold'}, {
+    buffer = bufnr,
+    group = java_cmds,
+    desc = 'refresh codelens',
+    callback = function()
+      pcall(vim.lsp.codelens.refresh)
+    end,
+  })
+end
+
+local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  enable_codelens(bufnr)
   -- Mappings
   local opts = { noremap=true, silent=true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -53,30 +68,34 @@ local on_attach = function(client, bufnr)
 end
 
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities())
+
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp'}
-root_dir_overrides = {
-    pylsp = function(bufnr, on_dir)
-      local root_files = {
-        'pyproject.toml',
-        'setup.py',
-        'setup.cfg',
-        'requirements.txt',
-        'Pipfile',
-        '.arcadia.root'
-      }
-      on_dir(vim.fs.root(bufnr, root_files))
-    end,
-}
 
 for _, lsp in ipairs(servers) do
-    vim.lsp.config(lsp, {
+    config = {
         on_attach = on_attach,
         capabilities = capabilities,
-        root_dir = root_dir_overrides[lsp]
-    })
+        codelens = { enabled = true },
+    }
+
+    if lsp == 'pylsp' then
+        config['root_dir'] = function(bufnr, on_dir)
+          local root_files = {
+            'pyproject.toml',
+            'setup.py',
+            'setup.cfg',
+            'requirements.txt',
+            'Pipfile',
+            '.arcadia.root'
+          }
+          on_dir(vim.fs.root(bufnr, root_files))
+        end
+    end
+
+    vim.lsp.config(lsp, config)
     vim.lsp.enable(lsp)
 end
 
