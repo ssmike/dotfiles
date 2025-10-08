@@ -1,8 +1,5 @@
-local nvim_lsp = require('lspconfig')
 local luasnip = require('luasnip')
 local cmp = require('cmp')
-
-local lsputil = require 'lspconfig.util'
 
 local lsp_status = require("lsp-status")
 
@@ -61,7 +58,7 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp'}
 root_dir_overrides = {
-    pylsp = function(fname)
+    pylsp = function(bufnr, on_dir)
       local root_files = {
         'pyproject.toml',
         'setup.py',
@@ -70,16 +67,17 @@ root_dir_overrides = {
         'Pipfile',
         '.arcadia.root'
       }
-      return lsputil.root_pattern(unpack(root_files))(fname) or lsputil.find_git_ancestor(fname)
+      on_dir(vim.fs.root(bufnr, root_files))
     end,
 }
 
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
+    vim.lsp.config(lsp, {
         on_attach = on_attach,
         capabilities = capabilities,
         root_dir = root_dir_overrides[lsp]
-    }
+    })
+    vim.lsp.enable(lsp)
 end
 
 local select_opts = {behavior = cmp.SelectBehavior.Insert}
