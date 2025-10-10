@@ -23,6 +23,8 @@ call plug#begin('~/.vim/plugged')
     "Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
     "Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
+    Plug 'pedrohdz/vim-yaml-folds'
+
     Plug 'LnL7/vim-nix', {'for': 'nix'}
 
     Plug 'tpope/vim-fugitive'
