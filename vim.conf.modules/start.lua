@@ -1,6 +1,5 @@
 local luasnip = require('luasnip')
 local cmp = require('cmp')
-
 local lsp_status = require("lsp-status")
 
 -- use LSP SymbolKinds themselves as the kind labels
@@ -71,7 +70,7 @@ local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_c
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp'}
+local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp', 'tinymist'}
 
 for _, lsp in ipairs(servers) do
     config = {
