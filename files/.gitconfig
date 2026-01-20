@@ -10,3 +10,5 @@
   excludesfile = ~/.config/git/ignore
 [credential]
 	helper = /usr/bin/git-credential-libsecret
+[init]
+    defaultBranch = main
