@@ -90,7 +90,7 @@ local rustconfig = {
                         enable = true
                     },
                     sysroot = "discover",
-                    features = {"ci"}
+                    features = {}
                 },
                 procMacro = {
                     --enable = true
