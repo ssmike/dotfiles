@@ -9,8 +9,8 @@ fi
 
 make -j30
 
-emerge @module-rebuild
 make modules_install
+emerge @module-rebuild
 
 
 mount /boot
