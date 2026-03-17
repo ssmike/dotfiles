@@ -80,7 +80,7 @@ for _, lsp in ipairs(servers) do
         codelens = { enabled = true },
     }
 
-    if lsp == 'pylsp' then
+    if lsp == 'pylsp' or lsp == 'ty' then
         config['root_dir'] = function(bufnr, on_dir)
           local root_files = {
             'pyproject.toml',
