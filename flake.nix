@@ -69,6 +69,9 @@
           mkdir -p ~/.clojure
           ln -sTf ${./.clojure/deps.edn} ~/.clojure/deps.edn
 
+          mkdir -p ~/.config/alacritty
+          ln -sTf ~/.alacritty.toml ~/.config/alacritty/alacritty.toml
+
           for file in \$(ls $out/files -A); do
             ln -sTf $out/files/\$file ~/\$file
           done
