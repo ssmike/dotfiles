@@ -1,22 +1,10 @@
 local luasnip = require('luasnip')
 local cmp = require('cmp')
-local lsp_status = require("lsp-status")
 
 -- use LSP SymbolKinds themselves as the kind labels
 local kind_labels_mt = {__index = function(_, k) return k end}
 local kind_labels = {}
 setmetatable(kind_labels, kind_labels_mt)
-
-lsp_status.config({
-  kind_labels = kind_labels,
-  indicator_errors = "×",
-  indicator_warnings = "!",
-  indicator_info = "i",
-  indicator_hint = "›",
-  -- the default is a wide codepoint which breaks absolute and relative
-  -- line counts if placed before airline's Z section
-  status_symbol = "",
-})
 
 local function enable_codelens(bufnr)
   pcall(vim.lsp.codelens.refresh)
@@ -170,64 +158,24 @@ g = vim.g
 opt = vim.opt
 cmd = vim.cmd
 
-function get_lsp_status()
-    return vim.fn.trim(lsp_status.status())
-end
+vim.cmd([[
+  function! LspStatus() abort
+    return luaeval('vim.lsp.status()')
+  endfunction
 
-function check_lsp_clients()
-    return #vim.lsp.get_clients({buffer=0}) > 0
-end
+  function! AirlineInit()
+    call airline#parts#define_function('lsp_status', 'LspStatus')
+    let g:airline_section_y = airline#section#create_right(['lsp_status', 'ffenc'])
+  endfunction
 
---require'nvim-treesitter.configs'.setup {
---  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
---  --ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
---
---  -- Install parsers synchronously (only applied to `ensure_installed`)
---  sync_install = false,
---
---  -- Automatically install missing parsers when entering buffer
---  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
---  auto_install = false,
---
---  -- List of parsers to ignore installing (or "all")
---  --ignore_install = { "javascript" },
---
---  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
---  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
---
---  highlight = {
---    enable = true,
---
---    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
---    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
---    -- the name of the parser)
---    -- list of language that will be disabled
---    --disable = { "c", "rust" },
---    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
---    disable = function(lang, buf)
---        if lang == "c" or lang == "rust" then
---            return true
---        end
---        local max_filesize = 100 * 1024 -- 100 KB
---        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
---        if ok and stats and stats.size > max_filesize then
---            return true
---        end
---    end,
---
---    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
---    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
---    -- Using this option may slow down your editor, and you may see some duplicate highlights.
---    -- Instead of true it can also be a list of languages
---    additional_vim_regex_highlighting = false,
---  },
---}
+  autocmd User AirlineAfterInit call AirlineInit()
+]])
 
-vim.call('airline#parts#define_function', 'lsp_status', 'v:lua.get_lsp_status')
-vim.call('airline#parts#define_condition', 'lsp_status', 'v:lua.check_lsp_clients()')
-
-g['airline#extensions#nvimlsp#enabled'] = 0
-g.airline_section_warning = vim.call('airline#section#create_right', {'lsp_status'})
+vim.api.nvim_create_autocmd('LspProgress', {
+  callback = function()
+    vim.cmd('redrawstatus')
+  end,
+})
 
 cmd [[
     au FileType clojure nmap <buffer> <c-]> ,gd]
