@@ -270,6 +270,8 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "waybar"
+spawn-at-startup "/usr/libexec/pam_kwallet_init"
+spawn-at-startup "/usr/bin/kded6"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -630,8 +632,8 @@ binds {
     Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Alt+Shift+Escape { quit; }
-    Ctrl+Alt+Delete { quit; }
+    //Alt+Shift+Escape { quit; }
+    Ctrl+Alt+Minus { quit; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
