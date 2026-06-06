@@ -1,3 +1,4 @@
 #!/bin/bash
 plasma-apply-colorscheme BreezeLight
 sed -i 's/alacritty.litgh/alacritty.light/g' ~/.alacritty.override
+dms ipc call theme light 2>/dev/null || true
