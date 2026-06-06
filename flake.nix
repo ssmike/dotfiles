@@ -31,7 +31,7 @@
     zsh-tipz, zsh-abbr,
     nixpkgs, flake-utils, ...}:
 
-  flake-utils.lib.eachDefaultSystem (system: 
+  flake-utils.lib.eachDefaultSystem (system:
   let
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (pkgs) stdenv lib;
@@ -78,6 +78,15 @@
 
           mkdir -p ~/.config/niri
           ln -sTf ${./niri.kdl} ~/.config/niri/config.kdl
+
+          touch ~/.config/niri/dms/binds.kdl
+          touch ~/.config/niri/dms/alttab.kdl
+          touch ~/.config/niri/dms/colors.kdl
+          touch ~/.config/niri/dms/cursor.kdl
+          touch ~/.config/niri/dms/layout.kdl
+          touch ~/.config/niri/dms/outputs.kdl
+          touch ~/.config/niri/dms/windowrules.kdl
+          touch ~/.config/niri/dms/wpblur.kdl
 
           # protect dotfiles from gc
           nix-store --add-root ~/.keep-dotfiles -r $out
