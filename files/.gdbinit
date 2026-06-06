@@ -1,7 +1,7 @@
 add-auto-load-safe-path /usr/lib64/go/src/pkg/runtime/runtime-gdb.py
 set confirm off
-set height 0
-set width 0
+#set height 0
+#set width 0
 
 define argv
   show args
