@@ -76,6 +76,9 @@
             ln -sTf $out/files/\$file ~/\$file
           done
 
+          mkdir -p ~/.config/niri
+          ln -sTf ${./niri.kdl} ~/.config/niri/config.kdl
+
           # protect dotfiles from gc
           nix-store --add-root ~/.keep-dotfiles -r $out
 
