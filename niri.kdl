@@ -363,7 +363,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Alt+Shift+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --screenshot --effect-blur 30x3"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
