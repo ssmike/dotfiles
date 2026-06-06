@@ -446,10 +446,10 @@ binds {
     Alt+Shift+K     { focus-monitor-up; }
     Alt+Shift+L     { focus-monitor-right; }
 
-    Alt+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Alt+Shift+Q  { move-column-to-monitor-left; }
     Alt+Shift+Ctrl+Down  { move-column-to-monitor-down; }
     Alt+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    Alt+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Alt+Shift+E { move-column-to-monitor-right; }
     Alt+Shift+Ctrl+H     { move-column-to-monitor-left; }
     Alt+Shift+Ctrl+J     { move-column-to-monitor-down; }
     Alt+Shift+Ctrl+K     { move-column-to-monitor-up; }
@@ -630,7 +630,7 @@ binds {
     Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Alt+Shift+E { quit; }
+    Alt+Shift+W { quit; }
     Ctrl+Alt+Delete { quit; }
 
     // Powers off the monitors. To turn them back on, do any input like
