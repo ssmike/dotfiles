@@ -420,10 +420,10 @@ binds {
     Alt+K     { focus-window-up; }
     Alt+L     { focus-column-right; }
 
-    Alt+Ctrl+Left  { move-column-left; }
-    Alt+Ctrl+Down  { move-window-down; }
-    Alt+Ctrl+Up    { move-window-up; }
-    Alt+Ctrl+Right { move-column-right; }
+    Alt+Shift+Left  { move-column-left; }
+    Alt+Shift+Down  { move-window-down; }
+    Alt+Shift+Up    { move-window-up; }
+    Alt+Shift+Right { move-column-right; }
     Alt+Ctrl+H     { move-column-left; }
     Alt+Ctrl+J     { move-window-down; }
     Alt+Ctrl+K     { move-window-up; }
@@ -444,8 +444,8 @@ binds {
     Alt+Q  { focus-monitor-left; }
     Alt+E { focus-monitor-right; }
 
-    Alt+Shift+Down  { focus-monitor-down; }
-    Alt+Shift+Up    { focus-monitor-up; }
+    //Alt+Shift+Down  { focus-monitor-down; }
+    //Alt+Shift+Up    { focus-monitor-up; }
 
     Alt+Shift+H     { focus-monitor-left; }
     Alt+Shift+J     { focus-monitor-down; }
