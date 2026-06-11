@@ -379,6 +379,7 @@ window-rule {
 window-rule {
     match app-id=r#"^winecfg\.exe$"#
     match app-id=r#"^game\.exe$"#
+    match app-id=r#"^syncthingtray$"#
     open-floating true
 }
 
