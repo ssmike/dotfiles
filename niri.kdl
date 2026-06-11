@@ -383,7 +383,7 @@ window-rule {
 
 window-rule {
     match app-id=r#"^vlc$"#
-    open-maximized true
+    open-fullscreen true
 }
 
 // Example: block out two password managers from screen capture.
