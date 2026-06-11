@@ -334,6 +334,7 @@ window-rule {
     match app-id=r#"^org.telegram.desktop$"#
     match app-id=r#"^com.slack.Slack$"#
     match app-id=r#"^org.kde.kmail2$"#
+    match app-id=r#"^max$"#
     open-on-workspace "chats"
 }
 
@@ -419,7 +420,7 @@ binds {
     // in the end. To find an XKB name for a particular key, you may use a program
     // like wev.
     //
-    // "Mod" is a special modifier bound in the input section 
+    // "Mod" is a special modifier bound in the input section
     //
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
