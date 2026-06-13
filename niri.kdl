@@ -334,6 +334,7 @@ window-rule {
     match app-id=r#"^org.telegram.desktop$"#
     match app-id=r#"^com.slack.Slack$"#
     match app-id=r#"^org.kde.kmail2$"#
+    match app-id=r#"^thunderbird$"#
     match app-id=r#"^max$"#
     open-on-workspace "chats"
 }
