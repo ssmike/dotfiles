@@ -346,6 +346,7 @@ workspace "media" {
 window-rule {
     match app-id=r#"^org.kde.kasts$"#
     match app-id=r#"^vlc$"#
+    match app-id=r#"^org.kde.ktorrent$"
     open-on-workspace "media"
 }
 
