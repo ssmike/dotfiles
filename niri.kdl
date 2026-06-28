@@ -336,6 +336,7 @@ window-rule {
     match app-id=r#"^org.kde.kmail2$"#
     match app-id=r#"^thunderbird$"#
     match app-id=r#"^max$"#
+    match app-id=r#"^org.squidowl.halloy$"#
     open-on-workspace "chats"
 }
 
@@ -346,7 +347,7 @@ workspace "media" {
 window-rule {
     match app-id=r#"^org.kde.kasts$"#
     match app-id=r#"^vlc$"#
-    match app-id=r#"^org.kde.ktorrent$"
+    match app-id=r#"^org.kde.ktorrent$"#
     open-on-workspace "media"
 }
 
