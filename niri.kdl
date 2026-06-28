@@ -337,6 +337,7 @@ window-rule {
     match app-id=r#"^thunderbird$"#
     match app-id=r#"^max$"#
     match app-id=r#"^org\.squidowl\.halloy$"#
+    match app-id=r#"^discord$"#
     open-on-workspace "chats"
 }
 
