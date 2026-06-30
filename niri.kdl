@@ -338,6 +338,7 @@ window-rule {
     match app-id=r#"^max$"#
     match app-id=r#"^org\.squidowl\.halloy$"#
     match app-id=r#"^discord$"#
+    match app-id=r#"^org\.kde\.kontact$"#
     open-on-workspace "chats"
 }
 
