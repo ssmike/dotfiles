@@ -158,9 +158,74 @@ g = vim.g
 opt = vim.opt
 cmd = vim.cmd
 
+local lsp_progress_messages = {}
+local lsp_progress_status = ''
+local lsp_progress_timer = nil
+local LSP_STATUS_MAX_WIDTH = 20
+
+local function truncate_lsp_status(message)
+  if vim.fn.strdisplaywidth(message) <= LSP_STATUS_MAX_WIDTH then
+    return message
+  end
+
+  local suffix = '...'
+  local limit = LSP_STATUS_MAX_WIDTH - vim.fn.strdisplaywidth(suffix)
+  if limit <= 0 then
+    return suffix
+  end
+
+  local result = ''
+  for index = 1, vim.fn.strchars(message) do
+    local candidate = vim.fn.strcharpart(message, 0, index)
+    if vim.fn.strdisplaywidth(candidate) > limit then
+      break
+    end
+    result = candidate
+  end
+
+  return result .. suffix
+end
+
+local function render_lsp_progress()
+  local messages = {}
+  for _, item in pairs(lsp_progress_messages) do
+    if item.message ~= nil and item.message ~= '' then
+      table.insert(messages, item.message)
+    end
+  end
+  table.sort(messages)
+  lsp_progress_status = truncate_lsp_status(table.concat(messages, ', '))
+end
+
+local function progress_message(value)
+  local message = value.message or value.title or ''
+  if value.percentage ~= nil and message ~= '' then
+    message = string.format('%d%%: %s', value.percentage, message)
+  end
+  return message
+end
+
+local function clear_lsp_progress_later()
+  if lsp_progress_timer ~= nil then
+    lsp_progress_timer:stop()
+    lsp_progress_timer:close()
+  end
+
+  lsp_progress_timer = vim.uv.new_timer()
+  lsp_progress_timer:start(5000, 0, vim.schedule_wrap(function()
+    lsp_progress_messages = {}
+    render_lsp_progress()
+    vim.cmd('redrawstatus')
+  end))
+end
+
+function _G.LspStatus()
+  return lsp_progress_status
+end
+
 vim.cmd([[
   function! LspStatus() abort
-    return luaeval('vim.lsp.status()')
+    return luaeval('LspStatus()')
   endfunction
 
   function! AirlineInit()
@@ -172,7 +237,24 @@ vim.cmd([[
 ]])
 
 vim.api.nvim_create_autocmd('LspProgress', {
-  callback = function()
+  callback = function(event)
+    local params = event.data and event.data.params
+    local value = params and params.value
+    if type(params) == 'table' and type(value) == 'table' then
+      local key = tostring(event.data.client_id) .. ':' .. tostring(params.token)
+      if value.kind == 'end' then
+        lsp_progress_messages[key] = {
+          message = progress_message(value),
+        }
+        render_lsp_progress()
+        clear_lsp_progress_later()
+      else
+        lsp_progress_messages[key] = {
+          message = progress_message(value),
+        }
+        render_lsp_progress()
+      end
+    end
     vim.cmd('redrawstatus')
   end,
 })
