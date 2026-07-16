@@ -59,7 +59,7 @@ local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_c
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp', 'tinymist', 'zls'}
+local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp', 'tinymist', 'zls', 'lua_ls'}
 
 for _, lsp in ipairs(servers) do
     config = {
