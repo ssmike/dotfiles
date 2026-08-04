@@ -363,6 +363,7 @@ workspace "docs" {
 
 window-rule {
     match app-id=r#"^obsidian$"#
+    match app-id=r#"^md.Obsidian$"#
     open-on-workspace "docs"
 }
 
