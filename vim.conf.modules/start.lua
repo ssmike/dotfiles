@@ -1,3 +1,4 @@
+---@global vim
 local luasnip = require('luasnip')
 local cmp = require('cmp')
 
@@ -59,16 +60,42 @@ local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_c
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-local servers = {'clangd', 'gopls', 'rust_analyzer', 'hls', 'pylsp', 'tinymist', 'zls', 'lua_ls'}
+local servers = {
+    'denols', 'ts_ls',
+    'clangd',
+    'gopls',
+    'rust_analyzer',
+    'hls',
+    'pylsp',
+    'tinymist',
+    'zls',
+    'lua_ls'
+}
 
 for _, lsp in ipairs(servers) do
-    config = {
+    local config = {
         on_attach = on_attach,
         capabilities = capabilities,
         codelens = { enabled = true },
     }
 
-    if lsp == 'pylsp' or lsp == 'ty' then
+    if lsp == 'lua_ls' then
+        config["settings"] = {
+            Lua = {
+                 workspace = {
+                     checkThirdParty = false,
+                     library = vim.api.nvim_get_runtime_file("", true) },
+                 }
+            }
+    end
+    if lsp == 'ts_ls' then
+        config['workspace_required'] = true
+        config['root_markers'] = { "package.json" }
+    end
+    if lsp == 'denols' then
+        config['root_markers'] = { "deno.json", "deno.jsonc" }
+    end
+    if lsp == 'pylsp' then
         config['root_dir'] = function(bufnr, on_dir)
           local root_files = {
             'pyproject.toml',
