@@ -339,6 +339,7 @@ window-rule {
     match app-id=r#"^org\.squidowl\.halloy$"#
     match app-id=r#"^discord$"#
     match app-id=r#"^org\.kde\.kontact$"#
+    match app-id="com.rtosta.zapzap"
     open-on-workspace "chats"
 }
 
@@ -350,6 +351,7 @@ window-rule {
     match app-id=r#"^org\.kde\.kasts$"#
     match app-id=r#"^vlc$"#
     match app-id=r#"^org\.kde\.ktorrent$"#
+    match app-id="org.kde.elisa"
     open-on-workspace "media"
 }
 
