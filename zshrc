@@ -490,11 +490,6 @@ function debug-flags; {
     echo -Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fstack-protector -lmcheck -D_FORTIFY_SOURCE=2
 }
 
-function docker-clean() {
-  docker ps -a | awk '{print $1}' | xargs --no-run-if-empty docker rm
-  docker rmi $(docker images -f dangling=true -q)
-}
-
 function set-title() {
     echo -ne "\033]0;$@\007"
 }
