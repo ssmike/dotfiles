@@ -364,6 +364,11 @@ workspace "docs" {
 }
 
 window-rule {
+    match app-id=r#"^com.anthropic.Claude$"#
+    open-on-workspace "code"
+}
+
+window-rule {
     match app-id=r#"^obsidian$"#
     match app-id=r#"^md.Obsidian$"#
     match app-id="md.obsidian.Obsidian"
