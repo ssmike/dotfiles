@@ -66,6 +66,9 @@
           ln -sTf ${zsh-tipz} ~/.zsh/zsh-tipz
           ln -sTf ${zsh-abbr} ~/.zsh/zsh-abbr
 
+          mkdir -p ~/.config/direnv
+          ln -sTf ${./direnvrc} ~/.config/direnv/direnvrc
+
           mkdir -p ~/.clojure
           ln -sTf ${./.clojure/deps.edn} ~/.clojure/deps.edn
 

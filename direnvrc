@@ -1,0 +1,61 @@
+use_agent_sandbox() {
+  local cache="$HOME/.cache/agent-sandbox"
+  local bin="$PWD/.direnv/sandbox-bin"
+  mkdir -p "$cache"/{cargo,go,deno,uv,pip,npm} "$bin"
+
+  local -a args=(
+    --ro-bind /usr /usr --symlink usr/bin /bin
+    --symlink usr/lib /lib --symlink usr/lib64 /lib64
+    --ro-bind /etc /etc
+    --proc /proc --dev /dev --tmpfs /tmp
+    --unshare-all --share-net --die-with-parent
+
+    --ro-bind /nix/store /nix/store
+    --ro-bind /nix/var/nix/profiles /nix/var/nix/profiles
+    --ro-bind "$HOME/.nix-profile" "$HOME/.nix-profile"
+
+    --ro-bind "$HOME/.rustup" "$HOME/.rustup"
+    --ro-bind "$HOME/.cargo/bin" "$HOME/.cargo/bin"
+    --ro-bind "$HOME/.local/share/solana/install" "$HOME/.local/share/solana/install"
+
+    --bind "$cache/cargo" "$cache/cargo"
+    --bind "$cache/go" "$cache/go"
+    --bind "$cache/deno" "$cache/deno"
+    --bind "$cache/uv" "$cache/uv"
+    --bind "$cache/pip" "$cache/pip"
+    --bind "$cache/npm" "$cache/npm"
+
+    --bind "$PWD" "$PWD" --chdir "$PWD"
+
+    --setenv CARGO_HOME "$cache/cargo"
+    --setenv RUSTUP_HOME "$HOME/.rustup"
+    --setenv GOPATH "$cache/go"
+    --setenv GOCACHE "$cache/go/build"
+    --setenv GOMODCACHE "$cache/go/pkg/mod"
+    --setenv DENO_DIR "$cache/deno"
+    --setenv UV_CACHE_DIR "$cache/uv"
+    --setenv PIP_CACHE_DIR "$cache/pip"
+    --setenv npm_config_cache "$cache/npm"
+
+    --ro-bind "$HOME/.gitconfig" "$HOME/.gitconfig"
+    --ro-bind "$HOME/.config/git" "$HOME/.config/git"
+    --bind "${SSH_AUTH_SOCK%/*}" "${SSH_AUTH_SOCK%/*}"
+  )
+
+  local cmds=("$@"); [ ${#cmds[@]} -eq 0 ] && cmds=(claude codex kimi)
+  local cmd real
+  for cmd in "${cmds[@]}"; do
+    real="$(command -v "$cmd" 2>/dev/null)" || { log_status "use_sandbox: $cmd не найден, пропуск"; continue; }
+    printf '%s\n' \
+      '#!/bin/sh' \
+      'exec bwrap "${BWRAP_ARGS[@]}" "$@"' > "$bin/$cmd" 2>/dev/null || true
+    { printf '#!/bin/sh\nexec bwrap'
+      printf ' %q' "${args[@]}"
+      printf ' %q "$@"\n' "$real"
+    } > "$bin/$cmd"
+    chmod +x "$bin/$cmd"
+  done
+
+  PATH_add "$bin"
+  log_status "use_sandbox: агенты запускаются в bwrap, кэши → $cache"
+}
