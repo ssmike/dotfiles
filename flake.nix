@@ -66,6 +66,8 @@
           ln -sTf ${zsh-tipz} ~/.zsh/zsh-tipz
           ln -sTf ${zsh-abbr} ~/.zsh/zsh-abbr
 
+          ln -sTf ${./zed/keymap.json} ~/.config/zed/keymap.json
+
           mkdir -p ~/.config/direnv
           ln -sTf ${./direnvrc} ~/.config/direnv/direnvrc
 

@@ -1,0 +1,65 @@
+// Zed keymap
+//
+// Ported from ~/.ideavimrc
+[
+  // nmap <F3> :qa<CR>
+  // nmap <TAB> :bn<CR>
+  // nmap <BACKSPACE> :bp<CR>
+  // nmap s :w<CR>
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "f3": "zed::Quit",
+      "tab": "pane::ActivateNextItem",
+      "backspace": "pane::ActivatePreviousItem",
+      "s": "workspace::Save",
+      // nmap <SPACE>] <C-]>
+      // nmap <SPACE>[ <C-o>
+      // nmap <SPACE>p <C-]>
+      // nmap <SPACE>o <C-o>
+      "space ]": "editor::GoToDefinition",
+      "space [": "pane::GoBack",
+      "space p": "editor::GoToDefinition",
+      "space o": "pane::GoBack",
+      // buf_set_keymap('n', '<space>q', vim.diagnostic.setloclist)
+      "space q": "diagnostics::Deploy"
+    }
+  },
+  // nmap Q <c-w>  (Q as window-command prefix, mirroring ctrl-w)
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "shift-q": null,
+      "shift-q h": "workspace::ActivatePaneLeft",
+      "shift-q left": "workspace::ActivatePaneLeft",
+      "shift-q l": "workspace::ActivatePaneRight",
+      "shift-q right": "workspace::ActivatePaneRight",
+      "shift-q k": "workspace::ActivatePaneUp",
+      "shift-q up": "workspace::ActivatePaneUp",
+      "shift-q j": "workspace::ActivatePaneDown",
+      "shift-q down": "workspace::ActivatePaneDown",
+      "shift-q w": "workspace::ActivateNextPane",
+      "shift-q p": "workspace::ActivatePreviousPane",
+      "shift-q v": "pane::SplitVertical",
+      "shift-q s": "pane::SplitHorizontal",
+      "shift-q n": "workspace::NewFileSplitHorizontal",
+      "shift-q c": "pane::CloseActiveItem",
+      "shift-q q": "pane::CloseActiveItem",
+      "shift-q o": "workspace::CloseInactiveTabsAndPanes",
+      "shift-q x": "workspace::SwapPaneAdjacent",
+      "shift-q shift-h": "workspace::MovePaneLeft",
+      "shift-q shift-l": "workspace::MovePaneRight",
+      "shift-q shift-k": "workspace::MovePaneUp",
+      "shift-q shift-j": "workspace::MovePaneDown"
+    }
+  },
+  // imap jj <ESC>
+  // imap ii <ESC>
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+      "i i": "vim::NormalBefore"
+    }
+  }
+]
