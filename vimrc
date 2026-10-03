@@ -398,7 +398,7 @@ endif
 
 set cinoptions=g0,(4
 
-nmap <SPACE>] <C-]>
+nmap <leader>] <C-]>
 nmap <leader>[ <C-o>
 nmap <leader>p <C-]>
 nmap <leader>o <C-o>
