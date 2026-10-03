@@ -365,6 +365,8 @@ workspace "docs" {
 
 window-rule {
     match app-id=r#"^com.anthropic.Claude$"#
+    match app-id=r#"^chatgpt$"#
+    match app-id=r#"^dev.zed.Zed$"#
     open-on-workspace "code"
 }
 
