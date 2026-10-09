@@ -50,7 +50,16 @@ local menu        = "hyprlauncher"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function ()
-   hl.exec_cmd("dms run")
+    hl.exec_cmd("dms run")
+    -- передаём окружение Wayland в D-Bus и systemd, иначе
+    -- активируемые через D-Bus сервисы не найдут дисплей
+    hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+
+    -- передаёт ключ из PAM демону и запускает его
+    hl.exec_cmd("/usr/lib/pam_kwallet_init")
+    hl.exec_cmd("/usr/libexec/pam_kwallet_init")
+    hl.env("XDG_CURRENT_DESKTOP", "Hyprland:KDE")
+    hl.env("KDE_SESSION_VERSION", "6")
 end)
 
 
