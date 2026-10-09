@@ -93,6 +93,17 @@
           touch ~/.config/niri/dms/windowrules.kdl
           touch ~/.config/niri/dms/wpblur.kdl
 
+          mkdir -p ~/.config/hypr
+          ln -sTf ${./hyprland.lua} ~/.config/hypr/hyprland.lua
+          touch ~/.config/hypr/dms/binds.kdl
+          touch ~/.config/hypr/dms/alttab.kdl
+          touch ~/.config/hypr/dms/colors.kdl
+          touch ~/.config/hypr/dms/cursor.kdl
+          touch ~/.config/hypr/dms/layout.kdl
+          touch ~/.config/hypr/dms/outputs.kdl
+          touch ~/.config/hypr/dms/windowrules.kdl
+          touch ~/.config/hypr/dms/wpblur.kdl
+
           # protect dotfiles from gc
           nix-store --add-root ~/.keep-dotfiles -r $out
 

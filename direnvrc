@@ -4,6 +4,7 @@ use_agent_sandbox() {
   mkdir -p "$cache"/{cargo,go,deno,uv,pip,npm} "$bin"
 
   local -a args=(
+    --ro-bind /opt/bin/claude
     --ro-bind /usr /usr --symlink usr/bin /bin
     --symlink usr/lib /lib --symlink usr/lib64 /lib64
     --ro-bind /etc /etc
