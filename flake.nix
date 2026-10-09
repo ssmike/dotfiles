@@ -95,14 +95,14 @@
 
           mkdir -p ~/.config/hypr
           ln -sTf ${./hyprland.lua} ~/.config/hypr/hyprland.lua
-          touch ~/.config/hypr/dms/binds.kdl
-          touch ~/.config/hypr/dms/alttab.kdl
-          touch ~/.config/hypr/dms/colors.kdl
-          touch ~/.config/hypr/dms/cursor.kdl
-          touch ~/.config/hypr/dms/layout.kdl
-          touch ~/.config/hypr/dms/outputs.kdl
-          touch ~/.config/hypr/dms/windowrules.kdl
-          touch ~/.config/hypr/dms/wpblur.kdl
+          touch ~/.config/hypr/dms/binds.lua
+          touch ~/.config/hypr/dms/alttab.lua
+          touch ~/.config/hypr/dms/colors.lua
+          touch ~/.config/hypr/dms/cursor.lua
+          touch ~/.config/hypr/dms/layout.lua
+          touch ~/.config/hypr/dms/outputs.lua
+          touch ~/.config/hypr/dms/windowrules.lua
+          touch ~/.config/hypr/dms/wpblur.lua
 
           # protect dotfiles from gc
           nix-store --add-root ~/.keep-dotfiles -r $out
