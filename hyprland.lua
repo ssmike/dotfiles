@@ -51,6 +51,14 @@ local menu        = "hyprlauncher"
 --
 hl.on("hyprland.start", function ()
     hl.exec_cmd("dms run")
+    hl.env("XDG_CURRENT_DESKTOP", "Hyprland:KDE")
+    hl.env("KDE_SESSION_VERSION", "6")
+
+    local runtime = os.getenv("XDG_RUNTIME_DIR")
+
+    hl.env("SSH_AUTH_SOCK", runtime .. "/ssh-agent.socket")
+    hl.env("SSH_ASKPASS", "/usr/bin/ksshaskpass")
+    hl.env("SSH_ASKPASS_REQUIRE", "prefer")
     -- передаём окружение Wayland в D-Bus и systemd, иначе
     -- активируемые через D-Bus сервисы не найдут дисплей
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
@@ -58,8 +66,6 @@ hl.on("hyprland.start", function ()
     -- передаёт ключ из PAM демону и запускает его
     hl.exec_cmd("/usr/lib/pam_kwallet_init")
     hl.exec_cmd("/usr/libexec/pam_kwallet_init")
-    hl.env("XDG_CURRENT_DESKTOP", "Hyprland:KDE")
-    hl.env("KDE_SESSION_VERSION", "6")
 end)
 
 
