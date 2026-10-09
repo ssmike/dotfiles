@@ -160,14 +160,32 @@ hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "
 hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
 hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
+
+-- Кривые Безье
+hl.curve("smooth",      { type = "bezier", points = { {0.25, 0.9}, {0.3, 1} } })
+--hl.curve("easeOutQuint", { type = "bezier", points = { {0.23, 1},  {0.32, 1} } })
+
+-- Воркспейсы: вертикальный сдвиг
+hl.animation({ leaf = "workspaces",    enabled = true, speed = 5, bezier = "smooth",       style = "slidevert" })
+hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 5, bezier = "smooth",       style = "slidevert" })
+--hl.animation({ leaf = "workspacesOut", enabled = true, speed = 4, bezier = "easeOutQuint", style = "slidefadevert 30%" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 5, bezier = "smooth", style = "slidevert" })
+
+-- Специальные воркспейсы
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "smooth", style = "slidevert" })
+
+-- Вертикальный свайп тремя пальцами для переключения воркспейсов
+hl.gesture({ fingers = 3, direction = "vertical", action = "workspace" })
+
+--hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.74, bezier = "almostLinear", style = "slidevert" })
+--hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slidevert" })
+--hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slidevert" })
+
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
 -- DankMaterialShell-generated settings (override the look-and-feel values above)
 local dmsDir = os.getenv("HOME") .. "/.config/hypr/dms/"
---dofile(dmsDir .. "binds.lua")
+dofile(dmsDir .. "binds.lua")
 dofile(dmsDir .. "layout.lua")
 dofile(dmsDir .. "outputs.lua")
 dofile(dmsDir .. "windowrules.lua")
