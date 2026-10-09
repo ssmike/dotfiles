@@ -49,7 +49,7 @@ local menu        = "hyprlauncher"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 --
-hl.on("hyprland.start", function () 
+hl.on("hyprland.start", function ()
    hl.exec_cmd("dms run")
 end)
 
@@ -167,8 +167,14 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 
 -- DankMaterialShell-generated settings (override the look-and-feel values above)
 local dmsDir = os.getenv("HOME") .. "/.config/hypr/dms/"
+--dofile(dmsDir .. "binds.lua")
 dofile(dmsDir .. "layout.lua")
+dofile(dmsDir .. "outputs.lua")
 dofile(dmsDir .. "windowrules.lua")
+dofile(dmsDir .. "alttab.lua")
+dofile(dmsDir .. "colors.lua")
+dofile(dmsDir .. "cursor.lua")
+dofile(dmsDir .. "wpblur.lua")
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
