@@ -50,7 +50,7 @@ local menu        = "hyprlauncher"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("dms run")
+    hl.exec_cmd("env QT_AUDIO_BACKEND=pulseaudio dms run")
     hl.env("XDG_CURRENT_DESKTOP", "Hyprland:KDE")
     hl.env("KDE_SESSION_VERSION", "6")
 
@@ -285,12 +285,6 @@ hl.config({
     },
 })
 
-hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace"
-})
-
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 hl.device({
@@ -467,6 +461,13 @@ local suppressMaximizeRule = hl.window_rule({
     suppress_event = "maximize",
 })
 -- suppressMaximizeRule:set_enabled(false)
+
+hl.config({
+    xwayland = {
+        enabled = true,
+        force_zero_scaling = true,
+    },
+})
 
 hl.window_rule({
     -- Fix some dragging issues with XWayland
