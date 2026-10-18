@@ -304,12 +304,9 @@ bind("SHIFT + C", hl.dsp.window.close())
 -- Focus columns / windows
 bind("left",  hl.dsp.focus({ direction = "l" }))
 bind("right", hl.dsp.focus({ direction = "r" }))
-bind("up",    hl.dsp.layout("focus u"))
-bind("down",  hl.dsp.layout("focus d"))
 bind("H",     hl.dsp.focus({ direction = "l" }))
 bind("L",     hl.dsp.focus({ direction = "r" }))
-bind("K",     hl.dsp.layout("focus u"))
-bind("J",     hl.dsp.layout("focus d"))
+-- up/down are bound below, next to the tabbed column helpers
 
 -- Move columns / windows
 bind("SHIFT + left",  hl.dsp.layout("swapcol l"))
@@ -569,6 +566,27 @@ local function toggleColumnTabbed()
         tabColumn(active)
     end
 end
+
+-- niri-like: in a tabbed column, up/down switch tabs instead of windows
+local function focusVertical(direction)
+    local active = hl.get_active_window()
+    local group = tabbedGroup(active)
+    if group and group.size > 1 then
+        local members = group.members
+        for i, member in ipairs(members) do
+            if member == active then
+                focusWindow(members[i + (direction == "u" and -1 or 1)])
+                return
+            end
+        end
+    end
+    hl.dispatch(hl.dsp.layout("focus " .. direction))
+end
+
+bind("up",   function() focusVertical("u") end)
+bind("down", function() focusVertical("d") end)
+bind("K",    function() focusVertical("u") end)
+bind("J",    function() focusVertical("d") end)
 
 bind("bracketleft",  function() consumeOrExpel("prev") end)
 bind("bracketright", function() consumeOrExpel("next") end)
