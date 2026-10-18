@@ -367,10 +367,213 @@ for i = 1, 9 do
 end
 
 -- Column composition
-bind("bracketleft",  hl.dsp.layout("consume_or_expel prev"))
-bind("bracketright", hl.dsp.layout("consume_or_expel next"))
-bind("comma",        hl.dsp.layout("consume"))
-bind("period",       hl.dsp.layout("expel"))
+local function focusWindow(window)
+    if window then
+        hl.dispatch(hl.dsp.focus({ window = window }))
+    end
+end
+
+local function scrollingColumn(window)
+    local layout = window and window.layout
+    if not layout or layout.name ~= "scrolling" then
+        return nil
+    end
+    return layout.column
+end
+
+local function tabbedGroup(window)
+    local column = scrollingColumn(window)
+    if not column or #column.windows ~= 1 then
+        return nil
+    end
+    return column.windows[1].group
+end
+
+local function findColumnWindow(workspace, index)
+    for _, window in ipairs(hl.get_workspace_windows(workspace)) do
+        local column = scrollingColumn(window)
+        if column and column.index == index then
+            return column.windows[1] or window
+        end
+    end
+    return nil
+end
+
+local function tabColumn(window)
+    local column = scrollingColumn(window)
+    if not column or #column.windows == 0 or tabbedGroup(window) then
+        return
+    end
+
+    local active = hl.get_active_window()
+    local targets = column.windows
+    local group = targets[1].group
+    if not group then
+        hl.dispatch(hl.dsp.group.toggle({ window = targets[1] }))
+        group = targets[1].group
+    end
+    if not group then
+        return
+    end
+
+    for i = 2, #targets do
+        if targets[i].group ~= group then
+            group:add(targets[i], group.size + 1)
+        end
+    end
+    focusWindow(active)
+end
+
+local function untabColumn(window)
+    local group = tabbedGroup(window)
+    if not group then
+        return
+    end
+
+    local active = hl.get_active_window()
+    local members = group.members
+    local first = members[1]
+    focusWindow(first)
+
+    for i = 2, #members do
+        local member = members[i]
+        group:remove(member)
+        focusWindow(member)
+        hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
+    end
+    group:remove(first)
+    focusWindow(active)
+end
+
+local function moveIntoColumn(window, destination)
+    local active = hl.get_active_window()
+    local sourceGroup = window.group
+    local destinationGroup = tabbedGroup(destination)
+
+    if destinationGroup then
+        if sourceGroup == destinationGroup then
+            return
+        end
+
+        focusWindow(destination)
+        if sourceGroup then
+            sourceGroup:remove(window)
+        end
+        destinationGroup:add(window, destinationGroup.size + 1)
+    elseif sourceGroup then
+        focusWindow(destination)
+        sourceGroup:remove(window)
+
+        local sourceColumn = scrollingColumn(window)
+        local destinationColumn = scrollingColumn(destination)
+        if sourceColumn and destinationColumn and sourceColumn.index ~= destinationColumn.index then
+            local direction = destinationColumn.index < sourceColumn.index and "prev" or "next"
+            focusWindow(window)
+            hl.dispatch(hl.dsp.layout("consume_or_expel " .. direction))
+        end
+    end
+    focusWindow(active)
+end
+
+local function expelGroupMember(member, left)
+    local group = tabbedGroup(member)
+    if not group or group.size < 2 then
+        return
+    end
+
+    local active = hl.get_active_window()
+    local remaining
+    for _, candidate in ipairs(group.members) do
+        if candidate ~= member then
+            remaining = candidate
+            break
+        end
+    end
+
+    focusWindow(remaining)
+    group:remove(member)
+    if left then
+        focusWindow(member)
+        hl.dispatch(hl.dsp.layout("swapcol l"))
+    end
+    focusWindow(active)
+end
+
+local function consumeOrExpel(direction)
+    local active = hl.get_active_window()
+    local column = scrollingColumn(active)
+    if not column then
+        hl.dispatch(hl.dsp.layout("consume_or_expel " .. direction))
+        return
+    end
+
+    local group = tabbedGroup(active)
+    if group and group.size > 1 then
+        expelGroupMember(active, direction == "prev")
+        return
+    elseif not group and #column.windows > 1 then
+        hl.dispatch(hl.dsp.layout("consume_or_expel " .. direction))
+        return
+    end
+
+    local offset = direction == "prev" and -1 or 1
+    local destination = findColumnWindow(active.workspace, column.index + offset)
+    if destination and (group or tabbedGroup(destination)) then
+        moveIntoColumn(active, destination)
+    else
+        hl.dispatch(hl.dsp.layout("consume_or_expel " .. direction))
+    end
+end
+
+local function consumeIntoColumn()
+    local active = hl.get_active_window()
+    local column = scrollingColumn(active)
+    if not column then
+        hl.dispatch(hl.dsp.layout("consume"))
+        return
+    end
+
+    local source = findColumnWindow(active.workspace, column.index + 1)
+    if not source then
+        hl.dispatch(hl.dsp.layout("consume"))
+        return
+    end
+
+    local sourceGroup = tabbedGroup(source)
+    if not tabbedGroup(active) and not sourceGroup then
+        hl.dispatch(hl.dsp.layout("consume"))
+        return
+    end
+
+    local member = sourceGroup and sourceGroup.members[1] or scrollingColumn(source).windows[1]
+    moveIntoColumn(member, active)
+end
+
+local function expelFromColumn()
+    local active = hl.get_active_window()
+    local group = tabbedGroup(active)
+    if group and group.size > 1 then
+        expelGroupMember(group.members[group.size], false)
+    else
+        hl.dispatch(hl.dsp.layout("expel"))
+    end
+end
+
+local function toggleColumnTabbed()
+    local active = hl.get_active_window()
+    if not scrollingColumn(active) then
+        hl.dispatch(hl.dsp.group.toggle())
+    elseif tabbedGroup(active) then
+        untabColumn(active)
+    else
+        tabColumn(active)
+    end
+end
+
+bind("bracketleft",  function() consumeOrExpel("prev") end)
+bind("bracketright", function() consumeOrExpel("next") end)
+bind("comma",        consumeIntoColumn)
+bind("period",       expelFromColumn)
 
 -- Sizing
 bind("R",             hl.dsp.layout("colresize +conf"))
@@ -396,8 +599,7 @@ bind("SHIFT + V", function()
         hl.dispatch(hl.dsp.window.cycle_next({ floating = true }))
     end
 end)
-bind("SHIFT + W", hl.dsp.group.toggle())
-bind("W", hl.dsp.group.next())
+bind("W", toggleColumnTabbed)
 -- Screenshots
 hl.bind("Print",              hl.dsp.exec_cmd("dms screenshot region"))
 hl.bind("CTRL + Print",       hl.dsp.exec_cmd("dms screenshot full"))
