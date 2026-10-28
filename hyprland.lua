@@ -17,7 +17,7 @@ local menu        = "hyprlauncher"
 hl.on("hyprland.start", function ()
     -- dms ждём после PipeWire: иначе при гонке запуска
     -- аудиосервис Quickshell не подхватывает устройства
-    hl.exec_cmd([[bash -c 'until pw-cli info 0 >/dev/null 2>&1; do sleep 0.5; done; exec dms run']])
+    hl.exec_cmd([[bash -c 'until pw-cli info 0 >/dev/null 2>&1; do sleep 0.5; done; exec env QT_AUDIO_BACKEND=pulseaudio dms run']])
     hl.env("XDG_CURRENT_DESKTOP", "Hyprland:KDE")
     hl.env("KDE_SESSION_VERSION", "6")
 
