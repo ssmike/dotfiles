@@ -773,7 +773,7 @@ hl.window_rule({
     name  = "float-telegram-dialogs",
     match = {
         class = "^org\\.telegram\\.desktop$",
-        title = "^(Media viewer|Media View|Choose Files|Open File|Save File)$",
+        title = "^(Media viewer|Media View|Choose Files|Open File|Save File|Просмотр медиа)$",
     },
     float = true,
 })
