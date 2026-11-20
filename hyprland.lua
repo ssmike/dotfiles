@@ -744,17 +744,18 @@ local workspaceApps = {
         "^org\\.kde\\.kasts$",
         "^vlc$",
         "^org\\.kde\\.ktorrent$",
-        "org.kde.elisa",
+        "^org\\.kde\\.elisa$",
+        "^org\\.kde\\.digikam$",
     },
     code = {
-        "^com.anthropic.Claude$",
+        "^com\\.anthropic\\.Claude$",
         "^chatgpt$",
-        "^dev.zed.Zed$",
+        "^dev\\.zed\\.Zed$",
     },
     docs = {
         "^obsidian$",
-        "^md.Obsidian$",
-        "md.obsidian.Obsidian",
+        "^md\\.Obsidian$",
+        "^md\\.obsidian\\.Obsidian$",
     },
 }
 
